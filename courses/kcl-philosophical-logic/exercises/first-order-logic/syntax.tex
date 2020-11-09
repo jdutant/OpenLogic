@@ -14,12 +14,12 @@
 Underline the scope of $\lforall x$ in the following
 formulas.\label{exer:Underline-the-scope}
 \begin{enumerate}
-\item $\lforall x\Atom{F}{x}\lif \Atom{G}{a}$. 
-\item $Gx\lif\lforall xGx$. 
-\item $\lforall x\lexists y(\Atom{F}{y}\lor\lnot Gx)$. 
-\item $\lforall x(\Atom{F}{x,z}\lif\lexists z\Atom{G}{z})$. 
-\item $\lexists z(\lforall x\Atom{F}{x,z}\lor\lexists y\Atom{G}{y,z})$. 
-\item $\lexists y(\lforall x(\lnot \Atom{G}{y,z}\lif\lexists x\Atom{F}{x}))$. 
+\item $\lforall x\Atom{\Obj F}{x}\lif \Atom{\Obj G}{a}$. 
+\item $\Atom{\Obj G}{x}\lif\lforall x\Atom{\Obj G}{x}$. 
+\item $\lforall x\lexists y(\Atom{\Obj F}{y}\lor\lnot \Atom{\Obj G}{x})$. 
+\item $\lforall x(\Atom{\Obj F}{x,z}\lif\lexists z\Atom{\Obj G}{z})$. 
+\item $\lexists z(\lforall x\Atom{\Obj F}{x,z}\lor\lexists y\Atom{\Obj G}{y,z})$. 
+\item $\lexists y(\lforall x(\lnot \Atom{\Obj G}{y,z}\lif\lexists x\Atom{\Obj F}{x}))$. 
 \end{enumerate}
 \end{prob}
 
@@ -37,12 +37,12 @@ say:
 Say whether these formulas are open
 or closed. If open, underline the free variable(s).
 \begin{enumerate}
-\item $\Atom{F}{a,b}$. 
-\item $\Atom{F}{x}\land\lexists y\Atom{G}{y}$. 
-\item $\lexists y(\Atom{G}{y}\land \Atom{F}{x})$. 
-\item $\lforall x\lforall y(\Atom{G}{x,y}\lif \Atom{F}{y})$. 
-\item $\lforall x\Atom{F}{x,y}\lif \Atom{G}{x}$. 
-\item $\lexists y(\Atom{F}{a}\lor\lexists x\Atom{G}{x}))$.
+\item $\Atom{\Obj F}{a,b}$. 
+\item $\Atom{\Obj F}{x}\land\lexists y\Atom{\Obj G}{y}$. 
+\item $\lexists y(\Atom{\Obj G}{y}\land \Atom{\Obj F}{x})$. 
+\item $\lforall x\lforall y(\Atom{\Obj G}{x,y}\lif \Atom{\Obj F}{y})$. 
+\item $\lforall x\Atom{\Obj F}{x,y}\lif \Atom{\Obj G}{x}$. 
+\item $\lexists y(\Atom{\Obj F}{a}\lor\lexists x\Atom{\Obj G}{x}))$.
 \end{enumerate}
 \end{prob}
 

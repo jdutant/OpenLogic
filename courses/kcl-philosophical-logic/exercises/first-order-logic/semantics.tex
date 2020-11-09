@@ -27,15 +27,15 @@ $\Assign{\mathord{F}}{M} =\{\langle\mbox{Arthur},\mbox{Arthur}\rangle,\langle\mb
 $\langle\mbox{Balin},\mbox{Balin}\rangle,\langle\mbox{Balin},\mbox{Celia}\rangle,$
 $\langle\mbox{Celia},\mbox{Celia}\rangle,\langle\mbox{Celia},\mbox{Arthur}\rangle\}$.
 \begin{enumerate}
-\item $\Atom{F}{b,b}$
-\item $\Atom{F}{a,b}$
-\item $\Atom{F}{c,b}\lor \Atom{F}{b,c}$
-\item $\lforall x\Atom{F}{x,x}$
-\item $\lexists x\lexists y(\Atom{F}{x,y}\land\lnot \Atom{F}{y,x})$
-\item $\lexists x\lexists y(\Atom{F}{x,y}\land \Atom{F}{y,x})$
-\item $\lexists x\lforall y\Atom{F}{x,y}$
-\item $\lexists x\lforall y\Atom{F}{y,x}$
-\item $\lforall x(\lexists y\Atom{F}{x,y}\lif \Atom{F}{x,x})$
+\item $\Atom{\Obj F}{b,b}$
+\item $\Atom{\Obj F}{a,b}$
+\item $\Atom{\Obj F}{c,b}\lor \Atom{\Obj F}{b,c}$
+\item $\lforall x\Atom{\Obj F}{x,x}$
+\item $\lexists x\lexists y(\Atom{\Obj F}{x,y}\land\lnot \Atom{\Obj F}{y,x})$
+\item $\lexists x\lexists y(\Atom{\Obj F}{x,y}\land \Atom{\Obj F}{y,x})$
+\item $\lexists x\lforall y\Atom{\Obj F}{x,y}$
+\item $\lexists x\lforall y\Atom{\Obj F}{y,x}$
+\item $\lforall x(\lexists y\Atom{\Obj F}{x,y}\lif \Atom{\Obj F}{x,x})$
 \end{enumerate}
 \emph{Tip: }draw the model!
 \end{prob}
@@ -44,11 +44,11 @@ $\langle\mbox{Celia},\mbox{Celia}\rangle,\langle\mbox{Celia},\mbox{Arthur}\rangl
 For each of the !!{formula}s below, build !!a{structure}
 in which it is true and one in which it is false.
 \begin{enumerate}
-\item $\lexists x(\Atom{G}{x}\land\lnot \Atom{F}{x})$.
-\item $\lforall x\lforall y(\Atom{G}{x,y}\lif \Atom{G}{x,x})$.
-\item $\lexists x\Atom{F}{x}\lif\lforall x(\Atom{F}{x}\lor \Atom{G}{x})$.
-\item $\lforall x\lexists y\Atom{L}{x,y}\lif\lexists y\lforall x\Atom{L}{x,y}$.
-\item $\lforall x\lforall y\lforall z(\Atom{L}{x,y}\lif(\Atom{L}{y,z}\lif \Atom{L}{x,z}))$.
+\item $\lexists x(\Atom{\Obj G}{x}\land\lnot \Atom{\Obj F}{x})$.
+\item $\lforall x\lforall y(\Atom{\Obj G}{x,y}\lif \Atom{\Obj G}{x,x})$.
+\item $\lexists x\Atom{\Obj F}{x}\lif\lforall x(\Atom{\Obj F}{x}\lor \Atom{\Obj G}{x})$.
+\item $\lforall x\lexists y\Atom{\Obj L}{x,y}\lif\lexists y\lforall x\Atom{\Obj L}{x,y}$.
+\item $\lforall x\lforall y\lforall z(\Atom{\Obj L}{x,y}\lif(\Atom{\Obj L}{y,z}\lif \Atom{\Obj L}{x,z}))$.
 \end{enumerate}
 \end{prob}
 
@@ -77,17 +77,17 @@ are correct.
 	\item $\langle\Value{x}{M}[g'], \Value{y}{M}[g']\rangle$ is in $\Assign{G}{M}$, with $\varAssign{g'}{g}{xy}[23]$
 	\item $\Sat{M}{Fa}[g]$
 	\item $\Sat{M}{Gbc}[g]$
-	\item $\Sat{M}{\Atom{G}{x,a}}[g']$, where $\varAssign{g'}{g}{x}[2]$
+	\item $\Sat{M}{\Atom{\Obj G}{x,a}}[g']$, where $\varAssign{g'}{g}{x}[2]$
 	\item $\Sat{M}{\eq[a][b]}[g]$
 	\item $\Sat{M}{\eq[c][y]}[g']$ where $\varAssign{g'}{g}{xy}[13]$
 	\item $\Sat{M}{\eq/[x][y]}[g']$ where $\varAssign{g'}{g}{xy}[13]$
-	\item $\Sat{M}{\Atom{G}{y,x}}[g']$ where $\varAssign{g'}{g}{xy}[23]$
-	\item $\Sat{M}{\Atom{F}{x}\lif \Atom{G}{x,x}}[g']$ where $\varAssign{g'}{g}{x}[1]$
-	\item $\Sat{M}{\Atom{F}{x}\lif \Atom{G}{x,x}}[g']$ where $\varAssign{g'}{g}{x}[2]$
-	\item $\Sat{M}{\Atom{F}{x}\lif \Atom{G}{x,x}}[g']$ where $\varAssign{g'}{g}{x}[3]$
-	\item $\Sat{M}{\lforall x(\Atom{F}{x}\lif \Atom{G}{x,x})}[g]$
-	\item $\Sat{M}{\Atom{G}{x,x}}[g']$ where $\varAssign{g'}{g}{x}[1]$
-	\item $\Sat{M}{\lexists x\Atom{G}{x,x}}[g]$
+	\item $\Sat{M}{\Atom{\Obj G}{y,x}}[g']$ where $\varAssign{g'}{g}{xy}[23]$
+	\item $\Sat{M}{\Atom{\Obj F}{x}\lif \Atom{\Obj G}{x,x}}[g']$ where $\varAssign{g'}{g}{x}[1]$
+	\item $\Sat{M}{\Atom{\Obj F}{x}\lif \Atom{\Obj G}{x,x}}[g']$ where $\varAssign{g'}{g}{x}[2]$
+	\item $\Sat{M}{\Atom{\Obj F}{x}\lif \Atom{\Obj G}{x,x}}[g']$ where $\varAssign{g'}{g}{x}[3]$
+	\item $\Sat{M}{\lforall x(\Atom{\Obj F}{x}\lif \Atom{\Obj G}{x,x})}[g]$
+	\item $\Sat{M}{\Atom{\Obj G}{x,x}}[g']$ where $\varAssign{g'}{g}{x}[1]$
+	\item $\Sat{M}{\lexists x\Atom{\Obj G}{x,x}}[g]$
 \end{enumerate}
 \emph{Tip}: draw the model! 
 \end{prob}

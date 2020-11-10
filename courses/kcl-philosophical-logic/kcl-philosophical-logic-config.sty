@@ -150,6 +150,26 @@
   }
 }
 
+% `\mSat[/]{M}{!A}[w]`, the relation of being satisfied in a
+% model (at a world), is provided as the command
+% `\mSat` with two mandatory arguments (the model and the formula)
+% and one optional argument (the world).  Use `\mSat/` to create
+% the negated relation.  By default, `\mSat{M}{!A}[w]` is typeset as
+% $\mathfrak{M}, w \models \varphi$. Redefine to match the pSat and Sat
+% dashes
+
+\DeclareDocumentCommand \mSat { t{/} m m o } {%
+  \IfBooleanTF{#1}{%
+    % negated
+    \IfNoValueTF {#4} 
+        { \mModel{#2} \nvDash #3 }
+        { \mModel{#2}, #4 \nvDash #3}}{%
+    % not negated
+    \IfNoValueTF {#4} 
+        { \mModel{#2} \vDash #3 }
+        { \mModel{#2}, #4 \vDash #3 }}}
+
+
 % Terminology
 
 \settexttoken{constant}{constant}{constants}

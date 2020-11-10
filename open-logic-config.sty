@@ -763,7 +763,7 @@
 % `\mSat` with two mandatory arguments (the model and the formula)
 % and one optional argument (the world).  Use `\mSat/` to create
 % the negated relation.  By default, `\mSat{M}{!A}[w]` is typeset as
-% $\mathfrak{M}, w \models \varphi$.
+% $\mathfrak{M}, w \Vdash \varphi$ (using the forcing \Vdash).
 
 \DeclareDocumentCommand \mSat { t{/} m m o } {%
   \IfBooleanTF{#1}{%

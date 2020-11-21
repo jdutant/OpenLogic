@@ -1,0 +1,48 @@
+% Part: exercises
+% Chapter: free logics
+% Section: semantics
+
+\documentclass[../../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{exe}{frl}{sem}
+
+\olsection{Semantics}
+
+\begin{prob}[Semantics]
+Explain why the following are not valid in any of the free logics.
+(For neutral logic, feel free to pick just one trivalent logic.)
+\begin{enumerate}
+\item $\exists x(a=x)$
+\item $\exists x(x=x)$
+\end{enumerate}
+\end{prob}
+
+\begin{prob}[existence]
+Explain why no formula of the form $\exists x\phi$ is valid in any
+of the (inclusive) free logics. (For neutral free logic assume a truth-preservation
+notion of validity.)
+\end{prob}
+
+\begin{prob}[Validity in negative and positive free logics]
+For each of the formulas below, say whether it is valid in negative
+free logic and whether it is valid in positive free logic. Briefly justify your answers.
+\begin{enumerate}
+\item $a=a$.\\
+\emph{Example answer}. Positive: yes. Negative: no. In positive FL,
+$t_{1}=t_{2}$ is true as long as $t_{1}$ and $t_{2}$ have the same
+denotation, so $a=a$ is guaranteed to hold. In negative FL, $t_{1}=t_{2}$
+is false if the denotation of $t_{1}$ or $t_{2}$ is in the outer
+domain, so $a=a$ may fail. 
+\item $\forall x(E!x)$
+\item $Fa\rightarrow E!a$.
+\item $\sim a=b\rightarrow\sim E!a$.
+\item $\sim E!a\rightarrow\sim a=b$.
+\item $\forall xGxb\rightarrow(E!a\rightarrow Gab)$.
+\item $a=b\rightarrow(Fa\rightarrow Fb)$.
+\item $E!a\land\sim E!b\rightarrow\sim Gab$.
+\end{enumerate}
+\end{prob}
+
+\end{document}

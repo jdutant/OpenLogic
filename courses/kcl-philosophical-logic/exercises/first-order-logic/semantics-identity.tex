@@ -1,0 +1,47 @@
+% Part: exercises
+% Chapter: first-order-logic
+% Section: semantics-identity
+
+\documentclass[../../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{exe}{fol}{sid}
+
+\olsection{Semantics with identity}
+
+\begin{prob}[Expressing cardinalities]
+Cardinalities are number of things: one things, a thousand things, infinitely many things, as many things as there are natural numbers, as many things as there are real numbers, etc. First-order logic with identity can express some facts 
+about cardinalities. 
+\begin{enumerate}
+	\item Write !!a{formula} of first-order logic that holds only if the domain contains at least two individuals.
+	\item Write !!a{formula} of first-order logic that holds only if the domain contains exactly two individuals.
+	\item Write !!a{formula} of first-order logic that holds only if the domain contains at most three individuals.
+	\item Write !!a{formula} of first-order logic that holds only if the domain contains infinitely many things.
+\end{enumerate}
+\end{prob}
+
+\begin{prob}[Formalizing claims about quantity]
+Write !!{formula}s of first-order logic with identity that express the following: 
+\begin{enumerate}
+	\item There are at least three things.
+	\item There are exactly three things that are red.\\ 
+	(Use $\Atom{\Obj F}{x}$ to express the claim that $x$ is red.)
+\end{enumerate}
+
+\end{prob}
+
+\begin{prob}[Leibniz's law]
+In first-order logic, Leibniz's law is expressed by the following schema, where $!A$ can stand for any formula in which $y$ doesn't appear free:
+$$\lforall x \lforall y (\eq[x][y] \lif (!A \liff \Subst{!A}{y}{x}))$$
+(Recall that $\Subst{!A}{y}{x}$ stands for the !!{formula} resulting from substituting $y$ for all free occurrences of $x$ in $!A$.) Answer the following.
+\begin{enumerate}
+	\item Explain why if (for some assignement $g$ in some model $\Struct{M}$) $\Value{y}{M}[g] = \Value{x}{M}[g]$, then $\Sat{M}{\Atom{\Obj F}{y}}[g]$ iff $\Sat{M}{\Atom{\Obj F}{x}}[g]$. 
+	\item (Generalize your answer.) Let $\Atom{!A}$ be an atomic !!{formula} in which $y$ doesn't appear free. Explain why, if $\Value{y}{M}[g] = \Value{x}{M}[g]$, $\Sat{M}{!A}[g]$ iff $\Sat{M}{\Subst{!A}{y}{x}}[g]$.
+	\item Explain why, if $\Sat{M}{!A}[g]$ iff $\Sat{M}{\Subst{!A}{y}{x}}[g]$ and $\Sat{M}{!B}[g]$ iff $\Sat{M}{\Subst{!B}{y}{x}}[g]$, then $\Sat{M}{!A \land !B}[g]$ and $\Sat{M}{\Subst{!A \land !B}{y}{x}}[g]$.
+	\item Suppose that if $\Struct{M}$) $\Value{y}{M}[g] = \Value{x}{M}[g]$, then $\Sat{M}{!A}[g]$ iff $\Sat{M}{\Subst{!A}{y}{x}}[g]$. Explain why, if $\Sat{M}{!A}[g]$ iff $\Sat{M}{\Subst{!A}{y}{x}}[g]$, then $\lforall \nu \Sat{M}{!A}[g]$ iff $\forall \nu \Sat{M}{\Subst{!A}{y}{x}}[g]$ for any variable $\nu$. (Tip: $\nu$ could be $x$ or $y$ themselves, but that doesn't change anything to the explanation of why this hods.)
+	\item Using the claims above, explain why Leibniz's law holds in first-order logic with identity. 
+\end{enumerate}
+\end{prob}
+
+\end{document}

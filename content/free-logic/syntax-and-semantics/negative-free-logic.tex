@@ -42,9 +42,9 @@ $\Lang L_{FL}$ of free logic consists of:
 \item \emph{Interpretation of !!{predicate}s:} for each $n$-place
   !!{predicate}~$R$ of $\Lang{L}$ (other than $\eq$), an $n$-place
   relation $\Assign{R}{M} \subseteq \Domain{M}^n$
-\item \emph{Interpretation of !!{function}s:} for each $n$-place
-  !!{function}~$f$ of $\Lang{L}$, an $n$-place function $\Assign{f}{M}
-  \colon \Domain{M}^n \to \Domain{M}$
+\tagitem{fnTerms}{\emph{Interpretation of !!{function}s:} for each $n$-place
+  !!{function}~$f$ of $\Lang{L}$, an $n$-place partial function $\Assign{f}{M}
+  \colon \Domain{M}^n \to \Domain{M}$}{}
 \end{enumerate}
 The system of negative free logic is \emph{inclusive} if $\Domain M$ is
 allowed to be empty. There is only one such !!{structure}, for interpretations
@@ -71,11 +71,12 @@ follows:
 \begin{enumerate}
 \item \indcase{t}{c}{$\Value{\indfrm}{M}[s] = \Assign{\indcomplex}{M}$, if defined.}
 \item \indcase{t}{x}{$\Value{\indfrm}{M}[s] = s(\indcomplex)$, if defined.}
-\item \indcase{t}{\Atom{f}{t_1, \ldots, t_n}}{
+\tagitem{fnTerms}{\indcase{t}{\Atom{f}{t_1, \ldots, t_n}}{
 \[
 \Value{\indfrm}{M}[s] = \Assign{f}{M}(\Value{t_1}{M}[s], \ldots,
 \Value{t_n}{M}[s])\textrm{, if defined}.
 \]}
+}{}
 \end{enumerate}
 \end{defn}
 

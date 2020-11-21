@@ -56,8 +56,8 @@ free logic:
   A^n_0$, $\Obj A^n_1$, $\Obj A^n_2$, \dots
 \item A !!{denumerable}s set of !!{constant}s: $\Obj c_0$, $\Obj c_1$, $\Obj
   c_2$, \dots.
-\item A !!{denumerable}s set of $n$-place !!{function}s for each $n>0$:
-  $\Obj f^n_0$, $\Obj f^n_1$, $\Obj f^n_2$, \dots
+\tagitem{fnTerms}{A !!{denumerable}s set of $n$-place !!{function}s for each $n>0$:
+  $\Obj f^n_0$, $\Obj f^n_1$, $\Obj f^n_2$, \dots}{}
 \end{enumerate}
 \item Punctuation marks: (, ), and the comma.
 \end{enumerate}
@@ -77,22 +77,27 @@ above, we also use the following \emph{defined} symbols:
   \iftag{defFalse}{\ycomma !!{falsity}~$\lfalse$}{}%
   \iftag{defTrue}{\ycomma !!{truth}~$\ltrue$}.}{}
 
-The language $\Lang {FL}$ of free logic is defined as follows.
+The language $\Lang L$ of free logic is defined as follows.
 
 \begin{defn}[Terms]
 \ollabel{defn:terms}
 The set of \emph{terms}~$\Trm[L]$ of~$\Lang L$ is
-defined inductively by:
+defined\iftag{fnTerms}{ inductively}{} by:
 \begin{enumerate}
 \item Every !!{variable} is a term.
 \item Every !!{constant} of~$\Lang L$ is a term.
-\item If $f$ is an $n$-place !!{function} and $t_1$, \dots, $t_n$
-  are terms, then $\Atom{f}{t_1, \ldots, t_n}$ is a term.
+\tagitem{fnTerms}{ If $f$ is an $n$-place !!{function} and $t_1$, \dots, $t_n$
+  are terms, then $\Atom{f}{t_1, \ldots, t_n}$ is a term.}{}
 \tagitem{limitClause}{
   Nothing else is a term.}{}
 \end{enumerate}
-A term containing no !!{variable}s is a \emph{closed term}.
+\iftag{fnTerms}{
+  A term containing no !!{variable}s is a \emph{closed term}.
+}{
+  A constant is a \emph{closed term}.
+}
 \end{defn}
+
 
 \begin{defn}[Formula]
 \ollabel{defn:formulas}
@@ -185,14 +190,14 @@ as follows:
 \end{tagblock}
 
 If we work in a language for a specific application, we will often
-write two-place !!{predicate}s and !!{function}s between the
-respective terms, e.g., $t_1 < t_2$ and $(t_1 + t_2)$ in the language
-of arithmetic and $t_1 \in t_2$ in the language of set theory.  The
+write two-place !!{predicate}s\iftag{fnTerms}{ and !!{function}s}{} between the
+respective terms, e.g., $t_1 < t_2$\iftag{fnTerms}{ and $(t_1 + t_2)$}{} in the language
+of arithmetic and $t_1 \in t_2$ in the language of set theory. \iftag{fnTerms}{The
 successor function in the language of arithmetic is even written
-conventionally \emph{after} its argument:~$t'$.  Officially, however,
-these are just conventional abbreviations for $\Atom{\Obj A^2_0}{t_1, t_2}$,
-$\Obj f^2_0(t_1, t_2)$, $\Atom{\Obj A^2_0}{t_1, t_2}$ and $f^1_0(t)$,
-respectively.
+conventionally \emph{after} its argument:~$t'$. }Officially, however,
+these are just conventional abbreviations for $\Atom{A^2_0}{t_1, t_2}$,
+\iftag{fnTerms}{$\Atom{f^2_0}{t_1, t_2}$, }{and }$\Atom{A^2_0}{t_1, t_2}%
+$\iftag{fnTerms}{, and $f^1_0(t)$}{}, respectively.
 
 \begin{defn}[Syntactic identity]
 The symbol $\ident$ expresses syntactic identity between strings of

@@ -827,6 +827,14 @@
 \DeclareDocumentCommand \mTrue { m }{\ensuremath{\phantom{\lnot}#1}}
 \DeclareDocumentCommand \mFalse { m }{\ensuremath{\lnot #1}}
 
+% Free Logic
+% ----------
+
+% - The existence predicate in free logic, `\lfrexists` defaults to 
+%   \mathfrak{E}.
+
+\DeclareDocumentMacro \lfrexists {\mathord{\mathfrak{E}}}
+
 % Special Sets and Mathematical Symbols
 % -------------------------------------
 

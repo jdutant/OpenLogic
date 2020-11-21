@@ -1,0 +1,97 @@
+% Open Logic Project
+%
+% driver file open-logic-sample.tex to produce text on letter-size paper
+% with standard layout and margins
+
+% We use the memoir class for maximal flexibility of layout, but any
+% class will do
+
+\documentclass[letterpaper]{memoir}
+
+% \olpath has to point to the location of the OLP main
+% directory/folder.  We're compiling from subdirectory courses/sample,
+% so the main directory is two levels up.
+\newcommand{\olpath}{../../}
+
+% load all the Open Logic definitions. This will also load the
+% local definitions in open-logic-sample-config.sty
+\input{\olpath/sty/open-logic.sty}
+
+% we want all the problems deferred to the end
+\input{\olpath/sty/open-logic-defer.sty}
+
+% let's set the whole thing in Palatino, with Helvetica for
+% sans-serif, and spread the lines a bit to make the text more
+% readable
+
+\usepackage{mathpazo}
+\usepackage[scaled=0.95]{helvet}
+\linespread{1.05}
+
+\begin{document}
+
+% First we make a titlepage
+
+\begin{titlingpage}
+\begin{raggedleft}
+\fontsize{52pt}{2em}\selectfont\bfseries\sffamily
+Sample\\[.5ex] 
+Logic\\[.5ex] 
+Text
+\vskip 4ex
+\normalfont\Huge\textbf{\href{http://openlogicproject.org/}{Open Logic Project}}
+
+\end{raggedleft}
+
+\vfill
+
+% oluselicense generates a license mark that a) licenses the result
+% under a CC-BY licence and b) acknowledges the original source (the
+% OLP).  Acknowledgment of the source is a requirement under the
+% conditions of the CC-BY license used by the OLP, but you are not
+% required to license the product itself under CC-BY.
+
+\oluselicense
+% Title of this version of the OLT with link to source
+{\href{https://github.com/OpenLogicProject/OpenLogic/tree/master/courses/sample}{\textit{Sample Logic Text}}}
+% Author of this version
+{\href{http://openlogicproject.org/}{OLP}}
+\end{titlingpage}
+
+\frontmatter
+\pagestyle{ruled}
+
+\tableofcontents*
+
+\mainmatter
+
+% olimport includes an entire part
+
+\olimport*[free-logic]{free-logic}
+
+\stopproblems
+
+% Ok, that's it. Now for the appendices
+
+% now typeset all the problems as an appendix. If you want problems at
+% the end of each chapter, delete this part and put
+% \problemsperchapter in the preamble
+
+\chapter{Problems}
+
+\printproblems
+
+\backmatter
+
+% If you include any chapters from the history part, you have to print
+% the Photo Credits. 
+
+%\photocredits
+
+% Include the bibliography
+
+\bibliographystyle{\olpath/bib/natbib-oup}
+\bibliography{\olpath/bib/open-logic}
+
+\end{document}
+

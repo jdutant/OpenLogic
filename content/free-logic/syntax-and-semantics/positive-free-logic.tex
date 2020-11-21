@@ -1,0 +1,55 @@
+% Part: first-order-logic
+% Chapter: syntax-and-semantics
+% Section: negative-free-logic
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{frl}{syn}{pfl}
+
+\olsection{Positive Free Logic}
+
+The guiding idea of positive free logic is that atomic claims do not have
+existence committments. In natural language the following may seem true:
+
+\begin{enumerate}
+  \item Pegasus is Pegasus.
+  \item Pegasus is a winged horse.
+  \item Some children are waiting for Santa Claus.
+  \item The round square is a square.
+\end{enumerate}
+
+If they are true, however, they should not entail that Pegasus, 
+Santa Claus or the round square exist. Moreover, the following seem 
+false:
+
+\begin{enumerate}
+  \item Pegasus is Santa Claus.
+  \item Santa Claus is a winged horse.
+  \item Some children are waiting for Pegasus.
+\end{enumerate}
+
+Accordingly, positive free logic allows that, where $a$ is empty in a 
+!!{structure} $\Struct M$ and $F$ some predicate, $\Atom{F}{a}$ may be 
+either true or false in $\Struct M$. So $\Atom{F}{a}$ does not 
+entail $\lfrexists a$. Moreover, it allows that predicates behave 
+differently with different empty !!{constant}s: for instance, where 
+$a$ and $b$ are empty in a !!{structure} $\Struct M$ and $F$ some 
+predicate, we may have $\Atom{F}{a}$ true and $\Atom{F}{b}$ false
+in $\Struct M$. We will have $\eq[a][a]$ and $\eq[b][b]$ but 
+$\eq[a][b]$ may be either true or false in a given $\Struct M$. In short,
+the truth of falsity of atomic !!{formula}s with empty !!{constant}s is
+\emph{non-trivial} in positive free logic.
+
+\begin{explain}
+To ensure atomic !!{formula}s with empty !!{constant}s have non-trivial
+truth conditions, !!{structure}s of positive free logic use \emph{non-existing
+objects}. That is, it gives empty !!{constant}s referents. These referents
+can be part of the extension of predicates and are used to determine
+the truth of falsity of claim using these !!{constant}s. However, these
+referents are not considered as existing: they are not in the domain
+over which $\lforall$ and $\lexists$ operate. 
+\end{explain}
+
+\end{document}

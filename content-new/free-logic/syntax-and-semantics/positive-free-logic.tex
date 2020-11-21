@@ -6,36 +6,60 @@
 
 \begin{document}
 
-\olfileid{frl}{syn}{nfl}
+\olfileid{frl}{syn}{pfl}
 
-\olsection{Negative Free Logic}
+\olsection{Positive Free Logic}
 
-The guiding idea of negative free logic is that atomic claims have
-existence committments. The following inference seems correct:
+The guiding idea of positive free logic is that atomic claims do not have
+existence committments. In natural language the following may seem true:
 
 \begin{enumerate}
-  \item René thinks.
-  \item Therefore, René exists.
+  \item Pegasus is Pegasus.
+  \item Pegasus is a winged horse.
+  \item Some children are waiting for Santa Claus.
+  \item The round square is a square.
 \end{enumerate}
 
-This suggests that the claim that René thinks does require that \emph{there is 
-something}, René, which is said to think.  Accordingly, negative free logic 
-considers that (where $F$ is any predicate) $\Atom{F}{a}$ holds only 
-if $a$ is not empty, hence only if $\lfrexists a$ holds. 
+If they are true, however, they should not entail that Pegasus, 
+Santa Claus or the round square exist. Moreover, the following seem 
+false:
+
+\begin{enumerate}
+  \item Pegasus is Santa Claus.
+  \item Santa Claus is a winged horse.
+  \item Some children are waiting for Pegasus.
+\end{enumerate}
+
+Accordingly, positive free logic allows that, where $a$ is empty in a 
+!!{structure} $\Struct M$ and $F$ some predicate, $\Atom{F}{a}$ may be 
+either true or false in $\Struct M$. So $\Atom{F}{a}$ does not 
+entail $\lfrexists a$. Moreover, it allows that predicates behave 
+differently with different empty !!{constant}s: for instance, where 
+$a$ and $b$ are empty in a !!{structure} $\Struct M$ and $F$ some 
+predicate, we may have $\Atom{F}{a}$ true and $\Atom{F}{b}$ false
+in $\Struct M$. We will have $\eq[a][a]$ and $\eq[b][b]$ but 
+$\eq[a][b]$ may be either true or false in a given $\Struct M$. In short,
+the truth of falsity of atomic !!{formula}s with empty !!{constant}s is
+\emph{non-trivial} in positive free logic.
 
 \begin{explain}
-The corresponding !!{structure}s are the most straightforward way to 
-modify those of first-order logic to remove their existence assumptions.
-We allow interpretations that do not assign any object to some !!{constant}s,
-and (for an inclusive negative free logic) we allow the domain to be empty.
-\end{expain}
+To ensure atomic !!{formula}s with empty !!{constant}s have non-trivial
+truth conditions, !!{structure}s of positive free logic use \emph{non-existing
+objects}. That is, it gives empty !!{constant}s referents. These referents
+can be part of the extension of predicates and are used to determine
+the truth of falsity of claim using these !!{constant}s. However, these
+referents are not considered as existing: they are not in the domain
+over which $\lforall$ and $\lexists$ operate. 
+\end{explain}
+
 
 \begin{defn}[!!^{structure}s]
-In the negative system of free logic, $\Log NFL$,
+In the positive system of free logic,  $\Log PFL$,
 \article{structure} \emph{!!{structure}}~$\Struct M$ for a language
 $\Lang L_{FL}$ of free logic consists of:
 \begin{enumerate}
-\item \emph{Domain:} a set, $\Domain M$,
+\item \emph{(Inner) Domain:} a set, $\Domain M$,
+\item \emph{Outer Domain:} a non-empty set $\Domain M$
 \item \emph{Interpretation of !!{constant}s:} for any !!{constant}~$c$ of
   $\Lang{L}$, its interpretation $\Assign{c}{M}$ is !!a{element} of 
   $\Domain M$ or undefined,

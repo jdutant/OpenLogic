@@ -1,0 +1,52 @@
+% Part: exercises
+% Chapter: free logics
+% Section: tableaus
+
+\documentclass[../../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{exe}{frl}{dis}
+
+\olsection{Discussion}
+
+\begin{prob}
+Give an English equivalent of each of the following and explain briefly why both
+ hold in standard first-order logic.
+\begin{enumerate}
+\item $\models\exists x(x=x)$
+\item $\models\exists(x=a)$
+\end{enumerate}
+
+Suppose we extend first-order logic with a necessity operator $\Box$ with the  
+necessitation property:
+\begin{defn}[Necessitation rule]
+If $\Entails !A$, then $\Entails \Box !A$
+\end{defn}
+
+\begin{enumerate}
+	\item Applying the necessitation rule to the two valid formulas of first-order logic above. which validities do we get? (Give only two.) 
+	\item Explain briefly why one would not want to accept the resulting validities.
+\end{enumerate}
+\end{prob}
+
+\begin{prob}
+Negative free logic is committed to primitive predicates.
+\begin{enumerate}
+	\item Explain what that means.
+	\item Explain why that is the case.
+	\item Give a reason to think that this is a problem.
+\end{enumerate}
+\end{prob}
+
+\begin{prob}
+Consider the following formula:
+$$\forall x (Fx \rightarrow \lfrexists x)$$
+\begin{enumerate}
+	\item Explain why this is valid in positive and negative free logic.
+	\item Give a reason to think that this is a problem.
+\end{enumerate}
+\end{prob}
+
+
+\end{document}

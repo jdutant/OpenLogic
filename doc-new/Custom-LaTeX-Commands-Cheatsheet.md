@@ -91,9 +91,11 @@ Semantics
 * `\pAssign` a valuation of the atoms. Usage:
     - `\pAssign{v}`. valuation itself.
     - `\pAssign{v}{!A}`. valuation of a formula.
+    - 
 * `\pValue{v}` a valuation of all formulas. Usage: 
     - `\pValue{v}`. valuation itself.
     - `\pValue{v}(!A)`. valuation of a formula.
+* `\Struct{M}` a structure or model (in first-order logic).
 * Satisfaction or truth. `\Sat`, negated `\Sat/`. Usage:
     - `\Sat{M}{!A}` states that formula `!A` is satisfied in structure `M`.
     - `\Sat{M}{!A}[s]` states the same relative to assignment `s`.

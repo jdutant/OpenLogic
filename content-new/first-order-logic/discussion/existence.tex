@@ -1,0 +1,43 @@
+% Part: first-order-logic
+% Chapter: syntax-and-semantics
+% Section: discussion
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{dis}{exi}
+
+\olsection{Existence in first-order logic}
+
+\paragraph{To be is to be something} In first-order logic we can express the idea that something exist. Namely, to be it to be something. For instance, we express that $a$ exists thus:
+
+$$\lexists x(\eq[a][x])$$$
+
+\paragraph{Some consequences of first-order logic}
+
+Can you see that the following holds in first-order logic? 
+
+\begin{enumerate}
+	\item $\Entails \lforall (\eq[x][x])$.
+	\item For any constant $c$, we have: $\Entails \lexists (\eq[c][x])$.
+	\item $\Entails \lexists (\eq[x][x])$.
+\end{enumerate} 
+
+Let's look ahead to the combination of first-order logic and modal logic (quantified modal logic). In "normal" modal logic, we have the principle that everything that is logically valid is necessary:
+
+\begin{defn}[Necessitation]
+If $\Entails !A$ then $\Entails \Box !A$ 
+\end{defn}
+
+Combining our result above with Necessitation, we obtain: 
+
+\begin{enumerate}
+	\item $\Entails \Box \lforall (\eq[x][x])$.
+	\item For any constant $c$, we have: $\Entails \Box \lexists (\eq[c][x])$.
+	\item $\Entails \Box \lexists (\eq[x][x])$.
+\end{enumerate} 
+
+Which of these do you find acceptable? Inacceptable?
+
+\end{document}

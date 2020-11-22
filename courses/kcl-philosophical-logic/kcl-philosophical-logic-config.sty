@@ -135,7 +135,7 @@
 %  parentheses. Redefined to remove the commas and parentheses.
 
 \makeatletter
-\DeclareDocumentCommand \Atom { m m }{ \mathord{\Obj #1}\@for\i:=#2\do{\i}}
+\DeclareDocumentCommand \Atom { m m }{ \mathord{#1}\@for\i:=#2\do{\i}}
 \makeatother
 
 %\DeclareDocumentCommand \Atom { m m }{ \mathord{#1}#2 } % this only removes the parentheses, not the commas
@@ -144,9 +144,9 @@
 
 \DeclareDocumentCommand \pValue { m d() o}{
 \IfNoValueTF {#2} {%
-  |\cdot|_\pAssign{#1}\IfNoValueTF{#3}{}{^{#3}}%
+  |\cdot|_{\pAssign{#1}}\IfNoValueTF{#3}{}{^{#3}}%
   }{%
-  |#2|_\pAssign{#1}\IfNoValueTF{#3}{}{_{#3}}%
+  |#2|_{\pAssign{#1}}\IfNoValueTF{#3}{}{^{#3}}%
   }
 }
 

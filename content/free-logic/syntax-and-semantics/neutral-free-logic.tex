@@ -1,0 +1,84 @@
+% Part: first-order-logic
+% Chapter: syntax-and-semantics
+% Section: negative-free-logic
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{frl}{syn}{neu}
+
+\olsection{Neutral Free Logic}
+
+The guiding idea of neutral free logic is that atomic claims with empty
+terms are neither true nor false: they produce \emph{truth-value gaps}. 
+Neutral free logic agrees with negative free logic and classical first-order
+logic on the idea that atomic claims have existence committments. Where $F$ 
+is some predicate other than $\lfrexists$, $\Atom{F}{a}$ cannot be 
+true if $a$ is empty. But instead of treating atomic
+claims involving empty terms as false, it treats them as neither true nor 
+false. 
+
+\begin{explain}
+One way to motivate neutral free logic is to consider pairs of claims like
+the following: 
+
+\begin{enumerate}
+  \item Pegasus is a horse.
+  \item Pegasus is not a horse. 
+\end{enumerate}
+
+It is difficult to endorse either claim. Saying that Pegasus is a horse 
+suggests that there is horse called Pegasus. But saying that Pegasus isn't
+a horse suggests that there is a thing that is not a horse. Either way sounds
+wrong. But all bivalent logicians must say that one of these is true and
+the other false. Positive free logicians may (but need not to) say the first is true. 
+Negative free logicians must say that the second is true. Classical logicians 
+too must say that the second is true --- unless they deny these sentences express
+claims at all. Neutral free logic, by contrast, says that neither is true.
+\end{explain}
+
+Semantics for neutral free logic must therefore accomodates truth-valueless
+!!{formula}s. But there are several ways to do so that yield different 
+systems of logic. The systems all agree on these points:
+
+\begin{itemize}
+	\item If a !!{formula} doesn't involve empty terms, it is evaluated
+	as in classical first-order logic. 
+	\item If an atomic !!{formula} $\Atom{R}{t_1,\ldots,t_n}$ (where $R$
+	is some $n$-ary predicate other than $\lfrexists$) contains a
+	term $t_i$ that is empty (in a !!{structure}), it is neither true nor 
+	false (in a !!{structure}).
+	\item If a !!{formula} $!A$ is neither true nor false, then its negation
+	$\lnot !A$ is neither true nor false either, and conversely. 
+\end{itemize}
+
+Moreover, all can use the same !!{structure}, namely the same as
+negative free logic. 
+
+\begin{defn}
+In a neutral system of free logic, \article{structure} 
+\emph{!!{structure}}~$\Struct M$ for a language
+$\Lang L_{\Log{FL}}$ of free logic consists of:
+\begin{enumerate}
+\item \emph{Domain:} a set, $\Domain M$,
+\item \emph{Interpretation of !!{constant}s:} for any !!{constant}~$c$ of
+  $\Lang L_{\Log{FL}}$, its interpretation $\Assign{c}{M}$ is !!a{element} of 
+  $\Domain M$ or undefined,
+\item \emph{Interpretation of !!{predicate}s:} for each $n$-place
+  !!{predicate}~$R$ of $\Lang L_{\Log{FL}}$ (other than $\eq$), an $n$-place
+  relation $\Assign{R}{M} \subseteq \Domain{M}^n$
+\item \emph{Interpretation of !!{function}s:} for each $n$-place
+  !!{function}~$f$ of $\Lang L_{\Log{FL}}$, an $n$-place function $\Assign{f}{M}
+  \colon \Domain{M}^n \to \Domain{M}$
+\end{enumerate}
+The system is \emph{inclusive} if it includes the \emph{empty !!{structure}}
+for which $\Domain M$ is empty. 
+\end{defn}
+
+But they diverge on how to define satisfaction and truth on that !!{structure}.
+The main division is between \emph{truth-functional} systems, on the one hand,
+and \emph{supervaluationism}, on the other. The options are detailed in chapters
+on many-valued logics. 
+
+\end{document}

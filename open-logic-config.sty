@@ -830,10 +830,16 @@
 % Free Logic
 % ----------
 
-% - The existence predicate in free logic, `\lfrexists` defaults to 
+% - `\lfrexists` the existence predicate in free logic, defaults to 
 %   \mathfrak{E}.
 
 \DeclareDocumentMacro \lfrexists {\mathord{\mathfrak{E}}}
+
+% - `\Outerdomain{M}` the outer domain of \Struct{M}
+%   usage: see \Domain
+
+\DeclareDocumentCommand \Outerdomain { m }{\left| \Struct{#1} \right|_O}
+
 
 % Special Sets and Mathematical Symbols
 % -------------------------------------

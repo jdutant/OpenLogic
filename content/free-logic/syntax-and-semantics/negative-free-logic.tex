@@ -33,17 +33,17 @@ and (for an inclusive negative free logic) we allow the domain to be empty.
 \begin{defn}[!!^{structure}s]
 In the negative system of free logic, $\Log NFL$,
 \article{structure} \emph{!!{structure}}~$\Struct M$ for a language
-$\Lang L$ of free logic consists of:
+$\Lang L_{\Log{FL}}$ of free logic consists of:
 \begin{enumerate}
 \item \emph{Domain:} a set, $\Domain M$,
 \item \emph{Interpretation of !!{constant}s:} for any !!{constant}~$c$ of
-  $\Lang{L}$, its interpretation $\Assign{c}{M}$ is !!a{element} of 
+  $\Lang L_{\Log{FL}}$, its interpretation $\Assign{c}{M}$ is !!a{element} of 
   $\Domain M$ or undefined,
 \item \emph{Interpretation of !!{predicate}s:} for each $n$-place
-  !!{predicate}~$R$ of $\Lang{L}$ (other than $\eq$), an $n$-place
+  !!{predicate}~$R$ of $\Lang L_{\Log{FL}}$ (other than $\eq$), an $n$-place
   relation $\Assign{R}{M} \subseteq \Domain{M}^n$
-\tagitem{fnTerms}{\emph{Interpretation of !!{function}s:} for each $n$-place
-  !!{function}~$f$ of $\Lang{L}$, an $n$-place partial function $\Assign{f}{M}
+\tagitem{fnTerms}{\item \emph{Interpretation of !!{function}s:} for each $n$-place
+  !!{function}~$f$ of $\Lang L_{\Log{FL}}$, an $n$-place function $\Assign{f}{M}
   \colon \Domain{M}^n \to \Domain{M}$}{}
 \end{enumerate}
 The system of negative free logic is \emph{inclusive} if $\Domain M$ is
@@ -60,12 +60,12 @@ an !!{structure} whose domain is the empty set.
 \begin{defn}[Variable Assignment]
 A \emph{variable assignment}~$s$ for a !!{structure}~$\Struct{M}$ is a
 (partial) function such that for any !!{variable}~$x$ of
-  $\Lang{L_{FL}}$, $s(x) \in \Domain M$ if defined. 
+  $\Lang L_{\Log{FL}}$, $s(x) \in \Domain M$ if defined. 
 \end{defn}
 
 \begin{defn}[!!^{value} of Terms]
-If $t$ is a term of the language~$\Lang L$, $\Struct M$ is a
-!!{structure} for~$\Lang L$, and $s$ is a !!{variable} assignment
+If $t$ is a term of the language~$\Lang L_{\Log{FL}}$, $\Struct M$ is a
+!!{structure} for~$\Lang L_{\Log{FL}}$, and $s$ is a !!{variable} assignment
 for~$\Struct M$, the \emph{!!{value}}~$\Value{t}{M}[s]$ is defined as
 follows:
 \begin{enumerate}
@@ -92,9 +92,11 @@ We write $\varAssign{s'}{s}{x}$ when $s'$ is an $x$-variant of $s$.
 \end{enumerate}
 \end{defn}
 
-Note that $x$-variants of a !!{variable} assignment $s$ are all defined
-for $x$, that is, they assign and existing object (an object of $\Domain M$)
-to the !!{variable} $x$. 
+Note that an $x$-variant of some !!{variable} assignment $s$ must be 
+defined for $x$, that is, it must assign an existing object to $x$. 
+If, for instance, $s$ is undefined for $x$, then $s$ is not an $x$-variant
+of itself. Only those variants of $s$ who do assign an object to $x$ 
+are $x$-variants of $s$. 
 
 \begin{explain}
 The only reason to let !!{variable} assignments go undefined for some
@@ -163,6 +165,8 @@ $\Sat/{M}{!A}[s]$ to mean ``not $\Sat{M}{!A}[s]$.'')
 \end{enumerate}
 \end{defn}
 
+Truth and validity are defined as in first-order logic.
+
 \begin{defn}[Truth]
 Where $!A$ is a closed !!{formula}, we say that $A$ is \emph{true in}, or
 \emph{satisfied by} a !!{structure} $\Struct M$, written $\Sat{M}{!A}$ iff 
@@ -171,20 +175,40 @@ $$\Sat{M}{!A}\textrm{ iff }\Sat{M}{!A}[s]\textrm{ for any }s\textrm{ in }\Struct
 \end{defn}
 
 \begin{defn}[Validity]
-A !!{formula} $!A$ is \emph{valid}, $\Entails !A$, iff $\Sat{M}{!A}$ for every
-!!{structure}~$\Struct M$.
+  A !!{formula} $!A$ is \emph{valid}, $\Entails !A$, iff $\Sat{M}{!A}$ for every
+  !!{structure}~$\Struct M$.
 \end{defn}
 
-\begin{ex}
-If $\Sat{M}{Fa}$ then $\Sat{M}{\lfrexists a}$.
-\end{ex}
+\begin{prop}\ollabel{prop:if-sat-Fa-sat-exists}
+  If $\Sat{M}{Fa}$ then $\Sat{M}{\lfrexists a}$.
+\end{prop}
 
-\begin{ex}
-If $\Sat{M}{\eq[a][a]}$ then $\Sat{M}{\lfrexists a}$.
-\end{ex}
+\begin{proof}
+  Exercise.
+\end{proof}
 
-\begin{ex}
-$\Entails/ \lexists x (x = x)$.
-\end{ex}
+\begin{prob}
+  Prove \olref[frl][syn][nfl]{prop:if-sat-Fa-sat-exists}
+\end{prob}
+
+\begin{prop}\ollabel{prop:if-sat-id-sat-exists}
+  If $\Sat{M}{\eq[a][a]}$ then $\Sat{M}{\lfrexists a}$.
+\end{prop}
+
+\begin{proof}
+  Exercise.
+\end{proof}
+
+\begin{prob}
+  Prove \olref[frl][syn][nfl]{prop:if-sat-id-sat-exists}
+\end{prob}
+
+\begin{prop}
+  $\Entails/ \lexists x (x = x)$.
+\end{prop}
+
+\begin{prob}
+Show that $\Entails/ \lexists x (x = x)$.
+\end{prob}
 
 \end{document}

@@ -1,0 +1,28 @@
+% Part: non-classical-logics Chapter: free-logics Section: introduction
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{frl}{tab}{nfr}
+
+\olsection{Negative Free Logic}
+
+Negative free logic is obtained by supplementing the common rules with
+the following rule of \emph{existential committment}, where $R$ is some
+predicate, $t$ some term and $a$ !!a{constant}:
+
+\begin{defish}
+\AxiomC{\sFmla{\True}{\Atom{F}{\ldots,a,\ldots}}}
+\RightLabel{\TRule{}{\lfrexists_{\Log{NFL}}}}
+\UnaryInfC{$\sFmla{\True}{\lfrexists a}$}
+\DisplayProof
+\hfill
+\AxiomC{\sFmla{\True}{\eq[a][t]}}
+\RightLabel{\TRule{}{\lfrexists_{\Log{NFL}}}}
+\UnaryInfC{$\sFmla{\True}{\lfrexists a}$}
+\DisplayProof
+\end{defish}
+
+
+\end{document}

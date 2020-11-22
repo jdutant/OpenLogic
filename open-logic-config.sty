@@ -827,6 +827,20 @@
 \DeclareDocumentCommand \mTrue { m }{\ensuremath{\phantom{\lnot}#1}}
 \DeclareDocumentCommand \mFalse { m }{\ensuremath{\lnot #1}}
 
+% Free Logic
+% ----------
+
+% - `\lfrexists` the existence predicate in free logic, defaults to 
+%   \mathfrak{E}.
+
+\DeclareDocumentMacro \lfrexists {\mathord{\mathfrak{E}}}
+
+% - `\Outerdomain{M}` the outer domain of \Struct{M}
+%   usage: see \Domain
+
+\DeclareDocumentCommand \Outerdomain { m }{\left| \Struct{#1} \right|_O}
+
+
 % Special Sets and Mathematical Symbols
 % -------------------------------------
 
@@ -1521,6 +1535,10 @@
 % inductive definitions to have a "Nothing else is a ..." clause?
 
 \tagtrue{limitClause}
+
+% tag for function terms in first-order logic
+
+\tagfalse{fnTerms}
 
 % - `tagTrue` - a true tag respectively.
 

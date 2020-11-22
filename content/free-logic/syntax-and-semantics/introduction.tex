@@ -1,0 +1,41 @@
+% Part: non-classical-logics Chapter: free-logics Section: introduction
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{frl}{syn}{int}
+
+\olsection{Introduction}
+
+First-order logic has strong existence commitments. The following
+are all valid in first-order logic (with identity for the latter two):
+
+\begin{enumerate} 
+	\item $\lexists x (\Atom{\Obj F}{x} \lor \lnot \Atom{\Obj F}{x})$ 
+	\item $\lexists x (\eq[x][x])$ 
+	\item $\lexists x (\eq[a][x])$ 
+\end{enumerate}
+
+The first two require that something exists. They are valid because
+!!{structure}s of first-order logic have a non-empty domain. They are !!{derivable} from the fact that in first-order logic, we can !!{derive} $\lexists x !A(x)$ from $!A(a)$, together with further facts. For the first, the relevant fact is that substitutions of !!{derivable} formulas of propositional logic formulas are derivable in first-order logic too. Since $!A \lor \lnot !A$ is !!{derivable} in propositional logic, substituting $Atom{\Obj F}{a}$ for $!A$, we have $\Atom{\Obj F}{a} \lor \lnot \Atom{\Obj F}{a}$ which is !!{derivable} in first-order logic. For the second, the relevant fact is that $\eq[x][x]$ is !!{derivable} in first-order logic with identity. 
+
+The third claim requires that every !!{constant} of the language denotes something. It is valid because in first-order !!{structure}s, the interpretations assigns an object of the !!{domain} to each !!{constant}. It is !!{derivable} from the fact that $\eq[a][a]$ is !!{derivable}, together with the fact that we can !!{derive} $\lexists x !A(x)$ from $!A{a}$.
+
+These features of classical first-order logic are controversial because the following do not seem to \emph{logical} truths:
+
+\begin{enumerate}
+	\item There is something.
+	\item Alice exists. 
+\end{enumerate}
+
+Logics have been devised to avoid these implications. \emph{Inclusive logic} allows the domain of quantification to be empty. \emph{Free logic} allows empty !!{constant}s, that is !!{constant}s that do not refer to any existing object.
+
+As soon as our language includes !!{constant}s, then our logic cannot be inclusive without
+ being free. So while strictly speaking an inclusive logic need not be free, we do not
+ discuss inclusive logic separately.
+
+Free logic can be inclusive or not. Most commonly systems of free logic are devised to
+be inclusive as well. The systems below are both free and inclusive. 
+
+\end{document}

@@ -70,9 +70,9 @@ $\Lang L_{\Log{FL}}$ of free logic consists of:
 \item \emph{Interpretation of !!{predicate}s:} for each $n$-place
   !!{predicate}~$R$ of $\Lang L_{\Log{FL}}$ (other than $\eq$), an $n$-place
   relation $\Assign{R}{M} \subseteq \Outerdomain M^n$
-\item \emph{Interpretation of !!{function}s:} for each $n$-place
+\tagitem{fnTerms}{\item \emph{Interpretation of !!{function}s:} for each $n$-place
   !!{function}~$f$ of $\Lang L_{\Log{FL}}$, an $n$-place function $\Assign{f}{M}
-  \colon \Outerdomain M^n \to \Outerdomain M$.
+  \colon \Outerdomain M^n \to \Outerdomain M$.}{}
 \end{enumerate}
 The system of positive free logic is \emph{inclusive} if $\Domain M$ is
 allowed to be empty. There are several such !!{structure}s, as they may
@@ -114,11 +114,12 @@ follows:
 \begin{enumerate}
 \item \indcase{t}{c}{$\Value{\indfrm}{M}[s] = \Assign{\indcomplex}{M}$.}
 \item \indcase{t}{x}{$\Value{\indfrm}{M}[s] = s(\indcomplex)$.}
-\item \indcase{t}{\Atom{f}{t_1, \ldots, t_n}}{
+\tagitem{fnTerms}{\indcase{t}{\Atom{f}{t_1, \ldots, t_n}}{
 \[
 \Value{\indfrm}{M}[s] = \Assign{f}{M}(\Value{t_1}{M}[s], \ldots,
-\Value{t_n}{M}[s]).
+\Value{t_n}{M}[s])\textrm{, if defined}.
 \]}
+}{}
 \end{enumerate}
 \end{defn}
 

@@ -14,14 +14,25 @@
 Underline the scope of $\lforall x$ in the following
 formulas.\label{exer:Underline-the-scope}
 \begin{enumerate}
-\item $\lforall x\Atom{\Obj F}{x}\lif \Atom{\Obj G}{a}$. 
-\item $\Atom{\Obj G}{x}\lif\lforall x\Atom{\Obj G}{x}$. 
-\item $\lforall x\lexists y(\Atom{\Obj F}{y}\lor\lnot \Atom{\Obj G}{x})$. 
-\item $\lforall x(\Atom{\Obj F}{x,z}\lif\lexists z\Atom{\Obj G}{z})$. 
-\item $\lexists z(\lforall x\Atom{\Obj F}{x,z}\lor\lexists y\Atom{\Obj G}{y,z})$. 
-\item $\lexists y(\lforall x(\lnot \Atom{\Obj G}{y,z}\lif\lexists x\Atom{\Obj F}{x}))$. 
+\item $\lforall x\Atom{\Obj F}{x}\lif \Atom{\Obj G}{a}$
+\item $\Atom{\Obj G}{x}\lif\lforall x\Atom{\Obj G}{x}$
+\item $\lforall x\lexists y(\Atom{\Obj F}{y}\lor\lnot \Atom{\Obj G}{x})$
+\item $\lforall x(\Atom{\Obj F}{x,z}\lif\lexists z\Atom{\Obj G}{z})$
+\item $\lexists z(\lforall x\Atom{\Obj F}{x,z}\lor\lexists y\Atom{\Obj G}{y,z})$
+\item $\lexists y(\lforall x(\lnot \Atom{\Obj G}{y,z}\lif\lexists x\Atom{\Obj F}{x}))$
 \end{enumerate}
+\begin{ans}
+\begin{enumerate}
+\item $\lforall x\underline{\Atom{\Obj F}{x}}\lif \Atom{\Obj G}{a}$
+\item $\Atom{\Obj G}{x}\lif\lforall x\underline{\Atom{\Obj G}{x}}$
+\item $\lforall x\underline{\lexists y(\Atom{\Obj F}{y}\lor\lnot \Atom{\Obj G}{x})}$
+\item $\lforall x\underline{(\Atom{\Obj F}{x,z}\lif\lexists z\Atom{\Obj G}{z})}$
+\item $\lexists z(\lforall x\underline{\Atom{\Obj F}{x,z}}\lor\lexists y\Atom{\Obj G}{y,z})$
+\item $\lexists y(\lforall x\underline{(\lnot \Atom{\Obj G}{y,z}\lif\lexists x\Atom{\Obj F}{x})})$
+\end{enumerate}
+\end{ans}
 \end{prob}
+
 
 \begin{prob}[Binding]
 In the formulas of exercise \ref{exer:Underline-the-scope},
@@ -31,6 +42,18 @@ say:
 \item which occurrences of $z$ are bound by an occurrence of $\lexists z$. 
 \item which occurrences of $y$ are bound by an occurrence of $\lexists y$. 
 \end{enumerate}
+\begin{ans}
+\begin{enumerate}
+	\item \begin{enumerate}
+		\item $\lforall x\Atom{\Obj F}{\underline{x}}\lif \Atom{\Obj G}{a}$,
+		\item $\Atom{\Obj G}{x}\lif\lforall x\Atom{\Obj G}{\underline{x}}$,
+		\item $\lforall x\lexists y(\Atom{\Obj F}{y}\lor\lnot \Atom{\Obj G}{\underline{x}})$,
+		\item $\lexists z(\lforall x\Atom{\Obj F}{\underline{x},z}\lor\lexists y\Atom{\Obj G}{y,z})$
+		\item $\lexists y(\lforall x(\lnot \Atom{\Obj G}{y,z}\lif\lexists x\Atom{\Obj F}{x}))$ (none)
+	\end{enumerate}
+	\item $\ldots$
+\end{enumerate}
+\end{ans}
 \end{prob}
 
 \begin{prob}[Open vs closed formulas]
@@ -44,6 +67,16 @@ or closed. If open, underline the free variable(s).
 \item $\lforall x\Atom{\Obj F}{x,y}\lif \Atom{\Obj G}{x}$. 
 \item $\lexists y(\Atom{\Obj F}{a}\lor\lexists x\Atom{\Obj G}{x}))$.
 \end{enumerate}
+\begin{ans}
+\begin{enumerate}
+	\item $\Atom{\Obj F}{a,b}$. Closed
+	\item $\Atom{\Obj F}{\underline{x}}\land\lexists y\Atom{\Obj G}{y}$. Open
+	\item $\lexists y(\Atom{\Obj G}{y}\land \Atom{\Obj F}{\underline{x}})$. Open 
+	\item $\lforall x\lforall y(\Atom{\Obj G}{x,y}\lif \Atom{\Obj F}{y})$. Closed
+	\item $\lforall x\Atom{\Obj F}{x,\underline{y}}\lif \Atom{\Obj G}{x}$. Open
+	\item $\lexists y(\Atom{\Obj F}{a}\lor\lexists x\Atom{\Obj G}{x}))$. Closed
+\end{enumerate}
+\end{ans}
 \end{prob}
 
 

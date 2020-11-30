@@ -1,0 +1,34 @@
+% Part: many-valued-logic
+% Chapter: tableaux 
+% Section: negation
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mvl}{tab}{neg}
+
+\olsection{Common rules for negation}
+
+All three-valued logic share the rules for negation.
+
+\subsection{Rules for $\lnot$}
+
+\begin{defish}
+\AxiomC{\sFmla{\True}{\lnot !A}}
+\RightLabel{\TRule{\True}{\lnot}}
+\UnaryInfC{\sFmla{\False}{!A}}
+\DisplayProof
+\hfill
+\AxiomC{\sFmla{\Undef}{\lnot !A}}
+\RightLabel{\TRule{\Undef}{\lnot}}
+\UnaryInfC{\sFmla{\Undef}{!A}}
+\DisplayProof
+\hfill
+\AxiomC{\sFmla{\False}{\lnot !A}}
+\RightLabel{\TRule{\False}{\lnot}}
+\UnaryInfC{\sFmla{\True}{!A}}
+\DisplayProof
+\end{defish}
+
+\end{document}

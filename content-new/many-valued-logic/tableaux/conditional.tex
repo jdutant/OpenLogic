@@ -1,0 +1,66 @@
+% Part: many-valued-logic
+% Chapter: tableaux 
+% Section: conjunction-and-disjunction
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mvl}{tab}{con}
+
+\olsection{Conditional}
+\subsection{Rules for $\lif$ in $\LogKs$, $\LogLP$}
+
+In $\LogKs$, the conditional $!A \lif !B$ is equivalent to $\lnot !A \lor B$. 
+The rules can be inferred from those for the disjunction.
+
+\begin{defish}\noindent
+\AxiomC{\sFmla{\True}{!A \lif !B}}
+\RightLabel{\TRule{\True}{\lif}}
+\UnaryInfC{$\sFmla{\False}{!A} \quad \mid \quad \sFmla{\True}{!B}$}
+\DisplayProof
+\hfill
+\AxiomC{\sFmla{\Undef}{!A \lif !B}}
+\RightLabel{\TRule{\Undef}{\lif}}
+\UnaryInfC{$\sFmla{\True}{!A} \quad \mid \quad \sFmla{\Undef}{!A} \quad \mid \quad \sFmla{\Undef}{!A}$}
+\noLine
+\UnaryInfC{$\sFmla{\Undef}{!B} \quad \mid \quad \sFmla{\False}{!B} \quad \mid \quad \sFmla{\Undef}{!B}$}
+\DisplayProof
+\hfill
+\AxiomC{\sFmla{\False}{!A \lif !B}}
+\RightLabel{\TRule{\False}{\lif}}
+\UnaryInfC{\sFmla{\True}{!A}}
+\noLine
+\UnaryInfC{\sFmla{\False}{!B}}
+\DisplayProof
+\end{defish}
+
+\subsection{Rules for $\lif$ in $\LogLuk[3]$}
+
+In $\LogLuk[3]$, there is one more way for the conditional to be true, and one less for it to be $\Undef$. 
+
+\begin{defish}\noindent
+\AxiomC{\sFmla{\True}{!A \lif !B}}
+\RightLabel{\TRule{\True}{\lif}}
+\UnaryInfC{$\sFmla{\Undef}{!A} \quad \mid \quad \sFmla{\False}{!A} \quad \mid \quad \sFmla{\True}{!B} $}
+\noLine
+\UnaryInfC{$\sFmla{\Undef}{!B} \quad \mid \quad {~~} \quad \mid \quad {~~}$}
+\DisplayProof
+\hfill
+\AxiomC{\sFmla{\Undef}{!A \lif !B}}
+\RightLabel{\TRule{\Undef}{\lif}}
+\UnaryInfC{$\sFmla{\True}{!A} \quad \mid \quad \sFmla{\Undef}{!A}$}
+\noLine
+\UnaryInfC{$\sFmla{\Undef}{!B} \quad \mid \quad \sFmla{\False}{!B}$}
+\DisplayProof
+\hfill
+\AxiomC{\sFmla{\False}{!A \lif !B}}
+\RightLabel{\TRule{\False}{\lif}}
+\UnaryInfC{\sFmla{\True}{!A}}
+\noLine
+\UnaryInfC{\sFmla{\False}{!B}}
+\DisplayProof
+\end{defish}
+
+
+\end{document}

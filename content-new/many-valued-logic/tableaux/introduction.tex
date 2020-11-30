@@ -1,0 +1,81 @@
+% Part: many-valued-logic
+% Chapter: tableaux 
+% Section: common-rules
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mvl}{tab}{int}
+
+\olsection{Introduction}
+
+\subsection{Setting up the tableaux}
+
+A tableau allows us to work out, from a set of hypotheses, whether 
+there are !!{valuation}s that would satisfy these hypotheses. If all
+the branche close, we know that there is no !!{valuation}, hence no
+!!{structure}, corresponding to these hypotheses.
+
+To show that $\Gamma \Entails[\Log{X}] !A$, we make the hypothesis that
+it is \emph{not} the case, and we use a tableau to work out whether some 
+!!{valuation} would be a counter-example to the consequence. 
+
+In bivalent logic, the hypothesis to examine is simple: premises true, 
+conclusion false. 
+
+In trivalent logic, however, the hypotheses is: premises \emph{of the 
+designated value(s)}, conclusion \emph{of the undesignated value}. In
+three-valued logics, 
+\begin{itemize}
+	\item In truth-preservation logics such as $\LogKw$, $\LogKs$, $\LogLuk[3]$ ($\True$ 
+	is the sole designated value), we should consider the hypothesis 
+	that the premise is $\True$ and the conclusion $\False$ \emph{or $\Undef$}.
+	\item In non-falsehood-preservation logics such as $\LogLP$ ($\True, \Undef$ are the 
+	designated values), we should consider the hypothesis that the premises 
+	are $\True$ \emph{or $\Undef$} and the conclusion false. We need to consider
+	\emph{each} possible combination of $\True$ and $\Undef$ for the premises. For
+	two premises, that is four possibilities (both $\True$, first $\True$ second $\Undef$,
+	first $\Undef$ second $\True$, both $\Undef$); for three, nine, etc. 
+\end{itemize}
+
+For example, this is how to begin a tableau for $!A,\lnot !A \lor !B \Entails !B$ 
+in $\LogLuk[3]$ or $\LogKs$:
+
+\begin{oltableau}
+	[\sFmla{\True}{\formula{A}}, just=\TAss
+		[\sFmla{\True}{\lnot \formula{A} \lor \formula{B}}, just=\TAss
+			[\sFmla{\False}{\formula{B}}, just=\TAss]
+			[\sFmla{\Undef}{\formula{B}}, just=\TAss]
+		]
+	]
+\end{oltableau}
+
+On the other hand, the \emph{development} of the tableau only depends on
+the semantics. Therefore:
+\begin{enumerate}
+	\item The rules for $\LogKs$ and $\LogLP$ are the same. They only differ
+	in the hypotheses used to set up a tableau.
+	\item $\LogKs$ and $\LogLuk[3]$ share the rules for $\lnot$, $\land$, $\lor$.
+	\item All three-valued logics share the rule for $\lnot$.
+\end{enumerate}
+
+$\LogLuk[3]$ sets up its tableaux like $\LogKs$, but uses a different rule for the 
+conditional. $\LogLP$ uses the very same rules as $\LogKs$, but sets up its 
+tableaux differently. The rules are determined by the semantics alone; the set-up
+is determined by which values the logic treat as designated.
+
+\subsection{Signed tableaux}
+
+In bivalent logic, we can use either \emph{signed} tableaux, 
+in which we consider (for each main operator) the case where !!a{formula}
+(with that main operator) is true, or false, or \emph{unsigned} tableaux,
+in which we consider instead (for each main operator) !!a{formula}
+(with that main operator) itself and its negation. In many-valued logic,
+we have three or more cases to consider, e.g. those where !!a{formula}
+is $\True$, $\False$, and $\Undef$. This requires us to use \emph{signed}
+tableaux.
+
+
+
+\end{document}

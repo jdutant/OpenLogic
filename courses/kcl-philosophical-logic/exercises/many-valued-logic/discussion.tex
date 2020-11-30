@@ -1,0 +1,52 @@
+% Part: exercises
+% Chapter: many-valued logic
+% Section: discussion
+
+\documentclass[../../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{exe}{mvl}{dis}
+
+\olsection{Discussion}
+
+\subsection{Three-valued logics with a determinacy operator}
+
+Suppose we supplement our three-valued language with a truth-functional
+determinacy operator $\Delta$ with the following semantics: 
+
+\begin{defn}
+ $\Delta\ !A$ is $\True$ iff $!A$ is $\True$, and $\False$ otherwise. 
+\end{defn}
+
+We now let $\LogKw, \LogKs, \LogLuk[3]$ for the extensions of these
+logics to that language with that semantic clause. 
+
+\begin{prob}[Truth-table for \Delta]
+Write down the truth-table for the truth-functional determinacy operator
+$\Delta$. 
+\end{prob}
+
+\begin{prob}[Expressive power]
+Using $\Delta$, $\land$, $\lnot$ and $\Obj p$, give a formula
+whose value is $\True$ if and only if the value of $p$ is $\Undef$. 
+Give a different formula for different logics if necessary.
+\end{prob}
+
+\begin{prob}[Validites]
+Say whether the following are correct in $\LogLuk[3]$. Briefly justify your answers. 
+\begin{enumerate}
+	\item $\Delta \Obj{p} \Entails \Obj{p}$
+	\item $\Obj{p} \Entails \Delta \Obj{p}$
+	\item $\lnot \Delta \Obj{p} \Entails \lnot \Obj{p}$
+	\item $\Entails \Obj{p}\rightarrow \Delta \Obj{p}$
+\end{enumerate}
+
+\begin{prob}[Classical validities and determinacy]
+Let $!A$ be any !!{formula} that is valid in $\LogCL$. Can we infer any of the following?
+Briefly justify your answers.
+\begin{enumerate}
+	\item $\Entails[\LogKs] \Delta !A$
+	\item $\Entails[\LogKs] \lnot \Delta \lnot !A$
+\end{enumerate}
+\end{prob}

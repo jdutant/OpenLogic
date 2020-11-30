@@ -1,0 +1,105 @@
+% Part: exercises
+% Chapter: many-valued logic
+% Section: semantics
+
+\documentclass[../../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{exe}{mvl}{tsm}
+
+\olsection{Three valued logic: semantics}
+
+\begin{prob}[Evaluations]
+Suppose that $\pValue{v}(\Obj p)=\True$, $\pValue{v}(\Obj q)=\Undef$, $\pValue{v}(\Obj r)=\False$.
+Give the value of the following in three-valued logics:
+\begin{enumerate}
+\item (in $\LogKs$) $\Obj{p \lor q}$
+\item (in $\LogKw$) $\Obj{p \lor q}$
+\item (in $\LogKs$) $\Obj{p\land(q\lor r)}$
+\item (in $\LogKs$) $\Obj{\lnot(q\lor r)\land p}$
+\item (in $\LogKw$) $\Obj{\lnot(q\lor r)\land p}$
+\item (in $\LogKs$) $\Obj{q\land\lnot q}$
+\item (in $\LogKs$) $\Obj{q\lor\lnot q}$
+\item (in $\LogKs$) $\Obj{q\rightarrow(p\lor r)}$
+\item (in $\LogKs$) $\Obj{\\rightarrow(p\land r)}$ 
+\item (in $\LogLuk[3]$) $\Obj{q\rightarrow(p\land r)}$
+\item (in $\LogKs$) $\Obj{(p\land q)\rightarrow(q\lor r)}$ 
+\item (in $\LogLuk[3]$) $\Obj{(p\land q)\rightarrow(q\lor r)}$
+\end{enumerate}
+\end{prob}
+
+\begin{prob}[Equivalences between connectives]
+Answer the following. 
+\begin{enumerate}
+\item Can you express $\land$ using only $\lor$ and $\lnot$ in the
+logics $\LogKw$, $\LogKs$, $\LogLuk[3]$? If yes, how? If no, explain briefly why.
+\item Can you express $\lor$ using only $\land$ and $\lnot$ in the logics $\LogKw$, $\LogKs$, $\LogLuk[3]$? If yes, how? If no, explain briefly why.
+\item Can you express $\rightarrow$ using only $\land$ and $\lnot$ in $\LogKs$? 
+If yes, how? If no, explain briefly why.
+\item Can you express $\rightarrow$ using only $\land$ and $\lnot$ in
+$\LogKs$? If yes, how? If no, explain briefly why.
+\end{enumerate}
+\end{prob}
+
+\begin{prob}[Expressive power (advanced, optional)]
+Answer the following.
+\begin{enumerate}
+	\item Is there, in any of $\LogKw$, $\LogKs$, $\LogLuk[3]$, a formula that is true $\True$ if $\Obj p$ is true, and $\False$ otherwise? (Note that $\Obj p$ itself is true if $\Obj p$ is true, but not $\False$ otherwise, since it's not $\False$ when $\Obj p$ is $\Undef$).
+	\item If yes, say which formula in which logic.
+	\item If no, show that it is so. 
+\end{enumerate}
+\end{prob}
+
+\begin{prob}[Validity]
+Say which of the following hold in $\LogKs$ and in $\LogLuk[3]$. For each, give a truth-table or an informal proof. If the table or proof is the same for both logics, only give one. 
+\begin{enumerate}
+	\item $\Obj{\Entails p \lor\lnot p}$
+	\item $\Obj{\Entails \lnot(p \land\lnot p)}$
+    \item $\Obj{p, p \lif q \Entails q}$
+    \item $\Obj{\lnot\lnot p \Entails p}$
+    \item $\Obj{\Entails p \rightarrow p}$
+    \item $\Obj{p \land q \Entails p}$
+    \item $\Obj{p \Entails p \lor q}$
+    \item $\Obj{p, \lnot p \Entails q}$
+    \item $\Obj{\Entails (p \land \lnot p) \rightarrow q}$
+\end{enumerate}
+\end{prob}
+
+\begin{prob}[Sub-classicality]
+Pick one of $\LogKw$, $\LogKs$, $\LogLuk[3]$ as $\Log{X}$. 
+Show that the following holds: 
+\begin{itemize}
+	\item If $\Gamma \Entails[\Log{X}] !A$ then  $\Gamma \Entails[\LogCL] !A$.
+\end{itemize}
+\emph{Tip}. Prove the converse. Suppose that $\Gamma \Entails/[\LogCL] !A$, 
+explain why $\Gamma \Entails/[\Log{X}] !A$, with your chosen $\Log{X}$.
+\end{prob}
+
+\begin{prob}[No valid formulas in Kleene logics]
+Explain why there are no valid !!{formula}s in $\LogKs$ and $\LogKw$.
+\end{prob}
+
+\begin{prob}[Non-contradiction and non-tautologies in $\LogLuk$]
+Considering $\LogLuk[3]$:
+\begin{enumerate}
+\item Give !!a{formula} that is valid.
+\item Give a formula that is not valid, but cannot be false under
+any  !!{structure}.
+\item Give !!a{formula} that cannot be true under any !!{structure}, but 
+that is not a contradiction (i.e., its negation is not valid).
+\end{enumerate}
+\end{prob}
+
+\begin{prob}[Conditional and consequence]
+Consider the following claim: 
+
+$!A, !B \Entails !C$ if, and only if, $!A \Entails !B \rightarrow !C$.
+\begin{enumerate}
+	\item Does this hold in $\LogKs$? If yes, show why, if not, say which
+	 direction (if, only if, both) fails and give the relevant counterexamples.
+	 \item Same question for $\LogLuk[3]$.
+\end{enumerate}
+\end{prob}
+
+\end{document}

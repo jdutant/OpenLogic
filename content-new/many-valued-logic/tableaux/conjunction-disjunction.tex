@@ -1,0 +1,65 @@
+% Part: many-valued-logic
+% Chapter: tableaux 
+% Section: conjunction-and-disjunction
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mvl}{tab}{cad}
+
+\olsection{Conjunction and Disjunction in $\LogLuk[3]$ and $\LogKs$}
+
+For each case, we need to identify what's necessary and sufficient for the case to
+obtain. For instance, if we have $\sFmla{\True}{!A \lor !B}$, it must be that at
+least one of $!A$, $B$ is true. If we have $\sFmla{\Undef}{!A \land !B}$, it can't be
+that any of $!A$, $!B$ is $\False$ and it must be that one is $\Undef$, which leads to
+three cases.
+
+\subsection{Rules for $\land$}
+
+\begin{defish}\noindent
+\AxiomC{\sFmla{\True}{!A \land !B}}
+\RightLabel{\TRule{\True}{\land}}
+\UnaryInfC{\sFmla{\True}{!A}}
+\noLine
+\UnaryInfC{\sFmla{\True}{!B}}
+\DisplayProof
+\hfill
+\AxiomC{\sFmla{\Undef}{!A \land !B}}
+\RightLabel{\TRule{\Undef}{\land}}
+\UnaryInfC{$\sFmla{\True}{!A} \quad \mid \quad \sFmla{\Undef}{!A} \quad \mid \quad \sFmla{\Undef}{!A}$}
+\noLine
+\UnaryInfC{$\sFmla{\Undef}{!B} \quad \mid \quad \sFmla{\True}{!B} \quad \mid \quad \sFmla{\Undef}{!B}$}
+\DisplayProof
+\hfill
+\AxiomC{\sFmla{\False}{!A \land !B}}
+\RightLabel{\TRule{\False}{\land}}
+\UnaryInfC{$\sFmla{\False}{!A} \quad \mid \quad \sFmla{\False}{!B}$}
+\DisplayProof
+\end{defish}
+
+\subsection{Rules for $\lor$}
+
+\begin{defish}\noindent
+\AxiomC{\sFmla{\True}{!A \lor !B}}
+\RightLabel{\TRule{\True}{\lor}}
+\UnaryInfC{$\sFmla{\True}{!A} \quad \mid \quad \sFmla{\True}{!B}$}
+\DisplayProof
+\hfill
+\AxiomC{\sFmla{\Undef}{!A \lor !B}}
+\RightLabel{\TRule{\Undef}{\lor}}
+\UnaryInfC{$\sFmla{\False}{!A} \quad \mid \quad \sFmla{\Undef}{!A} \quad \mid \quad \sFmla{\Undef}{!A}$}
+\noLine
+\UnaryInfC{$\sFmla{\Undef}{!B} \quad \mid \quad \sFmla{\False}{!B} \quad \mid \quad \sFmla{\Undef}{!B}$}
+\DisplayProof
+\hfill
+\AxiomC{\sFmla{\False}{!A \lor !B}}
+\RightLabel{\TRule{\False}{\lor}}
+\UnaryInfC{\sFmla{\False}{!A}}
+\noLine
+\UnaryInfC{\sFmla{\False}{!B}}
+\DisplayProof
+\end{defish}
+
+\end{document}

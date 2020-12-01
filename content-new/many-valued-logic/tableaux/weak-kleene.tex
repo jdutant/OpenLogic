@@ -10,6 +10,72 @@
 
 \olsection{Rules for the weak Kleene logic}
 
-Left as an exercise.
+\begin{defish}\noindent
+\AxiomC{\sFmla{\True}{!A \land !B}}
+\RightLabel{\TRule{\True}{\land}}
+\UnaryInfC{\sFmla{\True}{!A}}
+\noLine
+\UnaryInfC{\sFmla{\True}{!B}}
+\DisplayProof
+\hfill
+\AxiomC{\sFmla{\Undef}{!A \land !B}}
+\RightLabel{\TRule{\Undef}{\land}}
+\UnaryInfC{$\sFmla{\Undef}{!A} \quad \mid \quad \sFmla{\Undef}{!B}$}
+\DisplayProof
+\hfill
+\AxiomC{\sFmla{\False}{!A \land !B}}
+\RightLabel{\TRule{\False}{\land}}
+\UnaryInfC{$\sFmla{\True}{!A} \quad \mid \quad \sFmla{\False}{!B} \quad \mid \quad \sFmla{\False}{!A}$}
+\noLine
+\UnaryInfC{$\sFmla{\False}{!B} \quad \mid \quad \sFmla{\True}{!A}\quad \mid \quad \sFmla{\False}{!B} $}
+\DisplayProof
+\end{defish}
+
+Rules for $\lor$:
+
+\begin{defish}\noindent
+\AxiomC{\sFmla{\True}{!A \lor !B}}
+\RightLabel{\TRule{\True}{\lor}}
+\UnaryInfC{$\sFmla{\True}{!A} \quad \mid \quad \sFmla{\True}{!B} \quad \mid \quad \sFmla{\False}{!A}$}
+\noLine
+\UnaryInfC{$\sFmla{\True}{!B} \quad \mid \quad \sFmla{\False}{!A}\quad \mid \quad \sFmla{\True}{!B} $}
+\DisplayProof
+\hfill
+\AxiomC{\sFmla{\Undef}{!A \lor !B}}
+\RightLabel{\TRule{\Undef}{\lor}}
+\UnaryInfC{$\sFmla{\Undef}{!A} \quad \mid \quad \sFmla{\Undef}{!B}$}
+\DisplayProof
+\hfill
+\AxiomC{\sFmla{\False}{!A \lor !B}}
+\RightLabel{\TRule{\False}{\lor}}
+\UnaryInfC{\sFmla{\False}{!A}}
+\noLine
+\UnaryInfC{\sFmla{\False}{!B}}
+\DisplayProof
+\end{defish}
+
+Rules for $\lif$:
+
+\begin{defish}\noindent
+\AxiomC{\sFmla{\True}{!A \lif !B}}
+\RightLabel{\TRule{\True}{\lif}}
+\UnaryInfC{$\sFmla{\True}{!A} \quad \mid \quad \sFmla{\False}{!B} \quad \mid \quad \sFmla{\False}{!A}$}
+\noLine
+\UnaryInfC{$\sFmla{\True}{!B} \quad \mid \quad \sFmla{\True}{!A}\quad \mid \quad \sFmla{\False}{!B} $}
+\DisplayProof
+\hfill
+\AxiomC{\sFmla{\Undef}{!A \lif !B}}
+\RightLabel{\TRule{\Undef}{\lif}}
+\UnaryInfC{$\sFmla{\Undef}{!A} \quad \mid \quad \sFmla{\Undef}{!B}$}
+\DisplayProof
+\hfill
+\AxiomC{\sFmla{\False}{!A \lif !B}}
+\RightLabel{\TRule{\False}{\lif}}
+\UnaryInfC{\sFmla{\True}{!A}}
+\noLine
+\UnaryInfC{\sFmla{\False}{!B}}
+\DisplayProof
+\end{defish}
+
 
 \end{document}

@@ -1,0 +1,360 @@
+% Part: cheat-sheets
+% Chapter: modal-logic
+
+\documentclass[../../../../include/open-logic-chapter]{subfiles}
+
+\begin{document}
+
+\olchapter{chs}{nml}{Normal Modal Logic}
+
+\section{Semantics}
+
+\begin{defn}
+  A \emph{model} for the basic modal language is a triple $\mModel{M}
+  = \tuple{W, R, V}$, where
+  \begin{enumerate}
+  \item $W$ is a nonempty set of ``worlds,''
+  \item $R$ is a binary accessibility relation on~$W$, and
+  \item $V$ is a function assigning to each !!{propositional
+    variable}~$p$ a set $V(p)$ of possible worlds.
+  \end{enumerate}
+  When $Rww'$ holds, we say that $w'$ is \emph{accessible
+    from}~$w$. When $w \in V(p)$ we say $p$ is \emph{true at}~$w$.
+\end{defn}
+
+\begin{defn}\ollabel{defn:mmodels}
+  \emph{Truth of !!a{formula}~$!A$ at~$w$} in a~$\mModel M$, in symbols:
+  $\mSat{M}{!A}[w]$, is defined inductively as follows:
+  \begin{enumerate}
+  \tagitem{prvFalse}{\indcase{!A}{\lfalse}{Never $\mSat{M}{\lfalse}[w]$}.}{}
+  \tagitem{prvTrue}{\indcase{!A}{\ltrue}{Always $\mSat{M}{\ltrue}[w]$}.}{}
+  \item $\mSat{M}{p}[w]$ iff $w \in V(p)$
+  \tagitem{prvNot}{\indcase{!A}{\lnot !B}{$\mSat{M}{\indfrm}[w]$ iff
+    $\mSat/{M}{!B}[w]$}.}{}
+  \tagitem{prvAnd}{\indcase{!A}{(!B \land !C)}{$\mSat{M}{\indfrm}[w]$ iff
+    $\mSat{M}{!B}[w]$ and $\mSat{M}{!C}[w]$}.}{}
+  \tagitem{prvOr}{\indcase{!A}{(!B \lor !C)}{$\mSat{M}{\indfrm}[w]$ iff
+    $\mSat{M}{!B}[w]$ or $\mSat{M}{!C}[w]$} (or both).}{}
+  \tagitem{prvIf}{\indcase{!A}{(!B \lif !C)}{$\mSat{M}{\indfrm}[w]$ iff
+    $\mSat/{M}{!B}[w]$ or $\mSat{M}{!C}[w]$}.}{}
+  \tagitem{prvIff}{\indcase{!A}{(!B \liff !C)}{$\mSat{M}{\indfrm}[w]$ iff
+    either both $\mSat{M}{!B}[w]$ and $\mSat{M}{!C}[w]$ or
+    neither $\mSat{M}{!B}[w]$ nor $\mSat{M}{!C}[w]$}.}{}
+  \item\ollabel{defn:sub:mmodels-box}
+    \indcase{!A}{\Box !B}{$\mSat{M}{\indfrm}[w]$ iff
+    $\mSat{M}{!B}[w']$ for all $w' \in W$ with $Rww'$}
+  \item\ollabel{defn:sub:mmodels-diamond}
+    \indcase{!A}{\Diamond !B}{$\mSat{M}{\indfrm}[w]$ iff
+    $\mSat{M}{!B}[w']$ for at least one $w' \in W$ with $Rww'$}
+  \end{enumerate}
+\end{defn}
+
+\begin{defn}
+  !!^a{formula} $!A$ is \emph{true in a model} $M = \tuple{W, R,
+    V}$, written $\mSat{M}{!A}$, if and only if $\mSat{M}{!A}[w]$
+  for every $w \in W$.
+\end{defn}
+
+\begin{defn}
+  !!^a{formula} $!A$ is \emph{valid} in a class $\mClass{C}$ of
+  models if it is true in every model in~$\mClass{C}$ (i.e., true at
+  every world in every model in~$\mClass{C}$). If $!A$ is valid
+  in~$\mClass{C}$, we write $\mClass{C} \Entails !A$, and we
+  write $\Entails !A$ if $!A$ is valid in the class of
+  \emph{all} models.
+\end{defn}
+
+\section{Systems of Modal Logic}
+
+\begin{thm}\ollabel{thm:soundschemas}
+  Let $\mModel{M} = \tuple{W, R, V}$ be a model.  If $R$ has the
+  property on the left side of \olref{tab:five}, every instance of the
+  !!{formula} on the right side is true in~$\mModel{M}$.
+\end{thm}
+
+\begin{table}[t]
+    \begin{tabular}{| l || l |}
+      \hline
+      {\emph{If $R$ is \dots}} & {\emph{then \dots is true in~$\mModel{M}$:}} \\
+      \hline \hline
+      \emph{serial}: $\forall u \exists v Ruv$ & \hbox to.43\textwidth
+           {$\Box p \lif \Diamond p$ \hfill (\Ax{D})} \\
+      \hline
+      \emph{reflexive}: $\forall w Rww$  
+      & \hbox to.43\textwidth
+          {$\Box p \lif p$ \hfill (\Ax{T})} \\
+      \hline
+      \emph{symmetric}: &  \hbox to .43\textwidth
+           {$p \lif \Box\Diamond p$ \hfill (\Ax{B})} \\
+           $\forall u\forall v(Ruv \lif Rvu)$ & \\
+      \hline
+      \emph{transitive}: & \hbox to.43\textwidth
+           {$\Box p \lif \Box \Box p$ \hfill (\Ax{4})} \\
+      $\forall u \forall v \forall w ((Ruv \land Rvw) \lif Ruw)$ & \\
+      \hline 
+      \emph{euclidean}: & \hbox to .43\textwidth
+        {$\Diamond p \lif \Box\Diamond p$ \hfill (\Ax{5})} \\
+      $\forall w \forall u \forall v ((Rwu \land Rwv) \lif Ruv)$ &\\
+      \hline
+    \end{tabular}
+    \caption{Five correspondence facts.}
+    \ollabel{tab:five}
+\end{table} 
+
+\begin{defn}
+  If $\mClass{F}$ is a class of frames, we say $!A$
+  \emph{defines}~$\mClass{F}$ iff $\mModel{F} \Entails !A$ for all and only
+  frames~$\mModel{F} \in \mClass{F}$.
+\end{defn}
+
+\begin{thm}\ollabel{thm:fullCorrespondence}
+If the !!{formula} on the right side of \olref{tab:five} is valid in a
+frame~$\mModel{F}$, then $\mModel{F}$ has the property on the left
+side.
+\end{thm}
+
+\section{Tableaux}
+
+\subsection{Rules for \Ax{K}}
+
+The rules for the regular propositional connectives are the same as
+for regular propositional signed !!{tableau}s, just with prefixes
+added. In each case, the rule applied to a signed !!{formula}
+$\sFmla{S}{!A}[\sigma]$ produces new !!{formula}s that are also
+prefixed by~$\sigma$. This should be intuitively clear: e.g., if $!A
+\land !B$ is true at (a world named by)~$\sigma$, then $!A$ and $!B$
+are true at~$\sigma$ (and not at any other world). We collect the
+propositional rules in \olref{tab:prop-rules}.
+
+\begin{table}
+  \[\def\arraystretch{3}\begin{array}{|c|c|}
+    \hline
+    \AxiomC{\sFmla{\True}{\lnot !A}[\sigma]}
+    \RightLabel{\TRule{\True}{\lnot}}
+    \UnaryInfC{\sFmla{\False}{!A}[\sigma]}
+    \DisplayProof
+    &
+    \AxiomC{\sFmla{\False}{\lnot !A}[\sigma]}
+    \RightLabel{\TRule{\False}{\lnot}}
+    \UnaryInfC{\sFmla{\True}{!A}[\sigma]}
+    \DisplayProof
+    \\[1ex]
+    \hline
+    \AxiomC{\sFmla{\True}{!A \land !B}[\sigma]}
+    \RightLabel{\TRule{\True}{\land}}
+    \UnaryInfC{\sFmla{\True}{!A}[\sigma]}
+    \noLine
+    \UnaryInfC{\sFmla{\True}{!B}[\sigma]}
+    \DisplayProof
+    &
+    \AxiomC{\sFmla{\False}{!A \land !B}[\sigma]}
+    \RightLabel{\TRule{\False}{\land}}
+    \UnaryInfC{$\sFmla{\False}{!A}[\sigma] \quad \mid \quad
+      \sFmla{\False}{!B}[\sigma]$}
+    \DisplayProof
+    \\[2ex]
+    \hline
+    \AxiomC{\sFmla{\True}{!A \lor !B}[\sigma]}
+    \RightLabel{\TRule{\True}{\lor}}
+    \UnaryInfC{$\sFmla{\True}{!A}[\sigma] \quad \mid \quad
+      \sFmla{\True}{!B}[\sigma]$}
+    \DisplayProof
+    &
+    \AxiomC{\sFmla{\False}{!A \lor !B}[\sigma]}
+    \RightLabel{\TRule{\False}{\lor}}
+    \UnaryInfC{\sFmla{\False}{!A}[\sigma]}
+    \noLine
+    \UnaryInfC{\sFmla{\False}{!B}[\sigma]}
+    \DisplayProof
+    \\[2ex]
+    \hline
+    \AxiomC{\sFmla{\True}{!A \lif !B}[\sigma]}
+    \RightLabel{\TRule{\True}{\lif}}
+    \UnaryInfC{$\sFmla{\False}{!A}[\sigma] \quad \mid
+      \quad \sFmla{\True}{!B}[\sigma]$}
+    \DisplayProof
+    &
+    \AxiomC{\sFmla{\False}{!A \lif !B}[\sigma]}
+    \RightLabel{\TRule{\False}{\lif}}
+    \UnaryInfC{\sFmla{\True}{!A}[\sigma]}
+    \noLine
+    \UnaryInfC{\sFmla{\False}{!B}[\sigma]}
+    \DisplayProof
+    \\[2ex]
+    \hline
+  \end{array}\]
+  \caption{Prefixed !!{tableau} rules for the propositional
+    connectives}
+  \ollabel{tab:prop-rules}
+\end{table}
+
+The closure condition is the same as for ordinary !!{tableau}s,
+although we require that not just the !!{formula}s but also the
+prefixes must match. So a branch is closed if it contains both
+\[
+\sFmla{\True}{!A}[\sigma] \quad\text{and}\quad \sFmla{\False}{!A}[\sigma]
+\]
+for some prefix $\sigma$ and !!{formula}~$!A$.
+
+The rules for setting up assumptions is also as for ordinary
+!!{tableau}s, except that for asusmptions we always use the
+prefix~$1$. (It does not matter which prefix we use, as long as it's
+the same for all assumptions.) So, e.g., we say that
+\[
+!B_1, \dots, !B_n \Proves !A
+\]
+iff there is a closed tableau for the assumptions
+\[
+\sFmla{\True}{!B_1}[1], \dots, \sFmla{\True}{!B_n}[1],
+\sFmla{\False}{!A}[1].
+\]
+
+\olsection{Rules for Other Accessibility Relations}
+
+\begin{table}
+  \begin{center}
+    \def\arraystretch{3}\def\fCenter{}
+    \iftag{notprvBox,notprvDiamond}
+          {\begin{tabular}{|c|}}
+          {\begin{tabular}{|c|c|}}
+    \hline
+    \iftag{prvBox}{
+      \AxiomC{\sFmla{\True}{\Box !A}[\sigma]}
+      \RightLabel{T$\Box$}
+      \UnaryInfC{\sFmla{\True}{!A}[\sigma]}
+      \DisplayProof}{}
+    \iftag{notprvBox,notprvDiamond}{}{&}
+    \iftag{prvDiamond}{
+      \AxiomC{\sFmla{\False}{\Diamond !A}[\sigma]}
+      \RightLabel{T$\Diamond$}
+      \UnaryInfC{\sFmla{\False}{!A}[\sigma]}
+      \DisplayProof}{}
+    \\[1ex]
+    \hline
+    \iftag{prvBox}{
+      \AxiomC{\sFmla{\True}{\Box !A}[\sigma]}
+      \RightLabel{D$\Box$}
+      \UnaryInfC{\sFmla{\True}{\Diamond!A}[\sigma]}
+      \DisplayProof}{}
+    \iftag{notprvBox,notprvDiamond}{}{&}
+    \iftag{prvDiamond}{
+      \AxiomC{\sFmla{\False}{\Diamond !A}[\sigma]}
+      \RightLabel{D$\Diamond$}
+      \UnaryInfC{\sFmla{\False}{\Box!A}[\sigma]}
+      \DisplayProof}{}
+    \\[1ex]
+    \hline
+    \iftag{prvBox}{
+      \AxiomC{\sFmla{\True}{\Box !A}[\sigma.n]}
+      \RightLabel{B$\Box$}
+      \UnaryInfC{\sFmla{\True}{!A}[\sigma]}
+      \DisplayProof}{}
+    \iftag{notprvBox,notprvDiamond}{}{&}
+    \iftag{prvDiamond}{
+      \AxiomC{\sFmla{\False}{\Diamond !A}[\sigma.n]}
+      \RightLabel{B$\Diamond$}
+      \UnaryInfC{\sFmla{\False}{!A}[\sigma]}
+      \DisplayProof}{}
+    \\[1ex]
+    \hline
+    \iftag{prvBox}{
+      \AxiomC{\sFmla{\True}{\Box !A}[\sigma]}
+      \RightLabel{4$\Box$}
+      \UnaryInfC{\sFmla{\True}{\Box!A}[\sigma.n]}
+      \DisplayProof}{}
+    \iftag{notprvBox,notprvDiamond}{}{&}
+    \iftag{prvDiamond}{
+      \AxiomC{\sFmla{\False}{\Diamond !A}[\sigma]}
+      \RightLabel{4$\Diamond$}
+      \UnaryInfC{\sFmla{\False}{\Diamond!A}[\sigma.n]}
+      \DisplayProof}{}
+    \\
+    \iftag{notprvBox,notprvDiamond}
+         {$\sigma.n$ is used}
+         {$\sigma.n$ is used & $\sigma.n$ is used}
+    \\[1ex]
+    \hline
+    \iftag{prvBox}{
+      \AxiomC{\sFmla{\True}{\Box !A}[\sigma.n]}
+      \RightLabel{4r$\Box$}
+      \UnaryInfC{\sFmla{\True}{\Box!A}[\sigma]}
+      \DisplayProof}{}
+    \iftag{notprvBox,notprvDiamond}{}{&}
+    \iftag{prvDiamond}{
+      \AxiomC{\sFmla{\False}{\Diamond !A}[\sigma.n]}
+      \RightLabel{4r$\Diamond$}
+      \UnaryInfC{\sFmla{\False}{\Diamond!A}[\sigma]}
+      \DisplayProof}{}
+    \\[1ex]
+    \hline
+    \end{tabular}
+  \end{center}
+  \caption{More modal rules.}
+  \ollabel{tab:more-rules}
+\end{table}
+
+Adding these rules results in systems that are sound and complete for
+the logics given in \olref{tab:logics-rules}.
+
+\begin{table}
+  \begin{center}
+    \begin{tabular}{lll}
+      \hline
+      Logic & $R$ is \dots & Rules\\
+      \hline
+      $\Log{T} = \Log{KT}$ & reflexive &
+      \iftag{prvBox}{T$\Box$}{}%
+      \iftag{notprvBox,notprvDiamond}{}{, }%
+      \iftag{prvDiamond}{T$\Diamond$}{}
+      \\ \hline
+      $\Log{D} = \Log{KD}$ & serial &
+      \iftag{prvBox}{D$\Box$}{}%
+      \iftag{notprvBox,notprvDiamond}{}{, }%
+      \iftag{prvDiamond}{D$\Diamond$}{}
+      \\ \hline
+      $\Log{K4}$ & transitive &
+      \iftag{prvBox}{4$\Box$}{}%
+      \iftag{notprvBox,notprvDiamond}{}{, }%
+      \iftag{prvDiamond}{4$\Diamond$}{}
+      \\ \hline
+      $\Log{B} = \Log{KTB}$ & reflexive, &
+      \iftag{prvBox}{T$\Box$}{}%
+      \iftag{notprvBox,notprvDiamond}{}{, }%
+      \iftag{prvDiamond}{T$\Diamond$}{}\\
+      & symmetric &
+      \iftag{prvBox}{B$\Box$}{}%
+      \iftag{notprvBox,notprvDiamond}{}{, }%
+      \iftag{prvDiamond}{B$\Diamond$}{}
+      \\ \hline
+      $\Log{S4} = \Log{KT4}$ & reflexive, &
+      \iftag{prvBox}{T$\Box$}{}%
+      \iftag{notprvBox,notprvDiamond}{}{, }%
+      \iftag{prvDiamond}{T$\Diamond$}{},\\
+      & transitive &
+      \iftag{prvBox}{4$\Box$}{}%
+      \iftag{notprvBox,notprvDiamond}{}{, }%
+      \iftag{prvDiamond}{4$\Diamond$}{}
+      \\ \hline
+      $\Log{S5} = \Log{KT4B}$ & reflexive, &
+      \iftag{prvBox}{T$\Box$}{}%
+      \iftag{notprvBox,notprvDiamond}{}{, }%
+      \iftag{prvDiamond}{T$\Diamond$}{},\\
+      & transitive, &
+      \iftag{prvBox}{4$\Box$}{}%
+      \iftag{notprvBox,notprvDiamond}{}{, }%
+      \iftag{prvDiamond}{4$\Diamond$}{},\\
+      &  euclidean &
+      \iftag{prvBox}{4r$\Box$}{}%
+      \iftag{notprvBox,notprvDiamond}{}{, }%
+      \iftag{prvDiamond}{4r$\Diamond$}{}
+      \\ \hline
+    \end{tabular}
+  \end{center}
+  \caption{!!^{tableau} rules for various modal logics.}
+  \ollabel{tab:logics-rules}
+\end{table}
+
+
+\OLEndChapterHook
+
+\end{document}

@@ -1,0 +1,180 @@
+% Part: cheat-sheets
+% Chapter: first-order-logic
+
+\documentclass[../../../../include/open-logic-chapter]{subfiles}
+
+\begin{document}
+
+\olchapter{chs}{fol}{First-Order Logic}
+
+\section{Semantics}
+
+\begin{defn}[!!^{structure}s]
+\Article{structure} \emph{!!{structure}}~$\Struct M$, for a language
+$\Lang{L}$ of first-order logic consists of the following elements:
+\begin{enumerate}
+\item \emph{Domain:} a non-empty set, $\Domain M$
+\item \emph{Interpretation of !!{constant}s:} for each !!{constant}~$c$ of
+  $\Lang{L}$, !!a{element} $\Assign{c}{M} \in \Domain M$
+\item \emph{Interpretation of !!{predicate}s:} for each $n$-place
+  !!{predicate}~$R$ of $\Lang{L}$ (other than $\eq$), an $n$-place
+  relation $\Assign{R}{M} \subseteq \Domain{M}^n$
+\tagitem{fnTerms}{\emph{Interpretation of !!{function}s:} for each $n$-place
+  !!{function}~$f$ of $\Lang{L}$, an $n$-place function $\Assign{f}{M}
+  \colon \Domain{M}^n \to \Domain{M}$}{}
+\end{enumerate}
+\end{defn}
+
+\begin{defn}[!!^{value} of Terms]
+If $t$ is a term of the language~$\Lang L$, $\Struct M$ is a
+!!{structure} for~$\Lang L$, and $s$ is a !!{variable} assignment
+for~$\Struct M$, the \emph{!!{value}}~$\Value{t}{M}[s]$ is defined as
+follows:
+\begin{enumerate}
+\item \indcase{t}{c}{$\Value{\indfrm}{M}[s] = \Assign{\indcomplex}{M}$.}
+\item \indcase{t}{x}{$\Value{\indfrm}{M}[s] = s(\indcomplex)$.}
+\tagitem{fnTerms}{\indcase{t}{\Atom{f}{t_1, \ldots, t_n}}{
+\[
+\Value{\indfrm}{M}[s] = \Assign{f}{M}(\Value{t_1}{M}[s], \ldots,
+\Value{t_n}{M}[s]).
+\]}
+}{}
+\end{enumerate}
+\end{defn}
+
+\begin{defn}[$x$-Variant]
+If $s$ is a !!{variable} assignment for a !!{structure}~$\Struct M$, then any
+!!{variable} assignment $s'$ for $\Struct M$ which differs from $s$ at most
+in what it assigns to $x$ is called an \emph{$x$-variant} of~$s$.  If
+$s'$ is an $x$-variant of $s$ we write $\varAssign{s'}{s}{x}$.
+\end{defn}
+
+\begin{defn}[Satisfaction]
+\ollabel{defn:satisfaction}
+Satisfaction of a !!{formula}~$!A$ in a !!{structure}~$\Struct M$
+relative to a !!{variable} assignment~$s$, in symbols:
+$\Sat{M}{!A}[s]$, is defined recursively as follows. (We write
+$\Sat/{M}{!A}[s]$ to mean ``not $\Sat{M}{!A}[s]$.'')
+\begin{enumerate}
+\tagitem{prvFalse}{%
+  \indcase{!A}{\lfalse}{$\Sat/{M}{\indfrm}[s]$.}}{}
+
+\tagitem{prvTrue}{%
+  \indcase{!A}{\ltrue}{$\Sat{M}{\indfrm}[s]$.}}{}
+
+\item \indcase{!A}{\Atom{R}{t_1, \dots, t_n}}{$\Sat{M}{\indfrm}[s]$
+  iff $\langle \Value{t_1}{M}[s], \dots, \Value{t_n}{M}[s] \rangle \in
+  \Assign{R}{M}$.}
+
+\item \indcase{!A}{\eq[t_1][t_2]}{$\Sat{M}{\indfrm}[s]$ iff
+  $\Value{t_1}{M}[s] = \Value{t_2}{M}[s]$.}
+
+\tagitem{prvNot}{%
+  \indcase{!A}{\lnot !B}{$\Sat{M}{\indfrm}[s]$ iff
+    $\Sat/{M}{!B}[s]$.}}{}
+
+\tagitem{prvAnd}{%
+  \indcase{!A}{(!B \land !C)}{$\Sat{M}{\indfrm}[s]$ iff $\Sat{M}{!B}[s]$
+    and $\Sat{M}{!C}[s]$.}}{}
+
+\tagitem{prvOr}{%
+  \indcase{!A}{(!B \lor !C)}{$\Sat{M}{\indfrm}[s]$ iff
+    $\Sat{M}{!A}[s]$ or $\Sat{M}{!B}[s]$ (or both).}}{}
+
+\tagitem{prvIf}{%
+  \indcase{!A}{(!B \lif !C)}{$\Sat{M}{\indfrm}[s]$ iff $\Sat/{M}{!B}[s]$
+    or $\Sat{M}{!C}[s]$ (or both).}}{}
+
+\tagitem{prvIff}{%
+  \indcase{!A}{(!B \liff !C)}{$\Sat{M}{\indfrm}[s]$ iff either both
+    $\Sat{M}{!B}[s]$ and $\Sat{M}{!C}[s]$, or neither $\Sat{M}{!B}[s]$
+    nor $\Sat{M}{!C}[s]$.}}{}
+
+\tagitem{prvAll}{%
+  \indcase{!A}{\lforall[x][!B]}{$\Sat{M}{\indfrm}[s]$ iff for every
+    $x$-variant~$s'$ of $s$, $\Sat{M}{!B}[s']$.}}{}
+
+\tagitem{prvEx}{%
+  \indcase{!A}{\lexists[x][!B]}{$\Sat{M}{\indfrm}[s]$ iff there is an
+    $x$-variant~$s'$ of $s$ so that $\Sat{M}{!B}[s']$.}}{}
+\end{enumerate}
+\end{defn}
+
+\begin{defn}[Validity]
+A sentence $!A$ is \emph{valid}, $\Entails !A$, iff $\Sat{M}{!A}$ for every
+!!{structure}~$\Struct M$.
+\end{defn}
+
+\begin{defn}[Entailment]
+A set of sentences~$\Gamma$ \emph{entails} a sentence~$!A$, $\Gamma
+\Entails !A$, iff for every !!{structure}~$\Struct M$ with
+$\Sat{M}{\Gamma}$, $\Sat{M}{!A}$.
+\end{defn}
+
+
+\begin{defn}[Satisfiability]
+A set of sentences~$\Gamma$ is \emph{satisfiable} if $\Sat{M}{\Gamma}$
+for some !!{structure}~$\Struct M$.  If $\Gamma$ is not satisfiable it is
+called \emph{unsatisfiable}.
+\end{defn}
+
+\section{Tableaux}
+
+\subsection{Rules for $\lforall$}
+
+\begin{defish}
+\AxiomC{\sFmla{\True}{\lforall[x][!A(x)]}}
+\RightLabel{\TRule{\True}{\forall}}
+\UnaryInfC{\sFmla{\True}{!A(t)}}
+\DisplayProof
+\hfill
+\AxiomC{\sFmla{\False}{\lforall[x][!A(x)]}}
+\RightLabel{\TRule{\False}{\lforall}}
+\UnaryInfC{\sFmla{\False}{!A(a)}}
+\DisplayProof
+\end{defish}
+
+In \TRule{\True}{\lforall}, $t$ is a closed term (i.e., one without
+variables). In \TRule{\False}{\lforall}, $a$~is !!a{constant} which must
+not occur anywhere in the branch above \TRule{\False}{\lforall}
+rule. We call $a$ the \emph{eigenvariable} of the \TRule{\False}{\forall}
+inference.
+
+\subsection{Rules for $\lexists$}
+
+\begin{defish}
+\AxiomC{\sFmla{\True}{\lexists[x][!A(x)]}}
+\RightLabel{\TRule{\True}{\lexists}}
+\UnaryInfC{\sFmla{\True}{!A(a)}}
+\DisplayProof
+\hfill
+\AxiomC{\sFmla{\False}{\lexists[x][!A(x)]}}
+\RightLabel{\TRule{\False}{\lexists}}
+\UnaryInfC{\sFmla{\False}{!A(t)}}
+\DisplayProof
+\end{defish}
+
+\begin{defish}
+\AxiomC{}
+\RightLabel{$\eq$}
+\UnaryInfC{\sFmla{\True}{\eq[t][t]}}
+\DisplayProof
+\hfill
+\AxiomC{\sFmla{\True}{\eq[t_1][t_2]}}
+\noLine
+\UnaryInfC{\sFmla{\True}{!A(t_1)}}
+\RightLabel{$\TRule{\True}{\eq}$}
+\UnaryInfC{\sFmla{\True}{!A(t_1)}}
+\DisplayProof
+\hfill
+\AxiomC{\sFmla{\True}{\eq[t_1][t_2]}}
+\noLine
+\UnaryInfC{\sFmla{\False}{!A(t_1)}}
+\RightLabel{$\TRule{\True}{\eq}$}
+\UnaryInfC{\sFmla{\False}{!A(t_1)}}
+\DisplayProof
+\end{defish}
+
+\OLEndChapterHook
+
+\end{document}

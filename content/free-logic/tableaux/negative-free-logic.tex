@@ -11,11 +11,10 @@
 \olsection{Negative Free Logic}
 
 Negative free logic is obtained by supplementing the common rules with
-the following rule of \emph{existential committment}, where $R$ is some
-predicate, $t$ some term and $a$ !!a{constant}:
+the following rule of \emph{existential committment}. Where $R$ is some predicate,  $t$ some term, $a$ !!a{constant}, and $\ldots a \ldots$ a sequence of terms in which  $a$ appears (so $R\ldots a \ldots$ may be $Ra$, $Rbac$ or $Racacbd$, for instance):
 
 \begin{defish}
-\AxiomC{\sFmla{\True}{\Atom{F}{\ldots,a,\ldots}}}
+\AxiomC{\sFmla{\True}{\Atom{R}{\ldots,a,\ldots}}}
 \RightLabel{\TRule{}{\lfrexists_{\Log{NFL}}}}
 \UnaryInfC{$\sFmla{\True}{\lfrexists a}$}
 \DisplayProof

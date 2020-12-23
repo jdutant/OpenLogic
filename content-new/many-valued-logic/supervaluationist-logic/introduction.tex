@@ -1,0 +1,41 @@
+% Part: many-valued-logic
+% Chapter: supervaluationist-logic
+% Section: introduction
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mvl}{sup}{int}
+
+\olsection{Introduction}
+
+Supervaluationist logic is a tree-valued logic whose semantics is \emph{not truth-functional}.
+
+The semantics of classical logic and standard three-valued logics (\L ukasiewicz's $\LogLuk[3]$ or Kleene's $\LogKw$ and $\LogKs$, \ldots) is \emph{truth-functional}: the truth-value of a complex formula is a function of the truth-value of its parts and how they are combined. For instance, the truth-value of a formula $!A \land !B$ is a function of the truth-value of $!A$ and that of $!B$. This means that if $!C$ is a formula with the same truth-value as $!B$, then $!A \land !C$ have the same truth-value.  
+
+In three-valued logics truth-functionality has some suprising consequences. In those logics, if $\pValue{v}(!A)=\Undef$ then $\pValue{v}(\lnot !A)=\Undef$. Hence, given truth-functionality, we have:
+
+\begin{itemize}
+	\item  If $\pValue{v}(!A) = \Undef$, then $\pValue{v}(!A \land \lnot !A)=\pValue{v}(!A \land !A)=\pValue{v}(!A) = \Undef$
+	\item  If $\pValue{v}(!A) = \Undef$, then $\pValue{v}(!A \lor \lnot !A)=\pValue{v}(!A \lor !A)=\pValue{v}(!A) = \Undef$
+\end{itemize}
+
+That is, when $\pValue{v}(!A)=\Undef$ truth-functional three-valued must regard $!A \land \lnot !A$ (a contradiction in classical logic) has having the same truth-value as $!A \lor \lnot !A$ (a tautology in classical logic). Depending on which application of three-value logic we intend to defend (semantic paradoxes, vagueness, empty names, future contingents, ...), these consquences might seem indefensible. Suppose for instance that ``Zardoz'' is a name without referent, and suppose that it's not settled whether it will rain (at a given date). Consider:
+
+\begin{itemize}
+	\item Zardoz is human or Zardoz is not human.
+	\item Zardoz is human and Zardoz is not human.
+	\item It will rain or it will not rain.
+	\item It will rain and it will not rain.
+\end{itemize}
+
+The three-valued logicians must say that these three sentences are neither true nor false. But arguably, in each pair the first is much easier to assert and accept than the second. Indeed, the first might seem like a triviality and the second just the opposite. But the truth-functional three-valued logicians must say that they are the same. 
+
+Consider the future contigent case. The motivation for saying that the claim that it will rain (at a given time) is neither true nor false is the idea that it isn't yet settled. But with the claim that \emph{it will rain or it will not rain}, we might argue that \emph{is} settled, for \emph{no matter what will happen, it will rain or it will not rain}. And with the claim that \emph{it will rain and it will not rain}, we might argue that is settled too, for \emph{no matter what will happen, it's not the case that it will rain and it will not rain}. 
+
+Similarly, in the empty names came, one might argue that no matter who Zardoz may be, it (or he or she) is human or it is not human, and it's not the case that it is both. 
+
+Supervaluationist semantics aim to capture this intuition. The general idea is that when !!a{sentence} contains `undefined' parts (!!{sentence}s that are neither true nor false, empty names), we evaluate them by looking at *all the ways they could be made precise*. 
+
+\end{document}

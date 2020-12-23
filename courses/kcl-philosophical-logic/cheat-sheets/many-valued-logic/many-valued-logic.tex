@@ -345,6 +345,65 @@ Rules for $\lor$:
 \DisplayProof
 \end{defish}
 
+\subsection{Rules for $\lif$}
+
+\subsubsection{Logics $\LogKw$}
+
+Easy, left as an exercise.
+
+\subsubsection{Logics $\LogLuk[3]$, $\LogKs$, $\LogLP$}
+
+In $\LogKs$ (and $\LogLP$, which uses the same table) the conditional $!A \lif !B$ is equivalent to $\lnot !A \lor B$. 
+The rules can be inferred from those for the disjunction.
+
+\begin{defish}\noindent
+\AxiomC{\sFmla{\True}{!A \lif !B}}
+\RightLabel{\TRule{\True}{\lif}}
+\UnaryInfC{$\sFmla{\False}{!A} \quad \mid \quad \sFmla{\True}{!B}$}
+\DisplayProof
+\hfill
+\AxiomC{\sFmla{\Undef}{!A \lif !B}}
+\RightLabel{\TRule{\Undef}{\lif}}
+\UnaryInfC{$\sFmla{\True}{!A} \quad \mid \quad \sFmla{\Undef}{!A} \quad \mid \quad \sFmla{\Undef}{!A}$}
+\noLine
+\UnaryInfC{$\sFmla{\Undef}{!B} \quad \mid \quad \sFmla{\False}{!B} \quad \mid \quad \sFmla{\Undef}{!B}$}
+\DisplayProof
+\hfill
+\AxiomC{\sFmla{\False}{!A \lif !B}}
+\RightLabel{\TRule{\False}{\lif}}
+\UnaryInfC{\sFmla{\True}{!A}}
+\noLine
+\UnaryInfC{\sFmla{\False}{!B}}
+\DisplayProof
+\end{defish}
+
+\subsubsection{Rules for $\lif$ in $\LogLuk[3]$}
+
+In $\LogLuk[3]$, there is one more way for the conditional to be true, and one less for it to be $\Undef$. 
+
+\begin{defish}\noindent
+\AxiomC{\sFmla{\True}{!A \lif !B}}
+\RightLabel{\TRule{\True}{\lif}}
+\UnaryInfC{$\sFmla{\Undef}{!A} \quad \mid \quad \sFmla{\False}{!A} \quad \mid \quad \sFmla{\True}{!B}$}
+\noLine
+\UnaryInfC{$\sFmla{\Undef}{!B} \quad \mid \quad \sFmla{~~~}{~~~} \quad \mid \quad \sFmla{~~~}{~~~}$}
+\DisplayProof
+\hfill
+\AxiomC{\sFmla{\Undef}{!A \lif !B}}
+\RightLabel{\TRule{\Undef}{\lif}}
+\UnaryInfC{$\sFmla{\True}{!A} \quad \mid \quad \sFmla{\Undef}{!A}$}
+\noLine
+\UnaryInfC{$\sFmla{\Undef}{!B} \quad \mid \quad \sFmla{\False}{!B}$}
+\DisplayProof
+\hfill
+\AxiomC{\sFmla{\False}{!A \lif !B}}
+\RightLabel{\TRule{\False}{\lif}}
+\UnaryInfC{\sFmla{\True}{!A}}
+\noLine
+\UnaryInfC{\sFmla{\False}{!B}}
+\DisplayProof
+\end{defish}
+
 \OLEndChapterHook
 
 \end{document}

@@ -1,0 +1,39 @@
+% Part: exercises
+% Chapter: supervaluationist-logic
+
+\documentclass[../../../../include/open-logic-chapter]{subfiles}
+
+\begin{document}
+
+\olchapter{exe}{mvl}{Supervaluationist Logic}
+
+\olsection{Supervaluationist logic: semantics}
+
+\begin{prob}[Non truth-functionality]
+	Show that $\LogSup$ is not truth-functional for the $\lif$ operator. That is, present !!a{valuation} $\pAssign{v}$ and a pair of !!{sentence}s of the form $!A \lif !B$ and $!A \lif !C$ where that $!B$ and $!C$ have the same truth value in $\pAssign{v}$ but $!A \lif !B$ and $!A \lif !C$ differ in truth-value in $\pAssign{v}$.
+\end{prob}
+
+\begin{prob}
+	Show that if $\Gamma \Entails[\LogCL] !A$ then $\Gamma \Entails[\LogSup] !A$. (This is for the language with $\Delta$ operator.)
+
+	\emph{Tip}: suppose that $\Gamma \Entails/[\LogCL] !A$ and show that $\Gamma \Entails[\LogCL] !A$.
+\end{prob}
+
+\begin{prob}[Penumbral connections]
+	Explain why, when applying supervaluationist logic to vagueness, we need to restrict the range of supervaluations we consider. 
+\end{prob}
+
+\olsection{Supervaluationist logic with a determinacy operator}
+
+\begin{prob}
+	Suppose that we introduce the $\Delta$ operator in the language for supervaluationist logic. Explain informally why:
+	\begin{itemize}
+		\item Contraposition fails. Where contraposition is the rule according to which if $!A \Entails !B$ then $\lnot !B \Entails \lnot !A$.
+		\item Conditional proof fails. Where conditional proof is the rule according to which if $!A \Entails !B$ then $\Entails !A \lif !B$.
+		\item $\Entails/ !A \liff \Delta !A$.
+	\end{itemize}
+\end{prob}
+
+\OLEndChapterHook
+
+\end{document}

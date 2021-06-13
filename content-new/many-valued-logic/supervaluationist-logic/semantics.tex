@@ -16,7 +16,12 @@ Supervaluationist has the same !!{structure}s as three-valued logics and (negati
 A \emph{!!{valuation}} for a propositional language $\Lang{L}$ is a function~$\pAssign{v}$ assigning $\True$, $\False$ or $\Undef$ to the !!{propositional variable}s of the language, i.e., $\pAssign{v} \colon
 \PVar \to {\True,\False,\Undef}$.
 
-A \emph{!!{structure}} for a first-order language $\Lang{L}$ is a triple $\Struct{M}$ consisting of !!a{domain} of objects, $\Domain{M}$, and an interpretation $\Assign{\cdots}{M}$ of constants and predicates that can be partially defined.
+A \emph{!!{structure}} for a first-order language $\Lang{L}$ is a triple $\Struct{M}$ consisting of !!a{domain} of objects, $\Domain{M}$, and an interpretation $\Assign{\cdots}{M}$ of !!{constant}s and !!{predicate}s such that:
+
+\begin{itemize}
+	\item For a !!{constant} $c$, $\Assign{c}{M}$ is either an object of $\Domain{M}$ or undefined.
+	\item For a $n$-place !!{predicate} $R$, $\Assign{c}{M}$ is a function that associate each $n$-tuple to $\True$, $\False$ or $\Undef$.
+\end{itemize}
 \end{defn}
 
 (When applying supervaluationism to vagueness we also allow predicates to be partially defined for objects in the domain. That is, instead of the interpretation of a predicate being a set of tuples, we make it a function that maps tuples to $\True$, $\False$ or $\Undef$.)
@@ -26,22 +31,22 @@ The difference lies in the semantics for complex !!{sentence}s. Given !!a{struct
 \begin{defn}[Supervaluations]
 A \emph{supervaluation} $\pAssign{v^+}$ for $\pAssign{v}$ is a function that maps every !!{propositional variable} to $\True$ or $\False$, such that $\pAssign{v^+}(!A)=\pAssign{v}(!A)$ if $\pAssign{v}(!A) = \True$ or $\False$. 
 
-A \emph{supervaluation} $\Struct{M^+}$ of $\Struct{M}$ is !!a{structure} such that $\Domain{M^+}=\Domain{M}$ and $\Assign{\cdot}{M^+}$ is a classical interpretation such that $\Assign{c}{M^+} = \Assign{c}{M^+}$ if the latter is defined, and $\Assign{R}{M^+} = \Assign{R}{M}$ if the latter is defined.
+A \emph{supervaluation} $\Struct{M^+}$ of $\Struct{M}$ is !!a{structure} such that $\Domain{M^+}=\Domain{M}$ and $\Assign{\cdot}{M^+}$ is a classical interpretation such that $\Assign{c}{M^+} = \Assign{c}{M^+}$ if the latter is defined, and $\Assign{R}{M^+}$ agrees with $\Assign{R}{M}$ whenever the latter assigns $\True$ or $\False$ (that is, $\Assign{R}{M^+}$ is a set of tuples containing every tuple to which $\Assign{R}{M}$ assigns $\True$ and not containg any tuple to which $\Assign{R}{M}$ assigns $\False$.
 \end{defn}
 
-(When applying vagueness to supervaluationism, we say where $R$ is a $n$-place predicate, $\Assign{R}{M^+}$ assigns $\True$ or $\False$ to every tuple and agrees with $\Assign{R}{M}$ whenever the latter assigns $\True$ or $\False$ to some tuple.)
+(When applying supervaluationsim to vagueness, we say where $R$ is a $n$-place predicate, $\Assign{R}{M^+}$ assigns $\True$ or $\False$ to every tuple and agrees with $\Assign{R}{M}$ whenever the latter assigns $\True$ or $\False$ to some tuple.)
 
 Note that supervaluations are \emph{classical} !!{structure}s. If you think of $\Undef$, empty names and predicates with partial extension as being (partially or wholly) undefined, supervaluations are ways of making them defined (classical). Supervaluationist semantics, then, is simply the idea that !!a{sentence} has a classical truth-value only if \emph{all} the ways of making it defined (classical) have that truth-value, and is neither truth nor false otherwise.
 
 \begin{defn}[Supervaluationist semantics]
 Truth and satisfaction of a !!{formula}~$!A$ \emph{at a supervaluation}, $\pAssign{v^+}(A)$, $\Sat{M^+}{!A}$ is defined as in classical logic.
 
-The value of !!a{sentence} $!A$ at a !!a{valuation} $\pAssign{v}$ is $\True$ if $\pAssign{v^+}(!A) = \True$ for every supervaluation $\pAssign{v^+}$ for $\pAssign{v}$, $\False$ if $\pAssign{v^+}(!A) = \False$ for every supervaluation $\pAssign{v^+}$ for $\pAssign{v}$, and $\Undef$ otherwise.
+The value of !!a{sentence} $!A$ at a !!a{valuation} $\pAssign{v}$ is $\True$ if $\pValue{v^+}(!A) = \True$ for every supervaluation $\pAssign{v^+}$ for $\pAssign{v}$, $\False$ if $\pValue{v^+}(!A) = \False$ for every supervaluation $\pAssign{v^+}$ for $\pAssign{v}$, and $\Undef$ otherwise.
 
-Analogously, the value of !!a{sentence} $!A$ at !!a{structure} $\Struct{M}$,  is $\Value{!A}{M}$, is $\True$ if $\Value{M^+}(!A) = \True$ for every supervaluation $\Struct{M^+}$ for $\Struct{M}$, $\False$ if $\pAssign{v^+}(!A) = \False$ for every supervaluation $\Struct{M^+}$ for $\Struct{M}$, and $\Undef$ otherwise.
+Analogously, the value of !!a{sentence} $!A$ at !!a{structure} $\Struct{M}$,  is $\Value{!A}{M}$, is $\True$ if $\Value{M^+}(!A) = \True$ for every supervaluation $\Struct{M^+}$ for $\Struct{M}$, $\False$ if $\Value{!A}{M} = \False$ for every supervaluation $\Struct{M^+}$ for $\Struct{M}$, and $\Undef$ otherwise.
 \end{defn}
 
-!!^{sentence}s that are true are every supervaluation or false at every supervaluation are sometimes often called `supertrue' and `superfalse'. In the traditional supervaluationist picture, these are equated with truth and falsehood. 
+!!^{sentence}s that are true are every supervaluation or false at every supervaluation are sometimes called `supertrue' and `superfalse'. In the traditional supervaluationist picture, these are equated with truth and falsehood. 
 
 Using $\True$ as the designated truth value, the logic of supervaluationism turns out to be classical logic.
 

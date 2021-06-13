@@ -49,9 +49,25 @@ say:
 		\item $\Atom{\Obj G}{x}\lif\lforall x\Atom{\Obj G}{\underline{x}}$,
 		\item $\lforall x\lexists y(\Atom{\Obj F}{y}\lor\lnot \Atom{\Obj G}{\underline{x}})$,
 		\item $\lexists z(\lforall x\Atom{\Obj F}{\underline{x},z}\lor\lexists y\Atom{\Obj G}{y,z})$
-		\item $\lexists y(\lforall x(\lnot \Atom{\Obj G}{y,z}\lif\lexists x\Atom{\Obj F}{x}))$ (none)
+		\item none
 	\end{enumerate}
-	\item $\ldots$
+	\item \begin{enumerate}
+		\item none
+		\item none
+		\item none
+		\item $\lforall x(\Atom{\Obj F}{x,z}\lif\lexists z\Atom{\Obj G}{\underline{z}})$
+		\item $\lexists z(\lforall x\Atom{\Obj F}{x,\underline{z}}\lor\lexists y\Atom{\Obj G}{y,\underline{z}})$
+		\item none
+	\end{enumerate}
+	\item \begin{enumerate}
+		\item none
+		\item none
+		\item $\lforall x\lexists y(\Atom{\Obj F}{\underline{y}}\lor\lnot \Atom{\Obj G}{x})$
+		\item none
+		\item $\lexists z(\lforall x\Atom{\Obj F}{x,z}\lor\lexists y\Atom{\Obj G}{\underline{y},z})$
+		\item $\lexists y(\lforall x(\lnot \Atom{\Obj G}{\underline{y},z}\lif\lexists x\Atom{\Obj F}{x}))$
+	\end{enumerate}
+
 \end{enumerate}
 \end{ans}
 \end{prob}

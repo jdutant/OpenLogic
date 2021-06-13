@@ -25,22 +25,59 @@ logics to that language with that semantic clause.
 \begin{prob}[Truth-table for $\Delta$]
 Write down the truth-table for the truth-functional determinacy operator
 $\Delta$. 
+\begin{ans}
+\begin{center}
+	\begin{tabular}{|c|c|}
+	\hline
+	$\Obj p$ 	&	$\Obj{\Delta p}$\\
+	\hline
+	$\True$		&	$\True$ \\
+	$\Indet$	&	$\False$ \\
+	$\False$	&	$\False$ \\
+	\hline
+	\end{tabular}
+\end{center}
+\end{ans}
 \end{prob}
 
 \begin{prob}[Expressive power]
 Using $\Delta$, $\land$, $\lnot$ and $\Obj p$, give a formula
-whose value is $\True$ if and only if the value of $p$ is $\Undef$. 
+whose value is $\True$ if and only if the value of $\Obj p$ is $\Undef$. 
 Give a different formula for different logics if necessary.
+\begin{ans}
+$\Obj{\lnot \Delta p \land \lnot \Delta \lnot p}$ is $\True$ iff $\Obj{p}$
+if $\Undef$ under any of the three-valued logics.\\
+\emph{Comment.} Equivalent formulas are possible (e.g. $\Obj{\lnot (\Delta p \lor \Delta \lnot p)}$). If the formula does not include a conditional $\lif$ it should do equally well (or poorly!)
+in all the three-valued logics. If unsure, use a table to check (only three lines are needed).
+\end{ans}
 \end{prob}
 
 \begin{prob}[Validites]
-Say whether the following are correct in $\LogLuk[3]$. Briefly justify your answers. 
+Say whether the following are correct in $\LogLuk[3]$ supplemented with a $\Delta$ operator.
+ Briefly justify your answers. 
 \begin{enumerate}
 	\item $\Delta \Obj{p} \Entails \Obj{p}$
 	\item $\Obj{p} \Entails \Delta \Obj{p}$
 	\item $\lnot \Delta \Obj{p} \Entails \lnot \Obj{p}$
-	\item $\Entails \Obj{p}\rightarrow \Delta \Obj{p}$
+	\item $\Entails \Obj{p}\lif \Delta \Obj{p}$
 \end{enumerate}
+\begin{ans}
+\begin{enumerate}
+	\item Correct. If $\pValue{v}(\Delta \Obj{p})=\True$ then  $\pValue{v}(\Obj{p})=\True$ (semantics of $\Delta$), so there is no !!{valuation} that makes the premise $\True$ and
+	the conclusion other than $\True$: the argument is valid in $\LogLuk[3]$ (and other truth
+	preservation logics).
+	\item Correct. Any $\pAssign{v}$ with $\pValue{v}(\Obj p)=\True$ is such that 
+	$\pValue{v}(\Delta \Obj{p})=\True$ (semantics of $\Delta$). So there is no !!{valuation} that makes the premise $\True$ and
+	the conclusion other than $\True$: the argument is valid in $\LogLuk[3]$ (and other truth
+	preservation logics).
+	\item Incorrect. Consider $\pAssign{v}$ with $\pAssign{v}(\Obj p)=\Undef$: 
+	$\pValue{v}(\lnot \Delta \Obj{p})=\True$ but $\pValue{v}(\lnot \Obj{p})=\False$.
+	\item Incorrect. Consider $\pAssign{v}$ with $\pAssign{v}(\Obj p)=\Undef$:
+	$\pValue{v}(\Delta \Obj{p})=\False$, so $\pValue{v}(\Obj{p}\lif \Delta \Obj{p})=\Undef$. Hence it is not the case that the !!{formula} is $\True$ under any !!{valuation}. It is not valid in $\LogLuk[3]$ (nor other truth
+	preservation logics, as $!A$ $\Undef$ and $!B$ $\False$ result in $!A \lif !B$ $\Undef$ in 
+	all three-valued logics).
+\end{enumerate}
+\end{ans}
 \end{prob}
 
 \begin{prob}[Classical validities and determinacy]
@@ -50,6 +87,13 @@ Briefly justify your answers.
 	\item $\Entails[\LogKs] \Delta !A$
 	\item $\Entails[\LogKs] \lnot \Delta \lnot !A$
 \end{enumerate}
+\begin{ans}
+\begin{enumerate}
+	\item No. Consider $\Obj{\lnot (p \land \lnot p)}$. It is valid in $\LogCL$ but in $\LogKs$ on !!a{valuation} $\pAssign{v}$ with $\pAssign{v}(\Obj p)=\Undef$, we have $\pValue{v}(\Obj{\lnot (p \land \lnot p)})=\Undef$ so $\pValue{v}(\Obj{\Delta \lnot (p \land \lnot p)})=\False$.
+	\item Yes. If a !!{formula} $!A$ is valid in $\LogCL$ it cannot be $\False$ on any !!{valuation} in $\LogKs$. Hence on any !!{valuation} in $\LogKs$, $\lnot !A$ is $\False$ or $\Undef$, hence $\Delta \lnot !A$ is $\False$, hence $\lnot \Delta \lnot !A$ $\True$. So 
+	if $!A$ is classically valid, $\lnot \Delta \lnot !A$ is valid in $\LogKs$.
+\end{enumerate}
+\end{ans}
 \end{prob}
 
 \end{document}

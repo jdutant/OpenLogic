@@ -11,16 +11,45 @@
 
 \begin{prob}[Non truth-functionality]
 	Show that $\LogSup$ is not truth-functional for the $\lif$ operator. That is, present !!a{valuation} $\pAssign{v}$ and a pair of !!{sentence}s of the form $!A \lif !B$ and $!A \lif !C$ where that $!B$ and $!C$ have the same truth value in $\pAssign{v}$ but $!A \lif !B$ and $!A \lif !C$ differ in truth-value in $\pAssign{v}$.
+\begin{ans}
+	Let $\pAssign{v}$ be such that $\pAssign{v}(\Obj p)=\pAssign{v}(\Obj q)=\Undef$. Consider $\Obj{p \lif p}$ and $\Obj{p \lif q}$. For every supervaluation $\pAssign{v^+}$ of $\pAssign{v}$, $\pAssign{v}(\Obj p)=\pAssign{v}(\Obj p)=\True$ or $\False$, so $\pValue{v^+}(\Obj{p \lif p})=\True$. But there are supervaluations $\pAssign{v)_1^+}$, $\pAssign{v)_2^+}$ of
+	$\pAssign{v}$ such that $\pAssign{v_1^+}(\Obj p)=\pAssign{v_1^+}(\Obj q)=\True$, and 
+	$\pAssign{v_2^+}(\Obj p)=\True$ and $\pAssign{v_2^+}(\Obj q)=\False$. We have $\pValue{v_1^+}(\Obj{p \lif q})=\True$ and $\pValue{v_2^+}(\Obj{p \lif q})=\False$, so $\pValue{v^+}(\Obj{p \lif p})=\Undef$.\footnote{Note that once you have found one supervaluation under which $!A$ is true and one under which $!A$ is false, that is enough to conclude that the !!{valuation} of $!A$ is $\Undef$. No need to go over all possible supervaluations.} Since $\pValue{v}(\Obj p)=\pValue{v}(\Obj q)$ but $\pValue{v}(\Obj{p \lif p})\neq\pAssign{v}(\Obj{q \lif q})$, $\lif$ is not truth functional in $\pValue{v}$. 
+\end{ans}
 \end{prob}
 
 \begin{prob}
-	Show that if $\Gamma \Entails[\LogCL] !A$ then $\Gamma \Entails[\LogSup] !A$. (This is for the language with $\Delta$ operator.)
+	Show that if $\Gamma \Entails[\LogCL] !A$ then $\Gamma \Entails[\LogSup] !A$. (This is for the language without $\Delta$ operator.)
 
-	\emph{Tip}: suppose that $\Gamma \Entails/[\LogCL] !A$ and show that $\Gamma \Entails[\LogCL] !A$.
+	\emph{Tip}: suppose that $\Gamma \Entails/[\LogSup] !A$ and show that $\Gamma \Entails/[\LogCL] !A$.
+
+\begin{ans}
+	\emph{Comment. We can write our answer for first-order logics instead, 
+	the steps are the same with !!{structure}s instead of !!{valuation}s.}
+
+	Suppose that $\Gamma \Entails/[\LogSup] !A$. Then there is some 
+	$\LogSup$ !!{valuation} $\pAssign{v}$ such that $\pValue{v}(!B)=\True$ for any $!B\in\Gamma$ and $\pValue{v}(!A)=\Undef$ or $\False$. Since $\pValue{v}(!A)=\Undef$ or $\False$, there is some supervaluation $\pAssign{v^+}$ of $\pAssign{v}$
+	such that $\pValue{v^+}(!A)=\False$. But since $\pValue{v}(!B)=\True$ for any $!B\in\Gamma$ and $\pAssign{v^+}$ is a supervaluation for $\pAssign{v}$, $\pValue{v^+}(!B)=\True$ for any $!B\in\Gamma$. But then  
+	$\pAssign{v^+}$ is a classical valuation such that $\pValue{v^+}(!A)=\False$ and 
+	$\pValue{v}(!B)=\True$ for any $!B\in\Gamma$. So $\Gamma \Entails/[\LogCL] !A$.
+
+\end{ans}
 \end{prob}
 
 \begin{prob}[Penumbral connections]
 	Explain why, when applying supervaluationist logic to vagueness, we need to restrict the range of supervaluations we consider. 
+\begin{ans}
+	Suppose Ann is taller than Ben and ``Ann is tall'' and ``Ben is tall'' are 
+	both borderline. Applying supervaluationist logic to vagueness, we represent
+	borderliness as indeterminacy, so we represent this by !!a{structure} 
+	$\Struct{M}$ in which $\Value{\Atom{T}{a}}{M}=\Value{\Atom{T}{b}}{M} = \Undef$ 
+	in a !!{structure} $\Struct{M}$, where $T$ stands for \emph{being tall} and
+	$a$,$b$ for Anna and Bob, respectively. This means that $\Assign{T}{M}(\Assign{a}{M})=\Assign{R}{M}(\Assign{b}{M})=\Undef$. Given this there are supervaluations $\Struct{M^+}$ for $\Struct{M}$ that precisify $T$ so that it applies to Ben but not
+	to Ann, that is, such that $\Assign{b}{M}\in\Assign{T}{M^+}$ and $\Assign{a}{M}\notin\Assign{T}{M^+}$. If we included these in the range we would consider, ``If Ben is tall then Ann is tall'' (as well as ``it is not the case that Ben is tall and Ann isn't'' and ``Either Ben isn't tall or Ann is tall'') would be indeterminate
+	too. But intuitively, given that Ann is taller than Ben these should be (determinately) true. A precisification of ``tall'' that counts Ben as ``tall'' but
+	not Ann isn't a legitimate precisification of the term; so we should not include 
+	the corresponding supervaluation in the range we consider.
+\end{ans}
 \end{prob}
 
 \olsection{Supervaluationist logic with a determinacy operator}
@@ -32,6 +61,14 @@
 		\item Conditional proof fails. Where conditional proof is the rule according to which if $!A \Entails !B$ then $\Entails !A \lif !B$.
 		\item $\Entails/ !A \liff \Delta !A$.
 	\end{itemize}
+
+\begin{ans}
+\begin{enumerate}
+\item Suppose $!A$ is true (on some !!{valuation} $\pAssign{v}$ for $\LogSup$). Hence it is true under any supervaluation (for $\pAssign{v}$), so $\Delta !A$ is true. So there is no !!{valuation} that makes $!A$ true and $\Delta !A$ not true: $!A \Entails[\LogSup] \Delta !A$. However, suppose $!A$ is $\Undef$. Then $\lnot \Delta$ is true but $\lnot !A$ is $\Undef$. So there are !!{valuation}s that make $\lnot \Delta$ true but not $\lnot !A$ true. Hence $\lnot \Delta !A \Entails[\LogSup] \lnot !A$ fails for some !!{formula}s $!A$. 
+\item \emph{Comment: the answer is similar to the above; the (simplest) relevant counterexample is $\Obj{p} \Entails \Obj{\Delta p}$ but  $\Entails/[\LogSup]  \Obj{\Delta p \lif \Delta p}$}. 
+\item \emph{Comment: use $\Entails/[\LogSup] \Obj{\Delta p \lif \Delta p}$. Note $\Delta !A \lif !A$ is valid, it is only the direction $!A \lif \Delta !A$ that fails.}
+\end{enumerate}
+\end{ans}
 \end{prob}
 
 \OLEndChapterHook

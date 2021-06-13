@@ -1,0 +1,137 @@
+% Part: many-valued-logic
+% Chapter: supervaluationist-logic
+% Section: semantics
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mvl}{sup}{det}
+
+\olsection{Determinacy operator}
+
+We can introduce operators to talk about whether a sentence is $\True$, 
+$\Undef$ or $\False$ in supervaluationism. We extend our language 
+with unary !!{operator}s $\Delta$ and $\nabla$.
+
+\begin{defn}[Determinacy operators language]
+We add the following clause to our definition of the language:
+\begin{itemize}
+\item  For every !!{formula} $!A$, $\Delta !A$ and $\nabla !A$ are 
+	!!{formula}s too.
+\end{itemize}
+\end{defn}
+
+\begin{explain}
+$\Delta !A$ is meant to capture the idea that $!A$ is \emph{true} (or 
+\emph{determinately true} \emph{supertrue}). In supervaluationist 
+semantics ,  this means being true at every supervaluation. $\nabla
+!A$ is meant to capture the idea that $!A$ is \emph{neither true nor
+false} (or  \emph{indeterminate}). In supervaluationist semantics, 
+this means being true at some supervaluations but false at others.
+
+Recall that the supervaluationist semantics says that !!a{formula}
+$!A$ is $\True$ in !!a{valuation} \pAssign{v} (or !!a{structure} 
+\Struct{M}) iff $!A$ is $\True$ in any supervaluation $\pAssign{v^+}$
+for $\pAssign{v}$ (or any supervaluation $\Struct{M^+}$ for 
+$\Struct{M}$). We want to keep that even if $!A$ is of the form 
+$\Delta !B$ or $\nabla !B$. (This will allow us to handle arbitrary 
+embeddings of these operators, e.g. $\Delta (\Delta \Obj{p} \lif p)$.)
+So we need to assign values of $\Delta !B$ and $\nabla !B$ !!{formula}s
+\emph{at a supervaluation}. This is what we do in the semantics below.
+
+It is easy to see that if 
+$\Delta !B$ (resp. $\nabla !B$) is true at a supervaluation for some
+!!{valuation} \pAssign{v}, it will be true at any other supervaluation
+for that !!{valuation}, so the relativisation might seem redundant; but
+it is needed keep our general definition of truth as truth at all
+supervaluations. Moreover, there are more complex versions of 
+supervaluationism that allow $\Delta !B$ !!{formula}s themselves
+to vary in truth from one supervaluation to the other. So it is 
+good to define their truth relative to supervaluations in this simple
+case too, even though the relativization turns out to be redundant in
+our simple semantics.
+\end{explain}
+
+\begin{defn}[Semantics for determinacy operators]
+
+For propositional logic, let $\pAssign{v^+}$ be a 
+supervaluation for $\pAssign{v}$ and $!A$ any !!{formula}:
+
+\begin{itemize}
+	\item $\pValue{v^+}(!A)$ is given as in $\LogCL$ if $!A$ is a !!{propositional
+	variable} or of the forms $\lnot !B$, $!B \land !C$, $!B \lor !C$, $!B \lif !C$.
+	\item \indcase{!A}{\Delta !B}{$\pValue{v^+}(\Delta !B)=\True$ if $\pValue{v_i^+}(!B)=\True$ for any supervaluation $\pAssign{v_i^+}$ for $\pAssign{v}$.
+	$\pValue{v^+}(\Delta !B)=\False$ otherwise.
+	\item \indcase{!A}{\nabla !B}{$\pValue{v^+}(\Delta !B)=\True$ if $\pValue{v_i^+}(!B)=\True$ and $\pValue{v_j^+}(!B)=\True$ for some supervaluations $\pAssign{v_i^+}$, $\pAssign{v_j^+}$ for $\pAssign{v}$. $\pValue{v^+}(\nabla !B)=\False$ otherwise.
+\end{itemize}
+
+For predicate logic, the definition is analogue. Let $\Struct{M^+}$ be a supervaluation of $\Struct{M}$, $s$ an assignment in $\Struct{M^+}$
+ and $!A$ any !!{formula}:
+
+\begin{itemize}
+	\item $\Value{M^+}(!A)[s]$ is given as in classical logic if $!A$ is of
+	of the form $\Atom{f}{t_1, \dots, t_k}$, $\eq[t_1][t_2]$, $\lnot !B$, $!B \land !C$, $!B \lor !C$, $!B \lif !C$, $\lforall[x][!A]$, $\lexists[x][!A]$.
+	\item \indcase{!A}{\Delta !B}{$\Value{\Delta !B}{M^+}[s]=\True$ if 
+	$\Value{!B}{M_i^+}[s]=\True$ for any supervaluation $\Struct{M_i^+}$ for $\Struct{M}$. $\Value{\Delta !B}{M^+}[s]=\False$ otherwise.
+	\item \indcase{!A}{\nabla !B}{$\Value{\Delta !B}{M^+}[s]=\True$ if 
+	$\Value{!B}{M_i^+}[s]=\True$ and $\Value{!B}{M_j^+}[s]=\False$ for some
+	 supervaluations $\Struct{M_i^+}$, $\Struct{M_j^+}$ for $\Struct{M}$.
+	 $\Value{\nabla !B}{M^+}[s]=\False$ otherwise.
+\end{itemize}
+
+\end{defn}
+
+Note that the clauses ensure that at any supervaluation $\pAssign{v^+}$,
+$\pValue{v^+}(\Delta !A)$ and $\pValue{v^+}(\nabla !A)$ are $\True$
+or $\False$, so supervaluations remain bivalent. 
+
+We can use the same clauses for adding determinacy operators 
+in classical logic, treating each classical !!{valuation} as its unique own supervaluation.
+
+\begin{prop}[Interdefinability of $\Delta$ and $\nabla$]
+$\Delta$ and $\nabla$ are interdefinable. 
+\begin{itemize}
+	\item $\nabla !A$ is equivalent to $\lnot \Delta !A 
+	\land \lnot \Delta \lnot !A$.
+	\item $\Delta !A$ is equivalent to $p \land \lnot \nabla p$.
+\end{itemize}
+\end{prop}
+
+Some consequences. 
+
+\begin{enumerate}
+\item $\Entails[\LogSup] \Delta !A \lif !A$
+\item $\Delta !A \Entails[\LogSup] !A$
+\item $!A \Entails[\LogSup] \Delta !A$. For suppose $\pValue{v}[!A]=
+	\True$ for some $\LogSup$ !!{valuation} $\pAssign{v}$. Then 
+	$\pValue{v^+}[!A]=\True$ for any supervaluation $\pAssign{v^+}$ 
+	for $\pAssign{v}$. So $\pValue{v}[\Delta !A]=
+	\True$.
+\item $\Entails/[\LogSup] !A \lif \Delta !A$. Counterexample:
+	consider $\pAssign{v}(\Obj p)=\Undef$. We have $\pValue{v^+}(\Delta 
+	\Obj{p})=\False$
+	for any supervaluation $\pAssign{v^+}$ for $\pAssign{v}$, but 
+	$\pValue{v_i^+}(\Obj p)=\True$ and $\pValue{v_j^+}(\Obj p)=\False$
+	for some supervaluations $\pAssign{v_i^+}$ and $\pAssign{v_i^+}$
+	for $\pAssign{v}$, so $\pValue{v}(\Obj{p \lif \Delta p})=\False$.
+\item $\lnot \Delta !A \Entails/[\LogSup] \lnot !A$. Counterexample:
+	consider $\pAssign{v}(\Obj p)=\Undef$, we have $\pValue{v}(\lnot
+	\Delta \Obj{p})=\True$ but $\pValue{v}(\Obj{\lnot p})=\Undef$. 
+\item $\Entails[\LogSup] !A \lor \lnot !A$. $\Entails/[\LogSup] \Delta
+	!A \lor \Delta \lnot !A$.
+\item The rule of \emph{conditional proof} fails in $\LogSup$ 
+	with determinacy operators. Conditional proof
+	is the rule: if $\Gamma,!A\Entails !B$ then $\Gamma\Entails !A 
+	\lif !B$. Consequences 3 and 4 above show that it fails here.
+\item The rule of \emph{contraposition} fails in $\LogSup$ 
+	with determinacy operators. The contraposition rule is
+	the rule: if $\Gamma,!A\Entails !B$ then $\Gamma, \lnot !B\Entails 
+	\lnot !A$. Consequences 3 and 5 above show that it fails here. 
+\item The rule of \emph{reasoning by cases} fails in $\LogSup$ 
+	with determinacy operators. The reasoning by cases rule is 
+	the rule: if  $\Gamma\Entails !A \lor !B$ and $\Gamma, !A \Entails !C$
+	and $\Gamma, !B \Entails !C$, then $\Gamma\Entails !C$. 
+\end{enumerate}
+	
+\end{document}

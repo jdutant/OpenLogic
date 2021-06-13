@@ -27,28 +27,85 @@ Give the value of the following in three-valued logics:
 \item (in $\LogKs$) $\Obj{(p\land q)\rightarrow(q\lor r)}$ 
 \item (in $\LogLuk[3]$) $\Obj{(p\land q)\rightarrow(q\lor r)}$
 \end{enumerate}
+\begin{ans}
+\begin{enumerate}
+	\item $\True$
+	\item $\Undef$
+	\item $\Undef$
+	\item $\Undef$
+	\item $\Undef$
+	\item $\Undef$
+	\item $\Undef$
+	\item $\True$
+	\item $\True$
+	\item $\Undef$
+	\item $\Undef$
+	\item $\True$
+\end{enumerate}
+\end{ans}
 \end{prob}
 
 \begin{prob}[Equivalences between connectives]
 Answer the following. 
 \begin{enumerate}
 \item Can you express $\land$ using only $\lor$ and $\lnot$ in the
-logics $\LogKw$, $\LogKs$, $\LogLuk[3]$? If yes, how? If no, explain briefly why.
-\item Can you express $\lor$ using only $\land$ and $\lnot$ in the logics $\LogKw$, $\LogKs$, $\LogLuk[3]$? If yes, how? If no, explain briefly why.
-\item Can you express $\rightarrow$ using only $\land$ and $\lnot$ in $\LogKs$? 
-If yes, how? If no, explain briefly why.
-\item Can you express $\rightarrow$ using only $\land$ and $\lnot$ in
-$\LogLuk[3]$? If yes, how? If no, explain briefly why.
+	logics $\LogKw$, $\LogKs$, $\LogLuk[3]$? If yes, how? If no, explain 
+	briefly why.
+\item Can you express $\lor$ using only $\land$ and $\lnot$ in the logics 
+	$\LogKw$, $\LogKs$, $\LogLuk[3]$? If yes, how? If no, explain briefly 
+	why.
+\item Can you express $\lif$ using only $\land$ and $\lnot$ in 
+	$\LogKs$? If yes, how? If no, explain briefly why.
+\item Can you express $\lif$ using only $\land$ and $\lnot$ in
+	$\LogLuk[3]$? If yes, how? If no, explain briefly why.
 \end{enumerate}
+\begin{ans}
+\begin{enumerate}
+\item Yes. $!A \land !B$ is equivalent to $\lnot(\lnot !A \lor \lnot !B)$
+	 in the logics $\LogKw$, $\LogKs$, $\LogLuk[3]$. This can be seen from
+	 their respective truth-tables (draw the two truth-tables for the logic
+	 $\LogKw$, the two for $\LogKs$, and point out that the semantics
+	 for $\land$, $\lnot$, $\lor$ is the same in $\LogLuk[3]$.)
+\item Yes. $!A \lor !B$ is equivalent to $\lnot(\lnot !A \land \lnot !B)$ in 
+	the logics $\LogKw$, $\LogKs$, $\LogLuk[3]$. 
+\item Yes. $!A \lif !B$ is equivalent to $\lnot (!A \lnot !B)$ in $\LogKs$. 
+\item No. Consider a valuation $\pAssign{v}$ with $\pAssign{v}(\alpha)=\Undef$ 
+	for any atomic !!{formula} $\alpha$. It is easy to see from the matrices for $\land$ 
+	and $\lnot$ that every !!{formula} composed only of atomic !!{formula}s combined with $\land$
+	and $\lnot$ will be $\Undef$ too. But $\Obj p \lif \Obj p$ is $\True$ on that valuation
+	in $\LogLuk[3]$. So no !!{formula} containing only $\land$ and $\lnot$ can 
+	express $\lif$ in $\LogLuk[3]$. 
+\end{enumerate}
+\end{ans}
 \end{prob}
 
 \begin{prob}[Expressive power (advanced, optional)]
 Answer the following.
 \begin{enumerate}
-	\item Is there, in any of $\LogKw$, $\LogKs$, $\LogLuk[3]$, a formula that is true $\True$ if $\Obj p$ is true, and $\False$ otherwise? (Note that $\Obj p$ itself is true if $\Obj p$ is true, but not $\False$ otherwise, since it's not $\False$ when $\Obj p$ is $\Undef$).
-	\item If yes, say which formula in which logic.
+	\item Is there, in any of $\LogKw$, $\LogKs$, $\LogLuk[3]$, a !!{formula} that is $\True$ if $\Obj p$ is $\True$, and $\False$ otherwise? (Note that $\Obj p$ itself is $\True$ if $\Obj p$ is $\True$, but not $\False$ otherwise, since it is not $\False$ when $\Obj p$ is $\Undef$).
+	\item If yes, say which !!{formula} in which logic.
 	\item If no, show that it is so. 
 \end{enumerate}
+\begin{ans}
+\begin{enumerate}
+	\item Not in $\LogKw$, $\LogKs$, but yes $\LogLuk[3]$.
+	\item In $\LogLuk[3]$, $\Obj{\lnot (p \lif \lnot p)}$.
+	\item In $\LogKw$, $\LogKs$. Consider the !!{valuation} with $\pAssign{v}(\alpha)=\Undef$ for any !!{propositional variable} $\alpha$ (so $\pAssign{v}(\Obj p)=\Undef$). In that !!{valuation}, $\pValue{v}(!A)=\Undef$ for any formula $!A$. If there was !!a{formula} that is $\False$ whenever $\Obj p$ is $\Undef$, that !!{formula} 
+	would be $\False$ in $\pAssign{v}$, so there is no such !!{formula}. 
+	In $\LogLuk[3]$, consider the truth-table for $\Obj{\lnot (p \lif \lnot p)}$:
+	\begin{center}
+	\begin{tabular}{c|ccc}
+	\hline
+	$\Obj{p}$ & $\Obj{\lnot p}$ & $\Obj{p \lif \lnot p}$ & $\Obj{\lnot (p \lif \lnot p)}$\\
+	\hline
+	$\True$ & $\False$ & $\False$ & $\True$ \\
+	$\Undef$ & $\Undef$ & $\True$ & $\False$ \\
+	$\False$ & $\True$ & $\True$ & $\False$ \\
+	\hline
+	\end{tabular}
+	\end{center} 
+\end{enumerate}
+\end{ans}
 \end{prob}
 
 \begin{prob}[Validity]
@@ -64,6 +121,105 @@ Say which of the following hold in $\LogKs$ and in $\LogLuk[3]$. For each, give 
     \item $\Obj{p, \lnot p \Entails q}$
     \item $\Obj{\Entails (p \land \lnot p) \rightarrow q}$
 \end{enumerate}
+\begin{ans}
+	!!^{formula}s that do not have $\lif$ (nor $\liff$) have the same value
+	 in $\LogKs$ and $\LogLuk[3]$ on any !!{valuation}. So when the 
+	 argument does not involve $\lif$ it is enough to consider
+	only one of these logics; the argument is valid in one just if it 
+	is valid on the other.
+\begin{enumerate}
+\item Incorrect in $\LogKs$ and $\LogLuk[3]$. Consider $\pAssign{v}$
+	with $\pAssign{v}(\Obj p)=\Undef$ in $\LogKs$, we have
+	$\pValue{v}(\Obj{\lnot p})=\Undef$ and thus $\pValue{v}(\Obj{p \lor 
+	\lnot p})=\Undef$.
+\item Incorrect in  $\LogKs$ and $\LogLuk[3]$. Consider $\pAssign{v}$
+	with $\pAssign{v}(\Obj p)=\Undef$ in $\LogKs$, we have
+	$\pValue{v}(\Obj{\lnot p})=\Undef$, hence $\pValue{v}(\Obj{p
+	\land\lnot p})=\Undef$, hence $\pValue{v}(\Obj{\lnot(p \land\lnot
+	p)})=\Undef$. item Correct in $\LogKs$. Suppose
+	$\pValue{v}(\Obj{p})=\True$, $\pValue{v}(\Obj{p\lif q})=\True$ on a
+	$\LogKs$ !!{valuation}. Then $\pValue{v}(\Obj{p\lif q})=\True$ only if
+	$\pValue{v}(\Obj{p})=\False$ or $\pValue{v}(\Obj{q})=\True$; since
+	$\pValue{v}(\Obj{p})\neq \False$, $\pValue{v}(\Obj{q})=\True$. So
+	there is no !!{valuation} under which the premises are $\True$ but the
+	conclusion $\Undef$ or $\False$. 
+\item Correct in $\LogKs$ and
+	$\LogLuk[3]$, as shown by the table below (adequate for both
+	logics).
+	\begin{center}
+	\begin{tabular}{|c|cc|}
+	\hline
+	$\Obj p$ 	&	$\Obj{\lnot p}$		&	$\Obj{\lnot \lnot p}$\\
+	\hline
+	$\True$		&	$\False$			&	$\True$\\
+	$\Undef$	&	$\Undef$			&	$\True$\\
+	$\False$	&	$\True$				&	$\True$\\
+	\hline
+	\end{tabular}
+	\end{center}
+\item Incorrect in $\LogKs$: in $\pAssign{v}$ with $\pAssign{v}(\Obj
+	p)=\Undef$ we have $\pValue{v}(\Obj {p \lif p})=\Undef$ in the $\LogKs$
+	semantics.\\
+	Correct in $\LogLuk[3]$: $p \lif p$ is $\True$ in the $\LogLuk[3]$
+	semantics if $p$ is $\True$, $\Undef$ or $\False$.
+\item Correct in $\LogKs$ and $\LogLuk[3]$, as shown by the 
+	table below (adequate for both logics).
+	\begin{center}
+	\begin{tabular}{|cc|c|}
+	\hline
+	$\Obj p$	&	$\Obj q$	&	$\Obj{p \land q}$	\\
+	$\True$		&	$\True$		& 		$\True$ 		\\
+	$\True$		&	$\Undef$ 	& 		$\Undef$		\\
+	$\True$		&	$\False$ 	& 		$\False$ \\
+	$\Undef$	&	$\True$		& 		$\Undef$ 		\\
+	$\Undef$	&	$\Undef$ 	& 		$\Undef$		\\
+	$\Undef$	&	$\False$ 	& 		$\False$ \\
+	$\False$	&	$\True$		& 		$\False$ 		\\
+	$\False$	&	$\Undef$ 	& 		$\False$		\\
+	$\False$	&	$\False$ 	& 		$\False$ \\
+	\hline
+	\end{tabular}
+	\end{center}
+	There is no line at which the premise is true and the conclusion
+	not true. (There is only one line at which the premise is true, 
+	the first line, and the conclusion is true at that line too.)
+\item Correct in $\LogKs$ and $\LogLuk[3]$. Consider any $\pAssign{v}$ 
+	such that $\pValue{v}(\Obj p)=\True$. Then $\pValue{v}(\Obj{p \lor q})=\True$ 
+	on any many-valued logic. So there is no !!{valuation} that makes
+	the premise true and the conclusion not true. 
+\item Correct in $\LogKs$ and $\LogLuk[3]$. There is no !!{valuation}
+	$\pAssign{v}$ under which both $\Obj p$ and $\Obj \lnot p$ are 
+	$\True$. A fortiori no !!{valuation} under which the premises are 
+	$\True$ and the conclusion $\Undef$ or $\False$.
+\item Incorrect in $\LogKs$, correct in $\LogLuk[3]$.\\
+	For $\LogKs$, consider $\pAssign{v}$ with 
+	$\pAssign{v}(\Obj p)=\Undef$ and $\pAssign{v}(\Obj p)=\False$. 
+	We have $\pValue{v}(\Obj{p \land \lnot p})=\Undef$ and 
+	$\pValue{v}(q)=\False$, so 
+	$\pValue{v}(\Obj{(p \land \lnot p \lif q)})=\Undef$. Hence there
+	are !!{valuation}s under which the !!{formula} is not true in $\LogKs$.\\
+	In $\LogLuk[3]$, the truth-table below shows that the formula
+	is $\True$ under any !!{valuation}.
+	\begin{center}
+	\begin{tabular}{|cc|ccc|}
+	\hline
+	$\Obj p$	&	$\Obj q$	&	$\Obj{\lnot p}$ &	$\Obj{p \land \lnot p}$	&	$\Obj{(p \land \lnot p) \lif q}$ \\
+	$\True$		&	$\True$		& 	$\False$		&		$\False$ 			&	$\True$ \\
+	$\True$		&	$\Undef$ 	&	$\False$		& 		$\False$ 			&	$\True$ \\
+	$\True$		&	$\False$ 	&	$\False$		& 		$\False$ 			&	$\True$ \\
+	$\Undef$	&	$\True$		&	$\Undef$		& 		$\Undef$  			&	$\True$ \\
+	$\Undef$	&	$\Undef$ 	&	$\Undef$		& 		$\Undef$ 			&	$\True$ \\
+	$\Undef$	&	$\False$ 	&	$\Undef$		& 		$\Undef$ 			&	$\True$ \\
+	$\False$	&	$\True$		&	$\True$			& 		$\False$ 			&	$\True$ \\
+	$\False$	&	$\Undef$ 	&	$\True$			& 		$\False$ 			&	$\True$ \\
+	$\False$	&	$\False$ 	&	$\True$			& 		$\False$ 			&	$\True$ \\
+	\hline
+	\end{tabular}
+	\end{center}
+	\emph{Comment.} At lines 4-6 you would get the last !!{formula} $\Undef$ in the semantics
+	for $\LogKs$ and $\LogLP$.
+\end{enumerate}
+\end{ans}
 \end{prob}
 
 \begin{prob}[Sub-classicality]
@@ -74,32 +230,227 @@ Show that the following holds:
 \end{itemize}
 \emph{Tip}. Prove the converse. Suppose that $\Gamma \Entails/[\LogCL] !A$, 
 explain why $\Gamma \Entails/[\Log{X}] !A$, with your chosen $\Log{X}$.
+\begin{ans}
+\emph{Comment: in the following you can replace $\Log{X}$ with any of
+$\LogKw$, $\LogKs$, $\LogLuk[3]$: the answer is the same.}
+
+Suppose $\Gamma \Entails/[\LogCL] !A$. Then there is a \emph{classical} 
+!!{valuation} $\pAssign{v}$ under which all !!{formula}s of $\Gamma$ are 
+$\True$ but $!A$ false. Now a classical !!{valuation} is also a !!{valuation}
+for the logics $\Log{X}$ with all the atoms assigned $\True$ or $\False$. 
+Moreover, it is easy to see from the semantics of $\Log{X}$ that when a
+!!{valuation} that only assigns $\True$ or $\False$ to all atoms, $\Log{X}$
+agrees with $\LogCL$ on all !!{formula}s (that is, the value $\Log{X}$ assigns
+to complex !!{formula}s is the same as the one assigned by $\LogCL$
+on the basis of the same !!{valuation}). So there is a !!{valuation}
+in $\Log{X}$ that makes the premises $\True$ but the conclusion not $\True$.
+Hence $\Gamma \Entails/[\Log{X}] !A$. 
+
+\emph{OPTIONAL. If you are enthusiastic you can add a proof of the second
+step, by induction on the length of !!{formula}s. This goes as follows, but
+is not required for a correct answer.} Let $\pAssign{v}$ be a $\LogCL$ 
+!!{valuation} and $\pAssign{u}$ be a $\Log{X}$ !!{valuation} with
+$\pAssign{u}(\alpha)=\pAssign{v}(\alpha)$ for any !!{propositional variable}
+$\alpha$. Since $\pAssign{v}$ is a classical !!{valuation} we have 
+$\pAssign{v}(\alpha)=\True$ or $\False$ for any !!{propositional variable} $\alpha$.
+We prove by induction on the length of !!{formula}s that $\pValue{u}(!A)
+=\pValue{v}(!A)$ for all $!A$.
+
+Base case. $!A$ is an atom. Trivial ($\pValue{u}(!A) = \pAssign{u}(!A)
+=\pAssign{v}(!A) = \pValue{v}(!A)$).
+
+Induction hypothesis: suppose that for any !!{formula} $!B$ shorter than $!A$,
+$\pValue{u}(!B) = \pValue{v}(!B) = \True$ or $\False$.
+
+\begin{enumerate}
+\item \indcase{!A}{\alpha}{As in the base case.}
+\item \indcase{!A}{\lnot !B}{By the induction hypothesis,
+$\pValue{u}(!B) = \pValue{v}(!B)$ and $\pValue{v}(!B) = \True$ or $\False$.
+It is easy to see from the matrix of $\lnot$ in $\Log{X}$ that we will have
+$\pValue{u}(\lnot !B) = \pValue{v}(\lnot !B)$, that is, $\pValue{u}(!A) 
+= \pValue{v}(!A)$.}
+\item \indcase{!A}{!B \lif !C}{By the induction hypothesis,
+$\pValue{u}(!B) = \pValue{v}(!B)$ and $\pValue{v}(!B) = \True$ or $\False$.
+It is easy to see from the matrix of $\lif$ in $\Log{X}$ that we will have
+$\pValue{u}(!B \lif !C) = \pValue{v}(!B \lif !C)$, that is, $\pValue{u}(!A) 
+= \pValue{v}(!A)$.}
+\item The cases $!A\ident !B\land!C$ and $!A\ident !B\lor !C$ are similar.
+\end{enumerate}
+This completes the induction. 
+\end{ans}
 \end{prob}
 
-\begin{prob}[No valid formulas in Kleene logics]
+\begin{prob}[No valid !!{formula}s in Kleene logics]
 Explain why there are no valid !!{formula}s in $\LogKs$ and $\LogKw$.
+\begin{ans}
+Consider !!a{valuation} that assigns $\Undef$ to every !!{propositional
+variable} $\alpha$. In the semantics of $\LogKs$ and $\LogKw$, 
+if $!A$ and $!B$ are $\Undef$ (in some !!{valuation}) then 
+$\lnot !A$, $!A \land !A$, $!A \lor !B$
+are $\Undef$ too. From this it can be seen that every complex !!{formula}
+will have the value $\Undef$ in the !!{valuation} $v$ too. Hence no 
+!!{formula} is true in every valuation in $\LogKs$, nor in $\LogKw$. 
+
+\emph{Comment. You could prove this rigorously by induction on the
+length of !!{formula}s. This is shown below, but the above is sufficient
+for a correct answer}. Let $\pAssign{v}$ be such that $\pAssign{v}(\alpha)
+= \Undef$ for every !!{propositional variable} $\alpha$. We show by
+induction on the length of formulas that in $\LogKs$ and $\LogKw$,
+ $\pValue{v}(!A)=\Undef$ forany !!{formula} $!A$.
+
+Base case. $!A$ is a !!{propositional variable}. $\pValue{v}(!A)=
+\pAssign{v}(!A)=\Undef$.
+
+Induction hypothesis: suppose that for any !!{formula} $!B$ shorter than 
+$!A$ we have $\pValue{v}(!B)=\Undef$.
+
+\begin{enumerate}
+	\item \indcase{!A}{\alpha}{As in the base case.}
+	\item \indcase{!A}{\lnot !B}{Since $\pValue{v}(!B)=\Undef$ (induction
+	hypothesis), $\pValue{v}(\lnot !B)=\Undef$ in $\LogKs$ and $\LogKw$.}
+	\item \indcase{!A}{!B \lif
+    !C}{Since $\pValue{v}(!B)=\Undef$ and $\pValue{v}(!C)=\Undef$ (induction
+	hypothesis), $\pValue{v}(!B \lif !C)=\Undef$ in $\LogKs$ and $\LogKw$.}
+	\item The cases for $!A\ident !B \land !C$ and $!A\ident !B \lor !C$
+	are similar.
+\end{enumerate}
+This completes the induction. 
+\end{ans}
 \end{prob}
 
 \begin{prob}[Non-contradiction and non-tautologies in $\LogLuk$]
 Considering $\LogLuk[3]$:
 \begin{enumerate}
 \item Give !!a{formula} that is valid.
-\item Give a formula that is not valid, but cannot be false under
+\item Give a !!{formula} that is not valid, but cannot be false under
 any  !!{structure}.
 \item Give !!a{formula} that cannot be true under any !!{structure}, but 
 that is not a contradiction (i.e., its negation is not valid).
 \end{enumerate}
+\begin{ans}
+\begin{enumerate}
+\item $\Obj{p \lif p}$\\
+	\emph{Comment}. There are many options, e.g.  $\Obj{(p \land q) \lif
+	q}$, $\Obj{p \lif (q \lor p)}$,  $\Obj{(p \land \lnot p) \lif q}$. They
+	must all involve the conditional, since a formula with only $\lnot$,
+	$\lor$, $\land$ will be $\Undef$ on the !!{valuation} that assigns
+	$\Undef$ to all !!{propositional variable}s. But in need not have
+	$\lif$ as the !!{main operator}: $\Obj{(p\lif p)\lor \lnot(p\lif p)}$
+	is valid too.  
+\item $\Obj{p \lor \lnot p}$
+\item $\Obj{p \land \lnot p}$\\
+	\emph{Comment}. In $\LogLuk[3]$ (as in $\LogKw$, $\LogKs$
+	$\LogLP$), $\pValue{v}(\Obj{p \land \lnot p}) = \False$ if 
+	$\pValue{v}(\Obj{p})=\True$ or $\False$, and $\Undef$ if 
+	$\pValue{v}(\Obj{p}=\Undef)$. Hence the !!{formula} cannot be
+	true, but its negation is not valid in $\LogLuk$ because it is
+	$\Undef$ under !!{valuation}s such that $\pValue{v}(\Obj{p \land 
+	\lnot p}) = \Undef$.
+\end{enumerate}
+\end{ans}
 \end{prob}
 
 \begin{prob}[Conditional and consequence]
 Consider the following claim: 
 
-$!A, !B \Entails !C$ if, and only if, $!A \Entails !B \rightarrow !C$.
+$!A, !B \Entails !C$ if, and only if, $!A \Entails !B \lif !C$.
 \begin{enumerate}
 	\item Does this hold in $\LogKs$? If yes, show why, if not, say which
 	 direction (if, only if, both) fails and give the relevant counterexamples.
 	 \item Same question for $\LogLuk[3]$.
 \end{enumerate}
+\begin{ans}
+\begin{enumerate}
+\item $\LogKs$. The left to right (if) direction holds. Suppose $!A \Entails !B \lif
+	!C$.  Let $\pAssign{v}$ be any !!{valuation} such that
+	$\pValue{v}(!A)=\True$ and $\pValue{v}(!B)=\True$. Since $!A \Entails
+	!B \lif !C$, any !!{valuation} in which $!A$ is $\True$ is such that
+	$!B \lif !C$ is $\True$, so $\pValue{v}(!B  \lif !C)=\True$. By the
+	$\LogKs$ semantics, $\pValue{v}(!B)=\True$ and  $\pValue{v}(!B \lif
+	!C)=\True$ only if $\pValue{v}(!C)=\True$. So there is no
+	!!{valuation} $\pAssign{v}$ such that $\pValue{v}(!A)=\True$ and
+	$\pValue{v}(!B)=\True$ and $\pValue{v}(!C)$ not $\True$: $!A, !B
+	\Entails !C$.\\ 
+	The right to left (only if) direction fails.
+	Counterexample: $\Obj{q},  \Obj{p} \Entails \Obj{p}$ (trivially, no
+	!!{valuation} that makes $\Obj{p,q}$ $\True$ will make $\Obj{p}$ non
+	true), but $\Obj{q} \Entails/ \Obj{p \lif p}$ (consider  consider
+	$\pAssign{v}$ with $\pAssign{q}=\True$ and $\pAssign{p}=\Undef$).\\
+	\emph{Comment: See the footnote for the reasoning that leads me to
+	the right to left counterexample.}\footnote{First I note $!A, 
+	!B \Entails[\LogKs]
+	!C$ turns on what happens on !!{valuation}s where \emph{both} $!A$
+	and $!B$ are $\True$, while $!A \Entails[\LogKs] !B \lif
+	!C$ turns on \emph{all} !!{valuation}s where $!A$ is true. So we can
+	infer that if the former doesn't entail the latter, it's going to 
+	have to do with the !!{valuation}s where ($!A$ is true but) $!B$ is $\Undef$ 
+	or $\False$ rather than $\True$. (I can narrow it down to those
+	where $!A$ is $\Undef$ by noting that $!B \lif !C$ will be $\True$ 
+	whenver $!B$ is $\False$, so the !!{valuation}s with $!B$ $\False$ 
+	cannot make the right-side entailment fail.) 
+
+	Second, I look 
+	at what would have to be the case for that direction
+	 to \emph{fail}. It would have to be that: every !!{valuation} with 
+	 $!A$ and $!B$ $\True$
+	has $!C$ $\True$ too, but some !!{valuation} $\pAssign{v}$ with $!A$ 
+	$\True$ makes $!B \lif !C$ $\Undef$ or $\False$. Now we know $\pAssign{v}$
+	couldn't make $!B$ $\True$ (since every !!{valuation} that makes both $!A$
+	and $!B$ $\True$ makes $!C$ $\True$ and that would make $!B \lif !C$) $\True$).
+	And we know that $\pAssign{v}$ couldn't make $!B$ $\False$, because 
+	that would make $!B \lif !C$ $\True$. So it would have to be a 
+	!!{valuation} that makes $!B$ $\Undef$, and $!B \lif !C$ $\Undef$
+	of $\False$. From the table of $\lif$ in $\LogKs$ we can see that
+	with $!B$ $\Undef$ so our only options is to get $!B \lif !C$ $\Undef$
+	with $!C$ either $\Undef$ or $\False$. 
+
+	So, third, I look for three !!{formula}s $!A$, $!B$,
+	$!C$ such that $!B \lif !C$ can be $\Undef$ or $\False$ when $!B$ is
+	$\Undef$ (and $!A$ $\True$). But my !!{formula}s should also be such
+	that $!C$ is $\True$ when both $!A$ and $!B$ are. A simple solution is
+	to let $!B \ident !C \ident \Obj{p}$, since in $\LogKs$ $\Obj{p \lif
+	p}$ is $\Undef$ when $\Obj{p}$ is.}
+\item $\LogLuk[3]$.  The left to right (if) direction holds. The proof steps the
+	same as in $\LogKs$. In particular, note that in the
+	$\LogLuk[3]$ semantics too, $\pValue{v}(!B)=\True$ and  $\pValue{v}(!B \lif
+	!C)=\True$ only if $\pValue{v}(!C)=\True$.\\
+	The right to left direction fails. Counterexample: $\Obj{r}, \Obj{p  \land (p
+	\lif q)} \Entails[\LogLuk[3]] q$ but $\Obj{r} \Entails/[\LogLuk[3]] \Obj{(p
+	\land (p \lif q))\lif q}$. For the first, let $\pAssign{v}$ by any 
+	!!{valuation} such that ($\pAssign{v}(\Obj{r})=\True$ and $\pValue{v}(\Obj{p
+	\land (p \lif q)})=\True$. It is easy to see from the semantics that
+	$\pValue{v}(\Obj{p})=\True$. For the second, consider $\pAssign{v}$ such that
+	($\pAssign{v}(\Obj{r})=\True$ and) $\pAssign{v}(\Obj{p})=\Undef$ and 
+	$\pAssign{v}(\Obj{q})=\False$. We have $\pValue{v}(\Obj{p \lif q})=\Undef$,
+	$\pValue{v}(\Obj{p\land (p \lif q)})=\Undef$, and since $\pValue{v}(\Obj{q})=\False$, $\pValue{v}(\Obj{p\land (p \lif q)\lif q})=\Undef$.\footnote{Reasoning 
+	that leads to the counterexample. I suspect that this direction may fail 
+	for the reason as before: what happens when $!B$ is $\Undef$ rather than $\False$.
+	So I ask myself what has to be the case for this direction to fail. It has to be that there
+	are three !!{formula}s $!A,!B,!C$ such that (a) $!C$ is $\True$ on
+	any !!{valuation} on which \emph{both} $!A, !B$ are $\True$ but 
+	(b) $!B \lif !C$ is $\Undef$ or $\False$ on some valuation $\pAssign{v}$ 
+	on which $!A$ is $\True$. We can rule out that $\pValue{v}(!B)=\True$
+	(for then $\pValue{v}(!C)=\True$ by (a) and hence $\pValue{v}(!B 
+	\lif !C)=\True$ too)
+	and $\pValue{v}(!B)=\False$ (since then $\pValue{v}(!B 
+	\lif !C)=\True$ too). But in $\LogLuk[3]$ if $\pValue{v}(!B)$ the only 
+	way for $!B \lif !C$ to be other than $\True$ is to have 
+	$\pValue{v}(!C)=\False$. (In $\LogKs$, having $!C$ $\Undef$ would be enough
+	to make $!B\lif !C$ not true, but in $\LogLuk[3]$ with $!B$ $\Undef$ we 
+	need $!C$ \False.)\\
+	So I am looking for a pair of !!{formula}s $!B$, $!C$ such that
+	in every valuation in which $!B$ (and $!A$) is $\True$, $!C$ is 
+	$\True$, and for some valuation $\pAssign{v}$, $\pValue{v}(!B)=\Undef$
+	and $\pValue{v}{!C}=\False$. (Or at least two formulas that do so on the 
+	background of some formula $!A$.)\\
+	Here some exploration and trial and error is needed. What put me on the
+	track was the thought that in $\LogLuk[3]$ a $\True$ conditional $\Obj{p \lif q}$
+	doesn't allow any `drop' in truth-value from $\Obj p$ to $\Obj q$, while a $\Undef$
+	conditional allow from drops. So I looked at using $\Obj{p \lif q}$ for $!B$ and $\Obj q$ $!C$. But I needed the premises $!A, !B$ to entail $!C$ when true, so I needed to introduce $\Obj p$ as either $!A$ (but this doesn't work) or a conjunct in $!B$. Hence the idea of having $\Obj{p \land (p \lif q)}$ as my premise $!B$. When fully true $\True$, it makes both $\Obj{p}$ and $\Obj{p \land q}$ $\True$, so 
+	no drop of truth-value from $\Obj p$ to $\Obj q$ and $\Obj{q}$ is $\True$. But when $\Obj{p \land (p \lif q)}$ is not $\True$ but $\Undef$, we can have $\Obj{p \lif q}$ itself $\Undef$ and allow a drop in truth-value from from $\Obj p$ to $\Obj q$. I thus check what happens with $\Obj p$ $\Undef$ and $\Obj q$ $\False$ and 
+	find out that the couterexample works.}
+\end{enumerate}
+\end{ans}
 \end{prob}
 
 \end{document}

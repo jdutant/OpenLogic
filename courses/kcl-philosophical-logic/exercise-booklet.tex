@@ -25,8 +25,8 @@
 %\input{\olpath/sty/open-logic-defer.sty}
 
 % switch to hide  answers
-\tagtrue{hideAns}
-%\tagfalse{hideAns}
+%\tagtrue{hideAns}
+\tagfalse{hideAns}
 
 % let's set the whole thing in Palatino, with Helvetica for
 % sans-serif, and spread the lines a bit to make the text more
@@ -79,9 +79,10 @@
 \begin{raggedleft}
 
 {\bfseries\sffamily
-\fontsize{52pt}{4em}\selectfont
+\fontsize{52pt}{52pt}\selectfont
 Exercise\\[.2ex]
 \textit{Booklet}\\[0.2ex]
+\iftag{hideAns}{}{\fontsize{24pt}{24pt}\selectfont with model answers \\[0.2ex]}
 \Large \vskip 1ex
 for\\
 \vskip 1ex
@@ -93,7 +94,7 @@ Logic\\
 Julien Dutant\\[.5ex]
 King's College London\\[.5ex]
 2020-21\\[2ex]
-DRAFT of \today\\
+Version of \today\\
 }
 \end{raggedleft}
 

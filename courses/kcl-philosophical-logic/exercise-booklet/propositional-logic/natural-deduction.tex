@@ -1,0 +1,40 @@
+% Part: exercise-booklet
+% Chapter: propositional-logic
+% Section: natural-deduction
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{exb}{pl}{nd}
+
+\olsection{Natural Deduction}
+
+\begin{prob}
+    \citep[1.2 item 1]{MacFarlane-2020-PhilosophicalLogicContemporary}
+    For each of the following arguments, either show that it is valid by giving
+    a proof in our system, or show that it is invalid by describing a model on
+    which the premises are true and the conclusion false.
+
+    \smallskip\noindent
+    \begin{tabular}{cccccc}
+        1. 
+        & \AxiomC{$\pvar{A}$}
+            \noLine\UnaryInfC{$\pvar{B}\lif(\pvar{A}\lif\pvar{B})$}
+            \UnaryInfC{$\pvar{B}$}
+            \DisplayProof
+        & 2.
+        & \AxiomC{$\pvar{A} \liff (\pvar{B}\lor\pvar{C})$}
+              \noLine\UnaryInfC{$(\pvar{A}\lor \pvar{B})$}
+              \UnaryInfC{$\pvar{A}$}
+              \DisplayProof
+        & 3.
+        & \AxiomC{$\pvar{A}\lor(\pvar{B}\lif\pvar{C})$}
+              \noLine\UnaryInfC{$\pvar{B}$}
+              \UnaryInfC{$\pvar{A}\lor\pvar{C}$}
+              \DisplayProof 
+    \end{tabular}
+
+\end{prob}
+
+

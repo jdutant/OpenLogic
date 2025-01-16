@@ -1,0 +1,212 @@
+% Symbols
+% =======
+
+% Formula metavariabes 
+% --------------------
+
+% \olgreekformulas (default), otherwise use \ollatinformulas
+% provide our own (\lookup defined in open-logic-formulas.sty)
+\def\olpqrlatinformulas
+{\gdef\formula{\lookup{A/p,B/q,C/r,D/s,E/t,F/u,G/v,H/a,K/b,L/c,O/d,R/e,S/f,T/g}}}
+\olpqrlatinformulas
+
+% Object language propositional variables
+% \pvar{A}, \pvar{B}, ...
+% provide \pqrlatinpropositionalvariables
+\newcommand{\pvar}[1]{\Obj{\propositionalvariable{#1}}}
+\def\pqrpropositionalvariables
+{\gdef\propositionalvariable{\lookup{A/p,B/q,C/r,D/s,E/t,F/u,G/v,H/w}}}
+\def\PQRpropositionalvariables
+{\gdef\propositionalvariable{\lookup{A/P,B/Q,C/R,D/S,E/T,F/U,G/V,H/Q}}}
+\def\ABCpropositionalvariables
+{\let\propositionalvariable\relax}
+\pqrpropositionalvariables % default
+
+\ABCpropositionalvariables % MacFarlane
+
+% NB, they'll be typeset with \Obj \PVarP
+% Default definition, could be added in open-logic-sty
+\newcommand{\PVarP}{p}
+\newcommand{\PVarQ}{q}
+\newcommand{\PVarR}{r}
+\newcommand{\PVarS}{s}
+\newcommand{\PVarT}{t}
+% Redefine (MacFarlane)
+\renewcommand{\PVarP}{A}
+\renewcommand{\PVarQ}{B}
+\renewcommand{\PVarR}{C}
+\renewcommand{\PVarS}{D}
+\renewcommand{\PVarT}{E}
+
+% Object language formulas: sans-serif but not italic
+\DeclareDocumentCommand \Obj { m }{\mathsf{#1}}
+
+% Logical symbols
+% ---------------
+
+% ### Truth Values
+% boldface rather than blackboard
+\DeclareDocumentMacro \True {\ensuremath{\mathbf{T}}}
+\DeclareDocumentMacro \False {\ensuremath{\mathbf{F}}}
+\DeclareDocumentMacro \Indet {\ensuremath{\mathbf{I}}}
+\DeclareDocumentMacro \Undef {\ensuremath{\mathbf{U}}}
+
+% ### Propositional Constants and Connectives
+% MacFarlane's preferences
+\DeclareDocumentMacro \lif {\supset}
+\DeclareDocumentMacro \liff {\equiv}
+
+% Quantifiers 
+% ----------- 
+
+% Quantifiers: leave defaults
+
+% Identity (\eq): leave default =
+
+% Truth values
+\DeclareDocumentMacro \True {\mathbf{T}}
+\DeclareDocumentMacro \False {\mathbf{F}}
+
+% Proofs and Derivations
+% ----------------------
+
+% Proof Terms
+% ---------------------
+
+% Axiomatic Derivations
+% ---------------------
+
+% Tableaux
+% --------
+
+% Metalogical Relations
+% ---------------------
+
+
+% ### The satisfaction/truth relation 
+
+
+% ### The derivability relation
+
+
+% ### The semantic consequence relation relation
+
+
+% ### Model-theoretic notions and symbols
+
+% - `\pAssign{v}` - Typeset a truth-value assignment
+
+\DeclareDocumentCommand \pAssign { m } {\mathit{#1}}
+
+% - `\ident`: syntactic identity between expressions (infix relation),
+% we use `=` to avoid confusion with iff
+
+\DeclareDocumentMacro \ident {=}
+
+% Recursion-theoretic Notions and Symbols
+% ---------------------------------------
+
+
+% Modal Logic 
+% -----------
+
+
+% Special Sets and Mathematical Symbols
+% -------------------------------------
+
+
+% Topological notions
+% -------------------
+
+
+% Miscellaneous
+% =============
+
+
+% Commands for uniform formulations
+% =================================
+
+% Inductive definitions
+% ---------------------
+
+
+% Tokens
+% ======
+
+% from MacFarlane
+\settexttoken{propositional variable}{propositional constant}{propositional constants}
+\settexttoken{valuation}{model}{models}
+\settexttoken{derivation}{proof}{proofs}
+\settexttoken{derivability}{provability}{provabilities}
+\settexttoken{derivable}{provable}{provable}
+
+
+% infinity (following Phil Methodology)
+\settexttoken{enumerable}{countable}{countable}
+\settexttoken{nonenumerable}*{uncountable}{uncountable}
+\settexttoken{denumerable}{countably infinite}{countably infinite}
+
+% Tags
+% ====
+
+% connectives provided (MacFarlane)
+\tagtrue{prvFalse,prvNot,prvAnd,prvOr,prvIf,prvIff}
+
+% verum is not provided nor defined
+\tagfalse{defTrue,prvTrue}
+
+% REVIEW cases for conditional, universal quantifier left to reader
+
+\tagtrue{probIf,probAll}
+
+% REVIEW do just natural deduction
+
+\tagtrue{prfND}
+\tagfalse{prfSC,prfAX,prfTab}
+
+% Colors
+% ======
+
+% License box
+% ===========
+
+% \kcluselicense{title}{author}
+\newcommand*{\kcluselicense}[2]{%
+\begin{minipage}[b]{.9cm}
+  \includegraphics[width=.9cm]{\olpath/assets/logos/cc}
+  \includegraphics[width=.9cm]{\olpath/assets/logos/by}
+  \includegraphics[width=.9cm]{assets/logos/nc}
+  \includegraphics[width=.9cm]{\olpath/assets/logos/remix}
+\end{minipage}
+\hspace{.3cm}
+\begin{minipage}[b]{5cm}
+  \ollicensefont
+  \textit{#1} by #2 is licensed under a
+  \href{https://creativecommons.org/licenses/by-nc/4.0/}{Creative Commons
+    Attribution-NonCommercial 4.0 International License}. It is based on
+  \textit{\href{https://github.com/OpenLogicProject/OpenLogic}{The Open
+      Logic Text}} by the \href{https://openlogicproject.org/}{Open Logic
+    Project}, used under a
+  \href{https://creativecommons.org/licenses/by/4.0/}{Creative Commons
+    Attribution 4.0 International License}.
+\end{minipage}
+\hfill
+\begin{minipage}[b]{2.7cm}
+  \href{https://www.kcl.ac.uk/philosophy}{\includegraphics[width=2.7cm]{assets/logos/KCL-Logo.png}}\\
+  \vspace{.3cm}
+  \href{http://openlogicproject.org/}{\includegraphics[width=2.7cm]{\olpath/assets/logos/openlogic-logo-bw}}
+\end{minipage}
+}
+% \kcldonotcopylicense[date]{copyright holder}
+\newcommand*{\kcldonotcopylicense}[2][\the\year]{%
+  \hspace{1.2cm}
+  \begin{minipage}[b]{5cm}
+  \ollicensefont
+  Copyright \textcopyright~{#1} {#2}. \\  
+  \textbf{Do not copy or distribute without permission.}
+  \end{minipage}
+  \hfill
+  \begin{minipage}[b]{2.7cm}
+    \href{https://www.kcl.ac.uk/philosophy}{\includegraphics[width=2.7cm]{assets/logos/KCL-Logo.png}}\\
+  \end{minipage}  
+}

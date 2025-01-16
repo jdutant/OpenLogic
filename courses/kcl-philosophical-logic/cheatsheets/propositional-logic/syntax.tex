@@ -1,0 +1,52 @@
+% Part: cheat-sheets
+% Chapter: propositional-logic
+% Section: semantics
+
+\documentclass[../../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{chs}{pl}{syn}
+
+\olsection{Syntax}
+
+\begin{defn}[Formula]
+    \ollabel{defn:formulas}
+    The set~$\Frm[L_0]$ of \emph{!!{formula}s} of propositional logic
+    is defined inductively as follows:
+    \begin{enumerate}
+    \tagitem{prvFalse}{$\lfalse$ is an atomic !!{formula}.}{}
+    
+    \tagitem{prvTrue}{$\ltrue$ is an atomic !!{formula}.}{}
+    
+    \item Every !!{propositional variable}~$\Obj p_i$ is an atomic
+      !!{formula}.
+    
+    \tagitem{prvNot}{If $!A$ is !!a{formula}, then $\lnot !A$ is
+      !!{formula}.}{}
+    
+    \tagitem{prvAnd}{If $!A$ and $!B$ are !!{formula}s, then $(!A \land
+      !B)$ is a !!{formula}.}{}
+    
+    \tagitem{prvOr}{If $!A$ and $!B$ are !!{formula}s, then $(!A \lor !B)$
+      is a !!{formula}.}{}
+    
+    \tagitem{prvIf}{If $!A$ and $!B$ are !!{formula}s, then $(!A \lif !B)$
+      is a !!{formula}.}{}
+    
+    \tagitem{prvIff}{If $!A$ and $!B$ are !!{formula}s, then $(!A
+      \liff !B)$ is a !!{formula}.}{}
+    
+    \tagitem{limitClause}{Nothing else is a !!{formula}.}{}
+    \end{enumerate}
+\end{defn}
+
+\begin{defn}[Main connective]
+    The \emph{main connective} of a non-atomic !!{formula} is the last
+    connective introduced in the construction of the formula.
+\end{defn}
+
+For instance, in $\lnot \PVarP_0 \lor (\PVarP_1 \lif \PVarP_1)$, the
+main connective is $\lor$.
+    
+\end{document}

@@ -1,0 +1,62 @@
+% # King's Philosophical Logic style `design.sty'
+%
+% Sets up typefaces and styles for the memoir class
+
+% Center text blocks for PDF output
+
+\checkandfixthelayout% or perhaps \checkandfixthelayout[lines]
+\setlength{\evensidemargin}{\oddsidemargin}% after \checkandfix...
+
+% Fonts
+
+\usepackage[T1]{fontenc}
+\usepackage[cochineal,p,osf]{newtx} % main & serif; proportional old-style figs
+\usepackage[varqu,varl]{inconsolata} % mono (add var0 for no-slash 0)
+\usepackage[defaultsans]{cantarell} % sober sans serif
+% \usepackage[type1]{cabin} % showy sans serif
+\usepackage[cal=stixtwoplain,scr=rsfso]{mathalfa} % math alphabet fonts
+\usepackage{microtype}
+
+% Link colours
+
+\definecolor{myblue}{RGB}{12, 28, 140}
+\definecolor{mybrown}{RGB}{190, 40, 22}
+
+\hypersetup{linkcolor=myblue,citecolor=mybrown,urlcolor=myblue}
+
+% Memoir styles
+
+% part, chapter and section headings
+
+\renewcommand{\partnamefont}{\huge\sffamily}
+\renewcommand{\partnumfont}{\huge\sffamily}
+\renewcommand{\parttitlefont}{\Huge\sffamily}
+\renewcommand{\chapnamefont}{\huge\sffamily}
+\renewcommand{\chapnumfont}{\huge\sffamily}
+\renewcommand{\chaptitlefont}{\Huge\sffamily}
+\hangsecnum % hangs section numbers in the margin
+\setsecheadstyle{\large\sffamily\bfseries}
+\setsubsecheadstyle{\large\sffamily}
+\setsubsubsecheadstyle{\sffamily\itshape}
+
+% page headers and footers
+
+% custom pagestyle to be called in main matter
+\copypagestyle{myruled}{ruled} 
+\makeevenhead{myruled}{\sffamily\leftmark}{}{}
+\makeoddhead{myruled}{}{}{\sffamily\rightmark}
+\makeevenfoot{myruled}{\sffamily\thepage}{}{}
+\makeoddfoot{myruled}{}{}{\sffamily\thepage}
+
+% fix the plain pagestyle used in first pages
+\makeevenfoot{plain}{}{\sffamily\thepage}{}
+\makeoddfoot{plain}{}{\sffamily\thepage}{}
+
+% table of contents
+
+\renewcommand{\cftpartfont}{\large\scshape}
+\renewcommand{\cftpartpagefont}{\large\scshape}
+\renewcommand{\cftchapterfont}{\scshape}
+\renewcommand{\cftchapterpagefont}{\scshape}
+\renewcommand{\cftsectionfont}{}
+\renewcommand{\cftsectionpagefont}{}

@@ -1,0 +1,46 @@
+% Part: exercise-booklet
+% Chapter: propositional-logic
+% Section: semantic-notions
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{exb}{pl}{sem}
+
+\olsection{Semantic Notions}
+
+\begin{prob}[Satisfiability and validity]
+    If the set of formulas $!A_1, !A_2,\ldots, !A_n$ is unsatisfiable, 
+    then the argument with premises $!A_1,!A_2,\ldots!A_{n-1}$ 
+    and conclusion $\lnot !A_n$ is valid. Explain why that is so.
+\end{prob}
+
+\begin{prob}
+    \citep[1.1 item 4]{MacFarlane-2020-PhilosophicalLogicContemporary}
+    Is the following set of formulas satisfiable?
+    $$
+    \pvar{A}\lif\pvar{B}, \pvar{B}\lif\pvar{C},\lnot\pvar{C}\lif\lnot\pvar{A}
+    $$
+\end{prob}
+
+\begin{prob}[Validity of arguments]
+    \citep[1.1 item 6]{MacFarlane-2020-PhilosophicalLogicContemporary}
+    Say whether the following arguments are valid. Justify your answer using
+    truth tables, natural deduction proofs or informal reasoning.
+
+    \smallskip\noindent
+    \begin{tabular}{cccc}
+    1. 
+        & \AxiomC{$\pvar{A}\lif(\pvar{B}\land\lnot\pvar{B})$}
+          \UnaryInfC{$\lnot\pvar{A}\lor\pvar{R}$}
+          \DisplayProof
+    & 2.
+        & \AxiomC{$\pvar{A}\lif(\pvar{B}\lif\pvar{C})$}
+          \UnaryInfC{$\pvar{C}\lif(\lnot\pvar{B}\lif\lnot\pvar{Q})$}
+          \DisplayProof
+    \end{tabular}
+\end{prob}
+
+
+

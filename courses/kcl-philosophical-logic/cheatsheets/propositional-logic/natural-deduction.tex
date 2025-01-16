@@ -1,0 +1,551 @@
+% Part: cheat-sheets
+% Chapter: propositional-logic
+% Section: natural deduction
+
+\documentclass[../../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{chs}{pl}{nd}
+
+\newpage % for 'all the rules at once'
+\olsection{Natural Deduction}
+
+\begin{figure}
+{\setlength\extrarowheight{2em} 
+\begin{tabular}{llll}
+    \AxiomC{$!A$}\DisplayProof (\emph{Assumption})
+    & \AxiomC{}\DeduceC{$!A$}
+    \AxiomC{}\DeduceC{$\lnot!A$}
+    \RightLabel{\Intro{\bot}} \BinaryInfC{$\bot$}\DisplayProof
+    & \AxiomC{$\Discharge{\mathcolor{gray}{!A}}{n}$}\DeduceC{$\bot$}
+    \DischargeRule{\Elim{\bot}}{n} \UnaryInfC{$\lnot!A$}\DisplayProof 
+    & \AxiomC{$\Discharge{\mathcolor{gray}{\lnot!A}}{n}$}\DeduceC{$\bot$}
+    \DischargeRule{$\bot_C$}{n} \UnaryInfC{$!A$}\DisplayProof
+    \\
+    \AxiomC{}\DeduceC{$!A$}
+    \AxiomC{}\DeduceC{$!B$}
+    \RightLabel{\Intro{\land}}
+    \BinaryInfC{$!A\land!B$}\DisplayProof
+    & \AxiomC{}\DeduceC{$!A\land!B$}
+    \RightLabel{\Elim{\land}}
+    \UnaryInfC{$!A$}\DisplayProof
+    & \AxiomC{}\DeduceC{$!A\land!B$}
+    \RightLabel{\Elim{\land}}
+    \UnaryInfC{$!B$}\DisplayProof
+    \\
+    \AxiomC{}\DeduceC{$!A$}
+    \RightLabel{\Intro{\lor}}
+    \UnaryInfC{$!B\lor!A$}\DisplayProof
+    & \AxiomC{}\DeduceC{$!B$}
+    \RightLabel{\Intro{\lor}}
+    \UnaryInfC{$!B\lor!A$}\DisplayProof
+    & \multicolumn{2}{l}{
+    \AxiomC{}\DeduceC{$!A\lor!B$}
+    \AxiomC{$\Discharge{\mathcolor{gray}{!A}}{n}$}\DeduceC{$!C$}
+    \AxiomC{$\Discharge{\mathcolor{gray}{!B}}{n}$}\DeduceC{$!C$}
+    \DischargeRule{\Elim{\lor}}{n}
+    \TrinaryInfC{$!C$}\DisplayProof
+    }
+    \\
+    \AxiomC{$\Discharge{\mathcolor{gray}{!A}}{n}$}\DeduceC{$!B$}
+    \DischargeRule{\Intro{\lif}}{n}
+    \UnaryInfC{$!A\lif!B$}\DisplayProof
+    & \AxiomC{}\DeduceC{$!A$}
+    \AxiomC{}\DeduceC{$!A\lif!B$}
+    \RightLabel{\Elim{\lif}}
+    \BinaryInfC{$!B$}\DisplayProof
+\end{tabular}
+\\[1em] \noindent
+\begin{tabular}{lll}
+    \AxiomC{$\Discharge{\mathcolor{gray}{!A}}{n}$}\DeduceC{$!B$}
+    \AxiomC{$\Discharge{\mathcolor{gray}{!B}}{n}$}\DeduceC{$!A$}
+    \DischargeRule{\Intro{\liff}}{n}
+    \BinaryInfC{$!A\liff!B$}\DisplayProof
+    & \AxiomC{}\DeduceC{$!A$}
+    \AxiomC{}\DeduceC{$!A\liff!B$}
+    \RightLabel{\Elim{\liff}}
+    \BinaryInfC{$!B$}\DisplayProof
+    & \AxiomC{}\DeduceC{$!B$}
+    \AxiomC{}\DeduceC{$!A\liff!B$}
+    \RightLabel{\Elim{\liff}}
+    \BinaryInfC{$!A$}\DisplayProof
+    \\
+\end{tabular}
+\\[1em] \noindent
+\emph{You may also use the derived rules:}
+\\[1em] \noindent
+\begin{tabular}{llll}
+    \AxiomC{$\Discharge{\mathcolor{gray}{!A}}{n}$}\DeduceC{$!B$}
+    \AxiomC{$\Discharge{\mathcolor{gray}{!A}}{n}$}\DeduceC{$\lnot!B$}
+    \DischargeRule{\Intro{\lnot}}{n} \BinaryInfC{$\lnot!A$}\DisplayProof
+    & \AxiomC{$\Discharge{\mathcolor{gray}{\lnot!A}}{n}$}\DeduceC{$!B$}
+    \AxiomC{$\Discharge{\mathcolor{gray}{\lnot!A}}{n}$}\DeduceC{$\lnot!B$}
+    \DischargeRule{\Elim{\lnot}}{n}
+    \BinaryInfC{$!A$}\DisplayProof
+    \\
+    \AxiomC{}\DeduceC{$\bot$}
+    \RightLabel{$\bot_I$ aka EFQ}
+    \UnaryInfC{$!B$}\DisplayProof
+    & \AxiomC{}\DeduceC{$!A$}
+    \AxiomC{}\DeduceC{$\lnot!A$}
+    \RightLabel{EFQ}
+    \BinaryInfC{$!B$}\DisplayProof
+    & \AxiomC{}\DeduceC{$\lnot\lnot!A$}
+    \RightLabel{DNE}
+    \UnaryInfC{$!A$}\DisplayProof
+\end{tabular}
+}
+\caption{Natural Deduction Rules for Propositional Logic.}
+\label{NatDedPropRules}
+\end{figure}
+
+An overview of the rules is given in Figure \ref{NatDedPropRules}.
+We describe them in detail below, using the following notation:
+
+\bigskip \noindent
+{\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{cp{.75\textwidth}}
+
+    $!A,!B,!C$ 
+    
+    & stand for any formula.
+   
+    \\
+
+    \AxiomC{}\DeduceC{$!A$}\DisplayProof
+
+    & \begin{minipage}[c]{.75\textwidth}
+        stands for a proof whose conclusion is $!A$. 
+    
+    The proof may consist in just one line ($!A$, see the
+    assumption rule) or more, and it may have undischarged
+    assumptions.        
+    \end{minipage}
+
+    \\
+
+    \AxiomC{$\mathcolor{gray}{!A}$}\DeduceC{$!B$}\DisplayProof
+    \AxiomC{$[\mathcolor{gray}{!A}]$}\DeduceC{$!B$}\DisplayProof
+
+    & \begin{minipage}[c]{.75\textwidth}
+    The first stands for a proof whose conclusion is $!B$ and
+    whose assumptions \emph{may, but need not} include $!A$. The
+    second stands for the same proof, but with the assumption of
+    $!A$ discharged \emph{if present}. If $!A$ was not
+    present, it is the same proof with nothing discharged
+    \end{minipage}
+    
+\end{tabular}
+}
+\bigskip
+
+\noindent 
+Exam conventions:
+
+\begin{itemize}
+\item \emph{Is it mandatory to discharge?} No. Some systems (e.g. Hablach)
+require you to discharge when you can; others (e.g. King's
+Philosophical Logic) don't. The rules below are formulated with 
+mandatory discharge (`... you \emph{must} discharge ...'), which I 
+recommend as it makes your proofs cleaner. But either system is
+acceptable in exam, so you don't have to discharge every assumption 
+that can be discharged.
+
+\item  \emph{Is it mandatory to number the discharging steps?} No. 
+Below, rules with discharge include a number associating discharged
+assumptions with the step at which they are discharged. It makes 
+proofs more readable but is not required in exam.
+
+\end{itemize}
+
+\subsection*{Assumption Rule} 
+
+\begin{tabular}{l}
+     For any formula $!A$,\\
+     \AxiomC{$!A$}\DisplayProof\\
+     is a proof.
+\end{tabular}
+
+\subsection*{Connective Rules}
+
+I give two sets of rules for negation, plus some derived rules. Make
+sure you know at least the set of Negation with Falsum: it's enough
+to do any proofs. If you learn the others, you can freely use them
+in exam.
+
+\subsubsection*{Negation with Falsum}
+
+KCL Philosophical Logic's rules with Negation and Falsum. I have
+relabelled them \Intro{\bot} (instead of \Elim{\lnot}) and \Elim{\bot}
+(instead of \Intro{\lnot}) to avoid confusion with the rules without
+Falsum given further down. In exam labels are optional and any correct
+label is fine.
+
+\begin{defish}
+\noindent \textbf{Falsum Introduction}
+\nopagebreak \smallskip \\ \noindent
+\begin{tabular}{ll@{\hskip 3em}l}
+    \multicolumn{2}{l}{Given proofs:} & this is a proof:\\
+    \AxiomC{}\DeduceC{$!A$}\DisplayProof &
+    \AxiomC{}\DeduceC{$\lnot!A$}\DisplayProof &
+    \AxiomC{}\DeduceC{$!A$}
+    \AxiomC{}\DeduceC{$\lnot!A$}
+    \RightLabel{\Intro{\bot}} \BinaryInfC{$\bot$}\DisplayProof
+\end{tabular}    
+\end{defish}
+
+\begin{defish}
+\noindent \textbf{Reductio Ad Absurdum (aka Reductio)}
+\nopagebreak \smallskip \\ \noindent
+\begin{tabular}{l@{\hskip 4em}lp{.375\textwidth}}
+    Given proof: & this is a proof:\\
+    \AxiomC{$\mathcolor{gray}{!A}$}\DeduceC{$\bot$}\DisplayProof &
+    \AxiomC{$\Discharge{\mathcolor{gray}{!A}}{n}$}\DeduceC{$\bot$}
+    \DischargeRule{\Elim{\bot}}{n} \UnaryInfC{$\lnot!A$}\DisplayProof
+    & \emph{The assumption $!A$ need not be present in either subproof.
+    If present, it must be discharged.}
+\end{tabular}
+\end{defish}
+
+\begin{defish}
+\noindent \textbf{Indirect Proof}
+\nopagebreak \smallskip \\ \noindent
+\begin{tabular}{l@{\hskip 4em}lp{.375\textwidth}}
+    Given proof: & this is a proof:\\
+    \AxiomC{$\mathcolor{gray}{\lnot!A}$}\DeduceC{$\bot$}\DisplayProof &
+    \AxiomC{$\Discharge{\mathcolor{gray}{\lnot!A}}{n}$}\DeduceC{$\bot$}
+    \DischargeRule{$\bot_C$}{n} \UnaryInfC{$!A$}\DisplayProof
+    & \emph{The assumption $\lnot!A$ need not be present in either subproof.
+    If present, it must be discharged.}
+\end{tabular}
+\end{defish}
+
+%% NOTE
+$\bot_C$ stands for `Classical Falsum rule'. In the notes a fourth rule
+rule is given, $\bot_I$ (for `Intuitionistic Falsum rule'). We don't add
+it here because it's merely a special case of $\bot_C$ where the
+assumption $\lnot!A$ isn't present and, hence, nothing is discharged.
+$\bot_I$ is also called Ex Falso Quodlibet or Explosion; see below 
+for details.
+%% END OF NOTE
+
+\subsubsection*{Conjunction}
+
+\begin{defish}
+\noindent \textbf{Conjunction Introduction}
+\nopagebreak \smallskip \\ \noindent
+\begin{tabular}{ll@{\hskip 4em}l}
+    \multicolumn{2}{l}{Given proofs:} & this is a proof:\\
+    \AxiomC{}\DeduceC{$!A$}\DisplayProof 
+  & \AxiomC{}\DeduceC{$!B$}\DisplayProof 
+  & \AxiomC{}\DeduceC{$!A$}
+  \AxiomC{}\DeduceC{$!B$}
+  \RightLabel{\Intro{\land}}
+  \BinaryInfC{$!A\land!B$}\DisplayProof
+\end{tabular}
+\end{defish}
+
+\begin{defish}
+\noindent \textbf{Conjunction Elimination}
+\nopagebreak \smallskip \\ \noindent
+\begin{tabular}{l@{\hskip 3em}l@{\hskip 2em}l}
+    Given proof: & this is a proof: & and this too:\\
+    \AxiomC{}\DeduceC{$!A\land!B$}\DisplayProof
+    &  \AxiomC{}\DeduceC{$!A\land!B$}
+       \RightLabel{\Elim{\land}}
+       \UnaryInfC{$!A$}\DisplayProof
+    &  \AxiomC{}\DeduceC{$!A\land!B$}
+       \RightLabel{\Elim{\land}}
+       \UnaryInfC{$!B$}\DisplayProof
+\end{tabular}
+\end{defish}
+
+\subsubsection*{Disjunction}
+
+\begin{defish}
+\noindent \textbf{Disjunction Introduction}
+\nopagebreak \smallskip \\ \noindent    
+\begin{tabular}{l@{\hskip 4em}l@{\hskip 2em}l}
+    Given proof: & this is a proof: & and this too:\\
+    \AxiomC{}\DeduceC{$!A$}\DisplayProof
+    &  \AxiomC{}\DeduceC{$!A$}
+        \RightLabel{\Intro{\lor}}
+        \UnaryInfC{$!A\lor!B$}\DisplayProof
+     &  \AxiomC{}\DeduceC{$!A$}
+        \RightLabel{\Intro{\lor}}
+        \UnaryInfC{$!B\lor!A$}\DisplayProof
+\end{tabular}
+\end{defish}
+
+\begin{defish}
+\noindent \textbf{Disjunction Elimination}
+\nopagebreak \smallskip \\ \noindent    
+\begin{tabular}{lll@{\hskip 3em}l}
+    \multicolumn{3}{l}{Given proofs:} & this is a proof:\\
+    \AxiomC{}\DeduceC{$!A\lor!B$}\DisplayProof 
+  & \AxiomC{$\mathcolor{gray}{!A}$}\DeduceC{$!C$}\DisplayProof
+  & \AxiomC{$\mathcolor{gray}{!B}$}\DeduceC{$!C$}\DisplayProof
+  & \AxiomC{}\DeduceC{$!A\lor!B$}
+        \AxiomC{$\Discharge{\mathcolor{gray}{!A}}{n}$}\DeduceC{$!C$}
+            \AxiomC{$\Discharge{\mathcolor{gray}{!B}}{n}$}\DeduceC{$!C$}
+        \DischargeRule{\Elim{\lor}}{n}
+        \TrinaryInfC{$!C$}\DisplayProof \\
+\end{tabular}
+\bigskip
+
+\noindent \emph{The assumption $!A$ need not be present in the second
+subproof. If present, it must be discharged. Same for the assumption
+$!B$ in the third subproof.}
+\end{defish}
+
+\subsubsection*{Material implication}
+
+\begin{defish}
+\noindent \textbf{Conditional Proof}
+\nopagebreak \smallskip \\ \noindent        
+\begin{tabular}{l@{\hskip 4em}lp{.375\textwidth}}
+    Given proof: & this is a proof:\\
+    \AxiomC{$\mathcolor{gray}{!A}$}\DeduceC{$!B$}\DisplayProof 
+  & \AxiomC{$\Discharge{\mathcolor{gray}{!A}}{n}$}\DeduceC{$!B$}
+    \DischargeRule{\Intro{\lif}}{n}
+    \UnaryInfC{$!A\lif!B$}\DisplayProof
+        & \emph{The assumption $!A$ need not be present. If present, it must be discharged.}
+\end{tabular}
+\end{defish}
+
+\begin{defish}
+\noindent \textbf{Modus Ponens}
+\nopagebreak \smallskip \\ \noindent        
+\begin{tabular}{ll@{\hskip 2em}lp{.375\textwidth}}
+    \multicolumn{2}{l}{Given proofs:} & this is a proof:\\
+    \AxiomC{}\DeduceC{$!A$}\DisplayProof 
+  & \AxiomC{}\DeduceC{$!A\lif!B$}\DisplayProof
+  & \AxiomC{}\DeduceC{$!A$}
+            \AxiomC{}\DeduceC{$!A\lif!B$}
+        \RightLabel{\Elim{\lif}}
+        \BinaryInfC{$!B$}\DisplayProof
+    & \emph{When that is more convenient, you may place instead the $!A$ subproof on the right and the $!A\lif!B$ subproof on the left.}
+\end{tabular}
+\end{defish}
+
+\subsubsection*{Material equivalence}
+
+\begin{defish}
+\noindent \textbf{Material Equivalence Introduction}
+\nopagebreak \smallskip \\ \noindent
+\begin{tabular}{ll@{\hskip 2em}lp{.375\textwidth}}
+    \multicolumn{2}{l}{Given proofs:} & this is a proof:\\
+    \AxiomC{$\mathcolor{gray}{!A}$}\DeduceC{$!B$}\DisplayProof 
+  & \AxiomC{$\mathcolor{gray}{!B}$}\DeduceC{$!A$}\DisplayProof 
+  & \AxiomC{$\Discharge{\mathcolor{gray}{!A}}{n}$}\DeduceC{$!B$}
+    \AxiomC{$\Discharge{\mathcolor{gray}{!B}}{n}$}\DeduceC{$!A$}
+    \DischargeRule{\Intro{\liff}}{n}
+    \BinaryInfC{$!A\liff!B$}\DisplayProof 
+    & \emph{As with other rules, the subproof assumptions need not be present, and are discharged if present.}
+\end{tabular}
+\end{defish}    
+
+\begin{defish}
+\noindent \textbf{Material Equivalence Elimination}
+\nopagebreak \smallskip \\ \noindent
+\begin{tabular}{ll@{\hskip 2em}lp{.375\textwidth}}
+    \multicolumn{2}{l}{Given proofs:} & this is a proof:\\
+    \AxiomC{}\DeduceC{$!A$}\DisplayProof
+  & \AxiomC{}\DeduceC{$!A\liff!B$}\DisplayProof
+  & \AxiomC{}\DeduceC{$!A$}
+    \AxiomC{}\DeduceC{$!A\liff!B$}
+    \RightLabel{\Elim{\liff}}
+    \BinaryInfC{$!B$}\DisplayProof
+    & \emph{You can swap the left-right order of subproofs if convenient.}
+\end{tabular}
+\bigskip
+
+\noindent
+\begin{tabular}{ll@{\hskip 2em}lp{.375\textwidth}}
+    \multicolumn{2}{l}{Given proofs:} & this is a proof:\\
+    \AxiomC{}\DeduceC{$!B$}\DisplayProof
+  & \AxiomC{}\DeduceC{$!A\liff!B$}\DisplayProof
+  & \AxiomC{}\DeduceC{$!B$}
+    \AxiomC{}\DeduceC{$!A\liff!B$}
+    \RightLabel{\Elim{\liff}}
+    \BinaryInfC{$!A$}\DisplayProof
+\end{tabular}
+\end{defish}
+
+\subsubsection*{Optional: Negation without Falsum}
+
+Halbach's system. You may use these rules too.
+
+\begin{defish}
+\noindent \textbf{Reductio Ad Absurdum without Falsum}
+\nopagebreak \smallskip \\ \noindent
+\begin{tabular}{ll@{\hskip 3em}lp{.375\textwidth}}
+    \multicolumn{2}{l}{Given proofs:} & this is a proof:\\
+    \AxiomC{$\mathcolor{gray}{!A}$}\DeduceC{$!B$}\DisplayProof &
+  \AxiomC{$\mathcolor{gray}{!A}$}\DeduceC{$\lnot!B$}\DisplayProof &
+  \AxiomC{$\Discharge{\mathcolor{gray}{!A}}{n}$}\DeduceC{$!B$}
+  \AxiomC{$\Discharge{\mathcolor{gray}{!A}}{n}$}\DeduceC{$\lnot!B$}
+  \DischargeRule{\Intro{\lnot}}{n} \BinaryInfC{$\lnot!A$}\DisplayProof
+  & \emph{The assumption $!A$ need not be present in either subproof.
+  If present, it must be discharged.}
+\end{tabular}
+\end{defish}
+
+\begin{defish}
+\noindent \textbf{Indirect Proof without Falsum}
+\nopagebreak \smallskip \\ \noindent
+\begin{tabular}{ll@{\hskip 2em}lp{.325\textwidth}}
+    \multicolumn{2}{l}{Given proofs:} & this is a proof:\\
+    \AxiomC{$\mathcolor{gray}{\lnot!A$}}\DeduceC{$!B$}\DisplayProof 
+  & \AxiomC{$\mathcolor{gray}{\lnot!A}$}\DeduceC{$\lnot!B$}\DisplayProof 
+  & \AxiomC{$\Discharge{\mathcolor{gray}{\lnot!A}}{n}$}\DeduceC{$!B$}
+    \AxiomC{$\Discharge{\mathcolor{gray}{\lnot!A}}{n}$}\DeduceC{$\lnot!B$}
+    \DischargeRule{\Elim{\lnot}}{n}
+    \BinaryInfC{$!A$}\DisplayProof
+    & \emph{The assumption $\lnot!A$ need not be present in either subproof. If present, it must be discharged.}
+\end{tabular}
+\end{defish}
+
+This Reductio ad Absurdum rule (\Intro{\lnot}) here is derivable from
+the one with Falsum (\Elim{\bot}) together with \Intro{\bot}:
+\begin{prooftree}
+\AxiomC{$\Discharge{\mathcolor{gray}{!A}}{n}$}
+\DeduceC{$!B$}
+        \AxiomC{$\Discharge{\mathcolor{gray}{!A}}{n}$}
+        \DeduceC{$\lnot!B$}
+    \RightLabel{\Intro{\bot}}
+    \BinaryInfC{$\bot$}
+    \DischargeRule{\Elim{\bot}}{n}
+    \UnaryInfC{$\lnot!A$}
+\end{prooftree}
+
+This Indirect Proof rule (\Elim{\lnot}) is derivable from the one with
+Falsum ($\bot_C$) together with \Intro{\bot}:
+\begin{prooftree}
+    \AxiomC{$\Discharge{\mathcolor{gray}{\lnot!A}}{n}$}\DeduceC{$!B$}
+    \AxiomC{$\Discharge{\mathcolor{gray}{\lnot!A}}{n}$}\DeduceC{$\lnot!B$}
+    \RightLabel{\Intro{\bot}}
+    \BinaryInfC{$\bot$}
+    \DischargeRule{$\bot_C$}{n}
+    \UnaryInfC{$!A$}
+\end{prooftree}
+
+\subsubsection*{Optional: further negation rules}
+
+You may use the following rules too. 
+
+\begin{defish}
+\noindent \textbf{Ex Falso Quodlibet (aka Ex Falso or Explosion)}
+\nopagebreak \smallskip \\ \noindent
+\begin{tabular}{l@{\hskip 3em}l}
+    Given proof: & this is a proof:\\
+    \AxiomC{}\DeduceC{$\bot$}\DisplayProof &
+    \AxiomC{}\DeduceC{$\bot$}
+    \RightLabel{$\bot_I$}
+    \UnaryInfC{$!B$}\DisplayProof
+\end{tabular}
+\end{defish}
+
+Ex Falso ($\bot_I$) can be derived from Indirect Proof
+($\bot_C$): it is simply the case where we don't discharge. The 
+opposite isn't true: you can't derive Indirect Proof from Ex Falso.
+
+\begin{defish}
+\noindent \textbf{Ex Falso Quodlibet (aka Ex Falso or Explosion) without Falsum}
+\nopagebreak \smallskip \\ \noindent
+\begin{tabular}{ll@{\hskip 3em}l}
+    \multicolumn{2}{l}{Given proofs:} & this is a proof:\\
+    \AxiomC{}\DeduceC{$!A$}\DisplayProof &
+    \AxiomC{}\DeduceC{$\lnot!A$}\DisplayProof &
+    \AxiomC{}\DeduceC{$!A$}
+    \AxiomC{}\DeduceC{$\lnot!A$}
+    \RightLabel{EFQ}
+    \BinaryInfC{$!B$}\DisplayProof
+\end{tabular}
+\end{defish}
+
+Likewise, Ex Falso without Falsum (EFQ) can be derived from Indirect Proof 
+without Falsum ($\Elim{\lnot}$): it is the no-discharge case of the latter. 
+But the opposite is not true; so we couldn't replace Indirect Proof 
+with Ex Falso in this version either. 
+\begin{defish}
+\noindent \textbf{Double Negation Elimination}
+\nopagebreak \smallskip \\ \noindent
+\begin{tabular}{l@{\hskip 3em}l}
+    Given proof: & this is a proof:\\
+    \AxiomC{}\DeduceC{$\lnot\lnot!A$}\DisplayProof &
+    \AxiomC{}\DeduceC{$\lnot\lnot!A$}
+    \RightLabel{DNE}
+    \UnaryInfC{$!A$}\DisplayProof
+\end{tabular}
+\end{defish}
+
+This rule is equivalent to Indirect Proof, given the other negation
+rules. DNE is !!{derivable} from Indirect Proof with Falsum
+Introduction:
+\begin{prooftree}\def\extraVskip{4pt}
+    \AxiomC{}\DeduceC{$\lnot\lnot!A$}
+        \AxiomC{$\Discharge{\lnot!A}{n}$}
+    \RightLabel{\Intro{\bot} (Falsum Intro)}
+    \BinaryInfC{$\bot$}
+    \DischargeRule{$\bot_C$ (Indirect Proof)}{n}
+    \UnaryInfC{$!A$}
+\end{prooftree}
+(Note at step $n$, applying $\bot_C$ to conclude $!A$, we discharge
+assumptions of $\lnot!A$; since we only have one on the right, we only
+discharge there.) Conversely, Indirect Proof is derivable from
+DNE with Reductio Ad Absurdum:
+\begin{prooftree}\def\extraVskip{4pt}
+    \AxiomC{$\Discharge{\lnot!A}{n}$}
+    \DeduceC{$\bot$}
+    \DischargeRule{\Intro{\lnot} (Reductio)}{n}
+    \UnaryInfC{$\lnot\lnot!A$}
+    \RightLabel{DNE}
+    \UnaryInfC{$!A$}
+\end{prooftree}
+Thus either of Indirect Proof or DNE can be added to the other negation 
+rules to get a full system, known as Classical Propositional Logic. 
+But at least one is needed: you could not derive them from the other.
+
+\paragraph{Remark} Negation and falsum rules belong to four groups:
+
+\begin{enumerate}
+\item Falsum Introduction. From $p$ and $\lnot p$ absurdity follows.
+\item Reductio Ad Absurdum. If assuming $p$ leads to absurdity, then
+not-$p$ follows.
+\item Ex Falso. From absurdity anything follows.
+\item Indirect Proof and DNE. If $\lnot p$ leads to absurdity, then
+$p$ follows.
+\end{enumerate}
+
+(1)+(2) constitute a minimal logic of negation 
+where we can get from contradictions to \emph{negative} conclusions.
+It proves the Law of Non-Contradiction:
+\begin{equation}\tag{Law of Non-Contradiction}
+\lnot(!A\land\lnot!A)
+\end{equation}
+But it doesn't give us the Ex Falso rules, nor the Disjunctive Syllogism
+rule:
+\begin{prooftree}
+\AxiomC{$!A\lor !B$}
+        \AxiomC{$\lnot!A$}
+    \RightLabel{Disjunctive Syllogism}
+    \BinaryInfC{$!B$} 
+\end{prooftree}
+
+(1)-(2)-(3) constitute a stronger logic of negation, Intuitionistic Logic. 
+With it we can derive not only the Law of Non-Contradiction, but 
+also Disjunctive Elimination. It doesn't derive (4), 
+however; hence not Double Negation Elimination. Nor does it derive
+the Law of Excluded Middle: 
+\begin{equation}\tag{Law of Excluded Middle}
+    \lnot(!A\land\lnot!A)
+\end{equation}
+
+(1)-(2)-(3)-(4) is the strongest logic of negation, Classical Logic.
+In it we have !!{derivation}s of all the theorems and rules mentioned
+above.
+
+\end{document}
+

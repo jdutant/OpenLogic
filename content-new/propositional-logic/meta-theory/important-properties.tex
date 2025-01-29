@@ -1,0 +1,145 @@
+% Part: propositional-logic
+% Chapter: propositional-logic
+% Section: important-properties
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{pl}{mth}{imp}
+
+\olsection{Important Properties}
+
+This section recaps important properties of propositional logic.
+
+\subsection{The substitution rule}
+
+This property captures a sense in which validity is `formal'.
+$\pvar{A}\lor\lnot\pvar{A}$ is valid; but so is any formula of `the
+same form', $!A\lor\lnot!A$. (What's the difference? $\pvar{A}$ is a
+specific atomic sentence; $!A$ is any formula, including complex
+ones.) What does `the same form' mean here? Well, any formula that is
+like the original $\pvar{A}\lor\lnot\pvar{A}$, where the sentence
+letter $\pvar{A}$ is uniformly replaced by some formula (possibly
+complex). 
+
+\begin{thm}[Substitution rule]
+    \ollabel{thm:subst-rule}
+    Let $!A[!B_1/\Obj{\pvar{A}},\ldots,!B_n/\Obj{\pvar{A}_j}]$ is the
+    result of uniformly replacing !!{propositional variable}s
+    $\Obj{\pvar{A}}_i,\ldots,\Obj{\pvar{A}}_j$ with formulas,
+    respectively, and let
+    $\Gamma[!B_1/\Obj{\pvar{A}},\ldots,!B_n/\Obj{\pvar{A}_j}]$ be the
+    set of formulas resulting of doing so for each formula in
+    $\Gamma$. We have:
+    \begin{itemize}
+        \item If $\Entails !A$, $\Entails
+        !A[!B_1/\Obj{\pvar{A}},\ldots,!B_n/\Obj{\pvar{A}_j}]$.
+        \item If $\Gamma \Entails !A$,
+        $\Gamma[!B_1/\Obj{\pvar{A}},\ldots,!B_n/\Obj{\pvar{A}_j}]
+        \Entails
+        !A[!B_1/\Obj{\pvar{A}},\ldots,!B_n/\Obj{\pvar{A}_j}]$.
+    \end{itemize}
+\end{thm}
+
+\subsection{Semantic deduction theorem}
+
+This property connects validity of an argument and logical truth of
+a corresponding conditional. 
+
+\begin{thm}
+    \begin{thm}[Semantic Deduction Theorem]
+        \ollabel{thm:sem-deduction} $\Gamma \Entails !A \lif !B$ if and only
+        if $\Gamma \cup \{!A\} \Entails !B$.
+      \end{thm}
+\end{thm}
+
+This property is closely related to rules of proof for the conditional.
+\emph{Modus ponens} is sound only if the left-to-right version of
+the deduction theorem holds. \emph{Conditional proof} is sound only
+if the right-to-left version is sound. 
+
+This property is important because some weaker alternatives to classical
+logic don't have it; in those logics, at least one of modus ponens
+or conditional proof ceases to be usable for reasoning with the conditional.
+
+\subsection{Soundness and Completeness}
+
+\begin{thm}
+    Propositional logic is sound and complete. The argument from $\Gamma$
+    to $!A$ is valid if and only if provable.
+    \begin{itemize}
+        \item Soundness: if an argument is provable, it is valid. If
+        $\Gamma \Proves !A$, then $\Gamma \Entails !A$. 
+        \item Completeness: if an argument is valid, it is provable.
+        If $\Gamma \Entails !A$, then $\Gamma \Proves !A$.
+    \end{itemize} 
+\end{thm}
+
+Given soundness and completeness, the properties below hold for both
+notions of consequence.
+
+
+\subsection{Compactness}
+
+\begin{prop}[Compactness Theorem]
+    Propositional logic is \emph{compact}. Two equivalent formulations:
+    \begin{enumerate}
+        \item $\Gamma$ is satisfiable if and only if every \emph{finite} subset
+    $\Gamma_0$ of $\Gamma$ is satisfiable. 
+        \item If $\Gamma$ entails $!A$ then some finite subset of
+        $\Gamma$ entails $!A$. If $\Gamma \Entails !A$ then there are
+        $!B_1,\ldots,!B_n$ in $\Gamma$ such that $!B_1,\ldots,!B_n
+        \Entails !A$.
+    \end{enumerate}
+\end{prop}
+
+If a logic \emph{lacks} compactness, then some of its valid arguments
+are \emph{essentially infinitary}. That is, in that logic, some
+arguments with infinitely many premises are valid, but no argument
+using any finite subset of those premises to reach the same conclusion
+is valid. The best known example of infinitary consequence is:
+\begin{quote}
+There is at least $1$ thing.
+
+There are at least $2$ things.
+
+There are at least $3$ things.
+
+\dots
+
+There are at least $n$ things.
+
+\dots
+
+Therefore, there are infinitely many things.
+
+\end{quote}
+The conclusion follows from \emph{all} the premises of the form `there
+are at least $n$ things', for any natural number $n$. But it doesn't
+follow from any finite subset of those. Any \emph{finite} subset of
+those has a maximal number $n$ which is finite and such that if you
+have just $n$ things, all the premises in that finite subset are true.
+Therefore, any finite subset of those premises could be true without
+the conclusion being true. The set of \emph{all} the premises, however,
+can't be true without there being infinitely many premises. 
+Therefore, if a logic can properly express the claims `there are at
+least $n$ things' for any $n$ and the claim `there are finitely many
+things', it has infinitary consequences. \emph{Second-order logic} is
+of that kind.
+
+Compactness follows from soudness and completeness, because proofs are
+finite. Suppose $\Gamma \Entails !A$ in a complete logic. Since the
+logic is complete, there's a proof of $!A$ from $\Gamma$ ($\Gamma
+\Proves !A$). But a proof uses at most finitely many premises from
+$\Gamma$. Therefore there are $!B_1,\ldots,!B_n$ in $\Gamma$ such that
+$B_1,\ldots,!B_n\Proves !A$. Since the logic is sound,
+$B_1,\ldots,!B_n\Entails !A$. So, in general, if $\Gamma \Entails !A$,
+there's a finite subset $!B_1,\ldots,!B_n$ of $\Gamma$ that entails
+$!A$.
+
+Since soundness and completeness entail compactness, any (sound) logic
+that is not compact is incomplete. Second-order logic is a case in point.
+And any (sound) logic that is complete is compact, and therefore
+cannot express the claims in the infinitary argument above. First-order 
+logic and propositional logic are cases in point.

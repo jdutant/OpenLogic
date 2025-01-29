@@ -1,0 +1,234 @@
+% Part: propositional-logic
+% Chapter: propositional-logic
+% Section: expressive-power
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{pl}{mth}{exp}
+
+\olsection{Expressive Power}
+
+Propositional logic can express all finary bivalent truth functions. 
+This section explains that idea.
+
+\subsection{Truth-functional !!{operator}s}
+
+Whether a sentence `$!A$ and $!B$' is true \emph{only} turns on whether
+each component $!A$, $!B$ is true. That is all we need to know about
+$!A$, $!B$ to tell whether the sentence `$!A$ and $!B$' is true. The 
+same is not true for a sentence `$!A$ because $!B$'. Granted, if we
+are merely told that $!A$ is false or $!B$ is false, we can conclude
+that `$!A$ because $!B$' is false. But if we are merely told that $!A$
+and $!B$ are both true, that is not enough to tell whether `$!A$ because $!B$'
+is true. There are example of true sentences of that form where both $!A$ 
+and $!B$ are true (`the Sun is warm because it emits radiation') 
+and examples of false sentences of that form where both $!A$ 
+and $!B$ are true (`the Sun is warm because the Earth rotates around it').
+
+We call this feature of `and' \emph{truth-functionality}. It is that 
+feature that allows us to specify the meaning of `and' fully with
+a truth table. By contrast, you can't give the full meaning of `because'
+with a truth table. 
+
+\subsection{Truth functions}
+
+Mathematically speaking, a truth table describes 
+a mapping or \emph{function} from truth values to truth value. 
+A \emph{binary} truth function maps two truth values to truth value.
+The meaning of `and' is fully specified by the binary truth function 
+$f_{\text{and}}$ described thus:
+
+\smallskip
+\begin{tabular}{lll}
+    If $v_1$ is: & and $v_2$ is: & then $f_{\text{and}}(v_1,v_2)$ is: \\
+    \hline
+    $\True$ & $\True$ & $\True$ \\
+    $\True$ & $\False$ & $\False$ \\
+    $\False$ & $\True$ & $\False$ \\
+    $\False$ & $\False$ & $\False$ \\
+\end{tabular}
+\smallskip
+
+Our !!{operator}s `$\lnot$', `$\land$', `$\lor$', `$\lif$', `$\liff$' all 
+correspond to truth functions in that way. $\lnot$ is unary: it
+corresponds to a truth function from \emph{one} truth value to truth
+value. The others are binary: they express a truth function from
+\emph{two} truth values to truth value.
+
+We can of course imagine more binary truth functions than the ones
+associated with our !!{operator}s. For instance,
+the truth function $f_{NAND}$ described thus:
+\smallskip
+\begin{tabular}{lll}
+    If $v_1$ is: & and $v_2$ is: & then $f_{NAND}(v_1,v_2)$ is: \\
+    \hline
+    $\True$ & $\True$ & $\False$ \\
+    $\True$ & $\False$ & $\True$ \\
+    $\False$ & $\True$ & $\True$ \\
+    $\False$ & $\False$ & $\True$ \\
+\end{tabular}
+\smallskip
+
+(This function is often called NAND, short for `not and', for reasons 
+that will become clear shortly.)
+
+We could introduce a !!{operator} for this truth function. There is one,
+in fact: the \emph{Sheffer stroke}, written $|$. A formula $!A|!B$ is
+then true just if one of $!A$ or $!B$ is not true. 
+
+Do we need this !!{operator}? Is our language lacking without it? No,
+because we can \emph{express} the same truth function using $\lnot$
+and $\land$. For a formula $\lnot (!A\land!B)$ is true just if one of
+$!A$ or $!B$ isn't true. Thus we can write $\lnot (!A\land!B)$ instead
+of $!A|!B$. We don't need the Sheffer stroke. 
+
+Mathematically put: let $f_{AND}$ is the binary truth function 
+associated with conjunction and $f_{NOT}$ is the unary truth function 
+associated with negation. Mapping two truth values with $f_{NAND}$ is
+the same as mapping them to a truth value with $f_{AND}$ and then 
+mapping the result with $f_{NOT}$: $f_{NAND}(v)=f_{NOT}(f_{AND}(v))$, 
+where $v$ is $\True$ or $\False$.
+
+\subsection{Expressive power}
+
+We have seen that our !!{operator}s are associated with truth functions,
+and that combinations of !!{operator}s allow us to express \emph{some}
+further truth functions. We ask now: can they express \emph{all} truth
+functions? The answer is yes. More precisely, they can express all
+finite bivalent truth functions. 
+
+Let us illustrate first a language that is \emph{not} able to express
+all truth functions. 
+
+\begin{prop}\ollabel{prop:exp-inadequate} 
+    Let $\Lang{L}^*$ be language with $\land$ and $\lor$ as the only
+    !!{operator}s. $\Lang{L}^*$ cannot express negation:
+    that is, there is no formula $!A$ in
+    this language, however complex, that is false if $\Obj{\pvar{A}}$
+    is true.
+\end{prop}
+
+\begin{prob}
+    Establish \olref[pl][mth][exp]{prop:exp-inadequate}. Hint: consider
+    the valuation that makes all !!{propositional variable}s true.
+\end{prob}
+    
+Consider all possible truth functions. Unary truth functions correspond
+to truth tables with two lines. How many are them? (Describe them.)
+Binary truth functions correspond to truth tables with four lines.
+There are 16. Ternary ones with truth tables with eight lines. How 
+many are them? How many $n$-ary truth functions are there, for 
+arbitrary $n$?
+
+Let $f$ be an arbitrary ternary truth function. It will correspond 
+to a truth table:
+
+\smallskip \noindent
+\begin{tabular}{llll}
+    If $v_1$ is: & $v_2$ is: & and $v_3$ is & then $f_{NAND}(v_1,v_2)$ is: \\
+    \hline
+    $\True$ & $\True$ & $\True$ & \dots \\
+    $\True$ & $\True$ & $\False$ & \dots \\
+    $\True$ & $\False$ & $\True$ & \dots \\
+    $\True$ & $\False$ & $\False$ & \dots \\
+    $\False$ & $\True$ & $\True$ & \dots \\
+    $\False$ & $\True$ & $\False$ & \dots \\
+    $\False$ & $\False$ & $\True$ & \dots \\
+    $\False$ & $\False$ & $\False$ & \dots \\
+\end{tabular}
+\smallskip
+
+Suppose, for a start, that the truth function $f$ maps exactly one line
+to $\True$, all the other to false. Let it be the third line, say:
+
+\smallskip \noindent
+\begin{tabular}{llll}
+    If $v_1$ is: & $v_2$ is: & and $v_3$ is & then $f_{NAND}(v_1,v_2)$ is: \\
+    \hline
+    $\True$ & $\True$ & $\True$ & $\False$ \\
+    $\True$ & $\True$ & $\False$ & $\False$ \\
+    $\True$ & $\False$ & $\True$ & $\True$ \\
+    $\True$ & $\False$ & $\False$ & $\False$  \\
+    $\False$ & $\True$ & $\True$ & $\False$  \\
+    $\False$ & $\True$ & $\False$ & $\False$  \\
+    $\False$ & $\False$ & $\True$ & $\False$  \\
+    $\False$ & $\False$ & $\False$ & $\False$  \\
+\end{tabular}
+\smallskip
+
+Can we express it with our !!{operator}s $\lnot$, $\land$, $\lor$ only?
+To do so, we need to find a !!{formula} such that, given three
+!!{propositional variable}s
+$\Obj{\pvar{A}}_1,\Obj{\pvar{A}}_2,\Obj{\pvar{A}}_3$, is $\True$ just
+if $\Obj{\pvar{A}}_1$ is $\True$, $\Obj{\pvar{A}}_2$ is $\False$ and
+$\Obj{\pvar{A}}_3$ is $\True$. There is obviously one, namely:
+$$\Obj{\pvar{A}}_1\land\lnot\Obj{\pvar{A}}_2\land\Obj{\pvar{A}}_3$$
+It's easy to see that whichever single line $f$ makes true, we can
+express the same thing with a conjunction of $\Obj{\pvar{A}}_i$ or 
+negations $\Obj{\pvar{A}}_i$.
+
+Now suppose the truth function $f$ makes true exactly two lines, say
+the third and the fifth:
+
+\smallskip\noindent
+\begin{tabular}{llll}
+    If $v_1$ is: & $v_2$ is: & and $v_3$ is & then $f_{NAND}(v_1,v_2)$ is: \\
+    \hline
+    $\True$ & $\True$ & $\True$ & $\False$ \\
+    $\True$ & $\True$ & $\False$ & $\False$ \\
+    $\True$ & $\False$ & $\True$ & $\True$ \\
+    $\True$ & $\False$ & $\False$ & $\False$  \\
+    $\False$ & $\True$ & $\True$ & $\True$  \\
+    $\False$ & $\True$ & $\False$ & $\False$  \\
+    $\False$ & $\False$ & $\True$ & $\False$  \\
+    $\False$ & $\False$ & $\False$ & $\False$  \\
+\end{tabular}
+\smallskip
+
+Can we express this? We know how to give !!a{formula} that is $\True$
+only at the fifth line (with 
+$\Obj{\pvar{A}}_1,\Obj{\pvar{A}}_2,\Obj{\pvar{A}}_3$ for $v_1,v_2,v_3$, 
+respectively), namely:
+$$\Obj{\pvar{A}}_1\land\lnot\Obj{\pvar{A}}_2\land\Obj{\pvar{A}}_3$$
+We can give one that is $\True$ at exactly the fifth line:
+$$\lnot\Obj{\pvar{A}}_1\land\Obj{\pvar{A}}_2\land\Obj{\pvar{A}}_3$$
+Hence we can simply use their \emph{disjunction}:
+$$(\Obj{\pvar{A}}_1\land\lnot\Obj{\pvar{A}}_2\land\Obj{\pvar{A}}_3)
+\lor(\lnot\Obj{\pvar{A}}_1\land\Obj{\pvar{A}}_2\land\Obj{\pvar{A}}_3)$$
+For that will be $\True$ exactly when one of the two disjuncts are $\True$,
+hence exactly at the third and fifth line.
+
+What if $f$ maps three lines to $\True$? Well, we then use a disjunction
+of three formulas. And so on if $f$ maps four or more lines to $\True$.
+
+What if $f$ maps no lines to $\True$. Well, we then use $\lfalse$ 
+or an arbitrary contradiction. 
+
+It's easy to see that we could use the same strategy if $f$ was a
+\emph{quartenary} truth function. Its truth table would be 16 lines long.
+For each line, we could find conjunction of !!{propositional variable}s
+and their negation that is $\True$ at that line only. We can then 
+express $f$ using a disjunction of one or more of:
+\begin{itemize}
+    \item $\lfalse$
+    \item a conjunction of !!{propositional variable}s
+    and their negation
+\end{itemize}
+Such !!a{formula} is called a \emph{disjunctive normal formula}.
+
+The strategy generalize to any finitary truth function. 
+
+Thus, propositional logic expresses all finitary truth functions.
+
+Throughout, we have assumed \emph{bivalence}: there are only two truth
+values, $\True$ and $\False$. According to some logics, there are more
+truth values. If so, there are more truth functions. We have only 
+show that our !!{operator}s are enough to express all truth functions if 
+there are more than two values. Hence, to be precise, we have established that
+propositional logic expresses all finite, bivalent truth functions.
+
+\end{document}
+
+

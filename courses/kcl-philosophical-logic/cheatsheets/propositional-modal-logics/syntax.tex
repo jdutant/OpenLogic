@@ -1,0 +1,45 @@
+% Part: cheat-sheets
+% Chapter: modal-propositional-logics
+% Section: syntax
+
+\documentclass[../../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{chs}{pml}{syn}
+
+\olsection{Syntax}
+
+\begin{defn}
+
+\emph{!!^{formula}s} of the basic modal language are defined as in
+propositional logic with the addition of:
+
+    \begin{enumerate}
+        \tagitem{prvBox}{If $!A$ is !!a{formula}, then $\Box !A$ is
+        !!a{formula}.}{}
+      
+      \tagitem{prvDiamond}{If $!A$ is !!a{formula}, then $\Diamond !A$ is
+        !!a{formula}.}{}
+      \end{enumerate}
+
+\end{defn}
+    
+\begin{tagblock}{defBox,defDiamond}
+\begin{defn}
+    Formulas constructed using the defined operators are to be understood
+    as follows:
+    
+    \begin{tagenumerate}{defBox,defDiamond}
+    
+    \tagitem{defBox}{$\Box !A$ abbreviates $\lnot\Diamond\lnot !A$. }{}
+    
+    \tagitem{defDiamond}{$\Diamond !A$ abbreviates $\lnot\Box\lnot !A$.}{}
+    \end{tagenumerate}
+\end{defn}
+\end{tagblock}
+
+!!^a{formula} is \emph{modal-free} iff it does not contain $\Box$ or
+$\Diamond$.
+    
+\end{document}

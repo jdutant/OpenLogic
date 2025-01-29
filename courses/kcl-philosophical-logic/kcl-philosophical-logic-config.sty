@@ -56,6 +56,12 @@
 \DeclareDocumentMacro \lif {\supset}
 \DeclareDocumentMacro \liff {\equiv}
 
+% - Determinacy operators 
+% Note that \Def and \Indet are already used as truth values
+\DeclareDocumentMacro \ldet {\mathord{\Delta}}
+\DeclareDocumentMacro \lindet {\mathord{\nabla}}
+
+
 % Quantifiers 
 % ----------- 
 
@@ -110,6 +116,31 @@
 % Modal Logic 
 % -----------
 
+% - `\mModel{M}` - modal structures; default: set first token in
+% Fraktur
+% Changed to mathcal (MacFarlane)
+
+\DeclareDocumentCommand \mModel { m }{\applytofirst{\mathcal}{#1}}
+
+% `\mSat[/]{M}{!A}[w]`, the relation of being satisfied in a
+% model (at a world), is provided as the command
+% `\mSat` with two mandatory arguments (the model and the formula)
+% and one optional argument (the world).  Use `\mSat/` to create
+% the negated relation.  By default, `\mSat{M}{!A}[w]` is typeset as
+% $\mathfrak{M}, w \models \varphi$.
+% Redefined to $\Vdash{\mModel M}^w \phi$ (MacFarlane)
+
+\DeclareDocumentCommand \mSat { t{/} m m o } {%
+  \IfBooleanTF{#1}{%
+    % negated
+    \IfNoValueTF {#4} 
+        { \nVdash_{\mModel{#2}} #3 }
+        { \nVdash_{\mModel{#2}}^{#4} #3}}{%
+    % not negated
+    \IfNoValueTF {#4} 
+        { \Vdash_{\mModel{#2}} #3 }
+        { \Vdash_{\mModel{#2}}^{#4} #3}}}
+
 
 % Special Sets and Mathematical Symbols
 % -------------------------------------
@@ -135,11 +166,13 @@
 
 % from MacFarlane
 \settexttoken{propositional variable}{propositional constant}{propositional constants}
+\settexttoken{operator}{logical connective}{logical connectives}
 \settexttoken{valuation}{model}{models}
 \settexttoken{derivation}{proof}{proofs}
+\settexttoken{derive}{prove}{proves}
 \settexttoken{derivability}{provability}{provabilities}
 \settexttoken{derivable}{provable}{provable}
-
+\settexttoken{nonderivability}{unprovability}{unprovability}
 
 % infinity (following Phil Methodology)
 \settexttoken{enumerable}{countable}{countable}

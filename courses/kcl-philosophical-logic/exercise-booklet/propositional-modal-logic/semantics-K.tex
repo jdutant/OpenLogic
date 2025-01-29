@@ -1,0 +1,313 @@
+% Part: exercise-booklet
+% Chapter: propositional-modal-logic
+% Section: semantics-K
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{exb}{pml}{smk}
+
+\olsection{Semantics in system $\Log{K}$}
+
+\emph{Note on the semantics.} A modal !!{structure} includes a
+!!{valuation} $V$ that assigns $\True$ or $\False$ to each
+!!{propositional variable} at each world. There are two equivalent ways
+of specifying $V$:
+\begin{enumerate}
+    \item We say that $V$ assigns to each !!{propositional
+    variable}--world pair a truth value: $V(\Obj{\pvar{A}},w)=\True$.
+    \item We say that $V$ assigns to each !!{propositional variable}
+    the set of worlds at which it is true:
+    $V(\Obj{\pvar{A}})=\{w,v\}$. $\Obj{\pvar{A}}$ is $\True$ at $u$ if
+    $u\in V(\Obj{\pvar{A}})$, otherwise it is $\False$ at that world.
+\end{enumerate}
+You may use either way. Exercises below use sometimes the former, 
+sometimes the latter.
+
+\begin{prob}[Truth in a pointed model]
+    Consider the model $\mModel{M}=\tuple{W,@,R,V}$ with
+    \begin{itemize}
+        \item $W=\{@,v,w\}$
+        \item $R=\{\tuple{@,v},\tuple{@,w},\tuple{v,@},\tuple{w,v},\tuple{w,w}\}$
+        \item
+        $V(\Obj{\pvar{A}},@)=V(\Obj{\pvar{B}},v)=V(\Obj{\pvar{C}},w)=\True$,
+        all else $\False$.
+    \end{itemize}
+    Say whether the following formulas are true in the !!{structure}
+    (that is, true at $@$ in the !!{structure}). No need to justify
+    your answers.
+    \begin{enumerate}
+        \item $\Diamond \Obj{\pvar{A}}$
+        \item $\Box(\Obj{\pvar{C}}\lif\Diamond\Obj{\pvar{B}})$
+        \item $\Box(\Diamond\Obj{\pvar{C}\lor\Diamond\Obj{\pvar{A}}})$
+        \item $\Box\Box\Diamond\Obj{\pvar{B}}$
+    \end{enumerate} 
+    
+    \begin{ans}
+        Graph of the model:
+    
+        \begin{center}
+        \begin{tikzpicture}[modal]
+          \node[world] (A) [label={[align=right]left:\mTrue{\Obj{\pvar{A}}}\\ 
+                                  \mFalse{\Obj{\pvar{B}}} \\ \mFalse{\Obj{\pvar{C}}}}]{$@$}; 
+          \node[world] (V) [label={[align=right]right:\mFalse{\Obj{\pvar{A}}}\\ 
+                                  \mTrue{\Obj{\pvar{B}}} \\ \mFalse{\Obj{\pvar{C}}}},
+                              above right=of A]{$v$};
+          \node[world] (W) [label={[align=right]right:\mFalse{\Obj{\pvar{A}}}\\ 
+                                  \mFalse{\Obj{\pvar{B}}} \\ \mTrue{\Obj{\pvar{C}}}},
+                              below right=of A]{$w$};
+          \draw[<->] (A) to (V);
+          \draw[->] (A) to (W);
+          \draw[->] (W) to (V); 
+          \draw[->] (W) to [reflexive below] (W); 
+        \end{tikzpicture}
+      \end{center}
+        \begin{enumerate}
+            \item $\Diamond \Obj{\pvar{A}}$ False. The only worlds
+            accessible to $@$ are $v,w$ and $\Obj{\pvar{A}}$ isn't
+            true at either.
+
+            \item $\Box(\Obj{\pvar{C}}\lif\Diamond\Obj{\pvar{B}})$.
+            True. To see this, we need to check that
+            $\Obj{\pvar{C}}\lif\Diamond\Obj{\pvar{B}}$ is true at all
+            the worlds accessible to $@$, namely $v,w$. At $v$,
+            $\Obj{\pvar{C}}$ is false, so
+            $\Obj{\pvar{C}}\lif\Diamond\Obj{\pvar{B}}$ is true. At
+            $w$, $w$ has acess to $v$ where $\Obj{\pvar{B}}$ is true,
+            so $\Diamond\Obj{\pvar{B}}$ is true and hence
+            $\Obj{\pvar{C}}\lif\Diamond\Obj{\pvar{B}}$ is true. Since 
+            it is true at all worlds accessible from $@$, 
+            $\Box(\Obj{\pvar{C}}\lif\Diamond\Obj{\pvar{B}})$ is true 
+            at $@$.
+
+            \item
+            $\Box(\Diamond\Obj{\pvar{C}\lor\Diamond\Obj{\pvar{A}}})$.
+            True. $\Diamond\Obj{\pvar{C}} \lor\Diamond\Obj{\pvar{A}}$
+            is true at $v$ because $\Diamond\Obj{\pvar{A}}$ is true at
+            $v$, because $v$ has access to $@$ and $\Obj{\pvar{A}}$ is
+            true at $@$. ($\Diamond\Obj{\pvar{C}}$ is false at $v$ but
+            $\Diamond\Obj{\pvar{A}}$ true at $v$ is enough to make
+            $\Diamond\Obj{\pvar{C}} \lor\Diamond\Obj{\pvar{A}}$ is
+            true at $v$.) $\Diamond\Obj{\pvar{C}}
+            \lor\Diamond\Obj{\pvar{A}}$ is also true at $w$ because
+            $\Diamond\Obj{\pvar{C}}$ is true at $w$, because $w$ has
+            access to itself and $\Obj{\pvar{R}}$ is true at $w$.
+            Therefore, $\Diamond\Obj{\pvar{A}}
+            \lor\Diamond\Obj{\pvar{C}}$ is true at any world $@$ has
+            access to: $w,v$. So $\Box(\Diamond\Obj{\pvar{C}}
+            \lor\Diamond\Obj{\pvar{A}})$ is true at $@$.
+
+            \item $\Box\Box\Diamond\Obj{\pvar{B}}$. False. Strategy:
+            for this to be true at $@$, it must be that any worlds
+            accessible in two steps from $@$ is a world where
+            $\Diamond\Obj{\pvar{B}}$ is true, i.e., a world that has
+            acess to a world where $\Obj{\pvar{B}}$ is true. Hence a
+            good start is to look for worlds where
+            $\Diamond\Obj{\pvar{B}}$ is false, and check whether one
+            of them is accessible in two steps from $@$. Solution: $v$
+            only has access to $@$ and  $\Obj{\pvar{B}}$ isn't true at
+            $@$, hence $\Diamond\Obj{\pvar{B}}$ is false at $v$. Since
+            $w$ has access to $v$ and $\Diamond\Obj{\pvar{B}}$ is
+            false at $v$, $\Box\Diamond\Obj{\pvar{B}}$ is false at
+            $w$. Since $@$ has access to $w$ and
+            $\Box\Diamond\Obj{\pvar{B}}$ is false at $w$,
+            $\Box\Box\Diamond\Obj{\pvar{B}}$ is false at $@$.
+        \end{enumerate} 
+        
+    \end{ans}
+    
+\end{prob}
+
+\begin{prob}[Truth at a world]
+    Consider the model $\mModel{M}$ with worlds $W = \{u,v,w\}$, accessibility
+    relation $R=\{\tuple{u,v},\tuple{v,u},\tuple{v,v},\tuple{v,w},\tuple{w,v},\tuple{w,w}\}$ 
+    and $V$ such that $V(\Obj{\pvar{A}}) = \{ u \}$, $V(\Obj{\pvar{B}}) = \{ v \}$, $V(\Obj{\pvar{C}}) = \{ w \}$.
+    
+    \begin{enumerate}
+    \item Draw a graph of the model. 
+    \item Say whether in $\mModel{M}$ these !!{formula}s are true or false 
+        at the world indicated:
+        \begin{enumerate}
+            \item $\Diamond \Obj{\pvar{A}}$ at world $u$
+            \item $\Box \Obj{\pvar{A}}$ at world $u$
+            \item $\Box \Obj{\pvar{B}}$ at world $u$
+            \item $\Diamond\lnot(\Obj{\pvar{C}}\lif \Obj{\pvar{B}})$ at $w$
+            \item $\Box(\lnot \Obj{\pvar{B}}\lif \Obj{\pvar{C}})$ at $v$
+            \item $\Diamond(\Obj{\pvar{B}}\land\Box \Obj{\pvar{A}})$ at $w$
+            \item $\Diamond\Box \Obj{\pvar{B}}$ at $v$
+            \item $\Box(\Box \Obj{\pvar{B}}\lif\Diamond \Obj{\pvar{C}})$ at $u$
+            \item $\Box\Diamond(\lnot \Obj{\pvar{C}}\lif\lnot \Obj{\pvar{B}})$ at $v$
+            \item $\Diamond\Diamond\Box \Obj{\pvar{C}}$ at $u$
+        \end{enumerate}
+    \end{enumerate}
+    
+    \begin{ans}
+    Graph of the model:
+    
+        \begin{center}
+        \begin{tikzpicture}[modal]
+          \node[world] (u) [label={[align=right]right:\mTrue{\Obj{\pvar{A}}}\\ 
+                                  \mFalse{\Obj{\pvar{B}}} \\ \mFalse{\Obj{\pvar{C}}}}]{$u$}; 
+          \node[world] (v) [label={[align=right]right:\mFalse{\Obj{\pvar{A}}}\\ 
+                                  \mTrue{\Obj{\pvar{B}}} \\ \mFalse{\Obj{\pvar{C}}}},
+                              above right=of u]{$v$};
+          \node[world] (w) [label={[align=right]right:\mFalse{\Obj{\pvar{A}}}\\ 
+                                  \mFalse{\Obj{\pvar{B}}} \\ \mTrue{\Obj{\pvar{C}}}},
+                              below right=of u]{$w$};
+          \draw[<->] (u) to (v);
+          \draw[<->] (v) to (w);
+          \draw[->] (v) to [reflexive above] (v); 
+          \draw[->] (w) to [reflexive below] (w); 
+        \end{tikzpicture}
+      \end{center}
+    
+        \begin{enumerate}
+        \item False, $\mSat/{M}{\Diamond \Obj{\pvar{A}}}[u]$\\
+        \emph{Comment. }The only world that $u$ ``sees'' is $v$,
+        where $\Obj{\pvar{A}}$ is false. So there is no world that $u$ sees where
+        $\Obj{\pvar{A}}$ is true.
+        \item False, $\mSat/{M}{\Box \Obj{\pvar{A}}}[u]$\\
+        \emph{Comment}. Not all the worlds $u$ ``sees'' are $\Obj{\pvar{A}}$ worlds,
+        since it sees $v$ where $\Obj{\pvar{A}}$  is false.
+        \item True, $\mSat{M}{\Box \Obj{\pvar{B}}}[u]$\\
+        \emph{Comment}. $u$ only ``sees'' one world, $v$, and in that world
+        $\Obj{\pvar{B}}$ is true, so $\Box \Obj{\pvar{B}}$ is true at $u$. Note that the fact
+        that $\Obj{\pvar{B}}$ is false at $u$ itself doesn't matter, because $u$
+        doesn't ``see'' itself. 
+        \item True,  $\mSat{M}{\Diamond\lnot(\Obj{\pvar{C}}\lif \Obj{\pvar{B}})}[w]$\\
+        \emph{Comment}. $w$ sees two worlds, $v$ and $w$. Is
+        one of them one in which $\lnot(\Obj{\pvar{C}}\lif \Obj{\pvar{B}})$ is true? 
+        $\lnot(\Obj{\pvar{C}}\lif \Obj{\pvar{B}})$ is true just if $\Obj{\pvar{C}}\lif \Obj{\pvar{B}}$
+        is false, that is, just if $\Obj{\pvar{C}}$ is true and $\Obj{\pvar{B}}$ is
+        false. $w$ is a world where that is so. So $w$ sees a world,
+        namely itself, where $\lnot(\Obj{\pvar{C}}\lif \Obj{\pvar{B}})$ is true. 
+        \item False, 	$\mSat/{M}{\Box(\lnot \Obj{\pvar{B}}\lif \Obj{\pvar{C}})}[v]$\\
+        \emph{Comment}. $\lnot \Obj{\pvar{B}}\lif \Obj{\pvar{C}}$ is true if $\lnot\Obj{\pvar{B}}$ 
+        is false or $\Obj{\pvar{C}}$ is true, that is, if one of $\Obj{\pvar{B}}, \Obj{\pvar{C}}$ 
+        is true. That happens at two worlds that $v$ sees, namely $v$
+        and $w$, but not at a third world that $v$ sees, namely $u$. 
+        \item False, $\mSat/{M}{\Diamond(\Obj{\pvar{B}}\land\Box \Obj{\pvar{A}})}[w]$\\
+        \emph{Comment. }$w$ sees two worlds, $v$ and itself. Is
+        any of these one where $\Obj{\pvar{B}}\land\Box \Obj{\pvar{A}}$ is true? Not $w$, since
+        $\Obj{\pvar{B}}$ is false in $w$. At $v$,
+        $\Obj{\pvar{B}}$ is true; but is $\Box \Obj{\pvar{A}}$ true? No, because $v$ sees some
+        worlds where $\Obj{\pvar{A}}$ is false ($v$ and $w$). So $\Obj{\pvar{B}}\land\Box \Obj{\pvar{A}}$
+        is not true in $v$ either. Since $w$ doesn't see a world
+        where it is true, $\Diamond(\Obj{\pvar{B}}\land\Box \Obj{\pvar{A}})$ is false
+        at $w$.
+        \item True, $\mSat{M}{\Diamond\Box \Obj{\pvar{B}}}[v]$\\
+        \emph{Comment}. $v$ sees $u$. $u$ is a world where
+        $\Box \Obj{\pvar{B}}$ is true (see qu. 3 above). So $\Diamond\Box Q$ is true
+        at $v$.
+        \item True, $\mSat{M}{\Box(\Box \Obj{\pvar{B}}\lif\Diamond \Obj{\pvar{C}})}[u]$\\
+        \emph{Comment}. This is true iff all the worlds $u$ sees are
+        ones where $\Box \Obj{\pvar{B}}\lif\Diamond \Obj{\pvar{C}}$ is true. Since $u$
+        only sees $v$, we need only check whether $\Box \Obj{\pvar{B}}\lif\Diamond \Obj{\pvar{C}}$
+        is true at $v$. $\Box \Obj{\pvar{B}}$ is false at $v$ (since it sees
+        worlds where $\Obj{\pvar{B}}$ is false, namely $u$ and $w$), so $\Box \Obj{\pvar{B}}\lif\Diamond \Obj{\pvar{C}}$
+        is true at $v$. Alternatively, you can note that $\Diamond \Obj{\pvar{C}}$ is true at $v$
+        (since it sees a world where $\Obj{\pvar{C}}$ is true, namely $w$), so 
+        we again get that  $\Box \Obj{\pvar{B}}\lif\Diamond \Obj{\pvar{C}}$
+        is true at $v$. Since that $\Box \Obj{\pvar{B}}\lif\Diamond \Obj{\pvar{C}}$ true at all
+        the worlds $u$ sees (namely $v$), $\Box(\Box \Obj{\pvar{B}}\lif\Diamond \Obj{\pvar{C}})$
+        is true at $u$. \\
+        \emph{Note} that $\Box \Obj{\pvar{B}}\lif\Diamond \Obj{\pvar{C}})$ is false at $u$ itself.
+        But since $u$ doesn't see itself, that doesn't prevent $\Box(\Box \Obj{\pvar{B}}\lif\Diamond \Obj{\pvar{C}})$
+        to be true at $u$.
+        \item False, $\mSat/{M}{\Box\Diamond(\lnot \Obj{\pvar{C}}\lif\lnot \Obj{\pvar{B}})}[v]$\\
+        \emph{Comment}. $v$ sees three worlds, $u$, $v$, $w$,
+        so we must check whether $\Diamond(\lnot \Obj{\pvar{C}}\lif\lnot \Obj{\pvar{B}})$
+        is true in each of them. Is it true at $u$? $u$ only sees $v$;
+        $v$ is a world where $\lnot \Obj{\pvar{C}}\lif\lnot \Obj{\pvar{B}}$ is false 
+        ($\lnot \Obj{\pvar{C}}$ is true and $\lnot \Obj{\pvar{B}}$ false), so 
+        $\Diamond(\lnot \Obj{\pvar{C}}\lif\lnot \Obj{\pvar{B}})$ is false at $u$. 
+        No need to check further: some world $v$ sees is one 
+        where $\Diamond(\lnot \Obj{\pvar{C}}\lif\lnot \Obj{\pvar{B}})$ fails, so 
+        $\Box\Diamond(\lnot \Obj{\pvar{C}}\lif\lnot \Obj{\pvar{B}})$ is false at $v$. 
+        \item False, $\mSat/{M}{\Diamond\Diamond\Box \Obj{\pvar{C}}}[u]$\\
+        \emph{Comment}. This is true iff $u$ sees some world that sees
+        some world where $\Box \Obj{\pvar{C}}$ is true. But it's easy to check 
+        that $\Box \Obj{\pvar{C}}$ is \emph{false} at all our worlds (each of our worlds 
+        sees $v$, and $\Obj{\pvar{C}}$ is false at $v$). So there is simply no world where
+        $\Box \Obj{\pvar{C}}$ is true, so no world can see a world that sees
+        a world where $\Box \Obj{\pvar{C}}$ is true. So that's false at $u$ (or anywhere
+        else for that matter).
+        \end{enumerate}
+    
+    \end{ans}
+    
+    \end{prob}
+    
+    \begin{prob}
+    For each of the following !!{formula}s, devise a model with a world $w$
+    such that the formula is \emph{false} at $w$. 
+    
+    \begin{enumerate}
+        \item $\Diamond \Obj{\pvar{A}}\lif\Box \Obj{\pvar{A}}$
+        \item $\Diamond \Obj{\pvar{A}}\land\Diamond \Obj{\pvar{B}}\lif\Diamond(\Obj{\pvar{A}}\land \Obj{\pvar{B}})$
+        \item $\Diamond \Obj{\pvar{A}}\lor\Diamond\lnot \Obj{\pvar{A}}$
+        \item $\Box \Obj{\pvar{A}}\lif\Diamond \Obj{\pvar{A}}$ (schema $\Ax{D}$)
+        \item $\Box \Obj{\pvar{A}}\lif \Obj{\pvar{A}}$ (schema $\Ax{T}$)
+        \item $\Diamond \Obj{\pvar{A}}\lif(\Box \Obj{\pvar{A}}\lif \Obj{\pvar{A}})$
+        \item $\Obj{\pvar{A}}\lif\Box\Diamond \Obj{\pvar{A}}$ (schema $\Ax{B}$)
+        \item $\Box \Obj{\pvar{A}}\lif\Box\Box \Obj{\pvar{A}}$ (schema $\Ax{4}$)
+        \item $\Box\Box \Obj{\pvar{A}}\lif\Box \Obj{\pvar{A}}$
+        \item $\Diamond \Obj{\pvar{A}}\lif\Box\Diamond \Obj{\pvar{A}}$ (schema $\Ax{5}$)
+    \end{enumerate}
+    
+    \emph{Example answer: (1)}. Take $\mModel{M}$ with $W=\{w,v\}$, 
+    $R=\{\tuple{w,w},\tuple{w,v}\}$, $V(\Obj{\pvar{A}})=\{w\}$. 
+    
+    \emph{Note} Labelled items ($\Ax{D}$, $\Ax{T}$, 
+    $\Ax{B}$, $\Ax{4}$, $\Ax{5}$) are instances of these 
+    well-known schemas of modal logic. The labels are for
+    your future reference, ignore them when answering this exercise.
+    
+    \begin{ans}
+        Some answers. In each case, you can check that the
+        !!{formula} is false at world $w$. Of course other models 
+        could have been used too. 
+        \begin{enumerate}
+            \item $\mModel{M}$ with $W=\{w,v\}$, $R=\{\tuple{w,w},\tuple{w,v}\}$, 
+                $V(\Obj{\pvar{A}})=\{w\}$. 
+            \item $\mModel{M}$ with $W=\{w,v\}$, $R=\{\tuple{w,w}\tuple{w,v}\}$,
+                $V(\Obj{\pvar{A}})=\{w\}$, $V(\Obj{\pvar{B}})=\{v\}$. 
+            \item $W=\{u\},$ $R=\varnothing$ (the empty set: nothing is related to
+            nothing), $V(\Obj{\pvar{A}})=\varnothing$. \emph{Note:} in that question, 
+            you need $w$ to \emph{not} have access to any worlds. And that's 
+            all you need: any model where $w$ doesn't have access to any world 
+            will make this !!{formula} false at $w$. 
+            \item Same model as in the previous question, you need $w$ to not have access
+            to any world. And that's all you need. So you may use the same model.
+            \item $\mModel{M}$ with $W=\{w,v\}$, $R=\{\tuple{w,v}\}$, 
+                $V(\Obj{\pvar{A}})=\{v\}$. Note that $\Box \Obj{\pvar{A}}$ is true at $w$
+                because the only world $w$ has access to is $v$, where $\Obj{\pvar{A}}$ 
+                is true. 
+            \item Same model as in the previous question. You need $\Diamond \Obj{\pvar{A}}$
+            and $\Box \Obj{\pvar{A}}$ to be true at $w$ but $\Obj{\pvar{A}}$ to be false at $w$. 
+            So a model where $w$ doesn't have access to itself, but only sees
+            worlds where $\Obj{\pvar{A}}$ is true. 
+            \item $\mModel{M}$ with $W=\{w,v\}$, $R=\{\tuple{w,w},\tuple{w,v}
+                \tuple{v,v}\}$, 
+                $V(\Obj{\pvar{A}})=\{w\}$. Note that $\Diamond \Obj{\pvar{A}}$ is false at $v$. 
+                You could also use that model with $R=\{\tuple{w,v}\}$ instead.
+                More generally, any model with non-symmetric $R$ will do.
+            \item $\mModel{M}$ with $W=\{w,v,u\}$, $R=\{\tuple{w,w},
+                \tuple{w,v},\tuple{v,u}\}$, 
+                $V(\Obj{\pvar{A}})=\{w,v\}$. More generally, you need a model where 
+                $R$ is not transitive.
+            \item $\mModel{M}$ with $W=\{w,v,u\}$, $R=\{\tuple{w,v},\tuple{v,u}\}$, 
+                $V(\Obj{\pvar{A}})=\{u\}$. Note that $\Box\Obj{\pvar{A}}$ is true at $v$.
+            \item You could use models (7) or (8) above. Or: $\mModel{M}$ with 
+                $W=\{w,v,u\}$, $R=\{\tuple{w,v},\tuple{w,u}\}$, 
+                $V(\Obj{\pvar{A}})=\{v\}$. In general, you need a model that is 
+                "non-Euclidean", with $Rwx$ and $Rwy$ but not $Rxy$ for some
+                worlds $x$, $y$. 
+        \end{enumerate}
+    \end{ans}
+    
+    \end{prob}
+
+\end{document}
+

@@ -1,0 +1,129 @@
+% Part: cheat-sheets
+% Chapter: modal-propositional-logics
+% Section: natural-deduction
+
+\documentclass[../../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{chs}{pml}{nd}
+
+\olsection{Natural Deduction}
+
+\begin{figure}
+    \noindent
+    {\setlength\extrarowheight{3em}
+    \begin{tabular}{cc}
+        \AxiomC{}\DeduceC{$\Box!A$}
+        \AxiomC{}\DeduceC{$\Box!B$}
+        \AxiomC{$\Discharge{!A}{n},\Discharge{!B}{n}$ \emph{at most}}\DeduceC{$!C$}
+        \DischargeRule{\Intro{\Box}}{n}
+        \TrinaryInfC{$\Box!C$}
+        \DisplayProof
+    &   \AxiomC{}\DeduceC{$\Diamond!A$}
+        \AxiomC{}\DeduceC{$\Box!B$}
+        \AxiomC{$\Discharge{!A}{n},\Discharge{!B}{n}$ \emph{at most}}\DeduceC{$!C$}
+        \DischargeRule{\Intro{\Diamond}}{n}
+        \TrinaryInfC{$\Diamond!C$}
+        \DisplayProof
+    \\
+    &   \AxiomC{}\DeduceC{$\Diamond\lfalse$}
+        \RightLabel{\Elim{\Diamond}}
+        \UnaryInfC{$\lfalse$}
+        \DisplayProof
+    \end{tabular}
+    }
+    \\[1em]
+    \emph{In \Intro{\Box} and \Intro{\Diamond} the !!{derivation} on the right 
+    has at most $!A,!B$ undischarged assumptions before applying the rule.}
+    \\[1em]
+    \emph{You may also use the derived rules:}
+    \\[1em] \noindent
+    {\setlength\extrarowheight{3em} 
+    \begin{tabular}{ll}
+        \AxiomC{}\DeduceC{$\Box!A_1$}
+        \AxiomC{}\DeduceC{$\ldots$}
+        \AxiomC{}\DeduceC{$\Box!A_k$}
+        \AxiomC{$\Discharge{!A_1}{n},\ldots,\Discharge{!A_k}{n}$ \emph{at most}}\DeduceC{$!B$}
+        \DischargeRule{\Intro{\Box}}{n}
+        \QuaternaryInfC{$\Box!B$}
+        \DisplayProof
+        &   \AxiomC{\emph{no assumption}}\DeduceC{$!A$}
+        \RightLabel{Nec}
+        \UnaryInfC{$\Box!A$}
+        \DisplayProof
+    \\
+        \multicolumn{2}{l}{
+        \AxiomC{}\DeduceC{$\Diamond!A$}
+        \AxiomC{}\DeduceC{$\Box!B_1$}
+        \AxiomC{}\DeduceC{\ldots}
+        \AxiomC{}\DeduceC{$\Box!B_k$}
+        \AxiomC{$\Discharge{!A}{n},\Discharge{!B_1}{n},\ldots,\Discharge{!B_k}{n}$ \emph{at most}}\DeduceC{$!C$}
+        \DischargeRule{\Intro{\Diamond}}{n}
+        \QuinaryInfC{$\Diamond!C$}
+        \DisplayProof
+        }
+    \end{tabular}
+    }
+    \\[1em] \noindent
+
+\caption{Natural Deduction rules for Propositional Modal Logic K.}
+\ollabel{natdedpmlk}
+\end{figure}
+
+\begin{figure}
+    \begin{center} 
+    {\setlength\extrarowheight{3em} 
+    \begin{tabular}{ll}
+        \AxiomC{}\DeduceC{$\Box!A$}
+        \RightLabel{\Ax{D}}
+        \UnaryInfC{$\Diamond!A$}
+        \DisplayProof
+    \\
+        \AxiomC{}\DeduceC{$\Box!A$}
+        \RightLabel{$\Box$\Ax{T}}
+        \UnaryInfC{$!A$}
+        \DisplayProof
+    &   \AxiomC{}\DeduceC{$!A$}
+        \RightLabel{$\Diamond$\Ax{T}}
+        \UnaryInfC{$\Diamond!A$}
+        \DisplayProof
+    \\
+        \AxiomC{}\DeduceC{$\Box!A$}
+        \RightLabel{$\Box$\Ax{4}}
+        \UnaryInfC{$\Box\Box!A$}
+        \DisplayProof
+    &   \AxiomC{}\DeduceC{$\Diamond\Diamond!A$}
+        \RightLabel{$\Diamond$\Ax{4}}
+        \UnaryInfC{$\Diamond!A$}
+        \DisplayProof
+    \\
+        \AxiomC{}\DeduceC{$!A$}
+        \RightLabel{$\Box$\Ax{B}}
+        \UnaryInfC{$\Box\Diamond!A$}
+        \DisplayProof
+    &   \AxiomC{}\DeduceC{$\Diamond\Box!A$}
+        \RightLabel{$\Diamond$\Ax{B}}
+        \UnaryInfC{$!A$}
+        \DisplayProof
+    \\
+        \AxiomC{}\DeduceC{$\Diamond!A$}
+        \RightLabel{$\Box$\Ax{5}}
+        \UnaryInfC{$\Box\Diamond!A$}
+        \DisplayProof
+    &   \AxiomC{}\DeduceC{$\Box!A$}
+        \RightLabel{$\Diamond$\Ax{5}}
+        \UnaryInfC{$\Diamond\Box!A$}
+        \DisplayProof
+
+    \end{tabular}
+    }
+    \end{center}
+
+    \caption{Natural Deduction rules for stronger modal logics.}
+\ollabel{natdedspml}
+\end{figure}
+
+
+
+\end{document}

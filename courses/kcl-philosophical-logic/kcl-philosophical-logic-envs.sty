@@ -183,13 +183,13 @@
 \declaretheorem[
   style=definition,
   name=Answer,
-  numbered=no]{ans}
-\crefname{ans}{Answer}{Answers}
-\tagfalse{showAns}
-\newenvironment{answer}{
-  \iftag{showAns}{\begin{ans}}{\comment}
+  numbered=no]{answer}
+\crefname{answer}{Answer}{Answers}
+\tagtrue{showAns}
+\newenvironment{ans}{
+  \iftag{showAns}{\begin{answer}}{\comment}
 }{
-  \iftag{showAns}{\end{ans}}{\endcomment}
+  \iftag{showAns}{\end{answer}}{\endcomment}
 }
 
 % Remove pendantic

@@ -1,0 +1,161 @@
+% Part: propositional-logic
+% Chapter: propositional-logic
+% Section: consequence-relation
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{pl}{mth}{csq}
+
+\olsection{Consequence Relation}
+
+Logics define consequence relations. In propositional logic we have
+two: semantic consequence ($\Entails$) and !!{derivability} ($\Proves$),
+which can be shown to coincide (Soundness and Completeness).
+
+In this section we consider consequence relations at a more general
+level, using propositional logic as a concrete example.
+
+\subsection{Consequence relation}
+
+A logic can be thought of as a pair of a language $\Lang{L}$ and 
+a \emph{consequence relation} $\Proves$ over that language.
+The language $\Lang{L}$  is a set of !!{formula}s. The consequence relation is a
+relation between sets of !!{formula}s and !!{formula}s.
+
+For instance, in propositional logic, between the set
+$\{\Obj{\pvar{A}},\Obj{\pvar{A}}\lif\Obj{\pvar{B}}\}$ and the
+!!{formula} $\Obj{\pvar{B}}$, and between the empty set and the
+formula $\Obj{\pvar{A}}\lor\lnot\Obj{\pvar{A}}$. 
+
+Note that we use $\Proves$ for any consequence relation here: semantic 
+consequence ($\Entails$) or !!{derivability} ($\Proves$ proper). 
+In propositional logic and many others, the two coincide. 
+
+We use two notations for consequence relations:
+\begin{itemize}
+    \item $\Gamma\Proves !A$ states that $!A$ is a consequence of 
+    set of !!{formula}s $\Gamma$. When $\Gamma$ is the empty set, 
+    we may simply write $\Proves !A$ instead of
+    $\emptyset\Proves !A$.
+
+    \item $\mathsf{Con}(\Gamma)$ denotes the set of all !!{formula}s that
+    are consequences of !!{formula}s $\Gamma$:
+    $$\mathsf{Con}(\Gamma)=\Setabs{!A\in\Lang{L}}{\Gamma\Proves !A}$$
+
+\end{itemize}
+
+\subsection{Main Structural Properties of Consequence Relations}
+
+Consequence in propositional logic has three notable features:
+\begin{enumerate}
+    \item Reflexivity. $!A$ is a consequence of any premise set
+    containing $!A$.
+    \item Monotonicity. If $!A$ is a consequence of premise set $\Gamma$, 
+    it's a consequence of any set $\Delta$ that includes $\Gamma$.
+    \item Cut or Transitivity. If $!A$ is a consequence of consequences of
+    a set $\Gamma$, it's a consequence of $\Gamma$. (That is, $!A$ is a 
+    consequence of $\Delta$, and every !!{formula} in $\Delta$ is a 
+    consequence of $\Gamma$, then $!A$ is a consequence of $\Gamma$.)
+\end{enumerate}
+
+These properties are called \emph{structural} because they can be 
+described without reference to the syntax of $\Lang{L}$. (By contrast,
+the property that if $\Gamma\Proves !A$, then $\Gamma\Proves !A\lor!B$
+isn't structural because it makes reference to a specific connective, $\lor$.)
+
+\begin{explain}
+Monotonicity is a feature of \emph{deductive} arguments. With
+inductive, abductive (inference to the best explanation) or
+probabilistic reasoning, monotonicity fails. For instance, a
+conclusion may \emph{be probable} given a premise $!A$ alone but not
+probable given $!A$ and a further premise $!B$. In standard logics, by
+contrast, consequence is monotonic: if a consequence already follows
+from a set of premises, it also follows no matter what further
+premises we add. (It is called `Monotonicity' because in mathematical
+terms it can be expressed as the property that $\mathsf{Con}$ is a
+monotonically increasing function of subsets of $\Lang{L}$.)
+
+Cut means that intermediate steps are inessential. In ordinary reasoning,
+we often derive intermediate conclusions ('lemmas') first, from which
+we derive in term ultimate conclusions.We then say that the conclusions
+follow directly from our initial hypotheses, not merely from the initial
+hypotheses \emph{together with} the lemmas. 
+\end{explain}
+
+Here are Reflexivity, Monotoncity and Cut stated using the 
+two notations for consequence:
+
+\smallskip \noindent
+{\small
+\begin{tabular}{ccc}
+        & $\Proves$ notation & $\mathsf{Con}$ notation \\
+        \hline
+    Reflexivity & If $!A\in\Gamma$ then $\Gamma\Proves !A$ & $\Gamma\subseteq\mathsf{Con}(\Gamma)$ \\
+    Montonicity & If $\Gamma\Proves !A$
+    $\Gamma\cup\Delta\Proves!A$ & If $\Gamma\subseteq\Delta$ then
+    $\mathsf{Con}(\Delta)\subseteq\mathsf{Con}(\Gamma)$ \\
+    Cut & If $\Gamma\Proves !A$ and $\Delta,!A\Proves !B$ then $\Gamma,\Delta\Proves !B$ & $\mathsf{Con}(\mathsf{Con}(\Gamma))=\Gamma$ \\
+\end{tabular}
+}
+\smallskip
+
+\begin{explain}
+We could also have defined Reflexivity with:
+\begin{quote}
+    $\{!A\}\Proves !A$ for every $!A$. 
+\end{quote}
+The two definitions are equivalent given Monotonicity. 
+
+We could also have defined Cut with: 
+\begin{quote}
+    If $\Gamma\Proves !A_i$ for each $!A_i$ in $\Delta$ and $\Delta\Proves !B$,
+    then $\Gamma\Proves !B$. 
+\end{quote}
+The two definitions are equivalent given Reflexivity and Monotonicity.
+\end{explain}
+
+Reflexivity, Monotoncity and Cut aren't only features of consequence in
+propositional logic. They are features of consequence of all standard
+logics. Some logicians consider that a consequence relations can't
+really be called logical if it doesn't have these features.
+
+That being said, logicians do study systems without the structural 
+rules (e.g. non-monotonic Logics, subtructural logics).
+
+\subsection{The Substitution Rule}
+
+The Substitution Rule (\olref[pl][mth][imp]{thm:subst-rule}) 
+isn't structural, but it is another core property
+of consequence in propositional logic that many consider essential 
+for a consequence relation to be properly `logical'.
+
+\subsection{Further Structural Properties}
+
+Further structural properties of consequence relations are implicit in
+the decision to treat premises as \emph{sets}. With sets order and
+repetition don't matter. Therefore, when we say that a consequence
+relation $\Proves$ is a relation between \emph{sets} of !!{formula}s
+and !!{formula}s, we are committed to the idea that order and
+repetition of premises don't matter. For instance, we cannot say that
+$!A,!A,!B\Proves !C$ without accepting that $!B,!A\Proves !C$, for
+$\{!A,!A,!B\}$ and $\{!B,!A\}$ are one and the same set. 
+
+\smallskip\noindent
+\begin{tabular}{cc}
+    Repetition doesn't matter 
+        & $\Gamma,!A,!A\Proves!B$ iff $\Gamma,!A\Proves!B$ \\
+    Order doesn't matter
+        & $\Gamma,!A,!B,\Delta\Proves!C$ iff $\Gamma,!B,!A,\Delta\Proves!C$\\
+\end{tabular}
+
+Again, these features are present in all standard logics.
+\emph{Substructural} logics explore systems where they don't, i.e. 
+where order and/or repetition matters, or even when $!A$ doesn't 
+follow from $!A$. 
+
+\end{document}
+
+
+

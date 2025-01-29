@@ -1,0 +1,148 @@
+% Part: exercise-booklet
+% Chapter: propositional-modal-logic
+% Section: frame-definability
+
+\documentclass[../../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{exb}{pml}{frd}
+
+\olsection{Frame definability}
+
+\begin{prob}[Correspondence facts for types of models]
+
+For each of the schemas below, show that it holds in all models of the given type.
+
+\begin{enumerate}
+	\item (Distribution) $\Box(!A \lif !B)\lif(\Box !A \lif \Box !B)$ in all models.
+	\item ($\Ax D$) $\Box !A \lif \Diamond !A$ in serial models.
+	\item Pick one of the following, in reflexive models:
+	\begin{enumerate}
+		\item ($\Ax T$) $\Box !A \lif !A$
+		\item ($\Ax{T\Diamond}$) $!A \lif \Diamond !A$
+	\end{enumerate}
+	\item Pick one of the following, in symmetric models:
+	\begin{enumerate}
+		\item ($\Ax{B}$)  $!A \lif \Box \Diamond !A$
+		\item ($\Ax{B\Diamond}$) $\Diamond \Box !A \lif !A$
+	\end{enumerate}
+	\item Pick one of the following, in transitive models:
+	\begin{enumerate}
+		\item ($\Ax 4$)  $\Box !A \lif \Box \Box !A$
+		\item ($\Ax{4\Diamond}$) $\Diamond\Diamond !A \lif \Diamond !A$
+	\end{enumerate}
+	\item Pick one of the following, in euclidean models:
+	\begin{enumerate}
+		\item ($\Ax 5$) $\Diamond !A \lif \Box \Diamond !A$
+		\item ($\Ax{5\Diamond}$) $\Diamond\Box !A \lif \Box !A$
+	\end{enumerate}
+\end{enumerate}
+
+\emph{Example answer: (2)(a)}. Let $\mModel{M}$ be a reflexive 
+model, $w$ a world in $\mModel{M}$ and $!A$ a sentence. Suppose 
+$\mSat{M}{\Box !A}[w]$. Since $\mModel{M}$ is reflexive, $Rww$ so
+$\mSat{M}{!A}[w]$. Hence $\mSat{M}{\Box !A \lif !A}[w]$. Since $w$
+was arbitrary, that holds for any world: $\mSat{M}{\Box !A \lif !A}$. 
+
+\emph{Reminder}. Recall that: 
+
+\begin{itemize}
+	\item An accessibility relation $R$ is \emph{serial} iff every world `sees' 
+	(has access to) some world: $\lforall[w][\lexists[v][Rwv]]$.
+	\item $R$ is \emph{reflexive} iff every world sees itself: $\lforall[w][Rww]$.
+	\item $R$ is \emph{symmetric} iff whenever a world sees another world, the latter 
+	sees the former: $\lforall[w][\lforall[v][(Rwv \lif Rwv)]]$.
+	\item $R$ is \emph{transitive} iff whenever a world $w$ sees a world $v$ and $v$ a world $u$, $w$ sees $u$ too: $\lforall[w][\lforall[v][\lforall[u][(Rwv \land Rvu) \lif Rwu]]]$.
+	\item $R$ is \emph{euclidean} iff whenever a world $w$ sees a world $v$ and a world $u$, $v$ and $u$ see each other: $\lforall[w][\lforall[v][\lforall[u][(Rwv \land Rwv) \lif Rvu]]]$.
+	\item $R$ is \emph{an equivalence relation} or \emph{partitional} iff $R$ is reflexive,
+	symmetric and transitive. (It's also euclidean, because a relation that is both symmetric and transitive is euclidean.)
+\end{itemize}
+
+\end{prob}
+
+\begin{prob}[Relation between two systems]
+
+\Log{KTB} is the class of reflexive and symmetric models; \Log{KT5} 
+the class of reflexive and euclidean models. 
+\begin{enumerate}
+	\item Show that a relation can be euclidean 
+	without being symmetric, or symmetric without being euclidean. 
+	\item Show that if a relation is \emph{reflexive and} euclidean then
+	it is symmetric. 
+	\item Show that the converse is not true: a relation may be reflexive
+	and symmetric without being euclidean.
+	\item Given (2)-(3), what is the relation between the classes of 
+	models \Log{KTB} and \Log{KT5}?
+	\item Say which of the following (if any) is true: 
+	\begin{enumerate}
+		\item If $\Gamma \Entails[KTB] !A$ then $\Gamma \Entails[KT5] !A$ 
+		\item If $\Gamma \Entails[KT5] !A$ then $\Gamma \Entails[KTB] !A$ 
+	\end{enumerate}	
+\end{enumerate}	
+
+\emph{Tips}. For (1) and (3) you only need examples to illustrates both possibilities. 
+	Three-worlds (or three-items) models suffice.
+
+\end{prob}
+
+\begin{prob}[From models to frames]
+Answer the following.
+\begin{enumerate}
+	\item Let $\mModel{M}$ be a model with $W=\{w,v\}$,
+	$R=\{\tuple{w,v}\}$, and $V$ that assigns the same
+	value to every !!{propositional variable} at $w$ 
+	and $v$, i.e. $V(\Obj{\pvar{A}}_i) = \{w,v\}$ or $V(\Obj{\pvar{A}}_i) = \varnothing$ 
+	for all $i$.
+	\begin{enumerate}
+		\item Show that $\mSat{M}{\Box !A \lif !A}$.
+		\item Let $\mModel{M'}$ be with $W$ and $R$ as before
+		but $V(\Obj{\pvar{A}})=\{v\}$. Show that 
+		$\mSat/{M}{\Box \Obj{\pvar{A}} \lif \Obj{\pvar{A}}}[w]$.
+	\end{enumerate}
+	\item Find a \emph{non-transitive} model in 
+	which schema $\Ax{4}$ is true. 
+	\begin{enumerate}
+		\item State your proposed model. 
+		\item Show that the schema holds in the
+		in the model.
+		\item Show that by changing its valuation you 
+		can make the schema fail. (That is, there is a model with
+		the same worlds and accessibility relation but a different
+		valuation in which the schema fails.)
+	\end{enumerate}
+\end{enumerate}
+
+\end{prob}
+
+\begin{prob}[Correspondence facts for frames]
+Establish the following:
+\begin{enumerate}
+	\item $\Ax{D}$ is only valid on serial frames. 
+	\item $\Ax{T}$ is only valid on reflexive frames.
+	\item $\Ax{B}$ is only valid on symmetric frames.
+	\item $\Ax{4}$ is only valid on transitive frames. 
+	\item $\Ax{5}$ is only valid on euclidean frames.
+\end{enumerate}
+
+\emph{Tip}. Establish these by contraposition: suppose a
+frame $\mModel{F}$ isn't serial, and show that you can
+build a model based on that frame in which $\Box \Obj{\pvar{A}} 
+\lif \Diamond \Obj{\pvar{A}}$ is false at some world.
+
+\emph{Example answer for (2)}. Suppose $\mModel{F}=\tuple{W,R}$ 
+is not a reflexive frame, i.e. there is a world $w$ in $W$ 
+that doesn't have access to itself ($Rww$ fails). Let 
+$\mModel{M}$ be any model based on $\mModel{F}$ with a valuation
+$V$ such that: $V(\Obj{\pvar{A}}) = \{v\in W: v \not= w\}$, 
+that is, $\Obj{\pvar{A}}$ is true at any world other than $w$. Since
+$w$ only has access to worlds other than itself ($Rwv$ only 
+if $v \not= w$), and since $\Obj{\pvar{A}}$ is true at all those worlds 
+($v\in V(\Obj{\pvar{A}})$ if $v \not= w$), we have $\Box \Obj{\pvar{A}}$ true
+at $w$: $\mSat{M}{\Box \Obj{\pvar{A}}}[w]$. But since $w \notin V(\Obj{\pvar{A}})$
+we have $\mSat/{M}{\Obj{\pvar{A}}}[w]$ and hence
+ $\mSat/{M}{\Box \Obj{\pvar{A}} \lif \Obj{\pvar{A}}}[w]$. So $\mSat/{F}{\Box !A \lif !A}$.
+
+\end{prob}
+
+\end{document}

@@ -1,0 +1,293 @@
+% Part: normal-modal-logic
+% Chapter: natural-deduction
+% Section: rules-for-K
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{nml}{nd}{rul}
+
+\olsection{Rules for \Log{K}}
+
+We accept all the rules of propositional logic: assumption and rules
+for propositional connectives. 
+
+For the modal operator $\Box$, we add:
+\begin{defish}
+\AxiomC{}\DeduceC{$\Box!A$}
+\AxiomC{}\DeduceC{$\Box!B$}
+\AxiomC{$\Discharge{!A}{n},\Discharge{!B}{n}$ \emph{at most}}\DeduceC{$!C$}
+\DischargeRule{\Intro{\Box}}{n}
+\TrinaryInfC{$\Box!C$}
+\DisplayProof
+\end{defish}
+
+\iftag{prvDiamond}{
+For the modal operator $\Diamond$, we add:
+
+\begin{defish}
+\begin{tabular}{cc}
+    \AxiomC{}\DeduceC{$\Diamond!A$}
+    \AxiomC{}\DeduceC{$\Box!B$}
+    \AxiomC{$\Discharge{!A}{n},\Discharge{!B}{n}$ \emph{at most}}\DeduceC{$!C$}
+    \DischargeRule{\Intro{\Diamond}}{n}
+    \TrinaryInfC{$\Diamond!C$}
+    \DisplayProof
+
+    &
+    \AxiomC{}\DeduceC{$\Diamond\lfalse$}
+    \RightLabel{\Elim{\Diamond}}
+    \UnaryInfC{$\lfalse$}
+    \DisplayProof
+\end{tabular}
+\end{defish}
+
+}
+{} % end of \iftag{prvDiamond}{
+
+\begin{explain}
+Normal modal logics, i.e. $\Log{K}$ and stronger systems, all share the 
+idea that \emph{logical consequences of all that is necessary are necessary}.
+$!A\lor !B$ is a logical consequence of $!A$, so from $\Box !A$ we 
+should infer $\Box (!A\lor !B)$. $!A\land !B$ is a logical consequence 
+of $!A$ and $!B$, so if we have both $\Box !A$ and $\Box !B$ we 
+shoul dinfer $\Box(!A\land !B)$. 
+
+The rule above captures this idea. It concludes $\Box!C$ from:
+\begin{itemize}
+\item !!^{derivation}s of $\Box!A$ and of $\Box!B$, and
+\item A !!{derivation} $!C$ from \emph{at most} the assumptions of
+$!A$, $!B$. If we have such a !!{derivation} then $!C$ is a logical
+consequence of $!A$, $!B$. It is important that the !!{derivation} on
+right at most uses $!A$ and $!B$: if it used a further assumption,
+then we would not have shown that $!C$ is a logical consequences of
+$!A$ and $!B$.
+\end{itemize}
+On the right, $!A$, $!B$ are only temporary assumptions to show
+that we can derive $!C$ from these alone. They are therefore discharged
+when we conclude $!C$.
+
+The rule directly captures the idea that logical consequences of \emph{two}
+necessities are necessary. What about logical consequences of \emph{three}
+or more necessities? Repeated applications of the 
+rule will ensure that they are necessary too.
+
+There is no $\Box$ elimination rule. Or, perhaps a better way to think about 
+this: the rule is both a way to eliminate $\Box$ (in $\Box!A$ 
+and $\Box!B$) and to introduce $\Box$ (in $\Box!C$).
+\end{explain}
+
+\begin{ex}
+A special application of the rule is when the !!{derivation} of $!C$
+has no assumptions at all. We can then append $\Box!C$ to the
+!!{derivation}. That in turns counts as a !!{derivation} of $\Box!C$
+without assumptions, so we can append $\Box\Box!C$, and so on.
+Generalizing, our system obeys the \emph{Necessitation} rule:
+\begin{quote}
+    Nec. If $\Proves !A$, then $\Proves \Box!A$.
+\end{quote}
+Thus logical truths are necessary, necessarily necessary, and so on.
+(Note that this is \emph{not} equivalent to the principle that \emph{all}
+necessities are necessarily necessary, i.e. $\Box!A\lif\Box\Box!A$.)
+\end{ex}
+
+\iftag{prvDiamond}{ Our \Elim{\Diamond} rule captures the idea that
+what is logically false is not possible. Note that this rule is forced
+upon us if we accept two ideas. (1) The idea that logical consequences
+of all that is necessary are necessary (which motivates our
+\Intro{\Box} rule). (2) The idea that what is necessary not so is not
+possible:
+$$
+\Box\lnot !A\lif\lnot\Diamond !A
+$$
+For suppose $!A$ is logically false. Then $\lnot!A$ is logically true.
+By idea (1), $\Box\lnot!A$ should hold. By (2), $\lnot\Diamond !A$ 
+should hold.
+
+Our \Intro{\Diamond} rule is less immediately obvious. First, one thing 
+is worth clearing up: we do \emph{not} want a rule that says that
+logical consequences of \emph{all} possibilities are possible. 
+Suppose for instance that $!A$ is \emph{contingent}: $!A$ is possible,
+but $\lnot!A$ is possible too. That should \emph{not} entail that $!A\land\lnot!A$
+is possible---even though $!A\land\lnot!A$ is a logical consequence
+of $!A$ and $\lnot!A$ \emph{together}. In general, possibilities
+need not aggregate: if $!A$ is possible and $!B$ is possible, it need
+not be the case that $!A\land !B$ is possible. Necessities, by contrast,
+aggregate: if $!A$ is necessary and $!B$ is necessary, then 
+ $!A\land !B$ is necessary. 
+
+ 
+
+Suppose $!A$ is a logical falsehood; then $\lnot!A$
+
+One way to justify them is the following fact.
+
+\begin{prop}
+    Given the $\Intro{\Box}}$ rule, the \Intro{\Diamond},
+    \Elim{\Diamond} rules are inter-!!{derivable} with the \emph{Duality} 
+    rules:
+    
+    \bigskip
+    \begin{tabular}{cc}
+    \end{tabular}
+
+
+
+\end{prop}
+\begin{quote}
+    \item Given the $\Intro{\Box}}$ rule, the \Intro{\Diamond},
+    \Elim{\Diamond} rules are necessary and sufficient to ensure
+    the \emph{Duality} of $\Box$ and $\Diamond$:
+    $$\Box\lnot!A\Proves \Diamond\lnot!A$$
+    $$\Diamond\lnot!A\Proves \lnot\Box!A$$
+\end{quote}
+Thus, if we want to uphold both Duality and our $\Box$ rule, we 
+need to accept those rules for $\Diamond$.
+
+\begin{prob}
+
+\end{prob}
+
+All normal modal logics 
+For the modal operator $\Diamond$, we add:
+
+\begin{defish}
+\begin{tabular}{cc}
+    \AxiomC{}\DeduceC{$\Diamond!A$}
+    \AxiomC{}\DeduceC{$\Box!B$}
+    \AxiomC{$\Discharge{!A}{n},\Discharge{!B}{n}$ \emph{at most}}\DeduceC{$!C$}
+    \DischargeRule{\Intro{\Diamond}}{n}
+    \TrinaryInfC{$\Diamond!C$}
+    \DisplayProof
+
+    &
+    \AxiomC{}\DeduceC{$\Diamond\lfalse$}
+    \RightLabel{\Elim{\Diamond}}
+    \UnaryInfC{$\lfalse$}
+    \DisplayProof
+\end{tabular}
+\end{defish}
+
+}
+{} % end of \iftag{prvDiamond}{
+
+
+
+% \begin{figure}
+%     \noindent
+%     {\setlength\extrarowheight{3em}
+%     \begin{tabular}{cc}
+%         \AxiomC{}\DeduceC{$\Box!A$}
+%         \AxiomC{}\DeduceC{$\Box!B$}
+%         \AxiomC{$\Discharge{!A}{n},\Discharge{!B}{n}$ \emph{at most}}\DeduceC{$!C$}
+%         \DischargeRule{\Intro{\Box}}{n}
+%         \TrinaryInfC{$\Box!C$}
+%         \DisplayProof
+%     &   \AxiomC{}\DeduceC{$\Diamond!A$}
+%         \AxiomC{}\DeduceC{$\Box!B$}
+%         \AxiomC{$\Discharge{!A}{n},\Discharge{!B}{n}$ \emph{at most}}\DeduceC{$!C$}
+%         \DischargeRule{\Intro{\Diamond}}{n}
+%         \TrinaryInfC{$\Diamond!C$}
+%         \DisplayProof
+%     \\
+%     &   \AxiomC{}\DeduceC{$\Diamond\lfalse$}
+%         \RightLabel{\Elim{\Diamond}}
+%         \UnaryInfC{$\lfalse$}
+%         \DisplayProof
+%     \end{tabular}
+%     }
+%     \\[1em]
+%     \emph{In \Intro{\Box} and \Intro{\Diamond} the !!{derivation} on the right 
+%     has at most $!A,!B$ undischarged assumptions before applying the rule.}
+%     \\[1em]
+%     \emph{You may also use the derived rules:}
+%     \\[1em] \noindent
+%     {\setlength\extrarowheight{3em} 
+%     \begin{tabular}{ll}
+%         \AxiomC{}\DeduceC{$\Box!A_1$}
+%         \AxiomC{}\DeduceC{$\ldots$}
+%         \AxiomC{}\DeduceC{$\Box!A_k$}
+%         \AxiomC{$\Discharge{!A_1}{n},\ldots,\Discharge{!A_k}{n}$ \emph{at most}}\DeduceC{$!B$}
+%         \DischargeRule{\Intro{\Box}}{n}
+%         \QuaternaryInfC{$\Box!B$}
+%         \DisplayProof
+%         &   \AxiomC{\emph{no assumption}}\DeduceC{$!A$}
+%         \RightLabel{Nec}
+%         \UnaryInfC{$\Box!A$}
+%         \DisplayProof
+%     \\
+%         \multicolumn{2}{l}{
+%         \AxiomC{}\DeduceC{$\Diamond!A$}
+%         \AxiomC{}\DeduceC{$\Box!B_1$}
+%         \AxiomC{}\DeduceC{\ldots}
+%         \AxiomC{}\DeduceC{$\Box!B_k$}
+%         \AxiomC{$\Discharge{!A}{n},\Discharge{!B_1}{n},\ldots,\Discharge{!B_k}{n}$ \emph{at most}}\DeduceC{$!C$}
+%         \DischargeRule{\Intro{\Diamond}}{n}
+%         \QuinaryInfC{$\Diamond!C$}
+%         \DisplayProof
+%         }
+%     \end{tabular}
+%     }
+%     \\[1em] \noindent
+
+% \caption{Natural Deduction rules for Propositional Modal Logic K.}
+% \ollabel{natdedpmlk}
+% \end{figure}
+
+% \begin{figure}
+%     \begin{center} 
+%     {\setlength\extrarowheight{3em} 
+%     \begin{tabular}{ll}
+%         \AxiomC{}\DeduceC{$\Box!A$}
+%         \RightLabel{\Ax{D}}
+%         \UnaryInfC{$\Diamond!A$}
+%         \DisplayProof
+%     \\
+%         \AxiomC{}\DeduceC{$\Box!A$}
+%         \RightLabel{$\Box$\Ax{T}}
+%         \UnaryInfC{$!A$}
+%         \DisplayProof
+%     &   \AxiomC{}\DeduceC{$!A$}
+%         \RightLabel{$\Diamond$\Ax{T}}
+%         \UnaryInfC{$\Diamond!A$}
+%         \DisplayProof
+%     \\
+%         \AxiomC{}\DeduceC{$\Box!A$}
+%         \RightLabel{$\Box$\Ax{4}}
+%         \UnaryInfC{$\Box\Box!A$}
+%         \DisplayProof
+%     &   \AxiomC{}\DeduceC{$\Diamond\Diamond!A$}
+%         \RightLabel{$\Diamond$\Ax{4}}
+%         \UnaryInfC{$\Diamond!A$}
+%         \DisplayProof
+%     \\
+%         \AxiomC{}\DeduceC{$!A$}
+%         \RightLabel{$\Box$\Ax{B}}
+%         \UnaryInfC{$\Box\Diamond!A$}
+%         \DisplayProof
+%     &   \AxiomC{}\DeduceC{$\Diamond\Box!A$}
+%         \RightLabel{$\Diamond$\Ax{B}}
+%         \UnaryInfC{$!A$}
+%         \DisplayProof
+%     \\
+%         \AxiomC{}\DeduceC{$\Diamond!A$}
+%         \RightLabel{$\Box$\Ax{5}}
+%         \UnaryInfC{$\Box\Diamond!A$}
+%         \DisplayProof
+%     &   \AxiomC{}\DeduceC{$\Box!A$}
+%         \RightLabel{$\Diamond$\Ax{5}}
+%         \UnaryInfC{$\Diamond\Box!A$}
+%         \DisplayProof
+
+%     \end{tabular}
+%     }
+%     \end{center}
+
+%     \caption{Natural Deduction rules for stronger modal logics.}
+% \ollabel{natdedspml}
+% \end{figure}
+
+
+
+\end{document}

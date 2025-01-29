@@ -1,0 +1,170 @@
+% Part: exercise-booklet
+% Chapter: propositional-modal-logic
+% Section: applications
+
+\documentclass[../../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{exb}{pml}{app}
+
+\olsection{Applications of Modal Logic}
+
+\begin{prob}[From principles to modal system]
+Suppose we write `$\Box !A$' for `Sam believes that $ !A$' and
+we agree that the following principles are correct / incorrect:
+
+\begin{itemize}
+\item Sam believes the logical consequences of what she believes. That is,
+if Sam believes all of $ !A_{1}$, $ !A_{2}$, $\ldots$, $ !A_{n}$
+and $ !A_{1}$, $\ldots$, $ !A_{n}$ entail $!B$, then Sam believes
+$!B$. CORRECT
+\item If Sam believes $!A$, she believes that she believes $!A$. CORRECT
+\item If Sam believes $!A$, then $!A$. INCORRECT 
+\item If Sam believes $!A$, she does not believe not-$!A$. CORRECT
+\item If Sam does not believe $!A$, she believes that she does not believe
+$ !A$. CORRECT
+\end{itemize}
+Which logic does (Sam) belief obey, on our view?
+
+\emph{Note}. It is not one of the standard systems \Log{K}, \Log{D},
+\Log{T}, \Log{B}, \Log{S4}, \Log{S5}. Rather,
+you should name the logic by listing the principles it obeys,
+starting with \Ax{K}, e.g. \Log{KTB4}.
+\end{prob}
+
+\begin{prob}[From modal system to principles]
+Suppose we write `$\Box !A$' for `Sam knows that $ !A$' and we
+think $\Box$, under that reading, has the logic \Log{S4}. What
+does our view say about (Sam's) knowledge? 
+\end{prob}
+
+\begin{prob}
+Suppose we think of deontic notions in the following way. Among all
+possible worlds there is a set of ideal worlds where everything happens
+as it should. At any given world $w$, it is obligatory that $!A$
+iff $!A$ holds at all the ideal worlds; it is permitted that $!A$
+iff it is not obligatory that not-$!A$. 
+
+\begin{enumerate}
+	\item Suppose we are given $W$ the set of possible worlds, $I_{W}$ the
+	(non-empty) subset of $W$ that are the ideal worlds, and $V$ a valuation
+	of the sentence letters in each world. How do you define the accessibility
+	relation $R$ to get a model $\tuple{W,R,V}$ that captures
+	the picture above? 
+	\item What are the properties of $R$ on that picture: it is serial, reflexive,
+	symmetric, transitive? Briefly justify each answer. 
+	\item Which modal logic do deontic notions obey on that picture? (Give the
+	strongest of the standard modal logics \Log{K}, \Log{D},
+	\Log{T}, \Log{B}, \Log{S4}, \Log{S5} that applies.) 
+	\item For each of the principles or claims below, say whether is true in
+	your model. Briefly justify your answers.
+		\begin{enumerate}
+			\item If it is true that $!A$, it is permitted that $!A$.
+			\item If it is permitted that $!A$, it is obligatory that it is permitted
+			that $!A$.
+			\item It is obligatory that: it is raining or it is not raining.
+			\item If it is obligatory that Boris sends the letter, then it is obligatory
+			that: Boris sends the letter or Boris burns it. 
+			\item If it is obligatory that Ali replaces the lamp he has broken, then
+			it is obligatory that Ali has broken the lamp.
+		\end{enumerate}
+\end{enumerate}
+\emph{Note}. Treat `if \ldots then' as a material conditional. A
+principle or claim is true in your model iff it (or its traduction
+in a formula) is true at every world of the model. For the last three
+questions, suppose that your valuation $V$ captures the meaning of
+the sentences in question; for instance, if $\Obj{\pvar{A}}$ is the proposition
+that \emph{Ali replaces the lamp he has broken and $\Obj{\pvar{B}}$ is the proposition
+that \emph{Ali has broken the lamp}, every world where $V$ counts
+$\Obj{\pvar{A}}$ as true is a world where $\Obj{\pvar{B}}$ is true.}
+\end{prob}
+
+\begin{prob}
+Suppose we're only talking about temperature. Our `possible worlds'
+only differ in what the temperature is; $w_{1}$ is the world where
+the temperature is $1$º C, $w_{-26}$ is the world where the temperature
+is $-26$º C, and so on. For simplicity, we assume that we have one
+world per whole-number temperature (no matter how low or high). Our
+sentence letters are propositions about temperature: for instance,
+if $P$ is true just at $w_{-1}$, $w_{-2}$, $w_{-3}$, it is the
+proposition that the temperature is between $-1$º~C and $-3$º~C,
+if $Q$ is true just at $w_{1}$ and $w_{25}$ is it the proposition
+that the temperature is either $1$º C or $25$º C, and so on. 
+
+Now suppose we think of `definitely' as follows. At a given world
+$w$, it is definitely the case that $!A$---'definitely $!A$',
+for short---iff $!A$ holds at worlds whose temperature is plus
+or minus $5$º C the temperature of $w$. We write $\ldet!A$
+for `definitely $!A$', but $\ldet$ will work like a $\Box$
+operator in modal logic. 
+
+\begin{enumerate}
+\item Given $W$ the set of worlds described as above, $V$ a valuation
+of the sentence letters, define an accessibility relation $R$ to
+capture the notion of `definitely'. 
+\item At given world $w$, it is \emph{indefinite} that $!A$---`indefinitely
+$!A$', for short---iff among the worlds whose temperature is plus
+or minus $5$º C that of $w$, $!A$ holds at some and fails at
+others. Write $\lindet!A$ for `it is indefinite that $!A$'.
+Define $\lindet!A$ in terms of $\ldet!A$.
+\item What are the properties of $R$ on that picture: it is serial, reflexive,
+symmetric, transitive? Briefly justify each answer. 
+\item For each of the principles or claims below, say whether it holds in
+your model. (Treat `if $\ldots$ then' as a material conditional.)
+Briefly justify your answers.
+	\begin{enumerate}
+		\item If definitely $!A$ then $!A$.
+		\item If $!A$ then definitely $!A$.
+		\item If indefinitely $!A$ then not-$!A$.
+		\item Definitely: $!A$ or not $!A$.
+		\item Definitely $!A$ or definitely not-$!A$.
+		\item If definitely $!A$, then definitely definitely $!A$. (If it's
+		definitely the case that $!A$, then it's definitely the case that
+		it's definitely the case that $!A$.)
+		\item If indefinitely definitely $!A$ then indefinitely $!A$. (If
+		it's indefinitely the case that it's definitely the case that $!A$,
+		then it's indefinitely the case that $!A$.)
+	\end{enumerate}
+\end{enumerate}
+
+\end{prob}
+
+\begin{prob}
+Suppose we think of logical `necessity' in the following way: it is
+logically necessary that $!A$ iff $!A$ is true no matter how
+we interpret its !!{propositional variable}s. We capture the idea with a relational model
+where $\Box !A$ is true at a world iff every interpretation of sentence
+letters makes $!A$ true. We say that a !!{formula} $!A$ is ``logically necessary''
+just if $\Box !A$ is true in that model. 
+
+\begin{enumerate}
+	\item We let each world $w$ be a (propositional-logic) !!{valuation}
+	of the !!{propositional variable}s. We write $w(\Obj{\pvar{A}})=\True$ when the interpretation
+	that consititutes world $w$ assigns $\True$ to $\Obj{\pvar{A}}$, $w(\Obj{\pvar{A}})=\False$
+	if it assigns it false. Our set of worlds $W$ is the set of all !!{valuation}s.
+	How do we define an accessibility relation $R$ and a modal interpretation
+	$V$ to get the desired model $\tuple{W,R,V}$?
+	\item Which modal logic does logical necessity obey on that picture? (Give
+	the strongest of the standard modal logics \textbf{K, D}, \textbf{T},
+	\textbf{B}, \textbf{S4}, \textbf{S5} that applies.) Briefly justify
+	your answer.
+	\item Are the following true in your model:
+	\begin{enumerate}
+		\item $\Box \Obj{\pvar{A}} \lif\Box\Box \Obj{\pvar{A}}$
+		\item $\Diamond\lnot \Obj{\pvar{A}}$.
+		\item $\Box\Diamond\lnot \Obj{\pvar{A}}$.
+	\end{enumerate}
+	\item Consider the uniform substitution rule:
+
+	If $!A$ is a logical necessity then for any sentence letter $\Obj{\pvar{A}}$
+	that appears in $!A$ and any formula $!B$, the result of substituting $!B$
+	for $\Obj{\pvar{A}}$ in $!A$, namely $\Subst{!A}{!B}{\Obj{\pvar{A}}}$ is a logical necessity
+	too.
+
+	Explain why the rule \emph{fails} in the picture we just developped. 
+
+\end{enumerate}
+
+
+\end{document}

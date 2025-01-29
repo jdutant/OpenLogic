@@ -1,0 +1,75 @@
+% Part: cheat-sheets
+% Chapter: modal-propositional-logics
+% Section: semantics
+
+\documentclass[../../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{chs}{pml}{sem}
+
+\olsection{Semantics}
+
+
+\begin{defn}[Models]
+    A \emph{model} for the basic modal language is a triple $\mModel{M}
+    = \tuple{W, R, V}$, where
+    \begin{enumerate}
+    \item $W$ is a nonempty set of ``worlds,''
+    \item $R$ is a binary accessibility relation on~$W$, and
+    \item $V$ is a function assigning to each !!{propositional
+      variable}~$\pvar{A}_i$ a set $V(\pvar{A}_i)$ of possible worlds.
+    \end{enumerate}
+\end{defn}
+
+\begin{defn}
+    A \emph{pointed model} for the basic modal language is a triple
+    $\mModel{M} = \tuple{W, @, R, V}$, where
+    \begin{enumerate}
+    \item $W$ is a nonempty set of ``worlds,''
+    \item $R$ is a binary accessibility relation on~$W$,
+    \item $@$, the `actual world', is a member of~$W$, and
+    \item $V$ is a function assigning to each !!{propositional
+      variable}~$\pvar{A}_i$ a set $V(\pvar{A}_i)$ of possible worlds.
+    \end{enumerate}
+\end{defn}
+
+When $Rww'$ holds, we say that $w'$ is \emph{accessible
+from}~$w$. When $w \in V(\pvar{A}_i)$ we say $\pvar{A}_i$ is \emph{true at}~$w$.
+
+\begin{defn}[Frames]
+If $\mModel{M}=\tuple{W, R, V}$ is a model we call
+$\mModel{F}=\tuple{W, R}$ its \emph{frame}, and we say that the model
+$\mModel{M}$ is "based on" or "is in" the frame $\mModel{F}$. Likewise,
+if $\tuple{W, R, @, V}$ is a model we call $\tuple{W, R, @}$ its
+\emph{pointed frame}.
+\end{defn}
+
+\begin{defn}\ollabel{defn:mmodels} 
+    \emph{Truth of !!a{formula}~$!A$ at~$w$} in a~$\mModel M$, in
+    symbols: $\mSat{M}{!A}[w]$, is defined inductively as follows:
+    \begin{enumerate}
+    \tagitem{prvFalse}{\indcase{!A}{\lfalse}{$\mSat/{M}{\lfalse}[w]$}.}{}
+    \tagitem{prvTrue}{\indcase{!A}{\ltrue}{Always $\mSat{M}{\ltrue}[w]$}.}{}
+    \item $\mSat{M}{\pvar{A}_i}[w]$ iff $w \in V(\pvar{A}_i)$.
+    \tagitem{prvNot}{\indcase{!A}{\lnot !B}{$\mSat{M}{\indfrm}[w]$ iff
+      $\mSat/{M}{!B}[w]$}.}{}
+    \tagitem{prvAnd}{\indcase{!A}{(!B \land !C)}{$\mSat{M}{\indfrm}[w]$ iff
+      $\mSat{M}{!B}[w]$ and $\mSat{M}{!C}[w]$}.}{}
+    \tagitem{prvOr}{\indcase{!A}{(!B \lor !C)}{$\mSat{M}{\indfrm}[w]$ iff
+      $\mSat{M}{!B}[w]$ or $\mSat{M}{!C}[w]$} (or both).}{}
+    \tagitem{prvIf}{\indcase{!A}{(!B \lif !C)}{$\mSat{M}{\indfrm}[w]$ iff
+      $\mSat/{M}{!B}[w]$ or $\mSat{M}{!C}[w]$}.}{}
+    \tagitem{prvIff}{\indcase{!A}{(!B \liff !C)}{$\mSat{M}{\indfrm}[w]$ iff
+      either both $\mSat{M}{!B}[w]$ and $\mSat{M}{!C}[w]$ or
+      neither $\mSat{M}{!B}[w]$ nor $\mSat{M}{!C}[w]$}.}{}
+    \item\ollabel{defn:sub:mmodels-box}
+      \indcase{!A}{\Box !B}{$\mSat{M}{\indfrm}[w]$ iff
+      $\mSat{M}{!B}[w']$ for all $w' \in W$ with $Rww'$.}
+    \item\ollabel{defn:sub:mmodels-diamond}
+      \indcase{!A}{\Diamond !B}{$\mSat{M}{\indfrm}[w]$ iff
+      $\mSat{M}{!B}[w']$ for at least one $w' \in W$ with $Rww'$.}
+    \end{enumerate}
+\end{defn}
+  
+\end{document}

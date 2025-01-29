@@ -1,0 +1,78 @@
+% Part: exercise-booklet
+% Chapter: propositional-modal-logic
+% Section: understanding
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{exb}{pml}{und}
+
+\olsection{Check Your Understanding}
+
+\begin{prob}
+    Define $\Diamond$ in terms of $\Box$. Define $\Box$ in terms of $\Diamond$.
+\end{prob}
+
+\begin{prob}
+    Formalize in the best way you can the following in the language
+    of propositional modal logic:
+    \begin{itemize}
+        \item Omar has to study or get a job, but he doesn't have to do both.
+        \item She must be at home. And if she can't be running if she's at home.
+        Therefore she can't be running.
+        \item It's possible that God exists necessarily.
+    \end{itemize}
+\end{prob}
+
+\begin{prob}[Possibility vs Contingency]
+    What is the difference between \emph{possibility} and \emph{contingency}?
+
+    $\Diamond !A$ stands for `it is possible that $!A$'. Let $\lindet !A$
+    stand for `it is contingent that $!A$'. Define $\lindet$ in terms of $\Diamond$.
+
+    Say which of the following are correct (the answer is the same whether
+    you use $\Log{K}$ or standard stronger systems like $\Log{S5}$):
+    \begin{itemize}
+        \item $\Box !A \Entails \lnot \Diamond !A$
+        \item $\Box !A \Entails \lnot \lindet !A$
+        \item $\Diamond !A \Entails \Diamond \lnot !A$
+        \item $\lindet !A \Entails \lindet \lnot !A$
+        \item $\Diamond !A \Entails \lnot\Box !A$
+        \item $\lindet !A \Entails \lnot\Box !A$
+    \end{itemize}
+\end{prob}
+
+\begin{prob}[Distributing $\Box$ and $\Diamond$ over $\lor$ and $\land$]
+    Below are some inferences that are valid and some that are not 
+    valid. Can you explain why each of the following is the case? 
+    For valid ones, check that you see how the semantics ensures that it holds. 
+    For invalid ones, check that you can think of a counterexample.
+    \begin{itemize}
+        \item $\Box(!A\land!B) \Entails{\Log{K}} \Box !A \land \Box !B$
+        \item $\Box !A \land \Box !B \Entails{\Log{K}} \Box(!A \land !B)$
+        \item $\Diamond(!A\land!B) \Entails{\Log{K}} \Diamond !A \land \Diamond !B$
+        \item $\Diamond(!A)\land\Diamond(!B) \Entails/{\Log{K}} \Diamond (!A \land !B)$
+        \item $\Box(!A\lor!B) \Entails/{\Log{K}} \Box !A \lor \Box !B$
+        \item $\Box !A \lor \Box !B \Entails/{\Log{K}} \Box (!A \lor !B)$
+        \item $\Diamond(!A\lor!B) \Entails{\Log{K}} \Diamond !A \lor \Diamond !B$
+        \item $\Diamond !A \lor \Diamond !B \Entails/{\Log{K} \Diamond(!A\lor!B)}$ 
+    \end{itemize}
+
+    Check that the claims above still hold when we replace $\Log{K}$
+    by any stronger system up to $\Log{S5}$:
+    \begin{itemize}
+        \item We know that the validites in $\Log{K}$ are still valid 
+        in $\Log{S5}$. (Why?)
+        \item For the invalidities, it is enough to show that they are
+        still not valid in $\Log{S5}$. To do this think of countermodels
+        to each in $\Log{S5}$.
+        \item Once we know that they are invalid in $\Log{S5}$, we know
+        they are invalid in weaker systems, including
+         $\Log{D},\Log{T},\Log{S4},\Log{B}$. (Why?)
+    \end{itemize}
+
+\end{prob}
+
+\end{document}
+

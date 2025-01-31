@@ -1,0 +1,87 @@
+% Part: free-logic
+% Chapter: tableaux
+% Section: common-rules
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{frl}{tab}{cor}
+
+\olsection{Common Rules}
+
+The rules below are common to all systems of free logic. 
+
+\subsection{Rules for $\lforall$}
+
+\begin{defish}
+\AxiomC{\sFmla{\True}{\lforall[x][!A(x)]}}
+\RightLabel{\TRule{\True}{\lforall}}
+\UnaryInfC{$\sFmla{\False}{\lfrexists t} \quad \mid \quad \sFmla{\True}{!A(t)}$}
+\DisplayProof
+\hfill
+\AxiomC{\sFmla{\False}{\lforall[x][!A(x)]}}
+\RightLabel{\TRule{\False}{\lforall}}
+\UnaryInfC{\sFmla{\True}{\lfrexists a}}
+\noLine
+\UnaryInfC{\sFmla{\False}{!A(a)}}
+\DisplayProof
+\end{defish}
+
+In \TRule{\True}{\lforall}, $t$ is \iftag{fnTerms}{a closed term (i.e., one without
+variables)}{!!a{constant}}. In \TRule{\False}{\lforall}, $a$~is !!a{constant} 
+which must not occur anywhere in the branch above \TRule{\False}{\lforall}
+rule. We call $a$ the \emph{eigenvariable} of the \TRule{\False}{\forall}
+inference.
+
+\subsection{Rules for $\lexists$}
+
+\begin{defish}
+\AxiomC{\sFmla{\True}{\lexists[x][!A(x)]}}
+\RightLabel{\TRule{\True}{\lexists}}
+\UnaryInfC{\sFmla{\True}{\lfrexists a}}
+\noLine
+\UnaryInfC{\sFmla{\True}{!A(a)}}
+\DisplayProof
+\hfill
+\AxiomC{\sFmla{\False}{\lexists[x][!A(x)]}}
+\RightLabel{\TRule{\False}{\lexists}}
+\UnaryInfC{$\sFmla{\False}{\lfrexists t} \quad \mid \quad \sFmla{\False}{!A(t)}$}
+\DisplayProof
+\end{defish}
+
+Again, $t$~is $t$ is \iftag{fnTerms}{a closed term}{!!a{constant}}, and $a$~is 
+!!a{constant} which does not occur in the branch above 
+the~\TRule{\False}{\lexists} rule. We call
+$a$ the \emph{eigenvariable} of the \TRule{\False}{\lexists} inference.
+
+The condition that an eigenvariable not occur in the branch above 
+the \TRule{\False}{\lforall} or \TRule{\True}{\lexists} inference is called the
+\emph{eigenvariable condition}.
+
+\subsection{Rule for $\eq$}
+
+The rule for $\eq$ is ($t$, $t_1$, and $t_2$ are closed terms):
+
+\begin{defish}
+\AxiomC{\sFmla{\True}{\eq[t_1][t_2]}}
+\noLine
+\UnaryInfC{\sFmla{\True}{!A(t_1)}}
+\RightLabel{$\TRule{\True}{\eq}$}
+\UnaryInfC{\sFmla{\True}{!A(t_2)}}
+\DisplayProof
+\hfill
+\AxiomC{\sFmla{\True}{\eq[t_1][t_2]}}
+\noLine
+\UnaryInfC{\sFmla{\False}{!A(t_1)}}
+\RightLabel{$\TRule{\False}{\eq}$}
+\UnaryInfC{\sFmla{\False}{!A(t_2)}}
+\DisplayProof
+\end{defish}
+Note that in contrast to all the other rules, $\TRule{\True}{\eq}$ and
+$\TRule{\False}{\eq}$ require that \emph{two} signed !!{formula}s
+already appear on the branch, namely both $\sFmla{\True}{\eq[t_1][t_2]}$
+and $\sFmla{S}{!A(t_1)}$.
+
+
+\end{document}

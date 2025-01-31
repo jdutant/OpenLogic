@@ -1,7 +1,41 @@
+% -------------------------------------------------------------------
+% NEW COMMANDS
+% -------------------------------------------------------------------
+
+% hide problem answers (Modal Logic, nat ded)
+\tagfalse{showAns}
+
+% Free Logic chapter
+% ==================
+
+% - tag fnTerms to show/remove function terms
+\tagfalse{fnTerms}
+
+% - Free logic existence operator (redefine for \mathord{E{!}})
+\DeclareDocumentMacro \lfrexists {\mathord{\mathfrak{E}}}
+
+% - Positive Free logic outer domain
+\DeclareDocumentMacro \lfrexists {\mathord{\mathfrak{E}}}
+
+% Free logic: outer domain
+\DeclareDocumentCommand \OuterDomain { m }{ O_{\Struct{#1}} }
+
+% Supervaluationsim / Definitely
+% ==============================
+
+% - Determinacy operators 
+% Note that \Def and \Indet are already used as truth values
+\DeclareDocumentMacro \ldet {\mathord{\Delta}}
+\DeclareDocumentMacro \lindet {\mathord{\nabla}}
+
+% -------------------------------------------------------------------
+% CUSTOMIZATIONS
+% -------------------------------------------------------------------
+
 % Symbols
 % =======
 
-% Formula metavariabes 
+% Formula metavariables 
 % --------------------
 
 % \olgreekformulas (default), otherwise use \ollatinformulas
@@ -56,12 +90,6 @@
 \DeclareDocumentMacro \lif {\supset}
 \DeclareDocumentMacro \liff {\equiv}
 
-% - Determinacy operators 
-% Note that \Def and \Indet are already used as truth values
-\DeclareDocumentMacro \ldet {\mathord{\Delta}}
-\DeclareDocumentMacro \lindet {\mathord{\nabla}}
-
-
 % Quantifiers 
 % ----------- 
 
@@ -87,7 +115,6 @@
 
 % Metalogical Relations
 % ---------------------
-
 
 % ### The satisfaction/truth relation 
 

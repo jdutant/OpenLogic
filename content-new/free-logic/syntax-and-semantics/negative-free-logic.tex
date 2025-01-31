@@ -1,0 +1,220 @@
+% Part: first-order-logic
+% Chapter: syntax-and-semantics
+% Section: negative-free-logic
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{frl}{syn}{nfl}
+
+\olsection{Negative Free Logic}
+
+The guiding idea of negative free logic is that atomic claims have
+existence committments. The following inference seems correct:
+
+\begin{enumerate}
+  \item René thinks.
+  \item Therefore, René exists.
+\end{enumerate}
+
+This suggests that the claim that René thinks does require that \emph{there is 
+something}, René, which is said to think.  Accordingly, negative free logic 
+considers that (where $F$ is any predicate) $\Atom{F}{a}$ holds only 
+if $a$ is not empty, hence only if $\lfrexists a$ holds. 
+
+\begin{explain}
+The corresponding !!{structure}s are the most straightforward way to 
+modify those of first-order logic to remove their existence assumptions.
+We allow interpretations that do not assign any object to some !!{constant}s,
+and (for an inclusive negative free logic) we allow the domain to be empty.
+\end{explain}
+
+\begin{defn}[!!^{structure}s]
+In the negative system of free logic, $\Log NFL$,
+\article{structure} \emph{!!{structure}}~$\Struct M$ for a language
+$\Lang L_{\Log{FL}}$ of free logic consists of:
+\begin{enumerate}
+\item \emph{Domain:} a set, $\Domain M$,
+\item \emph{Interpretation of !!{constant}s:} for any !!{constant}~$c$ of
+  $\Lang L_{\Log{FL}}$, its interpretation $\Assign{c}{M}$ is !!a{element} of 
+  $\Domain M$ or undefined,
+\item \emph{Interpretation of !!{predicate}s:} for each $n$-place
+  !!{predicate}~$R$ of $\Lang L_{\Log{FL}}$ (other than $\eq$), an $n$-place
+  relation $\Assign{R}{M} \subseteq \Domain{M}^n$
+\tagitem{fnTerms}{\item \emph{Interpretation of !!{function}s:} for each $n$-place
+  !!{function}~$f$ of $\Lang L_{\Log{FL}}$, an $n$-place function $\Assign{f}{M}
+  \colon \Domain{M}^n \to \Domain{M}$}{}
+\end{enumerate}
+The system of negative free logic is \emph{inclusive} if $\Domain M$ is
+allowed to be empty. There is only one such !!{structure}, for interpretations
+can only be defined one way when the domain is empty. We call it the 
+\emph{empty !!{structure}}.
+\end{defn}
+
+\begin{prob}[The empty !!{structure}]
+Describe the interpretation of !!{constant}s and predicates in 
+an !!{structure} whose domain is the empty set.
+\end{prob}
+
+!!^{variable} assignements are defined as before, except that we allow
+partial assignments that fail to assign anything to some (or even all)
+!!{variable}s. 
+
+\begin{defn}[Variable Assignment]
+A \emph{variable assignment}~$s$ for a !!{structure}~$\Struct{M}$ is a
+(partial) function such that for any !!{variable}~$x$ of
+$\Lang L_{\Log{FL}}$, $s(x) \in \Domain M$ if defined. In addition, we stipulate
+an \emph{empty variable assignement} $s^{*}$ that doesn't assign any value to
+any variable.
+\end{defn}
+
+\begin{defn}[!!^{value} of Terms]
+If $t$ is a term of the language~$\Lang L_{\Log{FL}}$, $\Struct M$ is a
+!!{structure} for~$\Lang L_{\Log{FL}}$, and $s$ is a !!{variable} assignment
+for~$\Struct M$, the \emph{!!{value}}~$\Value{t}{M}[s]$ is defined as
+follows:
+\begin{enumerate}
+\item \indcase{t}{c}{$\Value{\indfrm}{M}[s] = \Assign{\indcomplex}{M}$, if defined.}
+\item \indcase{t}{x}{$\Value{\indfrm}{M}[s] = s(\indcomplex)$, if defined.}
+\tagitem{fnTerms}{\indcase{t}{\Atom{f}{t_1, \ldots, t_n}}{
+\[
+\Value{\indfrm}{M}[s] = \Assign{f}{M}(\Value{t_1}{M}[s], \ldots,
+\Value{t_n}{M}[s])\textrm{, if defined}.
+\]}
+}{}
+\end{enumerate}
+\end{defn}
+
+\begin{defn}[$x$-Variant]
+If $s$ is a !!{variable} assignment for a !!{structure}~$\Struct M$, we
+call !!a{variable} assignment $s'$ an \emph{$x$-variant} of $s$ iff:
+\begin{enumerate}
+\item it differs from $s$ at most in what it assigns for $s$, that is 
+either $\Value{y}{M}[s'] = \Value{y}{M}[s]$, or both are undefined, for
+any variable $y$ other than $x$.
+\item it is defined for $x$, that is, $\Value{y}{M}[s'] \in \Domain M$.
+We write $\varAssign{s'}{s}{x}$ when $s'$ is an $x$-variant of $s$.
+\end{enumerate}
+\end{defn}
+
+Note that an $x$-variant of some !!{variable} assignment $s$ must be 
+defined for $x$, that is, it must assign an existing object to $x$. 
+If, for instance, $s$ is undefined for $x$, then $s$ is not an $x$-variant
+of itself. Only those variants of $s$ who do assign an object to $x$ 
+are $x$-variants of $s$. 
+
+\begin{explain}
+The only reason to let !!{variable} assignments go undefined for some
+!!{variable}s is to cater  for the empty !!{structure}. We need to have 
+!!{variable} assignments in  every !!{structure} because we define 
+truth in a !!{structure} in terms of truth relative to an !!{variable} assignement. In the 
+empty !!{structure} there are no !!{element}s of the domain to assign 
+to !!{variable}. So the only way to have a  !!{variable} assignment 
+in the empty !!{structure} is to allow assignments
+that are not defined for all (or any) !!{variable}.
+\end{explain}
+
+\begin{defn}[Satisfaction]
+\ollabel{defn:satisfaction}
+Satisfaction of a !!{formula}~$!A$ in a !!{structure}~$\Struct M$
+relative to a !!{variable} assignment~$s$, in symbols:
+$\Sat{M}{!A}[s]$, is defined recursively as follows. (We write
+$\Sat/{M}{!A}[s]$ to mean ``not $\Sat{M}{!A}[s]$.'')
+\begin{enumerate}
+\tagitem{prvFalse}{%
+  \indcase{!A}{\lfalse}{$\Sat/{M}{\indfrm}[s]$.}}{}
+
+\tagitem{prvTrue}{%
+  \indcase{!A}{\ltrue}{$\Sat{M}{\indfrm}[s]$.}}{}
+
+\item \indcase{!A}{\Atom{R}{t_1, \dots, t_n}}{$\Sat{M}{\indfrm}[s]$
+  iff $\Value{t_i}{M}[s]$ is defined for any $1\leq i \leq n$ and 
+  $\langle \Value{t_1}{M}[s], \dots, \Value{t_n}{M}[s] \rangle \in
+  \Assign{R}{M}$.}
+
+\item \indcase{!A}{\Atom{\lfrexists}{t}}{$\Sat{M}{\indfrm}[s]$ iff 
+  $\Value{t}{M}[s]$ is defined.}
+
+\item \indcase{!A}{\eq[t_1][t_2]}{$\Sat{M}{\indfrm}[s]$ iff 
+  $\Value{t_1}{M}[s], \Value{t_2}{M}[s]$ are both defined and
+  $\Value{t_1}{M}[s] = \Value{t_2}{M}[s]$.}
+
+\tagitem{prvNot}{%
+  \indcase{!A}{\lnot !B}{$\Sat{M}{\indfrm}[s]$ iff
+    $\Sat/{M}{!B}[s]$.}}{}
+
+\tagitem{prvAnd}{%
+  \indcase{!A}{(!B \land !C)}{$\Sat{M}{\indfrm}[s]$ iff $\Sat{M}{!B}[s]$
+    and $\Sat{M}{!C}[s]$.}}{}
+
+\tagitem{prvOr}{%
+  \indcase{!A}{(!B \lor !C)}{$\Sat{M}{\indfrm}[s]$ iff
+    $\Sat{M}{!A}[s]$ or $\Sat{M}{!B}[s]$ (or both).}}{}
+
+\tagitem{prvIf}{%
+  \indcase{!A}{(!B \lif !C)}{$\Sat{M}{\indfrm}[s]$ iff $\Sat/{M}{!B}[s]$
+    or $\Sat{M}{!C}[s]$ (or both).}}{}
+
+\tagitem{prvIff}{%
+  \indcase{!A}{(!B \liff !C)}{$\Sat{M}{\indfrm}[s]$ iff either both
+    $\Sat{M}{!B}[s]$ and $\Sat{M}{!C}[s]$, or neither $\Sat{M}{!B}[s]$
+    nor $\Sat{M}{!C}[s]$.}}{}
+
+\tagitem{prvAll}{%
+  \indcase{!A}{\lforall[x][!B]}{$\Sat{M}{\indfrm}[s]$ iff for every
+    $x$-variant~$s'$ of $s$ \emph{for which $s'(x)$ is defined}, $\Sat{M}{!B}[s']$.}}{}
+
+\tagitem{prvEx}{%
+  \indcase{!A}{\lexists[x][!B]}{$\Sat{M}{\indfrm}[s]$ iff there is an
+    $x$-variant~$s'$ of $s$ \emph{for which $s'(x)$ is defined} such that $\Sat{M}{!B}[s']$.}}{}
+\end{enumerate}
+\end{defn}
+
+Truth and validity are defined as in first-order logic.
+
+\begin{defn}[Truth]
+Where $!A$ is a closed !!{formula}, we say that $A$ is \emph{true in}, or
+\emph{satisfied by} a !!{structure} $\Struct M$, written $\Sat{M}{!A}$ iff 
+$A$ is satisfied relative to any assignement in $\Struct M$:
+$$\Sat{M}{!A}\textrm{ iff }\Sat{M}{!A}[s]\textrm{ for any }s\textrm{ in }\Struct M$$
+\end{defn}
+
+\begin{defn}[Validity]
+  A !!{formula} $!A$ is \emph{valid}, $\Entails !A$, iff $\Sat{M}{!A}$ for every
+  !!{structure}~$\Struct M$.
+\end{defn}
+
+\begin{prop}\ollabel{prop:if-sat-Fa-sat-exists}
+  If $\Sat{M}{Fa}$ then $\Sat{M}{\lfrexists a}$.
+\end{prop}
+
+\begin{proof}
+  Exercise.
+\end{proof}
+
+\begin{prob}
+  Prove \olref[frl][syn][nfl]{prop:if-sat-Fa-sat-exists}
+\end{prob}
+
+\begin{prop}\ollabel{prop:if-sat-id-sat-exists}
+  If $\Sat{M}{\eq[a][a]}$ then $\Sat{M}{\lfrexists a}$.
+\end{prop}
+
+\begin{proof}
+  Exercise.
+\end{proof}
+
+\begin{prob}
+  Prove \olref[frl][syn][nfl]{prop:if-sat-id-sat-exists}
+\end{prob}
+
+\begin{prop}
+  $\Entails/ \lexists x (x = x)$.
+\end{prop}
+
+\begin{prob}
+Show that $\Entails/ \lexists x (x = x)$.
+\end{prob}
+
+\end{document}

@@ -1,0 +1,54 @@
+% Part: normal-modal-logic
+% Chapter: natural-deduction 
+% Section: soundness
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{nml}{nd}{snd}
+
+\olsection{Soundness}
+
+To check that the natural deduction system for normal modal logics is
+sounds, it is sufficient to check the following:
+\begin{itemize}
+\item If $!A,!B\Entails!C$ and $\Gamma\Entails[\Log{K}]\Box!A$ and
+$\Delta\Entails[\Log{K}]\Box!B$, then
+$\Gamma,\Delta\Entails[\Log{K}]\Box!C$. 
+
+\tagitem{prvDiamond}{If $!A,!B\Entails!C$ and
+$\Gamma\Entails[\Log{K}]\Diamond!A$ and
+$\Delta\Entails[\Log{K}]\Box!B$, then
+$\Gamma,\Delta\Entails[\Log{K}]\Diamond!C$.}{}
+
+\tagitem{prvDiamond}{If $\Gamma\Entails[\Log{K}]\Diamond\lfalse!A$,
+$\Gamma\Entails[\Log{K}]\lfalse$.
+Equivalently,$\Entails[\Log{K}]\lnot\Diamond\lfalse!A$.}{}
+
+\tagitem{prvDiamond}{prvDiamond}{If $\Gamma\Entails[\Log{D}]\Box!A$, then
+$\Gamma\Entails[\Log{D}]\Diamond!A$.}{If $\Gamma\Entails[\Log{D}]\Box!A$,
+then $\Gamma\Entails[\Log{D}]\lnot\Box\lnot!A$}
+
+\item If $\Gamma\Entails[\Log{T}]\Box!A$, 
+then $\Gamma\Entails[\Log{T}]!A$.
+\iftag{prvDiamond}{If $\Gamma\Entails[\Log{T}]!A$, 
+then $\Gamma\Entails[\Log{T}]\Diamond!A$.}{}
+
+\item If $\Gamma\Entails[\Log{S4}]\Box!A$, 
+then $\Gamma\Entails[\Log{S4}]\Box\Box!A$.
+\iftag{prvDiamond}{If $\Gamma\Entails[\Log{S4}]\Diamond\Diamond!A$, 
+then $\Gamma\Entails[\Log{S4}]\Diamond!A$.}{}
+
+\item If $\Gamma\Entails[\Log{B}]!A$, 
+then $\Gamma\Entails[\Log{B}]\Box\Diamond!A$.
+\iftag{prvDiamond}{If $\Gamma\Entails[\Log{B}]\Diamond\Box!A$, 
+then $\Gamma\Entails[\Log{B}]!A$.}{}
+
+\item If $\Gamma\Entails[\Log{S5}]\Diamond!A$, 
+then $\Gamma\Entails[\Log{S5}]\Box\Diamond!A$.
+\iftag{prvDiamond}{If $\Gamma\Entails[\Log{S5}]\Diamond\Box!A$, 
+then $\Gamma\Entails[\Log{S5}]\Box!A$.}{}
+
+\end{itemize}
+\end{document}

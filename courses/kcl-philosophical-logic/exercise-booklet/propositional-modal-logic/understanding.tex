@@ -44,6 +44,7 @@
 \end{prob}
 
 \begin{prob}[Distributing $\Box$ and $\Diamond$ over $\lor$ and $\land$]
+    \ollabel{moddistrib}
     Below are some inferences that are valid and some that are not 
     valid. Can you explain why each of the following is the case? 
     For valid ones, check that you see how the semantics ensures that it holds. 
@@ -58,8 +59,10 @@
         \item $\Diamond(!A\lor!B) \Entails{\Log{K}} \Diamond !A \lor \Diamond !B$
         \item $\Diamond !A \lor \Diamond !B \Entails/{\Log{K} \Diamond(!A\lor!B)}$ 
     \end{itemize}
+\end{prob}
 
-    Check that the claims above still hold when we replace $\Log{K}$
+\begin{prob}
+    Check that the claims of \olref{moddistrib} still hold when we replace $\Log{K}$
     by any stronger system up to $\Log{S5}$:
     \begin{itemize}
         \item We know that the validites in $\Log{K}$ are still valid 

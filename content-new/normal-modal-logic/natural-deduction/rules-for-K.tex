@@ -1,5 +1,5 @@
 % Part: normal-modal-logic
-% Chapter: natural-deduction
+% Chapter: natural-deduction 
 % Section: rules-for-K
 
 \documentclass[../../../include/open-logic-section]{subfiles}
@@ -10,284 +10,178 @@
 
 \olsection{Rules for \Log{K}}
 
-We accept all the rules of propositional logic: assumption and rules
-for propositional connectives. 
-
-For the modal operator $\Box$, we add:
+For the modal operator $\Box$, we add the \emph{Normality} rule 
+$\Box$\Ax{K}:
 \begin{defish}
 \AxiomC{}\DeduceC{$\Box!A$}
 \AxiomC{}\DeduceC{$\Box!B$}
-\AxiomC{$\Discharge{!A}{n},\Discharge{!B}{n}$ \emph{at most}}\DeduceC{$!C$}
-\DischargeRule{\Intro{\Box}}{n}
-\TrinaryInfC{$\Box!C$}
+\AxiomC{$\Discharge{!A}{n},\Discharge{!B}{n}$ \emph{at
+most}}
+\DeduceC{$!C$} 
+\DischargeRule{$\Box$\Ax{K}}{n}
+\TrinaryInfC{$\Box!C$} 
 \DisplayProof
 \end{defish}
 
-\iftag{prvDiamond}{
-For the modal operator $\Diamond$, we add:
+The rule plays both the role of an introduction rule (for $\Box!C$)
+and of an elimination rule (for $\Box!A$ and $\Box!B$). We thus call
+it $\Box$\Ax{K} rather than \Intro{\Box}\Ax{K} or \Elim{\Box}\Ax{K}. 
 
+At the step when $\Box$\Ax{K} is applied, the sub-!!{derivation} on 
+the right must have at most assumptions $!A,!B$ left undischarged. 
+It may have other assumptions, but they must be discharged by the 
+time we reach this step.
+
+The rule can be applied with just one premise $\Box!A$ 
+or even no premise:
+
+\bigskip
+\begin{tabular}{cc}
+    \AxiomC{}\DeduceC{$\Box!A$}
+    \AxiomC{$\Discharge{!A}{n}$ \emph{at
+    most}}
+    \DeduceC{$!C$} 
+    \DischargeRule{$\Box$\Ax{K}}{n}
+    \BinaryInfC{$\Box!C$} 
+    \DisplayProof
+&
+    \AxiomC{\emph{no undischarged assumption}}
+    \DeduceC{$!C$}
+    \RightLabel{$\Box$\Ax{K}}
+    \UnaryInfC{$\Box!C$} 
+    \DisplayProof
+\end{tabular}
+\bigskip
+
+\iftag{prvDiamond}{ For the modal operator $\Diamond$, we add the
+following \emph{Normality} rules \Intro{\Diamond}\Ax{K} and
+\Elim{\Diamond}\Ax{K}:
 \begin{defish}
 \begin{tabular}{cc}
     \AxiomC{}\DeduceC{$\Diamond!A$}
     \AxiomC{}\DeduceC{$\Box!B$}
-    \AxiomC{$\Discharge{!A}{n},\Discharge{!B}{n}$ \emph{at most}}\DeduceC{$!C$}
-    \DischargeRule{\Intro{\Diamond}}{n}
+    \AxiomC{$\Discharge{!A}{n}$\emph{at least},$\Discharge{!A}{n}\Discharge{!B}{n}$\emph{at most}}\DeduceC{$!C$}
+    \DischargeRule{\Intro{\Diamond}\Ax{K}}{n}
     \TrinaryInfC{$\Diamond!C$}
     \DisplayProof
-
-    &
+&   
     \AxiomC{}\DeduceC{$\Diamond\lfalse$}
-    \RightLabel{\Elim{\Diamond}}
+    \RightLabel{\Elim{\Diamond}\Ax{K}}
     \UnaryInfC{$\lfalse$}
     \DisplayProof
 \end{tabular}
 \end{defish}
+}{}
 
-}
-{} % end of \iftag{prvDiamond}{
+As with $\Box$\Ax{K}, the sub-!!{derivation} on the right should at 
+most have $!A$ and $!B$ as undischarged assumptions. The rule can be 
+applied without $\Box!B$ premise, but \emph{it cannot be applied without
+the $\Diamond!A$ premise}:
+
+\bigskip
+\begin{tabular}{cc}
+    \AxiomC{}\DeduceC{$\Diamond!A$}
+    \AxiomC{$\Discharge{!A}{n}$\emph{at least}}\DeduceC{$!C$}
+    \DischargeRule{\Intro{\Diamond}\Ax{K}}{n}
+    \BinaryInfC{$\Diamond!C$}
+    \DisplayProof
+&
+    \AxiomC{\emph{no undischarged assumption}}\DeduceC{$!C$}
+    \RightLabel{{\color{red}Incorrect}}
+    \UnaryInfC{$\Diamond!C$}
+    \DisplayProof
+\end{tabular}
+\bigskip
+
+Note, however, that this restriction is lifted in systems \Log{D}
+and stronger.
 
 \begin{explain}
-Normal modal logics, i.e. $\Log{K}$ and stronger systems, all share the 
-idea that \emph{logical consequences of all that is necessary are necessary}.
-$!A\lor !B$ is a logical consequence of $!A$, so from $\Box !A$ we 
-should infer $\Box (!A\lor !B)$. $!A\land !B$ is a logical consequence 
-of $!A$ and $!B$, so if we have both $\Box !A$ and $\Box !B$ we 
-shoul dinfer $\Box(!A\land !B)$. 
+The $\Box$\Ax{K} rule is called \emph{Normality} because it
+characterizes how necessity behaves in so-called \emph{normal modal
+logics}. The core idea of normal modal logics is that necessity is
+\emph{closed under multi-premise logical consequence}, namely, 
+that if some premises logically entail a conclusion, then the 
+necessity of those premises entail the necessity of that conclusion:
 
-The rule above captures this idea. It concludes $\Box!C$ from:
-\begin{itemize}
-\item !!^{derivation}s of $\Box!A$ and of $\Box!B$, and
-\item A !!{derivation} $!C$ from \emph{at most} the assumptions of
-$!A$, $!B$. If we have such a !!{derivation} then $!C$ is a logical
-consequence of $!A$, $!B$. It is important that the !!{derivation} on
-right at most uses $!A$ and $!B$: if it used a further assumption,
-then we would not have shown that $!C$ is a logical consequences of
-$!A$ and $!B$.
-\end{itemize}
-On the right, $!A$, $!B$ are only temporary assumptions to show
-that we can derive $!C$ from these alone. They are therefore discharged
-when we conclude $!C$.
-
-The rule directly captures the idea that logical consequences of \emph{two}
-necessities are necessary. What about logical consequences of \emph{three}
-or more necessities? Repeated applications of the 
-rule will ensure that they are necessary too.
-
-There is no $\Box$ elimination rule. Or, perhaps a better way to think about 
-this: the rule is both a way to eliminate $\Box$ (in $\Box!A$ 
-and $\Box!B$) and to introduce $\Box$ (in $\Box!C$).
-\end{explain}
-
-\begin{ex}
-A special application of the rule is when the !!{derivation} of $!C$
-has no assumptions at all. We can then append $\Box!C$ to the
-!!{derivation}. That in turns counts as a !!{derivation} of $\Box!C$
-without assumptions, so we can append $\Box\Box!C$, and so on.
-Generalizing, our system obeys the \emph{Necessitation} rule:
 \begin{quote}
-    Nec. If $\Proves !A$, then $\Proves \Box!A$.
-\end{quote}
-Thus logical truths are necessary, necessarily necessary, and so on.
-(Note that this is \emph{not} equivalent to the principle that \emph{all}
-necessities are necessarily necessary, i.e. $\Box!A\lif\Box\Box!A$.)
-\end{ex}
+\emph{Normality.} If $\Gamma\Entails!A$ then
+$\Box\Gamma\Entails\Box\!A$. (Where $\Box\Gamma$ is the result of
+prefixing each !!{formula} in $\Gamma$ with a $\Box$ operator, i.e.
+the set $\Setabs{\Box!B}{!B\in\Gamma}$.)
+\end{quote} 
 
-\iftag{prvDiamond}{ Our \Elim{\Diamond} rule captures the idea that
-what is logically false is not possible. Note that this rule is forced
-upon us if we accept two ideas. (1) The idea that logical consequences
-of all that is necessary are necessary (which motivates our
-\Intro{\Box} rule). (2) The idea that what is necessary not so is not
-possible:
-$$
-\Box\lnot !A\lif\lnot\Diamond !A
-$$
-For suppose $!A$ is logically false. Then $\lnot!A$ is logically true.
-By idea (1), $\Box\lnot!A$ should hold. By (2), $\lnot\Diamond !A$ 
-should hold.
+Our $\Box$\Ax{K} rule captures that idea. The sub-!!{derivation} on
+the right establishes that $!A,!B\Entails!C$. It is crucial that it
+has \emph{no undischarged assumptions other than} $!A,!B$. Otherwise
+it would not establish that $!C$ is a logical consequence of $!A,!B$
+\emph{alone}. Once $!A,!B\Entails!C$ is established, according to
+Normality $\Box!C$ is a logical consequence of $\Box!A$, $\Box!B$.
+Therefore we can discharge the assumptions $!A,!B$ on the right, and
+turn the two sub-!!{derivation}s of $\Box!A$, $\Box!B$ on the left
+into a !!{derivation} of $\Box!C$. Note that the sub-!!{derivation}s
+of $\Box!A$, $\Box!B$ may rest on undischarged assumptions; we then
+have a !!{derivation} of $\Box!C$ from these assumptions.
 
-Our \Intro{\Diamond} rule is less immediately obvious. First, one thing 
-is worth clearing up: we do \emph{not} want a rule that says that
-logical consequences of \emph{all} possibilities are possible. 
-Suppose for instance that $!A$ is \emph{contingent}: $!A$ is possible,
-but $\lnot!A$ is possible too. That should \emph{not} entail that $!A\land\lnot!A$
-is possible---even though $!A\land\lnot!A$ is a logical consequence
-of $!A$ and $\lnot!A$ \emph{together}. In general, possibilities
-need not aggregate: if $!A$ is possible and $!B$ is possible, it need
-not be the case that $!A\land !B$ is possible. Necessities, by contrast,
-aggregate: if $!A$ is necessary and $!B$ is necessary, then 
- $!A\land !B$ is necessary. 
+The $\Box$\Ax{K} rule directly captures the idea that logical
+consequences of \emph{up to two} necessities are necessary. But
+Normality states that logical consequences of \emph{any number} of
+necessities are necessary. Is our rule enough? Yes, because repeated
+applications of $\Box$\Ax{K} ensure that logical consequences of
+\emph{any finite number} of necessities are necessary. Could it happen
+that $!A$ is the logical consequence of an \emph{infinite} number of
+necessities, without being a logical consequence of any finite subset
+of those? If that was so, logical consequence would not be compact.
+When logical consequence is not compact, a complete !!{derivation}
+system cannot be given; our rule would still be the best we can
+achieve. As it happens, logical consequence in \Ax{K} models is
+compact, and the rule is sufficient for completeness.
 
- 
+\iftag{prvDiamond}{ The \Elim{\Diamond}\Ax{K} idea captures the idea that contradictions
+are not possible.
 
-Suppose $!A$ is a logical falsehood; then $\lnot!A$
-
-One way to justify them is the following fact.
-
-\begin{prop}
-    Given the $\Intro{\Box}}$ rule, the \Intro{\Diamond},
-    \Elim{\Diamond} rules are inter-!!{derivable} with the \emph{Duality} 
-    rules:
-    
-    \bigskip
-    \begin{tabular}{cc}
-    \end{tabular}
-
-
-
-\end{prop}
+The \Intro{\Diamond}\Ax{K} rule captures the idea
+that \emph{possibility is closed under single-premise necessary
+consequence}, namely that if $!C$ is a necessary consequence of $!A$,
+then $\Diamond!C$ is a logical consequence of $\Diamond!A$. To clarify this idea,
+start with the related idea that possibility is closed under single-premise
+\emph{logical} consequence: if $!C$ is a \emph{logical} consequence of 
+$!A$, then $\Diamond!C$ is a logical consequence of $\Diamond!A$. 
+This is a special case of \Intro{\Diamond}\Ax{K} with $\Box!B$ missing.
+Then, define \emph{necessary} consequence as follows:
 \begin{quote}
-    \item Given the $\Intro{\Box}}$ rule, the \Intro{\Diamond},
-    \Elim{\Diamond} rules are necessary and sufficient to ensure
-    the \emph{Duality} of $\Box$ and $\Diamond$:
-    $$\Box\lnot!A\Proves \Diamond\lnot!A$$
-    $$\Diamond\lnot!A\Proves \lnot\Box!A$$
+\emph{Necessary consequence}. $!C$ is a necessary consequence of $!A$
+iff $!A\lif!C$ is necessary. (Equivalently, iff $!C$ is a logical
+consequence of $!A$ \emph{together with} what is necessary.)
 \end{quote}
-Thus, if we want to uphold both Duality and our $\Box$ rule, we 
-need to accept those rules for $\Diamond$.
-
-\begin{prob}
-
-\end{prob}
-
-All normal modal logics 
-For the modal operator $\Diamond$, we add:
-
-\begin{defish}
-\begin{tabular}{cc}
+This idea would be captured by the following rule:
+\begin{prooftree}
     \AxiomC{}\DeduceC{$\Diamond!A$}
-    \AxiomC{}\DeduceC{$\Box!B$}
-    \AxiomC{$\Discharge{!A}{n},\Discharge{!B}{n}$ \emph{at most}}\DeduceC{$!C$}
-    \DischargeRule{\Intro{\Diamond}}{n}
-    \TrinaryInfC{$\Diamond!C$}
-    \DisplayProof
+    \AxiomC{}\DeduceC{$\Box(!A\lif!B)$}
+    \BinaryInfC{$\Diamond!C$}
+\end{prooftree}
+Which is equivalent to \Intro{\Diamond}\Ax{K} given the $\Box$\Ax{K}
+rule. We prefer \Intro{\Diamond}\Ax{K} because, unlike the rule above,
+it does not involve a specific propositional operator ($\lif$). 
 
-    &
-    \AxiomC{}\DeduceC{$\Diamond\lfalse$}
-    \RightLabel{\Elim{\Diamond}}
-    \UnaryInfC{$\lfalse$}
-    \DisplayProof
-\end{tabular}
-\end{defish}
+Why `single premise' consequence? While we accept the idea that 
+logical consequences of \emph{multiple} necessities are necessary, we
+reject the idea that logical consequences of \emph{multiple} possibilities
+are possible. For instance, it $!A$ is contingent it is both possible
+that $!A$ and possible that $\lnot!A$. While $!A$ and $\lnot!A$ \emph{jointly}
+logically entail $!A\land\lnot!A$, we do not want to say that $\Diamond!A$
+and $\Diamond\lnot!A$ jointly entail $\Diamond(!A\land\lnot!A)$. For 
+the same reason, we do not want to say that necessary consequences of
+multiple possibilities are possibilities. We only accept the principle
+that necessary consequences of \emph{one} possibility are possible.
 
-}
-{} % end of \iftag{prvDiamond}{
-
-
-
-% \begin{figure}
-%     \noindent
-%     {\setlength\extrarowheight{3em}
-%     \begin{tabular}{cc}
-%         \AxiomC{}\DeduceC{$\Box!A$}
-%         \AxiomC{}\DeduceC{$\Box!B$}
-%         \AxiomC{$\Discharge{!A}{n},\Discharge{!B}{n}$ \emph{at most}}\DeduceC{$!C$}
-%         \DischargeRule{\Intro{\Box}}{n}
-%         \TrinaryInfC{$\Box!C$}
-%         \DisplayProof
-%     &   \AxiomC{}\DeduceC{$\Diamond!A$}
-%         \AxiomC{}\DeduceC{$\Box!B$}
-%         \AxiomC{$\Discharge{!A}{n},\Discharge{!B}{n}$ \emph{at most}}\DeduceC{$!C$}
-%         \DischargeRule{\Intro{\Diamond}}{n}
-%         \TrinaryInfC{$\Diamond!C$}
-%         \DisplayProof
-%     \\
-%     &   \AxiomC{}\DeduceC{$\Diamond\lfalse$}
-%         \RightLabel{\Elim{\Diamond}}
-%         \UnaryInfC{$\lfalse$}
-%         \DisplayProof
-%     \end{tabular}
-%     }
-%     \\[1em]
-%     \emph{In \Intro{\Box} and \Intro{\Diamond} the !!{derivation} on the right 
-%     has at most $!A,!B$ undischarged assumptions before applying the rule.}
-%     \\[1em]
-%     \emph{You may also use the derived rules:}
-%     \\[1em] \noindent
-%     {\setlength\extrarowheight{3em} 
-%     \begin{tabular}{ll}
-%         \AxiomC{}\DeduceC{$\Box!A_1$}
-%         \AxiomC{}\DeduceC{$\ldots$}
-%         \AxiomC{}\DeduceC{$\Box!A_k$}
-%         \AxiomC{$\Discharge{!A_1}{n},\ldots,\Discharge{!A_k}{n}$ \emph{at most}}\DeduceC{$!B$}
-%         \DischargeRule{\Intro{\Box}}{n}
-%         \QuaternaryInfC{$\Box!B$}
-%         \DisplayProof
-%         &   \AxiomC{\emph{no assumption}}\DeduceC{$!A$}
-%         \RightLabel{Nec}
-%         \UnaryInfC{$\Box!A$}
-%         \DisplayProof
-%     \\
-%         \multicolumn{2}{l}{
-%         \AxiomC{}\DeduceC{$\Diamond!A$}
-%         \AxiomC{}\DeduceC{$\Box!B_1$}
-%         \AxiomC{}\DeduceC{\ldots}
-%         \AxiomC{}\DeduceC{$\Box!B_k$}
-%         \AxiomC{$\Discharge{!A}{n},\Discharge{!B_1}{n},\ldots,\Discharge{!B_k}{n}$ \emph{at most}}\DeduceC{$!C$}
-%         \DischargeRule{\Intro{\Diamond}}{n}
-%         \QuinaryInfC{$\Diamond!C$}
-%         \DisplayProof
-%         }
-%     \end{tabular}
-%     }
-%     \\[1em] \noindent
-
-% \caption{Natural Deduction rules for Propositional Modal Logic K.}
-% \ollabel{natdedpmlk}
-% \end{figure}
-
-% \begin{figure}
-%     \begin{center} 
-%     {\setlength\extrarowheight{3em} 
-%     \begin{tabular}{ll}
-%         \AxiomC{}\DeduceC{$\Box!A$}
-%         \RightLabel{\Ax{D}}
-%         \UnaryInfC{$\Diamond!A$}
-%         \DisplayProof
-%     \\
-%         \AxiomC{}\DeduceC{$\Box!A$}
-%         \RightLabel{$\Box$\Ax{T}}
-%         \UnaryInfC{$!A$}
-%         \DisplayProof
-%     &   \AxiomC{}\DeduceC{$!A$}
-%         \RightLabel{$\Diamond$\Ax{T}}
-%         \UnaryInfC{$\Diamond!A$}
-%         \DisplayProof
-%     \\
-%         \AxiomC{}\DeduceC{$\Box!A$}
-%         \RightLabel{$\Box$\Ax{4}}
-%         \UnaryInfC{$\Box\Box!A$}
-%         \DisplayProof
-%     &   \AxiomC{}\DeduceC{$\Diamond\Diamond!A$}
-%         \RightLabel{$\Diamond$\Ax{4}}
-%         \UnaryInfC{$\Diamond!A$}
-%         \DisplayProof
-%     \\
-%         \AxiomC{}\DeduceC{$!A$}
-%         \RightLabel{$\Box$\Ax{B}}
-%         \UnaryInfC{$\Box\Diamond!A$}
-%         \DisplayProof
-%     &   \AxiomC{}\DeduceC{$\Diamond\Box!A$}
-%         \RightLabel{$\Diamond$\Ax{B}}
-%         \UnaryInfC{$!A$}
-%         \DisplayProof
-%     \\
-%         \AxiomC{}\DeduceC{$\Diamond!A$}
-%         \RightLabel{$\Box$\Ax{5}}
-%         \UnaryInfC{$\Box\Diamond!A$}
-%         \DisplayProof
-%     &   \AxiomC{}\DeduceC{$\Box!A$}
-%         \RightLabel{$\Diamond$\Ax{5}}
-%         \UnaryInfC{$\Diamond\Box!A$}
-%         \DisplayProof
-
-%     \end{tabular}
-%     }
-%     \end{center}
-
-%     \caption{Natural Deduction rules for stronger modal logics.}
-% \ollabel{natdedspml}
-% \end{figure}
-
-
+Another way to motivate the $\Diamond$ rules is \emph{Duality}. 
+Duality is the idea that $\Diamond$ is
+the \emph{dual} of $\Box$: the negation of a
+necessity is is the possibility of its negation ($\lnot\Box$ is
+$\Diamond\lnot$) and the negation of a possibility is the necessity of
+its negation ($\lnot\Diamond$ is $\Box\lnot$). As shown below, our
+$\Diamond$ rules are equivalent to Duality.}{}
+\end{explain}
 
 \end{document}

@@ -1,0 +1,225 @@
+% Part: first-order-logic
+% Chapter: syntax-and-semantics
+% Section: negative-free-logic
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{frl}{syn}{pfl}
+
+\olsection{Positive Free Logic}
+
+The guiding idea of positive free logic is that atomic claims do not have
+existence committments. In natural language the following may seem true:
+
+\begin{enumerate}
+  \item Pegasus is Pegasus.
+  \item Pegasus is a winged horse.
+  \item Some children are waiting for Santa Claus.
+  \item The round square is a square.
+\end{enumerate}
+
+If they are true, however, they should not entail that Pegasus, 
+Santa Claus or the round square exist. Moreover, the following seem 
+false:
+
+\begin{enumerate}
+  \item Pegasus is Santa Claus.
+  \item Santa Claus is a winged horse.
+  \item Some children are waiting for Pegasus.
+\end{enumerate}
+
+Accordingly, positive free logic allows that, where $a$ is empty in a 
+!!{structure} $\Struct M$ and $F$ some predicate, $\Atom{F}{a}$ may be 
+either true or false in $\Struct M$. So $\Atom{F}{a}$ does not 
+entail $\lfrexists a$. Moreover, it allows that predicates behave 
+differently with different empty !!{constant}s: for instance, where 
+$a$ and $b$ are empty in a !!{structure} $\Struct M$ and $F$ some 
+predicate, we may have $\Atom{F}{a}$ true and $\Atom{F}{b}$ false
+in $\Struct M$. We will have $\eq[a][a]$ and $\eq[b][b]$ but 
+$\eq[a][b]$ may be either true or false in a given $\Struct M$. In short,
+the truth of falsity of atomic !!{formula}s with empty !!{constant}s is
+\emph{non-trivial} in positive free logic.
+
+\begin{explain}
+A semantics for positive free logic must therefore find ways of distinguishing
+true and false atomic !!{formula}s with empty !!{constant}s. The most
+common way to do so is by using a \emph{dual-domain} semantics. On this
+kind of semantics, all empty !!{constant}s referents, but these referents
+are treated as ``non-existing'' and left out of the domain over which
+quantifiers operate. These referents can be used to give non-trivial
+truth conditions for identity claims (where $a$ and $b$ are empty,
+$\eq[a][b]$ holds in a model iff their non-existing referents are the 
+same). The empty !!{constant}s' referents can also be part of the extension 
+of predicates, which in turns determines the the truth of falsity of claim 
+using these !!{constant}s.
+\end{explain}
+
+\begin{defn}[!!^{structure}s]
+In the positive system of free logic, $\Log NFL$,
+\article{structure} \emph{!!{structure}}~$\Struct M$ for a language
+$\Lang L_{\Log{FL}}$ of free logic consists of:
+\begin{enumerate}
+\item \emph{(Inner) Domain:} a set, $\Domain M$,
+\item \emph{Outer Domain:} a non-empty set, $\OuterDomain M$ that
+	includes $\Domain M$ ($\Domain M \subseteq \OuterDomain M $),
+\item \emph{Interpretation of !!{constant}s:} for any !!{constant}~$c$ of
+  $\Lang L_{\Log{FL}}$, its interpretation $\Assign{c}{M}$ is !!a{element} of 
+  $\OuterDomain M$,
+\item \emph{Interpretation of !!{predicate}s:} for each $n$-place
+  !!{predicate}~$R$ of $\Lang L_{\Log{FL}}$ (other than $\eq$), an $n$-place
+  relation $\Assign{R}{M} \subseteq \OuterDomain M^n$
+\tagitem{fnTerms}{\item \emph{Interpretation of !!{function}s:} for each $n$-place
+  !!{function}~$f$ of $\Lang L_{\Log{FL}}$, an $n$-place function $\Assign{f}{M}
+  \colon \OuterDomain M^n \to \OuterDomain M$.}{}
+\end{enumerate}
+The system of positive free logic is \emph{inclusive} if $\Domain M$ is
+allowed to be empty. There are several such !!{structure}s, as they may
+still differ on the !!{element}s of $\OuterDomain M$ outside of $M$ and the 
+interpretations of constants and predicates. We call a !!{structure} with
+empty $\Domain M$ an \emph{empty structure}. 
+\end{defn}
+
+\begin{intro}
+Our outer domain includes the inner domain. Some authors call instead "outer" 
+domain a set of objects that are not in the (inner) domain, that is the set
+$\OuterDomain M - \Domain M$.  
+\end{intro}
+
+\begin{defn}[Variable Assignment]
+A \emph{variable assignment}~$s$ for a !!{structure}~$\Struct{M}$ is a
+  function such that for any !!{variable}~$x$ of
+  $\Lang L_{\Log{FL}}$, $s(x) \in \OuterDomain M$. 
+\end{defn}
+
+\begin{explain}
+Interpretations and variable assignments are total functions: they 
+assign an object to every !!{constant} and !!{variable}, though 
+not necessarily an existing object (in) the inner domain. Interpretations
+are required to be total because that is needed to give non-trivial
+truth conditions to sentences with empty !!{constant}s. We allow
+variable assignements to assign non-existing objects to !!{variable}s in
+order to ensure that there are assignements even in empty
+ !!{structure}s. For even in empty !!{structure}s the definition ensures 
+ that $\Domain{M_O}$ is not empty and can be used to assign values to
+ !!{variable}s.
+\end{explain}
+
+\begin{defn}[!!^{value} of Terms]
+If $t$ is a term of the language~$\Lang L_{\Log{FL}}$, $\Struct M$ is a
+!!{structure} for~$\Lang L_{\Log{FL}}$, and $s$ is a !!{variable} assignment
+for~$\Struct M$, the \emph{!!{value}}~$\Value{t}{M}[s]$ is defined as
+follows:
+\begin{enumerate}
+\item \indcase{t}{c}{$\Value{\indfrm}{M}[s] = \Assign{\indcomplex}{M}$.}
+\item \indcase{t}{x}{$\Value{\indfrm}{M}[s] = s(\indcomplex)$.}
+\tagitem{fnTerms}{\indcase{t}{\Atom{f}{t_1, \ldots, t_n}}{
+\[
+\Value{\indfrm}{M}[s] = \Assign{f}{M}(\Value{t_1}{M}[s], \ldots,
+\Value{t_n}{M}[s])\textrm{, if defined}.
+\]}
+}{}
+\end{enumerate}
+\end{defn}
+
+\begin{defn}[$x$-Variant]
+If $s$ is a !!{variable} assignment for a !!{structure}~$\Struct M$, we
+call !!a{variable} assignment $s'$ an \emph{$x$-variant} of $s$ iff:
+\begin{enumerate}
+\item it differs from $s$ at most in what it assigns for $s$, that is 
+ $\Value{y}{M}[s'] = \Value{y}{M}[s]$, for any variable $y$ other 
+ than $x$.
+\item it is defined for $x$, that is, $\Value{y}{M}[s'] \in \Domain M$.
+We write $\varAssign{s'}{s}{x}$ when $s'$ is an $x$-variant of $s$.
+\end{enumerate}
+\end{defn}
+
+Note that an $x$-variant of some !!{variable} assignment $s$ must assign
+an object of the \emph{inner} domain to $x$, that is, it must assign 
+an existing object to $x$. If, for instance, $s$ assigns an object of
+the outer domain that is not in the inner domain, then $s$ is not an $x$-variant
+of itself. Only those variants of $s$ who do assign an !!{element} of
+the inner domain to $x$ are $x$-variants of $s$. 
+
+\begin{defn}[Satisfaction]
+\ollabel{defn:satisfaction}
+Satisfaction of a !!{formula}~$!A$ in a !!{structure}~$\Struct M$
+relative to a !!{variable} assignment~$s$, in symbols:
+$\Sat{M}{!A}[s]$, is defined recursively as follows. (We write
+$\Sat/{M}{!A}[s]$ to mean ``not $\Sat{M}{!A}[s]$.'')
+\begin{enumerate}
+\tagitem{prvFalse}{%
+  \indcase{!A}{\lfalse}{$\Sat/{M}{\indfrm}[s]$.}}{}
+
+\tagitem{prvTrue}{%
+  \indcase{!A}{\ltrue}{$\Sat{M}{\indfrm}[s]$.}}{}
+
+\item \indcase{!A}{\Atom{R}{t_1, \dots, t_n}}{$\Sat{M}{\indfrm}[s]$
+  iff $\langle \Value{t_1}{M}[s], \dots, \Value{t_n}{M}[s] \rangle \in
+  \Assign{R}{M}$.}
+
+\item \indcase{!A}{\Atom{\lfrexists}{t}}{$\Sat{M}{\indfrm}[s]$ iff 
+  $\Value{t}{M}[s] \in \Domain M$.}
+
+\item \indcase{!A}{\eq[t_1][t_2]}{$\Sat{M}{\indfrm}[s]$ iff 
+  $\Value{t_1}{M}[s] = \Value{t_2}{M}[s]$.}
+
+\tagitem{prvNot}{%
+  \indcase{!A}{\lnot !B}{$\Sat{M}{\indfrm}[s]$ iff
+    $\Sat/{M}{!B}[s]$.}}{}
+
+\tagitem{prvAnd}{%
+  \indcase{!A}{(!B \land !C)}{$\Sat{M}{\indfrm}[s]$ iff $\Sat{M}{!B}[s]$
+    and $\Sat{M}{!C}[s]$.}}{}
+
+\tagitem{prvOr}{%
+  \indcase{!A}{(!B \lor !C)}{$\Sat{M}{\indfrm}[s]$ iff
+    $\Sat{M}{!A}[s]$ or $\Sat{M}{!B}[s]$ (or both).}}{}
+
+\tagitem{prvIf}{%
+  \indcase{!A}{(!B \lif !C)}{$\Sat{M}{\indfrm}[s]$ iff $\Sat/{M}{!B}[s]$
+    or $\Sat{M}{!C}[s]$ (or both).}}{}
+
+\tagitem{prvIff}{%
+  \indcase{!A}{(!B \liff !C)}{$\Sat{M}{\indfrm}[s]$ iff either both
+    $\Sat{M}{!B}[s]$ and $\Sat{M}{!C}[s]$, or neither $\Sat{M}{!B}[s]$
+    nor $\Sat{M}{!C}[s]$.}}{}
+
+\tagitem{prvAll}{%
+  \indcase{!A}{\lforall[x][!B]}{$\Sat{M}{\indfrm}[s]$ iff for every
+    $x$-variant~$s'$ of $s$, $\Sat{M}{!B}[s']$.}}{}
+
+\tagitem{prvEx}{%
+  \indcase{!A}{\lexists[x][!B]}{$\Sat{M}{\indfrm}[s]$ iff there is an
+    $x$-variant~$s'$ of $s$ so that $\Sat{M}{!B}[s']$.}}{}
+\end{enumerate}
+\end{defn}
+
+Truth and validity are defined as usual.
+
+\begin{defn}[Truth]
+Where $!A$ is a closed !!{formula}, we say that $A$ is \emph{true in}, or
+\emph{satisfied by} a !!{structure} $\Struct M$, written $\Sat{M}{!A}$ iff 
+$A$ is satisfied relative to any assignement in $\Struct M$:
+$$\Sat{M}{!A}\textrm{ iff }\Sat{M}{!A}[s]\textrm{ for any }s\textrm{ in }\Struct M$$
+\end{defn}
+
+\begin{defn}[Validity]
+A !!{formula} $!A$ is \emph{valid}, $\Entails !A$, iff $\Sat{M}{!A}$ for every
+!!{structure}~$\Struct M$.
+\end{defn}
+
+\begin{ex}
+If $\Sat{M}{Fa}$ then $\Sat{M}{\lfrexists a}$.
+\end{ex}
+
+\begin{ex}
+If $\Sat{M}{\eq[a][a]}$ then $\Sat{M}{\lfrexists a}$.
+\end{ex}
+
+\begin{ex}
+$\Entails/ \lexists x (x = x)$.
+\end{ex}
+
+\end{document}

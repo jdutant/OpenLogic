@@ -1,0 +1,33 @@
+% Part: first-order-logic
+% Chapter: syntax-and-semantics
+% Section: negative-positive-neutral
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{frl}{syn}{pnn}
+
+\olsection{Positive, Negative and Neutral Free Logic}
+
+There are several ways of removing the existence assumptions of
+first-order logic. These give rise to different systems of free logic:
+negative, positive and neutral. The dividing issue is how to treat 
+!!{formula}s with empty !!{constant}s.
+
+\begin{explain}
+In free logic, not every !!{constant} needs to refer to something that exists.
+A !!{constant} without referent is said to be `empty'. 
+\end{explain}
+
+Let $a$ be an empty !!{constant} and $F$ some predicate:
+
+\begin{enumerate}
+  \item According to \emph{negative} free logic, $\Atom{F}{a}$ is false.
+  \item According to \emph{positive} free logic, $\Atom{F}{a}$ can be either
+  true or false.
+  \item According to \emph{neutral} free logic, $\Atom{F}{a}$ is neither
+  true nor false.
+\end{enumerate}
+
+\end{document}

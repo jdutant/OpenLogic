@@ -1,0 +1,73 @@
+% Part: normal-modal-logic
+% Chapter: natural-deduction 
+% Section: proofs-in-K-derived-rules
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{nml}{nd}{pdk}
+
+\olsection{Examples of \usetoken{P}{derivation} in \Log{K} using
+derived rules}
+
+\begin{ex}
+!!^{derivation} of $\Diamond (!A\lor!B)\Proves[\Log{K}]\Diamond!A\lor\Diamond!B$.
+
+{\small
+\begin{prooftree}
+\AxiomC{$\Diamond (!A\lor!B)$}
+    \AxiomC{$\Discharge{\lnot(\Diamond!A\lor\Diamond!B)}{2}$}
+    \RightLabel{\Log{PL}}
+    \UnaryInfC{$\lnot\Diamond!A$}
+    \RightLabel{\Elim{\Diamond}\Ax{K}$^*$}
+    \UnaryInfC{$\Box\lnot!A$}
+        \AxiomC{$\Discharge{\lnot(\Diamond!A\lor\Diamond!B)}{2}$}
+        \RightLabel{\Log{PL}}
+        \UnaryInfC{$\lnot\Diamond!B$}
+        \RightLabel{\Elim{\Diamond}\Ax{K}$^*$}
+        \UnaryInfC{$\Box\lnot!B$}
+            \AxiomC{$\Discharge{\lnot!A}{1}$}
+            \AxiomC{$\Discharge{\lnot!B}{1}$}
+            \RightLabel{\Log{PL}}
+            \BinaryInfC{$\lnot(!A\lor!B)$}
+    \DischargeRule{$\Box$\Ax{K}}{1}
+    \TrinaryInfC{$\Box\lnot(!A\lor!B)$}
+    \RightLabel{\Intro{\Diamond}\Ax{K}$^*$}
+    \UnaryInfC{$\lnot\Diamond(!A\lor!B)$}
+\RightLabel{\Elim{\lnot}}
+\BinaryInfC{$\lfalse$}
+\DischargeRule{\FalseCl}{2}
+\UnaryInfC{$\Diamond!A\lor\Diamond!B$}
+\end{prooftree}
+}
+
+\end{ex}
+
+\begin{explain}
+The overall strategy is a reductio. Our conclusion is a disjunction,
+and as often, there is no hope of deriving either disjunct from the
+premise alone: $\Diamond (!A\lor!B)\Entails/[\Log{K}]\Diamond!A$, and
+similarly for $\Diamond !B$. We must use \emph{reductio} instead: we
+assume $\lnot(\Diamond!A\lor\Diamond!B)$ and derive a contradiction. 
+
+The first \Log{PL} step uses the fact that $\lnot(!A\lor!B)\Entails\lnot!A$
+is valid in propositional logic alone, hence !!{derivable} using 
+propositional rules alone. From this it of course follows that $\lnot\Diamond!A$
+can be derived from $\lnot(\Diamond!A\lor\Diamond!B)$ using the 
+propositional rules alone (just put $\Diamond!A$ for $!A$, $\Diamond!B$
+for $!B$); therefore the \Log{PL} step is allowed. 
+
+Similarly, the \Log{PL} step from $\lnot!A,\lnot!B$ to $\lnot(!A\lor!B)$
+is allowed because $\lnot!A,\lnot!B\Entails\lnot(!A\lor!B)$ holds in 
+propositional logic alone.
+
+The Duality rules \Elim{\Diamond}\Ax{K}$^*$ and \Intro{\Diamond}\Ax{K}$^*$
+simplify our !!{derivation} further. Without them we would need to use
+the same steps as in their derivation, substantially lengthening our
+proof.
+
+\end{explain}
+
+
+\end{document}

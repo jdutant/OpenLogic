@@ -1,0 +1,85 @@
+% Sandbox for the Open Logic Text
+%
+%   Use to test code snippets and develop new chapters. 
+%
+\documentclass[a4paper,12pt,twoside]{memoir}
+
+% \olpath has to point to the location of the OLP main
+% directory/folder. 
+\newcommand{\olpath}{../../}
+
+% use this line to load the -config.sty and -envs.sty of another file
+% defaults to the current file otherwise
+\newcommand{\oljobname}{kcl-philosophical-logic}
+
+% load all the Open Logic definitions. This will also load the
+% local definitions in kcl-philosophical-logic.sty
+\input{\olpath/sty/open-logic.sty}
+
+% style the document
+\input{design.sty}
+
+% tigher lists
+\firmlists
+
+% extra packages
+% \usepackage{lipsum}
+
+\begin{document}
+
+% First we make a titlepage
+
+\begin{titlingpage}
+
+\begin{raggedleft}
+    {\sffamily
+    \fontsize{44pt}{4em}\selectfont
+    {Philosophical Logic}\\[0.4ex]
+    \textit{Exercise Booklet}
+    }\\[0.3ex]
+    \Large \vskip 4ex
+    Julien Dutant\\[.5ex]
+    King's College London\\[.5ex]
+    2024-25\\[2ex]
+    \textbf{Version of \today}\\
+\end{raggedleft}
+    
+\vfill
+
+% This work's license. 
+\kcldonotcopylicense{King's College London}
+
+\end{titlingpage}
+
+\frontmatter
+
+\pagestyle{myruled} % defined in design.sty
+
+% no colored links in the TOC
+{\hypersetup{linkcolor=.}
+
+    \tableofcontents*
+
+}
+
+\mainmatter
+
+
+\part{Normal Modal Logics}
+
+%\olimport*[normal-modal-logic/syntax-and-semantics]{syntax-and-semantics}
+
+%\olimport*[normal-modal-logic/frame-definability]{frame-definability}
+
+\olimport[\olpath/content-new/normal-modal-logic/natural-deduction]{natural-deduction}
+
+\OLEndPartHook
+
+\backmatter
+
+% Include the bibliography
+
+\bibliographystyle{\olpath/bib/natbib-oup}
+\bibliography{\olpath/bib/open-logic, references}
+
+\end{document}

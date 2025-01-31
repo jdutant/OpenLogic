@@ -1,0 +1,47 @@
+% Part: normal-modal-logic
+% Chapter: natural-deduction 
+% Section: relate-to-axiomatic
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{nml}{nd}{rax}
+
+\olsection{Relation with axiomatic systems}
+
+!!^{derivation}s for modal logic are often given by axiomatic systems.
+In those Normality is captured by an axiom schema and a rule:
+\begin{itemize}
+    \item \emph{Distribution} axiom schema. $\Box(!A\lif!B)\lif(\Box!A\lif\Box!B)$.
+    \item \emph{Necessitation} rule. If $\Proves!A$, then $\Proves\Box!A$.
+\end{itemize}
+Given Normality and Modus Ponens ($!A\lif!B,!A\Entails !B$) all
+instances of Distribution are logical truths. And given Normality again, 
+considering the case where $\Gamma$ is empty, the Necessitation rule
+is sound too. In axiomatic systems, propositional logic plus the
+Distribution schema and the Necessitation rule turn out to be 
+enough to capture all the consequences of Normality. It is easy to see
+that the schema and rule are both !!{derivable} 
+from our $Box$\Ax{K} rule. Necessitation is a special case of it 
+(with no $\Box!A,\Box!B$ premises); Distribution instances are 
+straightforwardly derived too.
+
+Stronger systems given by characteristic axiom schemas. These are
+obviously equivalent to our rules:
+\begin{itemize}
+    \tagitem{prvDiamond}
+        {\Ax{D}. $\Box!A\lif\Diamond!A$}
+        {\Ax{D} $\Box!A\lif\lnot\Box\lnot!A$} 
+    \item $\Box$\Ax{T}. $\Box!A\lif!A$
+    \iftag{prvDiamond}{\\ $\Diamond$\Ax{T}. $!A\lif\Diamond!A$}{}
+    \item $\Box$\Ax{4}. $\Box!A\lif\Box\Box!A$
+    \iftag{prvDiamond}{\\ $\Diamond$\Ax{4}. $\Diamond\Diamond!A\lif\Diamond!A$}{}
+    \item $\Box$\Ax{B}. $!A\lif\Box\Diamond!A$
+    \iftag{prvDiamond}{\\ $\Diamond$\Ax{B}. $\Diamond\Box!A\lif!A$}{}
+    \item $\Box$\Ax{5}. $\Diamond!A\lif\Box\Diamond!A$
+    \iftag{prvDiamond}{\\ $\Diamond$\Ax{5}. $\Diamond\Box!A\lif\Box!A$}{}
+ 
+\end{itemize}
+
+\end{document}

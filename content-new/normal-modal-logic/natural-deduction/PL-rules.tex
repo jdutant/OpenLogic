@@ -1,0 +1,51 @@
+% Part: normal-modal-logic
+% Chapter: natural-deduction 
+% Section: PL-rules
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{nml}{nd}{plr}
+
+\olsection{Simplifying propositional logic rules}
+
+\subsection{Rule of propositional consequence \Log{PL}}
+
+We introduce a rule to omit purely propositional logic steps. 
+
+\begin{defish}
+When $!B$ can be derived from $!A_1,\ldots,!A_n$ ($n\geq 0$) using
+propositional logic rules alone, we may simply write: 
+\begin{prooftree}
+    \AxiomC{}\DeduceC{$!A_1$}
+    \AxiomC{}\DeduceC{$\ldots$}
+    \AxiomC{}\DeduceC{$!A_n$}
+    \RightLabel{\Log{PL}}
+    \TrinaryInfC{$!B$}
+\end{prooftree}
+\end{defish}
+
+\begin{ex}
+The following !!{derivation} of $!A\lor!B,\lnot!A\Proves{\Log{K}}!B$:
+\begin{prooftree}
+\AxiomC{$!A\lor!B$}
+    \AxiomC{$\Discharge{!A}{1}$}
+    \AxiomC{$\lnot!A$}
+    \RightLabel{\Elim{\lnot}}
+    \BinaryInfC{$!B$}
+            \AxiomC{$!B$}
+    \DischargeRule{\Elim{\lor}}{1}
+    \TrinaryInfC{$!B$}
+\end{prooftree}
+may be abbreviated:
+\begin{prooftree}
+    \AxiomC{$!A\lor!B$}
+        \AxiomC{$\lnot!A$}
+        \RightLabel{\Log{PL}}
+    \BinaryInfC{$!B$}
+\end{prooftree}
+    
+\end{ex}
+
+\end{document}

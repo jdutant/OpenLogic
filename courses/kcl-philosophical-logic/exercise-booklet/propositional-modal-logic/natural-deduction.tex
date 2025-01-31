@@ -11,7 +11,7 @@
 \olsection{Natural deduction}
 
 \begin{prob}[System $\Log{K}$]
-    \citep[exercise 3.2 items 1]{MacFarlane-2020-PhilosophicalLogicContemporary}
+    \citep[exercise 3.2 item 1]{MacFarlane-2020-PhilosophicalLogicContemporary}
     Use !!{derivation}s to establish the following:
     \begin{enumerate}
         \item $\Box(\Obj{\pvar{A}}\lif\Obj{\pvar{B}}),
@@ -25,9 +25,112 @@
 \end{prob}
 
 \begin{prob}[System $\Log{S4}$]
-    \citep[exercise 3.2 items 2]{MacFarlane-2020-PhilosophicalLogicContemporary}
+    \citep[exercise 3.2 item 2]{MacFarlane-2020-PhilosophicalLogicContemporary}
+    Use !!{derivation}s to establish the following:
+
+    $\Box(\Obj{\pvar{A}}\land\lnot\Obj{\pvar{B}}) \Proves[\Log{K}] 
+    \Box(\Box\Obj{\pvar{A}}\land\lnot\Diamond\Obj{\pvar{B}})$ 
+
 \end{prob}
 
+\begin{prob}[System $\Log{S5}$]
+    \citep[exercise 3.2 item 3]{MacFarlane-2020-PhilosophicalLogicContemporary}
+    Use !!{derivation}s to establish the following:
+
+    $\Box\Obj{\pvar{A}}\lor\Diamond\Obj{\pvar{B}}) \Proves[\Log{K}] 
+        \Box(\Obj{\pvar{A}}\lor\lnot\Diamond\Obj{\pvar{B}})$ 
+\end{prob}
+
+\begin{prob}
+    Give !!a{derivation} of $\Box!A\land\Box!B\Proves[\Log{K}]
+    \Box(!A\land!B)$.
+    
+        \begin{ans} !!^{derivation} of 
+            $\Box!A\land\Box!B\Proves[\Log{K}]\Box(!A\land!B)$.
+    
+        \begin{prooftree}
+        \AxiomC{$\Box!A\land\Box$}
+        \RightLabel{\Elim{\land}}
+        \UnaryInfC{$\Box!A$}
+            \AxiomC{$\Box!A\land\Box$}
+            \RightLabel{\Elim{\land}}
+            \UnaryInfC{$\Box!B$}
+                \AxiomC{$\Discharge{!A}{1}$}
+                \AxiomC{$\Discharge{!B}{1}$}
+                \RightLabel{\Intro{\land}}
+                \BinaryInfC{$!A\land!B$}
+        \DischargeRule{$\Box$\Ax{K}}{1}
+        \TrinaryInfC{$\Box(!A\land!B)$}
+        \end{prooftree}
+        \end{ans}
+    
+\end{prob}
+    
+
+\begin{prob}
+    Give a !!{derivation} of $\Proves[\Log{K}]
+    \Diamond(!A\land!B)\lif(\Diamond!A\land\Diamond!B)$. 
+
+    \begin{ans} !!^{derivation} of $\Proves[\Log{K}]
+    \Diamond(!A\land!B)\lif(\Diamond!A\land\Diamond!B)$:
+
+    \begin{prooftree}
+    \AxiomC{$\Diamond(!A\land!B)$}
+    \AxiomC{$\Discharge{!A\land!B}{1}$}
+    \RightLabel{\Elim{\land}}
+    \UnaryInfC{$!A$}
+    \DischargeRule{\Elim{\Diamond}\Ax{K}}{1}
+    \BinaryInfC{$\Diamond!A$}
+            \AxiomC{$\Diamond(!A\land!B)$}
+                \AxiomC{$\Discharge{!A\land!B}{2}$}
+                \RightLabel{\Elim{\land}}
+                \UnaryInfC{$!B$}
+                \DischargeRule{ \Elim{\Diamond}\Ax{K}}{2}
+            \BinaryInfC{$\Diamond!B$}
+        \RightLabel{\Intro{\land}}
+        \BinaryInfC{$\Diamond!A\land\Diamond!B$}
+    \end{prooftree}
+    \end{ans}
+
+\end{prob}
+
+\begin{prob}
+    Give a !!{derivation} of $\Proves[\Log{K}]
+    \Box(!A\lif!B)\lif(\Diamond!A\lif\Diamond!B)$.
+
+    \begin{ans} !!^{derivation} of $\Proves[\Log{K}]
+        \Box(!A\lif!B)\lif(\Diamond!A\lif\Diamond!B)$:
+
+        \begin{prooftree}
+            \AxiomC{$\Discharge{\Diamond!A}{2}$}
+                \AxiomC{$\Discharge{\Box(!A\lif!B)}{3}$}
+                    \AxiomC{$\Discharge{!A}{1}$}
+                    \AxiomC{$\Discharge{!A\lif!B}{1}$}
+                    \RightLabel{\Elim{\lif}}
+                    \BinaryInfC{$!B$}
+            \DischargeRule{\Elim{\Diamond}\Ax{K}$^{**}$}{1}
+            \TrinaryInfC{$\Diamond!B$}
+            \DischargeRule{\Intro{\lif}}{2}
+            \UnaryInfC{$\Diamond!A\lif\Diamond!B$}
+            \DischargeRule{\Intro{\lif}}{3}
+            \UnaryInfC{$\Box(!A\lif!B)\lif\Diamond!A\lif\Diamond!B$}
+        \end{prooftree}        
+    \end{ans}
+
+\end{prob}
+
+
+% \begin{prob}
+%     \citep[exercise 3.2 item 4]{MacFarlane-2020-PhilosophicalLogicContemporary}
+%     For each of the following, determine whether it is a logical truth
+%     in \Log{T}, \Log{S4}, \Log{S5}. If it is, give a !!{derivation}.
+%     If it is not, give a !!{structure} in which it is false.
+
+%     \begin{enumerate}
+%     \item \Box(\Obk)
+%     \end{enumerate}
+
+% \end{prob}
 
 \end{document}
 

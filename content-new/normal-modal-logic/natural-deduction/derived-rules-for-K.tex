@@ -1,0 +1,60 @@
+% Part: normal-modal-logic
+% Chapter: natural-deduction 
+% Section: derived-rules-for-K.tex
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{nml}{nd}{drl}
+
+\olsection{Derived rules for \Log{K}}
+
+To following rules can be derived from the core ones, so they are 
+superfluous. However, we may use them to simplify our !!{derivation}s.
+
+\subsubsection{Duality}
+
+\begin{defish}
+    \AxiomC{}\DeduceC{$\Box\lnot!A$}
+    \RightLabel{\Intro{\Diamond}\Ax{K}$^*$}
+    \UnaryInfC{$\lnot\Diamond!A$}
+    \DisplayProof
+\hfill
+    \AxiomC{}\DeduceC{$\Diamond\lnot!A$}
+    \RightLabel{\Elim{\Diamond}\Ax{K}$^*$}
+    \UnaryInfC{$\lnot\Box!A$}
+    \DisplayProof
+\end{defish}
+
+\iftag{prvDiamond}{
+    \subsubsection{Generalized $\Box$\Ax{K}, \Intro{\Diamond}\Ax{K}}
+}{
+    \subsubsection{Generalized $\Box$\Ax{K}}
+}
+
+\begin{defish}
+
+\AxiomC{}\DeduceC{$\Box!A_1$}
+    \AxiomC{}\DeduceC{$\ldots$}
+    \AxiomC{}\DeduceC{$\Box!A_k$}
+    \AxiomC{$\Discharge{!A_1}{n},\ldots,\Discharge{!A_k}{n}$ \emph{at most}}\DeduceC{$!B$}
+    \DischargeRule{\Intro{\Box}}{n}
+    \QuaternaryInfC{$\Box!B$}
+\DisplayProof
+
+\iftag{prvDiamond}{
+\bigskip
+\AxiomC{}\DeduceC{$\Diamond!A$}
+\AxiomC{}\DeduceC{$\Box!B_1$}
+\AxiomC{}\DeduceC{\ldots}
+\AxiomC{}\DeduceC{$\Box!B_k$}
+\AxiomC{$\Discharge{!A}{n},\Discharge{!B_1}{n},\ldots,\Discharge{!B_k}{n}$ \emph{at most}}\DeduceC{$!C$}
+\DischargeRule{\Intro{\Diamond}}{n}
+\QuinaryInfC{$\Diamond!C$}
+\DisplayProof
+}{} 
+
+\end{defish}
+
+\end{document}

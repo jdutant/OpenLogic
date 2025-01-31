@@ -16,65 +16,81 @@
     \begin{tabular}{cc}
         \AxiomC{}\DeduceC{$\Box!A$}
         \AxiomC{}\DeduceC{$\Box!B$}
-        \AxiomC{$\Discharge{!A}{n},\Discharge{!B}{n}$ \emph{at most}}\DeduceC{$!C$}
-        \DischargeRule{\Intro{\Box}}{n}
-        \TrinaryInfC{$\Box!C$}
-        \DisplayProof
-    &   \AxiomC{}\DeduceC{$\Diamond!A$}
-        \AxiomC{}\DeduceC{$\Box!B$}
-        \AxiomC{$\Discharge{!A}{n},\Discharge{!B}{n}$ \emph{at most}}\DeduceC{$!C$}
-        \DischargeRule{\Intro{\Diamond}}{n}
-        \TrinaryInfC{$\Diamond!C$}
+        \AxiomC{$\Discharge{!A}{n},\Discharge{!B}{n}$ \emph{at
+        most}}
+        \DeduceC{$!C$} 
+        \DischargeRule{$\Box$\Ax{K}}{n}
+        \TrinaryInfC{$\Box!C$} 
         \DisplayProof
     \\
-    &   \AxiomC{}\DeduceC{$\Diamond\lfalse$}
-        \RightLabel{\Elim{\Diamond}}
+        \AxiomC{}\DeduceC{$\Diamond!A$}
+        \AxiomC{}\DeduceC{$\Box!B$}
+        \AxiomC{$\Discharge{!A}{n}$\emph{at least},$\Discharge{!A}{n}\Discharge{!B}{n}$\emph{at most}}\DeduceC{$!C$}
+        \DischargeRule{\Intro{\Diamond}\Ax{K}}{n}
+        \TrinaryInfC{$\Diamond!C$}
+        \DisplayProof
+    &   
+        \AxiomC{}\DeduceC{$\Diamond\lfalse$}
+        \RightLabel{\Elim{\Diamond}\Ax{K}}
         \UnaryInfC{$\lfalse$}
         \DisplayProof
     \end{tabular}
     }
-    \\[1em]
-    \emph{In \Intro{\Box} and \Intro{\Diamond} the !!{derivation} on the right 
-    has at most $!A,!B$ undischarged assumptions before applying the rule.}
-    \\[1em]
-    \emph{You may also use the derived rules:}
-    \\[1em] \noindent
-    {\setlength\extrarowheight{3em} 
-    \begin{tabular}{ll}
-        \AxiomC{}\DeduceC{$\Box!A_1$}
-        \AxiomC{}\DeduceC{$\ldots$}
-        \AxiomC{}\DeduceC{$\Box!A_k$}
-        \AxiomC{$\Discharge{!A_1}{n},\ldots,\Discharge{!A_k}{n}$ \emph{at most}}\DeduceC{$!B$}
-        \DischargeRule{\Intro{\Box}}{n}
-        \QuaternaryInfC{$\Box!B$}
-        \DisplayProof
-        &   \AxiomC{\emph{no assumption}}\DeduceC{$!A$}
-        \RightLabel{Nec}
-        \UnaryInfC{$\Box!A$}
-        \DisplayProof
-    \\
-        \multicolumn{2}{l}{
-        \AxiomC{}\DeduceC{$\Diamond!A$}
-        \AxiomC{}\DeduceC{$\Box!B_1$}
-        \AxiomC{}\DeduceC{\ldots}
-        \AxiomC{}\DeduceC{$\Box!B_k$}
-        \AxiomC{$\Discharge{!A}{n},\Discharge{!B_1}{n},\ldots,\Discharge{!B_k}{n}$ \emph{at most}}\DeduceC{$!C$}
-        \DischargeRule{\Intro{\Diamond}}{n}
-        \QuinaryInfC{$\Diamond!C$}
-        \DisplayProof
-        }
-    \end{tabular}
-    }
-    \\[1em] \noindent
-
 \caption{Natural Deduction rules for Propositional Modal Logic K.}
 \ollabel{natdedpmlk}
 \end{figure}
+
+The \Ax{K} rules are given in \olref{natdedpmlk}. Recall that:
+\begin{itemize}
+    \item In $\Box$\Ax{K} and \Intro{\Diamond}\Ax{K}, the
+    sub-!!{derivation} on the right has \emph{at most} 
+    \item In $\Box$\Ax{K} the assumptions $\Box!A$ and $\Box!B$ are
+    both optional.
+    \item In \Intro{\Diamond}\Ax{K} the assumption $\Box!B$ is
+    optional but the assumption $\Diamond!A$ is mandatory. 
+    \item In systems \Log{D} and stronger, \Intro{\Diamond}\Ax{K}
+    can be applied without the assumption $\Diamond!A$.
+\end{itemize}
+
+{\setlength\extrarowheight{3em}
+\begin{tabular}{cc}
+    \AxiomC{}\DeduceC{$\Box!A$}
+    \AxiomC{$\Discharge{!A}{n}$ \emph{at
+    most}}
+    \DeduceC{$!C$} 
+    \DischargeRule{$\Box$\Ax{K}}{n}
+    \BinaryInfC{$\Box!C$} 
+    \DisplayProof
+&
+    \AxiomC{\emph{no undischarged assumption}}
+    \DeduceC{$!C$}
+    \RightLabel{$\Box$\Ax{K}}
+    \UnaryInfC{$\Box!C$} 
+    \DisplayProof
+\\
+    \AxiomC{}\DeduceC{$\Diamond!A$}
+    \AxiomC{$\Discharge{!A}{n}$\emph{at least}}\DeduceC{$!C$}
+    \DischargeRule{\Intro{\Diamond}\Ax{K}}{n}
+    \BinaryInfC{$\Diamond!C$}
+    \DisplayProof
+&
+    \AxiomC{\emph{no undischarged assumption}}\DeduceC{$!C$}
+    \RightLabel{\Intro{\Diamond}\Ax{D} {\color{red}only in \Log{D} of stronger}}
+    \UnaryInfC{$\Diamond!C$}
+    \DisplayProof
+\end{tabular}
+}
+
 
 \begin{figure}
     \begin{center} 
     {\setlength\extrarowheight{3em} 
     \begin{tabular}{ll}
+        \AxiomC{\emph{no undischarged assumption}}\DeduceC{$!C$}
+        \RightLabel{\Intro{\Diamond}\Ax{D}}
+        \UnaryInfC{$\Diamond!C$}
+        \DisplayProof
+    &
         \AxiomC{}\DeduceC{$\Box!A$}
         \RightLabel{\Ax{D}}
         \UnaryInfC{$\Diamond!A$}

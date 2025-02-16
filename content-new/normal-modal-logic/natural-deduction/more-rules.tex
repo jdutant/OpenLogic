@@ -10,7 +10,8 @@
 
 \olsection{Rules for stronger systems}
 
-We provide rules for stronger systems.
+We provide rules for stronger systems. In these systems the rules for 
+\Log{K} are still allowed, but we supplement them with additional rules.
 
 \iftag{prvDiamond}{Except for \Ax{D}, rules come in two forms, e.g.
 $\Box$\Ax{T} and $\Diamond$\Ax{T}. In each case only one is needed: 
@@ -49,10 +50,18 @@ below.
 
 \end{defish}
 
-The \Ax{D} rule is sound for \emph{serial} frames and \Ax{T} is sound
-for \emph{reflexive} frames.
+\begin{itemize}
+    \item System \Log{D} is \Log{K} plus the \Ax{D} rule.
+    \item System \Log{T} is \Log{K} plus the \Ax{T} rule. We also
+    allow the \Ax{D} rules. 
+\end{itemize}
 
-The \Ax{D} rule is !!{derivable} from the \Ax{T} rules:
+The \Ax{D} rules are sound for \emph{serial} frames and \Ax{T} is sound
+for \emph{reflexive} frames. 
+
+We allow the \Ax{D} rules in \Log{T} and any system that contains the
+\Ax{T} rules because the \Ax{D} rules are !!{derivable} from the
+\Ax{T} rules. For $\Diamond$\Ax{D}:
 
 \begin{prooftree}
 \AxiomC{}\DeduceC{$\Box!A$}
@@ -62,10 +71,22 @@ The \Ax{D} rule is !!{derivable} from the \Ax{T} rules:
 \UnaryInfC{$\Diamond!A$}
 \end{prooftree}
 
-\Log{D} is \Log{K} plus the \Ax{D} rule.
+\begin{prob}
+    Show $\Proves[\Log{D}] \Box!A\lif\lnot\Box\lnot!A$.
+\end{prob}
 
-\Log{T} is \Log{K} plus the \Ax{T} rule. We also allow the \Ax{D} 
-rule. 
+\begin{prob}
+    Show $\Proves[\Log{D}] \Diamond!A\lor\Diamond\lnot!A$.
+\end{prob}
+
+\begin{prob}
+    Show that the \Intro{\Diamond}\Ax{D} rule is !!{derivable} from
+    the \Log{K} plus \Ax{T} rules.
+\end{prob}
+
+\begin{prob}
+    Show $\Proves[\Log{T}] \Box(\Box!A\lif!A)$.
+\end{prob}
 
 \subsection{Rules for \Log{S4}, \Log{B}, \Log{S5}}
 
@@ -97,9 +118,9 @@ rule.
     \UnaryInfC{$\Box\Diamond!A$}
     \DisplayProof
 \hfill
-    \AxiomC{}\DeduceC{$\Box!A$}
+    \AxiomC{}\DeduceC{$\Diamond\Box!A$}
     \RightLabel{$\Diamond$\Ax{5}}
-    \UnaryInfC{$\Diamond\Box!A$}
+    \UnaryInfC{$\Box!A$}
     \DisplayProof
 
 \end{defish}
@@ -111,24 +132,60 @@ sound for \emph{euclidean} frames.
 Individually, rules \Ax{T}, \Ax{4}, \Ax{B} and \Ax{5} are independent
 of each other. However, the following relations hold:
 \begin{itemize}
-    \item Given any two of \Ax{4}, \Ax{B} and \Ax{5} we can derive the third.
-    \item Given \Ax{5} \emph{and \Ax{T}}, we can derive \Ax{4} and \Ax{B} rules.
+    \item Given \Ax{B} and \Ax{D}, we can derive \Ax{T}.
+    \item Given \Ax{T}, \Ax{4}, and \Ax{B}, we can derive \Ax{5}.
+    \item Given \Ax{T} and \Ax{5}, we can derive \Ax{4} and \Ax{5}.
 \end{itemize}
 From \Ax{5} alone we cannot derive \Ax{4} or \Ax{B}. From \Ax{T} and \Ax{4}
 alone we cannot derive \Ax{B} nor \Ax{5}. From \Ax{T} and \Ax{B} we cannot
 derive \Ax{4} nor \Ax{5}. 
 
+Because of the facts above, there are only three distinct systems 
+extending \Log{T} with one or more of \Ax{4}, \Ax{B} and \Ax{5}:
+\begin{itemize}
+\item \Log{B} that extends \Log{T} with \Ax{B}. It has neither \Ax{4} nor \Ax{5}.
+\item \Log{S4} that extends \Log{T} with \Ax{4}. It has neither \Ax{B} nor \Ax{5}.
+\item \Log{S5} that extends \Log{T} with \Ax{5}. It also has both of \Ax{B} and \Ax{4}.
+\end{itemize}
+Since all these systems extend \Log{T}, they all have the \Log{K},
+\Ax{T} and \Ax{D} rules too.
+
+More generally, we can describe systems by listing their rules. 
+\Log{KD45} is the system given by the \Ax{K}, \Ax{D}, \Ax{4} and \Ax{5}
+rules. \Log{S4} can be called \Log{KT4} or \Log{KDT4}; \Log{S5} can 
+be called \Log{KT5}, \Log{KT45}, \Log{KDTB45}, and many other names.
+
+The standard systems, their conditions on accessibility relation and
+their rules are in \olref{natdedsrules}.
+
+\begin{figure}[h]
+    \begin{tabular}{c|p{20em}|c}
+        \hline
+        System  & Accessibility is ... & Add rule(s) ... \\
+        \hline
+        \Log{D} & serial & \Ax{D} \\
+        \Log{T} & serial, reflexive & \Ax{D},\Ax{T} \\
+        \Log{B} & serial, reflexive and symmetric & \Ax{D},\Ax{T},\Ax{B} \\
+        \Log{S4}  & serial, reflexive and transitive & \Ax{D},\Ax{T},\Ax{4} \\
+        \Log{S5} & serial, reflexive, transitive, symmetric, euclidean & \Ax{D},\Ax{T},\Ax{B},\Ax{4},\Ax{5} \\
+        \hline
+    \end{tabular}
+\caption{Standard systems \Log{D}, \Log{T}, \Log{B}, \Log{S4},
+\Log{S5}.}
+\ollabel{natdedsrules}
+\end{figure}
+
 \begin{ex}
-Deriving $\Box$\Ax{B} from \Ax{4} and \Ax{5} rules:
+Deriving $\Diamond$\Ax{5} from \Ax{B} and \Ax{4} rules:
 \begin{prooftree}
 \AxiomC{}\DeduceC{$\Diamond!A$}
-        \AxiomC{$!A$}
+        \AxiomC{$\Discharge{!A}{1}$}
         \RightLabel{$\Box$\Ax{B}}
         \UnaryInfC{$\Box\Diamond!A$}
-        \RightLabel{$\Box$\Ax{5}}
+        \RightLabel{$\Box$\Ax{4}}
         \UnaryInfC{$\Box\Box\Diamond!A$}
-    \RightLabel{\Intro{\Box}}
-    \BinaryInfC{$\Diamond\Box\Box\Diamond$}
+    \DischargeRule{$\Diamond$\Ax{K}}{1}
+    \BinaryInfC{$\Diamond\Box\Box\Diamond!A$}
     \RightLabel{$\Diamond$\Ax{B}}
     \UnaryInfC{$\Box\Diamond !A$}
 \end{prooftree}
@@ -148,20 +205,5 @@ rules.
 Show that $\Box$\Ax{4} can be derived using the \Ax{T} and \Ax{5}
 rules.
 \end{prob}
-
-\Log{S4} is \Log{T} plus the \Ax{4} rules. Therefore it has the \Ax{K},
-\Ax{D}, \Ax{T} and \Ax{4} rules.
-
-\Log{B} is \Log{T} plus the \Ax{B} rules. Therefore it has the \Ax{K},
-\Ax{D}, \Ax{T} and \Ax{4} rules.
-
-\Log{S5} is \Log{T} plus the \Ax{5} rules. Therefore it has 
-all the rules we have seen: \Ax{K}, \Ax{D}, \Ax{T}, \Ax{4}, \Ax{B}
-and \Ax{5} rules.
-
-More generally, we can describe systems by listing their rules. 
-\Log{KD45} is the system given by the \Ax{K}, \Ax{D}, \Ax{4} and \Ax{5}
-rules. \Log{S4} can be called \Log{KT4} or \Log{KDT4}; \Log{S5} can 
-be called \Log{KT5}, \Log{KT45}, \Log{KDTB45}, and many other names.
 
 \end{document}

@@ -12,6 +12,8 @@
 
 \begin{prob}
     Write down truth tables for $\bot$, $\lor$, $\land$, $\lif$.
+
+    \begin{ans}See textbook.\end{ans}
 \end{prob}
 
 \begin{prob}
@@ -19,6 +21,11 @@
     That it is a \emph{contradiction}? That it is \emph{logically contingent}?
 
     Give an example of each.
+    \begin{ans}See textbook for the definitions. Examples: 
+        $\Obj{\pvar{A}}\lif\Obj{\pvar{A}}$ for a tautology, 
+        $\lnot(\Obj{\pvar{A}}\lif\Obj{\pvar{A}})$ for a contradiction, 
+        $\Obj{\pvar{A}}$ for a logically contingent !!{formula}. 
+    \end{ans}
 \end{prob}
 
 \begin{prob}
@@ -56,6 +63,27 @@
     \item unsatisfiable set of !!{formula}s (containing 3 or more
     formulas)
     \end{itemize}
+
+    \begin{ans}Definitions: see textbook.
+
+    Examples (using $/$ to separate premises and conclusions in argument):
+    \begin{itemize}
+        \item Valid argument: 
+        $$\Obj{\pvar{A}} ~/~ \Obj{\pvar{A}} \lor \Obj{\pvar{B}}$$
+
+        \item Invalid argument:
+        $$\Obj{\pvar{A}} ~/~ \Obj{\pvar{A}} \land \Obj{\pvar{B}}$$
+
+        \item Satisfiable set of !!{formula}s:
+        $$\Obj{\pvar{A}}, \Obj{\pvar{B}}, 
+        \Obj{\pvar{A}}\land\Obj{\pvar{B}}$$
+
+        \item Unsatisfiable set of !!{formula}s:
+        $$\Obj{\pvar{A}}, \Obj{\pvar{B}}, 
+        \lnot(\Obj{\pvar{A}}\land \Obj{\pvar{B}})$$
+    
+    \end{itemize}
+    \end{ans}
 \end{prob}
 
 \begin{prob}
@@ -63,6 +91,12 @@
     What does it mean to say that two !!{formula}s are \emph{logically equivalent}?
     Give an (interesting) example of two logically equivalent !!{formula}s of
     propositional logic.    
+
+    \begin{ans}Definition: see textbook.
+
+    Example: $\lnot\Obj{\pvar{A}}$ and 
+    $\Obj{\pvar{A}}\lif\lnot\Obj{\pvar{A}}$ are logically equivalent.
+    \end{ans}
 \end{prob}
 
 % \begin{prob}[Find !!{valuation}s to verify or falsify !!a{formula}]

@@ -1,0 +1,66 @@
+% Part: cheat-sheets
+% Chapter: modal-propositional-logics
+% Section: remark-on-satisfication-notation
+
+\documentclass[../../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{chs}{pml}{rsn}
+
+\olsection{Remark on the notation for satisfaction and entailment}
+
+In earlier version of the KCL Philosophical Logic PDF you might have 
+noticed two slightly different symbols in the semantics: $\vDash$ and 
+$\Vdash$. Following MacFarlane, we simply use the same symbol $\vDash$. 
+This note explains why some textbooks use two symbols, what they mean, 
+and why it's fine to just use one. 
+
+Logical consequence is a relation \emph{between (premise) !!{formula}s
+and (conclusion) !!{formula}s}. We have two types of consequence 
+relation:
+\begin{itemize}
+\item Proof-theoretic (aka syntactic). !!^{derivability}, noted $\Gamma \Proves !A$.
+\item Semantic. Entailement (aka validity), noted $\Gamma \Entails !A$.
+\end{itemize}
+In semantics, we also have the notion of \emph{satisfaction}. This 
+is a relation between \emph{!!{structure}s} and !!{formula}s:
+roughly put, a truth-making relation---the !!{formula}
+is `true at' or `true in' the !!{structure}.
+\begin{itemize}
+\item Satisfaction. $\mSat{M}{!A}$.
+\end{itemize}
+
+Some textbooks use the same symbol $\vDash$ for 
+both entailement and satisfaction. The ambiguity is acceptable because
+both notions have to do with semantics, because one is defined in terms 
+of the other ($\Gamma$ entails $!A$ iff no !!{structure} satisfies all 
+!!{formula}s in $\Gamma$ without satisfying $!A$ too), and because we 
+can always figure out from context which one is meant. 
+
+Some textbooks use two distinct symbols, $\vDash$ and $\Vdash$: the
+former for entailement and the latter for satisfaction---never the
+other way round. (The symbol $\Vdash$ is sometimes called the
+`forcing' symbol because it's mostly used in advanced parts of set
+theory where it denotes yet another notion, forcing.)
+
+MacFarlane uses just one symbol. The Open Logic textbook, on which 
+KCL Philosophical Logic is based, uses two symbols in its modal logic
+chapter but only one symbol elsewhere. Thus you might have seen $\Vdash$
+in the modal logic chapter and wondered why I used $\vDash$ instead in 
+class. I've now updated KCL Philosophical Logic so that it only uses
+one symbol throughout, like MacFarlane. 
+
+For exam purposes it only matters that you use distinct symbols for
+\begin{itemize}
+    \item the proof-theoretic notion of !!{derivability}, with \emph{single-lined} symbol
+        $\vdash$
+    \item the semantic notions of entailement and satisfaction, with \emph{double-lined}
+        symbols $\vDash$ and/or $\Vdash$. 
+\end{itemize}
+Whether you use distinct symbols or not for entailement vs satisfaction
+doesn't matter. Either use $\vDash$ for both,
+or use $\vDash$ for entailement and $\Vdash$ for satisfaction. It's 
+wrong to use $\Vdash$ for entailement but we won't penalize you for it.
+
+\end{document}

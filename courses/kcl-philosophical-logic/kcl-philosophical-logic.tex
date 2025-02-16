@@ -2,7 +2,7 @@
 
 % \olpath has to point to the location of the OLP main
 % directory/folder. 
-\newcommand{\olpath}{../../}
+\newcommand{\olpath}{../..}
 
 % load all the Open Logic definitions. This will also load the
 % local definitions in kcl-philosophical-logic.sty
@@ -125,7 +125,24 @@
 
 \part{Normal Modal Logics}
 
-\olimport*[normal-modal-logic/syntax-and-semantics]{syntax-and-semantics}
+% adding note on \vDash vs \Vdash
+%\olimport*[normal-modal-logic/syntax-and-semantics]{syntax-and-semantics}
+\chapter{Syntax and Semantics}
+
+\olimport*[normal-modal-logic/syntax-and-semantics]{introduction}
+\olimport*[normal-modal-logic/syntax-and-semantics]{language-modal-logic}
+\olimport*[normal-modal-logic/syntax-and-semantics]{substitution}
+\olimport*[normal-modal-logic/syntax-and-semantics]{relational-models}
+\olimport*[normal-modal-logic/syntax-and-semantics]{truth-at-w}
+\olimport*[normal-modal-logic/syntax-and-semantics]{truth-in-model}
+\olimport[\olpath/content-new/normal-modal-logic/syntax-and-semantics]{remark-on-satisfaction-notation}
+\olimport*[normal-modal-logic/syntax-and-semantics]{modal-validity}
+\olimport*[normal-modal-logic/syntax-and-semantics]{tautological-instances}
+\olimport*[normal-modal-logic/syntax-and-semantics]{schemas}
+\olimport*[normal-modal-logic/syntax-and-semantics]{entailment}
+
+\OLEndChapterHook
+
 
 \olimport*[normal-modal-logic/frame-definability]{frame-definability}
 

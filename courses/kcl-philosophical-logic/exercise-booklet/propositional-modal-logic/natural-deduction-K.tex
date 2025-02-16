@@ -1,0 +1,462 @@
+% Part: exercise-booklet
+% Chapter: propositional-modal-logic
+% Section: natural-deduction
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{exb}{pml}{nd}
+
+\olsection{Natural deduction in \Log{K}}
+
+\begin{prob}[System K]
+    Give !!a{derivation} of $\Box!A\land\Box!B\Proves[\Log{K}]
+    \Box(!A\land!B)$.
+    
+        \begin{ans} !!^{derivation} of 
+            $\Box!A\land\Box!B\Proves[\Log{K}]\Box(!A\land!B)$.
+    
+        \begin{prooftree}
+        \AxiomC{$\Box!A\land\Box$}
+        \RightLabel{\Elim{\land}}
+        \UnaryInfC{$\Box!A$}
+            \AxiomC{$\Box!A\land\Box$}
+            \RightLabel{\Elim{\land}}
+            \UnaryInfC{$\Box!B$}
+                \AxiomC{$\Discharge{!A}{1}$}
+                \AxiomC{$\Discharge{!B}{1}$}
+                \RightLabel{\Intro{\land}}
+                \BinaryInfC{$!A\land!B$}
+        \DischargeRule{$\Box$\Ax{K}}{1}
+        \TrinaryInfC{$\Box(!A\land!B)$}
+        \end{prooftree}
+        \end{ans}
+    
+\end{prob}
+    
+
+\begin{prob}[System \Log{K}]
+    Give a !!{derivation} of $\Proves[\Log{K}]
+    \Diamond(!A\land!B)\lif(\Diamond!A\land\Diamond!B)$. 
+
+    \begin{ans} !!^{derivation} of $\Proves[\Log{K}]
+    \Diamond(!A\land!B)\lif(\Diamond!A\land\Diamond!B)$:
+
+    \begin{prooftree}
+    \AxiomC{$\Diamond(!A\land!B)$}
+    \AxiomC{$\Discharge{!A\land!B}{1}$}
+    \RightLabel{\Elim{\land}}
+    \UnaryInfC{$!A$}
+    \DischargeRule{$\Diamond$\Ax{K}}{1}
+    \BinaryInfC{$\Diamond!A$}
+            \AxiomC{$\Diamond(!A\land!B)$}
+                \AxiomC{$\Discharge{!A\land!B}{2}$}
+                \RightLabel{\Elim{\land}}
+                \UnaryInfC{$!B$}
+                \DischargeRule{$\Diamond$\Ax{K}}{2}
+            \BinaryInfC{$\Diamond!B$}
+        \RightLabel{\Intro{\land}}
+        \BinaryInfC{$\Diamond!A\land\Diamond!B$}
+    \end{prooftree}
+
+    Another option, using only the basic \Log{K} rules and \Log{PL} for
+    propositional steps:
+
+    \begin{prooftree}
+    \AxiomC{$\Diamond(!A\land!B)$}
+    \RightLabel{\Elim{\Diamond}}
+    \UnaryInfC{$\lnot\Box\lnot(!A\land!B)$}
+        \AxiomC{$\Discharge{\Box\lnot!A}{2}$}
+            \AxiomC{$\Discharge{\lnot!A}{1}$}
+            \RightLabel{\Log{PL}}
+            \UnaryInfC{$\lnot(!A\land!B)$}
+        \DischargeRule{$\Box$\Ax{K}}{1}
+        \BinaryInfC{$\Box\lnot(!A\land!B)$}
+    \DischargeRule{\Intro{\lnot}}{2}
+    \BinaryInfC{$\lnot\Box\lnot!A$}
+    \RightLabel{\Intro{\Diamond}}
+    \UnaryInfC{$\Diamond!A$}
+            \AxiomC{\emph{similar steps}}
+            \DeduceC{$\Diamond!B$}
+    \RightLabel{\Intro{\land}}
+    \BinaryInfC{$\Diamond!A\land\Diamond!B$}
+    \end{prooftree}
+    
+    The \Log{PL} step above abbreviates:
+    \begin{prooftree}
+    \AxiomC{$\lnot!A$}
+        \AxiomC{$\Discharge{!A\land!B}{n}$}
+        \RightLabel{\Elim{\land}}
+        \UnaryInfC{$!A$}
+    \DischargeRule{\Intro{\lnot}}{n}
+    \BinaryInfC{$\lnot(!A\land!B)$}
+    \end{prooftree}
+    
+    \end{ans}
+
+\end{prob}
+
+\begin{prob}[System \Log{K}]
+    Give a !!{derivation} of $\Proves[\Log{K}]
+    \Box(!A\lif!B)\lif(\Diamond!A\lif\Diamond!B)$.
+
+    \begin{ans} !!^{derivation} of $\Proves[\Log{K}]
+        \Box(!A\lif!B)\lif(\Diamond!A\lif\Diamond!B)$:
+
+        \begin{prooftree}
+            \AxiomC{$\Discharge{\Diamond!A}{2}$}
+                \AxiomC{$\Discharge{\Box(!A\lif!B)}{3}$}
+                    \AxiomC{$\Discharge{!A}{1}$}
+                    \AxiomC{$\Discharge{!A\lif!B}{1}$}
+                    \RightLabel{\Elim{\lif}}
+                    \BinaryInfC{$!B$}
+            \DischargeRule{$\Diamond$\Ax{K}}{1}
+            \TrinaryInfC{$\Diamond!B$}
+            \DischargeRule{\Intro{\lif}}{2}
+            \UnaryInfC{$\Diamond!A\lif\Diamond!B$}
+            \DischargeRule{\Intro{\lif}}{3}
+            \UnaryInfC{$\Box(!A\lif!B)\lif\Diamond!A\lif\Diamond!B$}
+        \end{prooftree}   
+        
+        Another option, using only basic modal rules and \Log{PL}
+        for propositional steps:
+
+        \begin{prooftree}
+        \AxiomC{$\Discharge{\Diamond!A}{3}$}
+        \RightLabel{\Elim{\Diamond}}
+        \UnaryInfC{$\lnot\Box\lnot!A$}
+            \AxiomC{$\Discharge{\Box(!A\lif!B)}{4}$}
+            \AxiomC{$\Discharge{\Box\lnot!B}{2}$}
+            \AxiomC{$\Discharge{!A\lif!B}{1}$}
+            \AxiomC{$\Discharge{\lnot!B}{1}$}
+            \RightLabel{\Log{PL}}
+            \BinaryInfC{$\lnot!A$}
+            \DischargeRule{$\Box$\Ax{K}}{1}
+            \TrinaryInfC{$\Box\lnot!A$}
+        \DischargeRule{\Intro{\lnot}}{2}
+        \BinaryInfC{$\lnot\Box\lnot!B$}
+        \RightLabel{\Intro{\Diamond}}
+        \UnaryInfC{$\Diamond!B$}
+        \DischargeRule{\Intro{\lif}}{3}
+        \UnaryInfC{$\Diamond!A\lif\Diamond!B$}
+        \DischargeRule{\Intro{\lif}}{4}
+        \UnaryInfC{$\Box(!A\lif!B)\lif(\Diamond!A\lif\Diamond!B)$}
+        \end{prooftree}
+
+        The \Log{PL} step above abbreviates:
+        \begin{prooftree}
+        \AxiomC{$!A\lif!B$}
+        \AxiomC{$\Discharge{!A}{1}$}
+        \RightLabel{\Elim{\lif}}
+        \BinaryInfC{$!B$}
+            \AxiomC{$\lnot!B$}
+        \RightLabel{\Intro{\lnot}}
+        \BinaryInfC{$\lnot!A$}
+        \end{prooftree}
+
+    \end{ans}
+
+\end{prob}
+
+\begin{prob}[System \Log{K}]
+    \citep[exercise 3.2 item 1.1]{MacFarlane-2020-PhilosophicalLogicContemporary}
+    Give a !!{derivation} of the following:
+    $$\Box(\Obj{\pvar{A}}\lif\Obj{\pvar{B}}),
+        \Box(\Obj{\pvar{B}}\lif\Obj{\pvar{C}}),
+        \Box(\Obj{\pvar{C}}\lif\Obj{\pvar{D}}),
+        \lnot\Diamond(\Obj{\pvar{D}}) 
+        \Proves[\Log{K}] \lnot\Diamond(\Obj{\pvar{A}})$$
+
+    \begin{ans} !!^{derivation}s of $\Box(\Obj{\pvar{A}}\lif\Obj{\pvar{B}}),
+        \Box(\Obj{\pvar{B}}\lif\Obj{\pvar{C}}),
+        \Box(\Obj{\pvar{C}}\lif\Obj{\pvar{D}}),
+        \lnot\Diamond(\Obj{\pvar{D}}) \Proves[\Log{K}] \lnot\Diamond(\Obj{\pvar{A}})$
+
+        \rotatebox{90}{
+            \footnotesize
+            \def\defaultHypSeparation{\hskip .02in}
+            \AxiomC{$\Discharge{\Diamond \Obj{\pvar{A}}}{4}$}
+            \AxiomC{$\Box(\Obj{\pvar{A}}\lif\Obj{\pvar{B}})$}
+                \AxiomC{$\Discharge{\Obj{\pvar{A}}}{1}$}
+                \AxiomC{$\Discharge{\Obj{\pvar{A}}\lif\Obj{\pvar{B}}}{1}$}
+                \RightLabel{\Elim{\lif}}
+                \BinaryInfC{$\Obj{\pvar{B}}$}
+            \DischargeRule{$\Diamond$\Ax{K}}{1}
+            \TrinaryInfC{$\Diamond \Obj{\pvar{B}}$}
+            \AxiomC{$\Box(\Obj{\pvar{B}}\lif\Obj{\pvar{C}})$}
+                \AxiomC{$\Discharge{\Obj{\pvar{B}}}{2}$}
+                \AxiomC{$\Discharge{\Obj{\pvar{B}}\lif\Obj{\pvar{C}}}{2}$}
+                \RightLabel{\Elim{\lif}}
+                \BinaryInfC{$\Obj{\pvar{C}}$}
+            \DischargeRule{$\Diamond$\Ax{K}}{2}
+            \TrinaryInfC{$\Diamond \Obj{\pvar{C}}$}
+            \AxiomC{$\Box(\Obj{\pvar{C}}\lif\Obj{\pvar{D}})$}
+                \AxiomC{$\Discharge{\Obj{\pvar{C}}}{3}$}
+                \AxiomC{$\Discharge{\Obj{\pvar{C}}\lif\Obj{\pvar{D}}}{3}$}
+                \RightLabel{\Elim{\lif}}
+                \BinaryInfC{$\Obj{\pvar{D}}$}
+            \DischargeRule{$\Diamond$\Ax{K}}{3}
+            \TrinaryInfC{$\Diamond \Obj{\pvar{D}}$}
+                \AxiomC{$\lnot\Diamond{\Obj{\pvar{D}}}$}
+            \RightLabel{\Intro{\lfalse}}
+            \DischargeRule{\Elim{\lfalse}}{4}
+            \BinaryInfC{$\lnot\Diamond{\Obj{\pvar{A}}}$}
+            \DisplayProof
+        }
+        \rotatebox{90}{
+            \begin{minipage}{30em}
+            \bigskip
+            Note that each $\Diamond$\Ax{K} is correct because (1) it 
+            uses one (and only one) $\Diamond!A$ premise, and 
+            (2) the derivation on the right uses \emph{at most} assumptions $!A$ 
+            and $!B$ from its other premises, $\Diamond !A$ and $\Box !B$. 
+            \end{minipage}
+        }
+
+        There are other options. For instance, you could first use
+        $\Box$K to derive $\Box(\Obj{\pvar{A}}\lif\Obj{\pvar{D}})$,
+        then combine with $\Diamond \Obj{\pvar{A}}$ to derive
+        $\Diamond \Obj{\pvar{D}}$ with $\Diamond$\Ax{K}, and use the
+        same finishing steps as above. The shortest !!{derivation}
+        uses the generalized version of $\Diamond$\Ax{K} rule and the
+        \Log{PL} rule to omit propositional steps: 
+
+        {\footnotesize
+        \def\defaultHypSeparation{\hskip .02in}
+        \begin{prooftree}
+            \AxiomC{$\Discharge{\Diamond \Obj{\pvar{A}}}{2}$}
+            \AxiomC{$\Box(\Obj{\pvar{A}}\lif\Obj{\pvar{B}})$}
+            \AxiomC{$\Box(\Obj{\pvar{B}}\lif\Obj{\pvar{C}})$}
+            \AxiomC{$\Box(\Obj{\pvar{C}}\lif\Obj{\pvar{D}})$}
+                \AxiomC{$\Discharge{\Obj{\pvar{A}}}{1}$}
+                \AxiomC{$\Discharge{\Obj{\pvar{A}}\lif\Obj{\pvar{B}}}{1}$}
+                \AxiomC{$\Discharge{\Obj{\pvar{B}}\lif\Obj{\pvar{C}}}{1}$}
+                \AxiomC{$\Discharge{\Obj{\pvar{C}}\lif\Obj{\pvar{D}}}{1}$}
+                \RightLabel{\Log{PL}}
+                \QuaternaryInfC{$\Obj{\pvar{D}}$}
+            \DischargeRule{$\Diamond$\Ax{K}}{1}
+            \QuinaryInfC{$\Diamond \Obj{\pvar{D}}$}
+                \AxiomC{$\lnot\Diamond{\Obj{\pvar{D}}}$}
+            \DischargeRule{\Log{PL}}{2}
+            \BinaryInfC{$\lnot\Diamond{\Obj{\pvar{A}}}$}
+        \end{prooftree}
+        }
+    
+    \end{ans}
+\end{prob}
+
+\begin{prob}
+    \citep[exercise 3.2 item 1.2]{MacFarlane-2020-PhilosophicalLogicContemporary}
+    Give a !!{derivation} of the following:
+    $$\Diamond(\Obj{\pvar{A}}\lor\Obj{\pvar{B}})
+        \Proves[\Log{K}] \Diamond\Obj{\pvar{A}} \lor \Diamond\Obj{\pvar{B}}$$
+
+\begin{ans}
+        The conclusion is a disjunction. A direct !!{derivation} would
+        be to use \Intro{\lor}:
+        \begin{prooftree}
+            \AxiomC{$\Diamond(\Obj{\pvar{A}}\lor\Obj{\pvar{B}})$}
+            \noLine
+            \UnaryInfC{$\mathcal{D}$}
+            \noLine
+            \UnaryInfC{$\Diamond \Obj{\pvar{A}}$}
+            \RightLabel{\Elim{\lor}}
+            \UnaryInfC{$\Diamond\Obj{\pvar{A}} \lor \Diamond\Obj{\pvar{B}}$}      
+        \end{prooftree}
+        But that requires deriving a disjunct. In that situation
+        always ask yourself whether it is indeed possible to derive a
+        disjunct. For if we can fill in the steps $\mathcal{D}$ above,
+        we would have !!a{derivation} of:
+        $\Diamond(\Obj{\pvar{A}}\lor\Obj{\pvar{B}}) \Proves[\Log{K}]
+        \Diamond\Obj{\pvar{A}}$. Is that possible? No, because that
+        argument is \emph{not} valid. Our proof system only derives
+        valid arguments (it is sound); therefore there won't be a way
+        to fill in the steps for $\mathcal{D}$. As is often the case
+        with (interesting) disjunctive conclusions, the premise
+        entails that \emph{one of} the disjuncts is true, but it
+        doesn't entail either conjunction: it doesn't entail that the
+        first one is true nor that the second one is true. 
+
+        Our only hope is an indirect !!{derivation}, also known as 
+        !!a{derivation} by \emph{reductio}:
+        \begin{prooftree}
+            \AxiomC{$\Diamond(\Obj{\pvar{A}}\lor\Obj{\pvar{B}})$}
+            \noLine
+            \UnaryInfC{$\mathcal{D}_1$}
+            \noLine
+            \UnaryInfC{$!A$}
+                \AxiomC{$\Discharge{\lnot(\Diamond\Obj{\pvar{A}} \lor \Diamond\Obj{\pvar{B}})}{1}$}
+                \noLine
+                \UnaryInfC{$\mathcal{D}_2$}
+                \noLine
+                \UnaryInfC{$\lnot!A$}
+                \DischargeRule{\Elim{\lnot}}{1}
+            \BinaryInfC{$\Diamond\Obj{\pvar{A}} \lor \Diamond\Obj{\pvar{B}}$}        
+        \end{prooftree}
+        What should we use for $!A$ above? A good guess is that we 
+        can use $\Diamond(\Obj{\pvar{A}}\lor\Obj{\pvar{B}})$ itself:
+        \begin{prooftree}
+            \AxiomC{$\Diamond(\Obj{\pvar{A}}\lor\Obj{\pvar{B}})$}
+                \AxiomC{$\Discharge{\lnot(\Diamond\Obj{\pvar{A}} \lor \Diamond\Obj{\pvar{B}})}{1}$}
+                \noLine
+                \UnaryInfC{$\mathcal{D}$}
+                \noLine
+                \UnaryInfC{$\lnot\Diamond(\Obj{\pvar{A}}\lor\Obj{\pvar{B}})$}
+                \DischargeRule{\Elim{\lnot}}{1}
+            \BinaryInfC{$\Diamond\Obj{\pvar{A}} \lor \Diamond\Obj{\pvar{B}}$}        
+        \end{prooftree}
+        Our task then is to fill up the steps for $\mathcal{D}$, i.e.
+        to prove $\lnot(\Diamond\Obj{\pvar{A}} \lor
+        \Diamond\Obj{\pvar{B}}) \Proves[\Log{K}]\lnot\Diamond(\Obj{\pvar{A}}
+        \lor \Obj{\pvar{B}})$.
+
+        How do we proceed? A rule of thumb: \emph{working with $\land$
+        is easier than working with $\lor$ and working with $\Box$
+        is easier than working with $\Diamond$}. If a few steps 
+        allow you to convert the one into the other, it's a good (but 
+        not infallible) bet that doing so would help. Here the key 
+        facts to remember are:
+        \begin{itemize}
+            \item From propositional logic: $\lnot(!A \lor !A)$ is
+            equivalent to $\lnot!A \land\lnot!B$. (De Morgan law)
+            \item From modal logic: $\lnot\Diamond !A$ is equivalent
+            to $\Box\lnot!A$. (Duality)
+        \end{itemize}
+        Given those facts, we can turn our job into one that 
+        only involves $\Box$ and $\land$:
+        \begin{prooftree}
+            \AxiomC{$\Diamond(\Obj{\pvar{A}}\lor\Obj{\pvar{B}})$}
+                \AxiomC{$\Discharge{\lnot(\Diamond\Obj{\pvar{A}} \lor \Diamond\Obj{\pvar{B}})}{1}$}
+                \RightLabel{\Log{PL} steps tbd}
+                \UnaryInfC{$\lnot\Diamond\Obj{\pvar{A}} \land \lnot\Diamond\Obj{\pvar{B}}$}
+                \RightLabel{Dual and \Log{PL} steps}
+                \UnaryInfC{$\Box\lnot\Obj{\pvar{A}} \land \Box\lnot\Obj{\pvar{B}}$}
+                \noLine
+                \UnaryInfC{$\mathcal{D}$}
+                \noLine
+                \UnaryInfC{$\Box\lnot(\Obj{\pvar{A}}\lor\Obj{\pvar{B}})$}
+                \RightLabel{Dual}
+                \UnaryInfC{$\lnot\Diamond(\Obj{\pvar{A}}\lor\Obj{\pvar{B}})$}
+                \DischargeRule{\Elim{\lnot}}{1}
+            \BinaryInfC{$\Diamond\Obj{\pvar{A}} \lor \Diamond\Obj{\pvar{B}}$}        
+        \end{prooftree}
+
+    Here is a complete proof, using the \Log{PL} rule to omit
+    propositional logic steps, and the Duality rules Dual. 
+
+
+    !!^{derivation} of $\Diamond(\Obj{\pvar{A}}\lor\Obj{\pvar{B}})
+        \Proves[\Log{K}] \Diamond\Obj{\pvar{A}} \lor \Diamond\Obj{\pvar{B}}$
+    {\small \def\defaultHypSeparation{\hskip .03in}
+    \begin{prooftree}
+        \AxiomC{$\Diamond(\Obj{\pvar{A}}\lor\Obj{\pvar{B}})$}
+        \AxiomC{$\Discharge{\lnot(\Diamond\Obj{\pvar{A}} \lor \Diamond\Obj{\pvar{B}})}{2}$}
+        \RightLabel{\Log{PL}}
+        \UnaryInfC{$\lnot\Diamond\Obj{\pvar{A}}$}
+        \RightLabel{Dual}
+        \UnaryInfC{$\Box\lnot\Obj{\pvar{A}}$}
+            \AxiomC{$\Discharge{\lnot(\Diamond\Obj{\pvar{A}} \lor \Diamond\Obj{\pvar{B}})}{2}$}
+            \RightLabel{\Log{PL}}
+            \UnaryInfC{$\lnot\Diamond\Obj{\pvar{B}}$}
+            \RightLabel{Dual}
+            \UnaryInfC{$\Box\lnot\Obj{\pvar{B}}$}
+                \AxiomC{$\Discharge{\lnot\Obj{\pvar{A}}}{1}$}
+                \AxiomC{$\Discharge{\lnot\Obj{\pvar{B}}}{1}$}
+                \RightLabel{\Log{PL}}
+                \BinaryInfC{$\lnot(\Obj{\pvar{A}}\lor\Obj{\pvar{B}})$}
+        \DischargeRule{$\Box$K}{1}
+        \TrinaryInfC{$\Box\lnot(\Obj{\pvar{A}}\lor\Obj{\pvar{B}})$}
+        \RightLabel{Dual}
+        \UnaryInfC{$\lnot\Diamond(\Obj{\pvar{A}}\lor\Obj{\pvar{B}})$}
+        \DischargeRule{\Elim{\lnot}}{2}
+    \BinaryInfC{$\Diamond\Obj{\pvar{A}} \lor \Diamond\Obj{\pvar{B}}$}        
+    \end{prooftree}
+    }
+
+    If you do not know the Duality rules you need to replace the 
+    Dual steps above with: 
+
+    \smallskip
+    \begin{tabular}{cc}
+        instead of step:   &  use steps: 
+    \\[2em]
+        \AxiomC{$\Box\lnot!A$}
+        \RightLabel{Dual}
+        \UnaryInfC{$\lnot\Diamond!A$}
+        \DisplayProof  
+    &
+        \AxiomC{$\Box\lnot!A$}
+            \AxiomC{$\Discharge{\Diamond!A}{1}$}
+            \RightLabel{\Elim{\Diamond}}
+            \UnaryInfC{$\lnot\Box\lnot!A$}
+        \DischargeRule{\Intro{\lnot}}{1}
+        \BinaryInfC{$\lnot\Diamond!A$}
+        \DisplayProof 
+    \\[3em]
+        \AxiomC{$\lnot\Diamond!A$}
+        \RightLabel{Dual}
+        \UnaryInfC{$\Box\lnot!A$}
+        \DisplayProof  
+    &
+        \AxiomC{$\lnot\Diamond!A$}
+            \AxiomC{$\Discharge{\lnot\Box\lnot!A}{1}$}
+            \RightLabel{\Elim{\Diamond}}
+            \UnaryInfC{$\Diamond!A$}
+        \RightLabel{\Elim{\lnot}}
+        \BinaryInfC{$\Box\lnot!A$}
+        \DisplayProof
+
+    \end{tabular}
+    \smallskip
+
+    If you do not know or cannot use the simplifying rule \Log{PL},
+    you need to replace steps in the !!{derivation} above as follows:
+
+    \smallskip
+    \begin{tabular}{cc}
+        instead of step:   &  use steps: 
+    \\[2em]
+        \AxiomC{$\lnot(!A\lor!B)$}
+        \RightLabel{\Log{PL}}
+        \UnaryInfC{$\lnot!A$}
+        \DisplayProof  
+    &
+        \AxiomC{$\lnot(!A\lor!B)$}
+            \AxiomC{$\Discharge{!A}{1}$}
+            \RightLabel{\Intro{\lor}}
+            \UnaryInfC{$!A\lor!B$}
+        \DischargeRule{\Intro{\lnot}}{1}
+        \BinaryInfC{$\lnot!A$}
+        \DisplayProof 
+    \\[2em]
+        \AxiomC{$\lnot!A$}
+        \AxiomC{$\lnot!B$}
+        \RightLabel{\Log{PL}}
+        \BinaryInfC{$\lnot(!A\lor!B)$}
+        \DisplayProof 
+    &
+        {\def\defaultHypSeparation{\hskip .03in}
+        \AxiomC{$\Discharge{!A\lor!B}{2}$}
+            \AxiomC{$\Discharge{!A}{1}$}
+            \AxiomC{$\lnot!A$}
+            \RightLabel{\Elim{\lnot}}
+            \BinaryInfC{$!B$}
+                \AxiomC{$\Discharge{!B}{1}$}
+        \DischargeRule{\Elim{\lor}}{1}
+        \TrinaryInfC{$!B$}
+            \AxiomC{$\lnot!B$}
+        \DischargeRule{\Intro{\lnot}}{2}
+        \BinaryInfC{$\lnot(!A\lor!B)$}
+        \DisplayProof
+        }
+
+    \end{tabular}
+    \smallskip
+
+
+    \end{ans}
+\end{prob}
+
+\end{document}
+

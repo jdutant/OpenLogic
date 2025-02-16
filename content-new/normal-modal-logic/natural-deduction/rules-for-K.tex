@@ -53,48 +53,21 @@ or even no premise:
 \end{tabular}
 \bigskip
 
-\iftag{prvDiamond}{ For the modal operator $\Diamond$, we add the
-following \emph{Normality} rules \Intro{\Diamond}\Ax{K} and
-\Elim{\Diamond}\Ax{K}:
+\iftag{prvDiamond}{
+For the modal operator $\Diamond$ we add the \emph{Duality} rules
+below. These amount to defining $\Diamond!A$ as $\lnot\Box\lnot!A$.
 \begin{defish}
-\begin{tabular}{cc}
-    \AxiomC{}\DeduceC{$\Diamond!A$}
-    \AxiomC{}\DeduceC{$\Box!B$}
-    \AxiomC{$\Discharge{!A}{n}$\emph{at least},$\Discharge{!A}{n}\Discharge{!B}{n}$\emph{at most}}\DeduceC{$!C$}
-    \DischargeRule{\Intro{\Diamond}\Ax{K}}{n}
-    \TrinaryInfC{$\Diamond!C$}
-    \DisplayProof
-&   
-    \AxiomC{}\DeduceC{$\Diamond\lfalse$}
-    \RightLabel{\Elim{\Diamond}\Ax{K}}
-    \UnaryInfC{$\lfalse$}
-    \DisplayProof
-\end{tabular}
+        \AxiomC{}\DeduceC{$\lnot\Box\lnot!A$}
+        \RightLabel{\Intro{\Diamond}K}
+        \UnaryInfC{$\Diamond!A$}
+        \DisplayProof
+    \hfill
+        \AxiomC{}\DeduceC{$\Diamond!A$}
+        \RightLabel{\Elim{\Diamond}K}
+        \UnaryInfC{$\lnot\Box\lnot!A$}
+        \DisplayProof
 \end{defish}
 }{}
-
-As with $\Box$\Ax{K}, the sub-!!{derivation} on the right should at 
-most have $!A$ and $!B$ as undischarged assumptions. The rule can be 
-applied without $\Box!B$ premise, but \emph{it cannot be applied without
-the $\Diamond!A$ premise}:
-
-\bigskip
-\begin{tabular}{cc}
-    \AxiomC{}\DeduceC{$\Diamond!A$}
-    \AxiomC{$\Discharge{!A}{n}$\emph{at least}}\DeduceC{$!C$}
-    \DischargeRule{\Intro{\Diamond}\Ax{K}}{n}
-    \BinaryInfC{$\Diamond!C$}
-    \DisplayProof
-&
-    \AxiomC{\emph{no undischarged assumption}}\DeduceC{$!C$}
-    \RightLabel{{\color{red}Incorrect}}
-    \UnaryInfC{$\Diamond!C$}
-    \DisplayProof
-\end{tabular}
-\bigskip
-
-Note, however, that this restriction is lifted in systems \Log{D}
-and stronger.
 
 \begin{explain}
 The $\Box$\Ax{K} rule is called \emph{Normality} because it
@@ -137,51 +110,11 @@ system cannot be given; our rule would still be the best we can
 achieve. As it happens, logical consequence in \Ax{K} models is
 compact, and the rule is sufficient for completeness.
 
-\iftag{prvDiamond}{ The \Elim{\Diamond}\Ax{K} idea captures the idea that contradictions
-are not possible.
-
-The \Intro{\Diamond}\Ax{K} rule captures the idea
-that \emph{possibility is closed under single-premise necessary
-consequence}, namely that if $!C$ is a necessary consequence of $!A$,
-then $\Diamond!C$ is a logical consequence of $\Diamond!A$. To clarify this idea,
-start with the related idea that possibility is closed under single-premise
-\emph{logical} consequence: if $!C$ is a \emph{logical} consequence of 
-$!A$, then $\Diamond!C$ is a logical consequence of $\Diamond!A$. 
-This is a special case of \Intro{\Diamond}\Ax{K} with $\Box!B$ missing.
-Then, define \emph{necessary} consequence as follows:
-\begin{quote}
-\emph{Necessary consequence}. $!C$ is a necessary consequence of $!A$
-iff $!A\lif!C$ is necessary. (Equivalently, iff $!C$ is a logical
-consequence of $!A$ \emph{together with} what is necessary.)
-\end{quote}
-This idea would be captured by the following rule:
-\begin{prooftree}
-    \AxiomC{}\DeduceC{$\Diamond!A$}
-    \AxiomC{}\DeduceC{$\Box(!A\lif!B)$}
-    \BinaryInfC{$\Diamond!C$}
-\end{prooftree}
-Which is equivalent to \Intro{\Diamond}\Ax{K} given the $\Box$\Ax{K}
-rule. We prefer \Intro{\Diamond}\Ax{K} because, unlike the rule above,
-it does not involve a specific propositional operator ($\lif$). 
-
-Why `single premise' consequence? While we accept the idea that 
-logical consequences of \emph{multiple} necessities are necessary, we
-reject the idea that logical consequences of \emph{multiple} possibilities
-are possible. For instance, it $!A$ is contingent it is both possible
-that $!A$ and possible that $\lnot!A$. While $!A$ and $\lnot!A$ \emph{jointly}
-logically entail $!A\land\lnot!A$, we do not want to say that $\Diamond!A$
-and $\Diamond\lnot!A$ jointly entail $\Diamond(!A\land\lnot!A)$. For 
-the same reason, we do not want to say that necessary consequences of
-multiple possibilities are possibilities. We only accept the principle
-that necessary consequences of \emph{one} possibility are possible.
-
-Another way to motivate the $\Diamond$ rules is \emph{Duality}. 
-Duality is the idea that $\Diamond$ is
+\iftag{prvDiamond}{ The $\Diamond$ rules capture the idea that $\Diamond$ is
 the \emph{dual} of $\Box$: the negation of a
 necessity is is the possibility of its negation ($\lnot\Box$ is
 $\Diamond\lnot$) and the negation of a possibility is the necessity of
-its negation ($\lnot\Diamond$ is $\Box\lnot$). As shown below, our
-$\Diamond$ rules are equivalent to Duality.}{}
-\end{explain}
+its negation ($\lnot\Diamond$ is $\Box\lnot$). 
+}{}
 
 \end{document}

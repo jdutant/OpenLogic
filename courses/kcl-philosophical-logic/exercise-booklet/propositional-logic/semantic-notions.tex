@@ -11,17 +11,55 @@
 \olsection{Semantic Notions}
 
 \begin{prob}[Satisfiability and validity]
-    If the set of formulas $!A_1, !A_2,\ldots, !A_n$ is unsatisfiable, 
+    If the set of !!{formula}s $!A_1, !A_2,\ldots, !A_n$ is unsatisfiable, 
     then the argument with premises $!A_1,!A_2,\ldots!A_{n-1}$ 
     and conclusion $\lnot !A_n$ is valid. Explain why that is so.
+
+    \begin{ans}
+    Suppose $!A_1, !A_2,\ldots, !A_n$ is unsatisfiable and 
+    let $\pAssign{v}$ be any !!{valuation} such that $\pSat{v}{!A_i}$
+    for all $1<i<n-1$. Since $!A_1, !A_2,\ldots, !A_n$ is unsatisfiable,
+    it's not the case that $\pSat{v}{!A_i}$ for all  $1<i<n$. Therefore it 
+    must be that $\pSat/{v}{!A_n}$ and $\pSat{v}{!A_n}$. Generalizing on $pAssign{v}$,
+    we have $!A_1, !A_2,\ldots, !A_{n_1}\Entails \lnot!A_n$.
+    
+    \emph{Here is a less formal version, also acceptable.} If 
+    $!A_1, !A_2,\ldots, !A_n$ is unsatisfiable then no !!{valuation}
+    makes all of them true. So any structure that makes all of 
+    $!A_1, !A_2,\ldots, !A_{n-1}$ must make $!A_n$ false hence
+    $\lnot!A_n$ true. Therefore any !!{valuation} that makes all of 
+    $!A_1,\ldots,!A_{n_1}$ true makes $\lnot!A_n$ true too. So, the 
+    argument from $!A_1,\ldots,!A_{n_1}$ to $\lnot!A_n$ is valid.
+
+    \emph{Comment.} The answer shows that \emph{any} !!{valuation} that
+    would make all of $!A_1, !A_2,\ldots, !A_{n-1}$ true would make
+    $\lnot!A_n$ true. That's enough to show that the argument is valid.
+    It does not assume that \emph{there actually exists} a !!{valuation}
+    that makes all of them true---that is why we say `\emph{any}', not
+    `some'. For all we know, it may be that 
+    $!A_1, !A_2,\ldots, !A_{n-1}$ are themselves unsatisfiable.
+
+    \end{ans}
 \end{prob}
 
 \begin{prob}
     \citep[1.1 item 4]{MacFarlane-2020-PhilosophicalLogicContemporary}
-    Is the following set of formulas satisfiable?
+    Is the following set of !!{formula}s satisfiable?
     $$
-    \pvar{A}\lif\pvar{B}, \pvar{B}\lif\pvar{C},\lnot\pvar{C}\lif\lnot\pvar{A}
+    \Obj{\pvar{A}}\lif\Obj{\pvar{B}}, 
+    \Obj{\pvar{B}}\lif\Obj{\pvar{C}},
+    \lnot\Obj{\pvar{C}}\lif\lnot\Obj{\pvar{A}}
     $$
+
+    \begin{ans}
+    The set is satisfiable. Consider $\pAssign{v}$ with 
+    $\pAssign{v}(\Obj{\pvar{A}})=\pAssign{v}(\Obj{\pvar{B}})
+    =\pAssign{v}(\Obj{\pvar{C}})=\True$.
+    It is easy to see that $\pSat{v}{\Obj{\pvar{A}}\lif\Obj{\pvar{B}}}$, 
+    $\pSat{v}{\Obj{\pvar{B}}\lif\Obj{\pvar{C}}}$, and
+    $\pSat{v}{\lnot\Obj{\pvar{C}}\lif\lnot\Obj{\pvar{A}}}$. Therefore the 
+    these !!{formula}s are jointly satisfiable.
+    \end{ans}
 \end{prob}
 
 \begin{prob}[Validity of arguments]
@@ -30,16 +68,70 @@
     truth tables, natural deduction proofs or informal reasoning.
 
     \smallskip\noindent
-    \begin{tabular}{cccc}
+    \begin{tabular}{rlrl}
     1. 
-        & \AxiomC{$\pvar{A}\lif(\pvar{B}\land\lnot\pvar{B})$}
-          \UnaryInfC{$\lnot\pvar{A}\lor\pvar{R}$}
+        & \AxiomC{$\Obj{\pvar{A}}\lif(\Obj{\pvar{B}}\land\lnot\Obj{\pvar{B}})$}
+          \UnaryInfC{$\lnot\Obj{\pvar{A}}\lor\Obj{\pvar{C}}$}
           \DisplayProof
     & 2.
-        & \AxiomC{$\pvar{A}\lif(\pvar{B}\lif\pvar{C})$}
-          \UnaryInfC{$\pvar{C}\lif(\lnot\pvar{B}\lif\lnot\pvar{Q})$}
+        & \AxiomC{$\Obj{\pvar{A}}\lif(\Obj{\pvar{B}}\lif\pvar{C})$}
+          \UnaryInfC{$\Obj{\pvar{C}}\lif(\lnot\Obj{\pvar{B}}\lif\lnot\Obj{\pvar{A}})$}
           \DisplayProof
     \end{tabular}
+
+    \begin{ans} Informally:
+        \begin{itemize}
+        \item Valid. Informal justification. Suppose
+        $\Obj{\pvar{A}}\lif(\Obj{\pvar{B}}\land\lnot\Obj{\pvar{B}})$
+        is true on some !!{valuation} $\pAssign{v}$. Since
+        $\Obj{\pvar{B}}\land\lnot\Obj{\pvar{B}}$ is not true in any
+        !!{valuation}, $\Obj{\pvar{A}}$ is false on $\pAssign{v}$,
+        therefore $\lnot\Obj{\pvar{A}}\lor\Obj{\pvar{C}}$ is true on
+        $\pAssign{v}$.
+
+        Natural deduction proof:
+        \begin{prooftree}
+        \AxiomC{$\Obj{\pvar{A}}\lif(\Obj{\pvar{B}}\land\lnot\Obj{\pvar{B}})$}
+            \AxiomC{$\Discharge{\Obj{\pvar{A}}}{1}$}
+        \RightLabel{\Elim{\lif}}
+        \BinaryInfC{$\Obj{\pvar{B}}\land\lnot\Obj{\pvar{B}}$}
+        \RightLabel{\Elim{\land}}
+        \UnaryInfC{$\Obj{\pvar{B}}$}
+                \AxiomC{$\Obj{\pvar{A}}\lif(\Obj{\pvar{B}}\land\lnot\Obj{\pvar{B}})$}
+                    \AxiomC{$\Discharge{\Obj{\pvar{A}}}{1}$}
+                \RightLabel{\Elim{\lif}}
+                \BinaryInfC{$\Obj{\pvar{B}}\land\lnot\Obj{\pvar{B}}$}
+                \RightLabel{\Intro{\land}}
+                \UnaryInfC{$\lnot\Obj{\pvar{B}}$}
+        \DischargeRule{\Elim{\lnot}}{1}
+        \BinaryInfC{$\lnot\Obj{\pvar{A}}$}
+        \RightLabel{\Intro{\lor}}
+        \UnaryInfC{$\lnot\Obj{\pvar{A}}\lor\Obj{\pvar{C}}$}
+        \end{prooftree}
+
+
+        \item Not valid. Counterexample 
+        $\pAssign{v}(\Obj{\pvar{A}})=\pAssign{v}(\Obj{\pvar{C}})=\True$, 
+        $\pAssign{v}(\Obj{\pvar{B}})=\False$.
+        
+        \emph{More explicit answer}. The conclusion 
+        $\Obj{\pvar{C}}\lif(\lnot\Obj{\pvar{B}}\lif\lnot\Obj{\pvar{A}})$
+        is false on a !!{valuation} $\pAssign{v}$ iff 
+        $\pAssign{v}(\Obj{\pvar{C}})=\True$ and 
+        $\pSat/{v}{\lnot\Obj{\pvar{B}}\lif\lnot\Obj{\pvar{A}}}$ 
+        hence $\pSat{v}{\lnot\Obj{\pvar{B}}}$ and 
+        $\pSat/{v}{\lnot\Obj{\pvar{A}}}$, iff
+        $\pAssign{v}(\Obj{\pvar{A}})=\True$, 
+        $\pAssign{v}(\Obj{\pvar{B}})=\False$
+        and $\pAssign{v}(\Obj{\pvar{C}})=\True$. Let $\pAssign{v}$ 
+        be such a valuation. We have $\pSat{v}{\Obj{\pvar{C}}}$
+        hence $\pSat{v}{\Obj{\pvar{B}}\lif\Obj{\pvar{C}}}$
+        hence $\pSat{v}{\Obj{\pvar{A}}\lif(\Obj{\pvar{B}}\lif\Obj{\pvar{C}})}$.
+        Since the premise is true on $\pAssign{v}$ but the conclusion
+        false, the argument is not valid.
+        
+        \end{itemize}
+    \end{ans}
 \end{prob}
 
 

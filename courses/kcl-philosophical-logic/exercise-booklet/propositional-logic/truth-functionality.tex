@@ -17,6 +17,22 @@ usual ones (conjunction, disjunction, negation, material conditional
 and bi-conditional). Explain what makes it truth-functional. Give an
 example of a non-truth-functional connective, and show that it is not
 truth-functional.
+
+    \begin{ans} One possible answer among many:
+        \begin{itemize}
+        \item `neither... nor' is a connective connective $\circ$ such
+        that $!A\circ!B$ is true just if neither $!A$ not $!B$ is
+        true. Since we can give its truth value as a function of the
+        truth values of $!A$ and $!B$, it is truth-functional.
+        \item 'It is necessary that' is not truth-functional. We can
+        find two claims $!A$, $!B$ with the same truth value, for
+        instance `water is water' and `England is a democracy' such
+        that `it is necessary that $!A$' is true but `it is necessary
+        that $!B$' is not. Therefore `it is necessary that' is not
+        truth-functional
+    \end{itemize}
+    
+    \end{ans}
 \end{prob}
 
 \begin{prob}
@@ -27,6 +43,24 @@ truth-functional.
 
     There are four \emph{unary} truth functions. Describe them all. 
     The propositional language only has one (which?). Why is that enough?
+
+    \begin{ans}
+     The four possible unary truth functions are described by the 
+     table below:
+
+        \bigskip
+        \begin{tabular}{l|cccc}
+            $\Obj{\pvar{A}}$    & $f_1$   & $f_2$   & $f_3$   & $f_4$ \\
+            $\True$       & $\True$ & $\True$ & $\False$ & $\False$ \\ 
+            $\False$      & $\True$ & $\False$ & $\True$ & $\False$ \\
+        \end{tabular}
+        \bigskip
+
+    Our language has $\lnot$ to express $f_3$. The others can be 
+    expressed indirectly: $f_1$ with the zero-ary connective $\top$,
+    $f_4$ with the zero-ary connective $\bot$, and $f_2$ using no 
+    connective and simply writing $\Obj{\pvar{A}}$.
+    \end{ans}
 \end{prob}
 
 \end{document}

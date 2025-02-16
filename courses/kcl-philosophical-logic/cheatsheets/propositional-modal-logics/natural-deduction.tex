@@ -10,79 +10,216 @@
 
 \olsection{Natural Deduction}
 
+\subsection{Rules for \Log{K}}
+
 \begin{figure}
-    \noindent
-    {\setlength\extrarowheight{3em}
+\begin{defish}
+\begin{center}
+    {\setlength\extrarowheight{2em}
     \begin{tabular}{cc}
-        \AxiomC{}\DeduceC{$\Box!A$}
-        \AxiomC{}\DeduceC{$\Box!B$}
-        \AxiomC{$\Discharge{!A}{n},\Discharge{!B}{n}$ \emph{at
-        most}}
-        \DeduceC{$!C$} 
-        \DischargeRule{$\Box$\Ax{K}}{n}
-        \TrinaryInfC{$\Box!C$} 
-        \DisplayProof
+        \multicolumn{2}{c}{
+            \AxiomC{}\DeduceC{$\Box!A$}
+            \AxiomC{}\DeduceC{$\Box!B$}
+            \AxiomC{$\Discharge{!A}{n},\Discharge{!B}{n}$ \emph{at
+            most}}
+            \DeduceC{$!C$} 
+            \DischargeRule{$\Box$\Ax{K}}{n}
+            \TrinaryInfC{$\Box!C$} 
+            \DisplayProof
+        }
     \\
-        \AxiomC{}\DeduceC{$\Diamond!A$}
-        \AxiomC{}\DeduceC{$\Box!B$}
-        \AxiomC{$\Discharge{!A}{n}$\emph{at least},$\Discharge{!A}{n}\Discharge{!B}{n}$\emph{at most}}\DeduceC{$!C$}
-        \DischargeRule{\Intro{\Diamond}\Ax{K}}{n}
-        \TrinaryInfC{$\Diamond!C$}
+        \AxiomC{}\DeduceC{$\lnot\Box\lnot!A$}
+        \RightLabel{\Intro{\Diamond}K}
+        \UnaryInfC{$\Diamond!A$}
         \DisplayProof
-    &   
-        \AxiomC{}\DeduceC{$\Diamond\lfalse$}
-        \RightLabel{\Elim{\Diamond}\Ax{K}}
-        \UnaryInfC{$\lfalse$}
+    &
+        \AxiomC{}\DeduceC{$\Diamond!A$}
+        \RightLabel{\Elim{\Diamond}K}
+        \UnaryInfC{$\lnot\Box\lnot!A$}
         \DisplayProof
     \end{tabular}
+    \\[1em] \noindent
+    \emph{You may also use the derived rules:}
+    \\[1em] \noindent
+        \begin{tabular}{cccc}
+        \AxiomC{}\DeduceC{$\lnot\Diamond!A$}
+        \RightLabel{Dual}
+        \UnaryInfC{$\Box\lnot!A$}
+        \DisplayProof
+    &
+        \AxiomC{}\DeduceC{$\Box\lnot!A$}
+        \RightLabel{Dual}
+        \UnaryInfC{$\lnot\Diamond!A$}
+        \DisplayProof
+    &
+        \AxiomC{}\DeduceC{$\Diamond\lnot!A$}
+        \RightLabel{Dual}
+        \UnaryInfC{$\lnot\Box!A$}
+        \DisplayProof
+    &
+        \AxiomC{}\DeduceC{$\Box\lnot!A$}
+        \RightLabel{Dual}
+        \UnaryInfC{$\lnot\Diamond!A$}
+        \DisplayProof
+    \\[3em]
+        \AxiomC{}\DeduceC{$\lnot\Diamond\lnot!A$}
+        \RightLabel{Dual}
+        \UnaryInfC{$\Box!A$}
+        \DisplayProof
+    &
+        \AxiomC{}\DeduceC{$\Box!A$}
+        \RightLabel{Dual}
+        \UnaryInfC{$\lnot\Diamond\lnot!A$}
+        \DisplayProof
+
+    \end{tabular}
+
+    \bigskip
+    \AxiomC{}\DeduceC{$\Box!A_1$}
+        \AxiomC{}\DeduceC{$\ldots$}
+        \AxiomC{}\DeduceC{$\Box!A_k$}
+        \AxiomC{$\Discharge{!A_1}{n},\ldots,\Discharge{!A_k}{n}$ \emph{at most}}\DeduceC{$!B$}
+        \DischargeRule{$\Box$\Ax{K}}{n}
+        \QuaternaryInfC{$\Box!B$}
+    \DisplayProof
+
+    \bigskip
+    \AxiomC{}\DeduceC{$\Diamond!A$}
+    \AxiomC{}\DeduceC{$\Box!B_1$}
+    \AxiomC{}\DeduceC{\ldots}
+    \AxiomC{}\DeduceC{$\Box!B_k$}
+    \AxiomC{$\Discharge{!A}{n},\Discharge{!B_1}{n},\ldots,\Discharge{!B_k}{n}$ \emph{at most}}\DeduceC{$!C$}
+    \DischargeRule{$\Diamond$\Ax{K}}{n}
+    \QuinaryInfC{$\Diamond!C$}
+    \DisplayProof
+
+    \bigskip
+    \begin{tabular}{cc}
+    \AxiomC{}
+    \DeduceC{$\Diamond\lfalse$}
+    \RightLabel{$\Diamond\lfalse$}
+    \UnaryInfC{$\lfalse$}
+    \DisplayProof
+    &
+    \AxiomC{}
+    \DeduceC{$\Diamond\lfalse$}
+    \RightLabel{$\Diamond\lfalse$}
+    \UnaryInfC{$!A$}
+    \DisplayProof
+    \end{tabular}
     }
-\caption{Natural Deduction rules for Propositional Modal Logic K.}
+\end{center}
+\end{defish}
+\caption{Natural Deduction rules for Propositional Modal Logic \Log{K}.}
 \ollabel{natdedpmlk}
 \end{figure}
 
-The \Ax{K} rules are given in \olref{natdedpmlk}. Recall that:
-\begin{itemize}
-    \item In $\Box$\Ax{K} and \Intro{\Diamond}\Ax{K}, the
-    sub-!!{derivation} on the right has \emph{at most} 
-    \item In $\Box$\Ax{K} the assumptions $\Box!A$ and $\Box!B$ are
-    both optional.
-    \item In \Intro{\Diamond}\Ax{K} the assumption $\Box!B$ is
-    optional but the assumption $\Diamond!A$ is mandatory. 
-    \item In systems \Log{D} and stronger, \Intro{\Diamond}\Ax{K}
-    can be applied without the assumption $\Diamond!A$.
-\end{itemize}
+The \Log{K} rules are given in \olref{natdedpmlk}. 
 
-{\setlength\extrarowheight{3em}
+In  $\Box$\Ax{K} on the right has \emph{at most} $!A,!B$. It can be 
+applied without one or without any too. Thus, these are correct
+applications of $\Box$\Ax{K}:
+
+\bigskip
 \begin{tabular}{cc}
     \AxiomC{}\DeduceC{$\Box!A$}
     \AxiomC{$\Discharge{!A}{n}$ \emph{at
     most}}
     \DeduceC{$!C$} 
-    \DischargeRule{$\Box$\Ax{K}}{n}
+    \DischargeRule{$\Box$\Ax{K} {\color{blue}Correct}}{n}
     \BinaryInfC{$\Box!C$} 
     \DisplayProof
 &
     \AxiomC{\emph{no undischarged assumption}}
     \DeduceC{$!C$}
-    \RightLabel{$\Box$\Ax{K}}
+    \RightLabel{$\Box$\Ax{K} {\color{blue}Correct}}
     \UnaryInfC{$\Box!C$} 
     \DisplayProof
-\\
-    \AxiomC{}\DeduceC{$\Diamond!A$}
-    \AxiomC{$\Discharge{!A}{n}$\emph{at least}}\DeduceC{$!C$}
-    \DischargeRule{\Intro{\Diamond}\Ax{K}}{n}
-    \BinaryInfC{$\Diamond!C$}
+\end{tabular}
+\bigskip
+
+\olref{natdedpmlk} also provides derived rules. Even though you do not 
+strictly need them, some !!{derivation}s are very long without them, 
+so I recommend learning them too. 
+
+In the $\Diamond$\Ax{K} rule, the $\Box$ premise is optional but 
+\emph{the $\Diamond$ premise is mandatory}. Therefore the first 
+application of $\Diamond$\Ax{K} below is correct but the second isn't:
+
+\bigskip\noindent
+\begin{tabular}{cc}
+     \AxiomC{$\Diamond!A$}
+        \AxiomC{$\Discharge{!A}{n}$ \emph{at most}}
+        \DeduceC{$!B$}
+    \DischargeRule{$\Diamond$\Ax{K} {\color{blue}Correct}}{n}
+    \BinaryInfC{$\Diamond!B$}
     \DisplayProof
 &
-    \AxiomC{\emph{no undischarged assumption}}\DeduceC{$!C$}
-    \RightLabel{\Intro{\Diamond}\Ax{D} {\color{red}only in \Log{D} of stronger}}
-    \UnaryInfC{$\Diamond!C$}
+    \AxiomC{\emph{no undisch. as.}}
+    \DeduceC{$!B$}
+    \RightLabel{{\color{red}Incorrect}}
+    \UnaryInfC{$\Diamond!B$}
     \DisplayProof
 \end{tabular}
-}
+\bigskip
 
+\noindent(The derivation on the right would be 
+correct in system \Log{D} and stronger, but using the \Ax{D} rule; see
+below.)
+
+The Dual (Duality) rules are particularly useful. They all apply the same
+procedure: move a negation `through' a modal operator and switch the
+main modal operator of a !!{formula}, and eliminate a double
+negation if it arises. Thus $\Box\lnot$ can be converted
+to $\lnot\Diamond$ and conversely, and $\lnot\Diamond\lnot$ can be
+converted to $\Box$. 
+
+Beware that the `Dual' rules only allow you to do these substitutions on the 
+\emph{main} modal operator of a formula, not in \emph{sub}-!!{formula}s.
+Thus the following are incorrect:
+
+\bigskip \noindent
+\begin{tabular}{cc}
+\AxiomC{$!A\lor\Box\lnot!B$}
+\RightLabel{Dual? {\color{red}Incorrect}}
+\UnaryInfC{$!A\lor\lnot\Diamond!B$}
+\DisplayProof
+&
+\AxiomC{$\Box\Diamond\lnot!B$}
+\RightLabel{Dual? {\color{red}Incorrect}}
+\UnaryInfC{$\Box\lnot\Box!B$}
+\DisplayProof
+\end{tabular}
+\bigskip
+
+In both cases the conclusion does follow from the premise, but 
+not directly by a `Dual' rule. Instead one must `unpack' the premises:
+
+\begin{prooftree}
+\AxiomC{$!A\lor\Box\lnot!B$}
+    \AxiomC{$\Discharge{!A}{1}$}
+    \AxiomC{$\Discharge{\Box\lnot!B}{1}$}
+    \RightLabel{Dual {\color{blue}Correct}}
+    \UnaryInfC{$\lnot\Diamond!B$}
+\DischargeRule{\Elim{\lor}}{1}
+\TrinaryInfC{$!A\lor\lnot\Diamond!B$}
+\end{prooftree}
+\begin{prooftree}
+\AxiomC{$\Box\Diamond\lnot!B$}
+    \AxiomC{$\Discharge{\Diamond\lnot!B}{1}$}
+        \RightLabel{Dual {\color{blue}Correct}}
+        \UnaryInfC{$\lnot\Box!B$}
+    \DischargeRule{$\Box$\Ax{K}}{1}
+\BinaryInfC{$\Box\lnot\Box!B$}
+\end{prooftree}
+
+\subsection{Rules for Stronger Systems}
+
+All others systems include rules for \Log{K}, plus one or more of the
+rules in \olref{natdedpmlx}.
 
 \begin{figure}
+    \begin{defish}
     \begin{center} 
     {\setlength\extrarowheight{3em} 
     \begin{tabular}{ll}
@@ -127,19 +264,122 @@ The \Ax{K} rules are given in \olref{natdedpmlk}. Recall that:
         \RightLabel{$\Box$\Ax{5}}
         \UnaryInfC{$\Box\Diamond!A$}
         \DisplayProof
-    &   \AxiomC{}\DeduceC{$\Box!A$}
+    &   \AxiomC{}\DeduceC{$\Diamond\Box!A$}
         \RightLabel{$\Diamond$\Ax{5}}
-        \UnaryInfC{$\Diamond\Box!A$}
+        \UnaryInfC{$\Box!A$}
         \DisplayProof
 
     \end{tabular}
     }
     \end{center}
+    \end{defish}
 
     \caption{Natural Deduction rules for stronger modal logics.}
-\ollabel{natdedspml}
+\ollabel{natdedspmlx}
 \end{figure}
 
+Some systems are often
+discussed and have a special name, namely \Log{D}, \Log{T}, \Log{B},
+\Log{S4}, \Log{S5}. You should know these names and know the rules
+available in each, given in \olref{natdedsrules}.
 
+\begin{figure}
+    \begin{tabular}{c|p{20em}|c}
+        \hline
+        System  & Accessibility is ... & Add rule(s) ... \\
+        \hline
+        \Log{D} & serial & \Ax{D} \\
+        \Log{T} & serial, reflexive & \Ax{D},\Ax{T} \\
+        \Log{B} & serial, reflexive and symmetric & \Ax{D},\Ax{T},\Ax{B} \\
+        \Log{S4}  & serial, reflexive and transitive & \Ax{D},\Ax{T},\Ax{4} \\
+        \Log{S5} & serial, reflexive, transitive, symmetric, euclidean & \Ax{D},\Ax{T},\Ax{B},\Ax{4},\Ax{5} \\
+        \hline
+    \end{tabular}
+\caption{Standard systems \Log{D}, \Log{T}, \Log{B}, \Log{S4},
+\Log{S5}.}
+\ollabel{natdedsrules}
+\end{figure}
+
+As \olref{natdedsrules} makes clear, each property of the
+accessibility relation corresponds to one set of rules, e.g. the
+\Ax{D} set for seriallity, the \Ax{T} set for reflexivity and so on.
+That being said, some properties entail others: if a relation is
+reflexive then it is serial. Thus, we usually define \Log{B} as having
+a reflexive and symmetric accessibility relation; no need to mention
+that it's serial. System \Log{S5} has many equivalent definitions
+because several combinations entail others, e.g. reflexive and
+euclidean entails symmetric and transitive. 
+
+More generally, systems can be named by stating their rules. \Log{KD45}
+is the system that extends \Log{K} with rules \Ax{D},\Ax{4},\Ax{5}. It 
+is suitable for models where the accessibility relation is serial, 
+transitive, and euclidean (but not necessarily reflexive). This system
+turns out not to be equivalent to the ones we know already. It doesn't 
+have a special name other than \Log{KD45}, but it is often used to model belief. 
+
+Our standard systems can thus be given more explicit names:
+
+\bigskip
+\begin{tabular}{ccc}
+\hline 
+System & Fully explicit name & Equivalent names \\
+\hline
+\Log{D} & \Log{KD} &  \\
+\Log{T} & \Log{KDT} & \Log{KT} \\
+\Log{B} & \Log{KDTB} & \Log{KTB}, \Log{KDB} \\
+\Log{S4}  & \Log{KDT4} & \Log{KT4} \\
+\Log{S5} & \Log{KDTB45} & \Log{KT5}, \Log{KTB4}, \Log{KDB4}, \dots \\
+\hline    
+\end{tabular}
+\bigskip
+
+Why the equivalent names on the last column? Corresponding to the fact 
+that some properties of accessibility, or
+combinations thereof, entail others, some rules and combination of
+rules entail others, as detailed in the table below:
+
+\bigskip\noindent
+\begin{tabular}{cccc}
+\hline
+If accessibility is\dots & it's also\dots & so from rule(s)\dots & we derive rule(s)\dots \\
+\hline 
+reflexive & serial & \Ax{T} & \Ax{D} \\
+serial + symmetric & reflexive &  \Ax{D}+\Ax{B} & \Ax{T} \\
+symmetric + transitive & euclidean & \Ax{B}+\Ax{4} & \Ax{5} \\
+reflexive + euclidean & sym. + trans. & \Ax{T}+\Ax{5} & \Ax{B},\Ax{4} \\
+\hline 
+\end{tabular}
+\bigskip
+
+This explains why \Log{B}, i.e. \Log{KDTB}, can also be called
+\Log{KTB} (since \Ax{T} gives you \Ax{D}) and \Log{KDB} (since \Ax{D}
+and \Ax{B} together give you \Ax{T}). 
+
+\emph{You do not need to remember all these facts}, expect the
+simplest one: reflexive entails serial. And \emph{you do not need to
+remember all equivalent names}. For the exam, whay you need to be able
+to do is:
+\begin{itemize}
+    \item Know which rules are applicable (or not) in each of the 
+    standard systems \Log{K}, \Log{D}, \Log{T}, \Log{B},
+    \Log{S4}, \Log{S5}. For instance, you should know
+    that \Log{S4} is \Log{KDT4}, i.e. that it has rules \Ax{T} (hence
+    \Ax{D}) and \Ax{4}, not rules \Ax{B} nor \Ax{5}.
+    \item Understand explicit names, e.g. understand that \Log{KD45}
+    is the system that extends \Log{K} with rules \Ax{D},\Ax{4},\Ax{5}.
+    \item Be aware that different explicit names can turn out to be 
+    the same system. For instance, \Log{KDT} isn't a different system 
+    than \Log{KT}: they're both just the system \Log{T}.
+    \item Be able to \emph{explain} the facts in the table above. Namely:
+    \begin{itemize}
+    \item Explain why a given (combination of) propertie(s) of accessibility
+    entails another. For instance, you could be asked to explain why 
+    an accessibility relation that is symmetric is serial is also reflexive.
+    \item Derive some rules from others. For instance, give a !!{derivation}
+    of the \Ax{B} rule from the \Ax{5} and \Ax{T} rules.
+    \end{itemize}
+    Examples of such exercises are given in the modal logic chapters
+    of the KCL Philosophical Logic textbook.   
+\end{itemize}
 
 \end{document}

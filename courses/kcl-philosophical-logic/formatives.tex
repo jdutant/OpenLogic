@@ -1,0 +1,68 @@
+\documentclass[a4paper,12pt,oneside]{memoir}
+
+% \olpath has to point to the location of the OLP main
+% directory/folder. 
+\newcommand{\olpath}{../../}
+
+% use this line to load the -config.sty and -envs.sty of another file
+% defaults to the current file otherwise
+\newcommand{\oljobname}{kcl-philosophical-logic}
+
+% load all the Open Logic definitions. This will also load the
+% local definitions in kcl-philosophical-logic.sty
+\input{\olpath/sty/open-logic.sty}
+
+% style the document
+\input{design.sty}
+
+% tigher lists
+\firmlists
+
+\begin{document}
+
+% First we make a titlepage
+
+\begin{titlingpage}
+
+\begin{raggedleft}
+    {\sffamily
+    \fontsize{42pt}{64pt}\selectfont
+    {Philosophical Logic}\\[0.4ex]
+    \textit{Formative Exercises}
+    }\\[0.3ex]
+    \Large \vskip 4ex
+    Julien Dutant\\[.5ex]
+    King's College London\\[.5ex]
+    2024-25\\[2ex]
+    \textbf{Version of \today}\\
+\end{raggedleft}
+    
+\vfill
+
+% This work's license. 
+\kcldonotcopylicense{King's College London}
+
+\end{titlingpage}
+
+\frontmatter
+
+\pagestyle{myruled} % defined in design.sty
+
+% no colored links in the TOC
+{\hypersetup{linkcolor=.}
+
+    \tableofcontents*
+
+}
+% 
+
+\mainmatter
+
+\tagfalse{showAns}
+
+\olimport[formatives]{formatives.tex}
+
+%\backmatter
+
+\end{document}
+

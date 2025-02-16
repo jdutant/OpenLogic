@@ -14,11 +14,40 @@
     \citep[1.1 item 2]{MacFarlane-2020-PhilosophicalLogicContemporary}
     Write out truth-tables of the following !!{formula}s.
     \begin{enumerate}
-    \item $\pvar{A} \lor \lnot (\pvar{C} \liff \pvar{B})$
-    \item $\pvar{B} \lor \lnot (\lnot \pvar{B} \land \lnot \pvar{C})$
+    \item $\Obj{\pvar{A}} \lor \lnot (\Obj{\pvar{C}} \liff \Obj{\pvar{B}})$
+    \item $\Obj{\pvar{B}} \lor \lnot (\lnot \Obj{\pvar{B}} \land \lnot \Obj{\pvar{C}})$
     \end{enumerate}
-% \begin{ans}
-% \end{ans}
+
+    \begin{ans} \begin{enumerate}
+        \item Truth table for $\Obj{\pvar{A}} \lor \lnot
+        (\Obj{\pvar{C}} \liff \Obj{\pvar{B}})$
+
+        \begin{tabular}{ccc||c|c|c}
+            $\Obj{\pvar{A}}$ & $\Obj{\pvar{B}}$ & $\Obj{\pvar{C}}$ & $\Obj{\pvar{C}} \liff \Obj{\pvar{B}}$  & $\lnot(\Obj{\pvar{C}} \liff \Obj{\pvar{B}})$ & $\Obj{\pvar{A}} \lor \lnot
+        (\Obj{\pvar{C}} \liff \Obj{\pvar{B}})$\\
+            $\True$           & $\True$         &  $\True$         &   $\True$          & $\False$      & $\True$ \\
+            $\True$           & $\True$         &  $\False$        &   $\False$         & $\True$       & $\True$ \\
+            $\True$           & $\False$         &  $\True$        &   $\False$         & $\True$       & $\True$ \\
+            $\True$           & $\False$         &  $\False$       &   $\True$          & $\False$      & $\True$ \\
+            $\False$           & $\True$         &  $\True$        &   $\True$          & $\False$      & $\False$ \\
+            $\False$           & $\True$         &  $\False$       &   $\False$         & $\True$       & $\True$ \\
+            $\False$           & $\False$         &  $\True$       &   $\False$         & $\True$       & $\True$ \\
+            $\False$           & $\False$         &  $\False$      &    $\True$         & $\False$      & $\False$ \\
+            \end{tabular}
+
+        \item Truth table for $\Obj{\pvar{B}} \lor \lnot (\lnot
+        \Obj{\pvar{B}} \land \lnot \Obj{\pvar{C}})$.
+
+        \begin{tabular}{cc||c|c|c|c}
+            $\Obj{\pvar{B}}$ & $\Obj{\pvar{C}}$ &  $\lnot\Obj{\pvar{B}}$ & $\lnot\Obj{\pvar{C}}$ & $\lnot \Obj{\pvar{B}} \land \lnot \Obj{\pvar{C}}$ & $\Obj{\pvar{B}} \lor \lnot (\lnot \Obj{\pvar{B}} \land \lnot \Obj{\pvar{C}})$\\
+            $\True$         &  $\True$         &  $\False$              & $\False$              &   $\False$        & $\True$\\
+            $\True$         &  $\False$        &  $\False$              & $\True$               &   $\False$        & $\True$\\
+            $\False$         &  $\True$        &  $\True$               & $\False$              &   $\False$        & $\False$\\
+            $\False$         &  $\False$       &  $\True$               & $\True$               &   $\True$          & $\True$\\
+            \end{tabular}
+    \end{enumerate}
+
+    \end{ans}
 \end{prob}
 
 \begin{prob}
@@ -26,9 +55,47 @@
     Use truth-tables to determine if the following !!{formula}s are 
     tautologies, contradictions, or logically contingent.
     \begin{enumerate}
-    \item $\pvar{A}\lif(\bot\lif\lnot\pvar{A})$
-    \item $\pvar{C}\lor(\pvar{D}\land(\lnot \pvar{C}\lor \lnot \pvar{D}))$
+    \item $\Obj{\pvar{A}}\lif(\bot\lif\lnot\Obj{\pvar{A}})$
+    \item $\Obj{\pvar{C}}\lor(\Obj{\pvar{D}}\land(\lnot \Obj{\pvar{C}}\lor \lnot \Obj{\pvar{D}}))$
     \end{enumerate}
+
+    \begin{ans}
+    \begin{enumerate}
+    \item Truth table for $\Obj{\pvar{A}}\lif(\bot\lif\lnot\Obj{\pvar{A}})$
+    
+    \begin{tabular}{c||c|c|c|c|c}
+        $\Obj{\pvar{A}}$ & $\bot$ & $\lnot\Obj{\pvar{A}}$ & $(\bot\lif\lnot\Obj{\pvar{A}})$ &  $\Obj{\pvar{A}}\lif(\bot\lif\lnot\Obj{\pvar{A}})$  \\
+        $\True$ & $\False$ & $\False$ & $\True$  & $\True$ \\
+        $\False$ & $\False$ & $\True$  & $\True$ & $\True$ \\
+    \end{tabular}
+
+    The !!{formula} true in every !!{valuation}, therefore it is a tautology.
+
+    \emph{Note}. You might realize that $\bot\lif!A$ is true no matter what $!A$ is 
+    and simplify the table:
+
+    \begin{tabular}{c||c|c}
+        $\Obj{\pvar{A}}$ & $(\bot\lif\lnot\Obj{\pvar{A}})$ &  $\Obj{\pvar{A}}\lif(\bot\lif\lnot\Obj{\pvar{A}})$  \\
+        $\True$ & $\True$  & $\True$ \\
+        $\False$  & $\True$ & $\True$ \\
+    \end{tabular}
+
+    \item Truth table for $\Obj{\pvar{C}}\lor(\Obj{\pvar{D}}\land(\lnot \Obj{\pvar{C}}\lor \lnot \Obj{\pvar{D}}))$
+
+    \begin{tabular}{cc||c|c|c|c|c}
+        $\Obj{\pvar{C}}$ & $\Obj{\pvar{D}}$ &  $\lnot\Obj{\pvar{C}}$ & $\lnot\Obj{\pvar{D}}$ & $\lnot \Obj{\pvar{C}} \land \lnot \Obj{\pvar{D}}$ & $\Obj{\pvar{D}}\land(\lnot \Obj{\pvar{C}} \land \lnot \Obj{\pvar{D}})$    &  $\Obj{\pvar{C}}\lor(\Obj{\pvar{D}}\land(\lnot \Obj{\pvar{C}}\lor \lnot \Obj{\pvar{D}}))$\\
+        $\True$         &  $\True$         &  $\False$              & $\False$              &   $\False$        & $\False$      & $\True$ \\
+        $\True$         &  $\False$        &  $\False$              & $\True$               &   $\True$         & $\False$      & $\True$ \\
+        $\False$         &  $\True$        &  $\True$               & $\False$              &   $\True$         & $\True$       & $\True$ \\
+        $\False$         &  $\False$       &  $\True$               & $\True$               &   $\True$         & $\False$      & $\False$ \\
+    \end{tabular}
+
+    The !!{formula} is true in some !!{valuation}s and false in some !!{valuation}, therefore 
+    it is logically contingent.
+
+
+    \end{enumerate}
+    \end{ans}
 \end{prob}
     
 

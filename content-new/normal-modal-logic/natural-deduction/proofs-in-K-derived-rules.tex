@@ -20,12 +20,12 @@ derived rules}
     \AxiomC{$\Discharge{\lnot(\Diamond!A\lor\Diamond!B)}{2}$}
     \RightLabel{\Log{PL}}
     \UnaryInfC{$\lnot\Diamond!A$}
-    \RightLabel{\Elim{\Diamond}\Ax{K}$^*$}
+    \RightLabel{Dual}
     \UnaryInfC{$\Box\lnot!A$}
         \AxiomC{$\Discharge{\lnot(\Diamond!A\lor\Diamond!B)}{2}$}
         \RightLabel{\Log{PL}}
         \UnaryInfC{$\lnot\Diamond!B$}
-        \RightLabel{\Elim{\Diamond}\Ax{K}$^*$}
+        \RightLabel{Dual}
         \UnaryInfC{$\Box\lnot!B$}
             \AxiomC{$\Discharge{\lnot!A}{1}$}
             \AxiomC{$\Discharge{\lnot!B}{1}$}
@@ -33,12 +33,10 @@ derived rules}
             \BinaryInfC{$\lnot(!A\lor!B)$}
     \DischargeRule{$\Box$\Ax{K}}{1}
     \TrinaryInfC{$\Box\lnot(!A\lor!B)$}
-    \RightLabel{\Intro{\Diamond}\Ax{K}$^*$}
+    \RightLabel{Dual}
     \UnaryInfC{$\lnot\Diamond(!A\lor!B)$}
-\RightLabel{\Elim{\lnot}}
-\BinaryInfC{$\lfalse$}
-\DischargeRule{\FalseCl}{2}
-\UnaryInfC{$\Diamond!A\lor\Diamond!B$}
+\DischargeRule{\Elim{\lnot}}{2}
+\BinaryInfC{$\Diamond!A\lor\Diamond!B$}
 \end{prooftree}
 }
 
@@ -53,21 +51,36 @@ assume $\lnot(\Diamond!A\lor\Diamond!B)$ and derive a contradiction.
 
 The first \Log{PL} step uses the fact that $\lnot(!A\lor!B)\Entails\lnot!A$
 is valid in propositional logic alone, hence !!{derivable} using 
-propositional rules alone. From this it of course follows that $\lnot\Diamond!A$
+propositional rules alone, as we may check:
+\begin{prooftree}
+\AxiomC{$\Discharge{!A}{1}$}
+\RightLabel{\Intro{\lor}}
+\UnaryInfC{$!A\lor!B$}
+    \AxiomC{$\lnot(!A\lor!B)$}
+\DischargeRule{\Intro{\lnot}}{1}
+\BinaryInfC{$\lnot!A$}
+\end{prooftree}
+By the same token, $\lnot\Diamond!A$
 can be derived from $\lnot(\Diamond!A\lor\Diamond!B)$ using the 
 propositional rules alone (just put $\Diamond!A$ for $!A$, $\Diamond!B$
-for $!B$); therefore the \Log{PL} step is allowed. 
+for $!B$). Therefore this \Log{PL} step is allowed. 
 
 Similarly, the \Log{PL} step from $\lnot!A,\lnot!B$ to $\lnot(!A\lor!B)$
 is allowed because $\lnot!A,\lnot!B\Entails\lnot(!A\lor!B)$ holds in 
 propositional logic alone.
 
-The Duality rules \Elim{\Diamond}\Ax{K}$^*$ and \Intro{\Diamond}\Ax{K}$^*$
-simplify our !!{derivation} further. Without them we would need to use
-the same steps as in their derivation, substantially lengthening our
-proof.
+The Duality rules Dual simplify our !!{derivation} further. Without 
+these we would need to replace the Dual steps with steps such as:
+\begin{prooftree}
+\AxiomC{$\lnot\Diamond{!A}$}
+    \AxiomC{$\Discharge{\lnot\Box\lnot!A}{1}$}
+    \RightLabel{\Intro{\Diamond}\Ax{K}}
+    \UnaryInfC{$\Diamond!A$}
+\DischargeRule{\Elim{\lnot}}{1}
+\BinaryInfC{$\Box\lnot!A$}
+\end{prooftree}
+Doing so considerably lengthens the !!{derivation}.
 
 \end{explain}
-
 
 \end{document}

@@ -13,19 +13,52 @@
 To following rules can be derived from the core ones, so they are 
 superfluous. However, we may use them to simplify our !!{derivation}s.
 
-\subsubsection{Duality}
+\iftag{prvDiamond}{
+\subsubsection{Duality rules}
+We have six further Duality rules. They all apply the same
+procedure: move a negation `through' a modal operator and switch the
+main modal operator of a !!{formula}, and eliminate a double
+negation if it arises. Thus $\Box\lnot$ can be converted
+to $\lnot\Diamond$ and conversely, and $\lnot\Diamond\lnot$ can be
+converted to $\Box$. 
 
 \begin{defish}
-    \AxiomC{}\DeduceC{$\Box\lnot!A$}
-    \RightLabel{\Intro{\Diamond}\Ax{K}$^*$}
-    \UnaryInfC{$\lnot\Diamond!A$}
-    \DisplayProof
-\hfill
-    \AxiomC{}\DeduceC{$\Diamond\lnot!A$}
-    \RightLabel{\Elim{\Diamond}\Ax{K}$^*$}
-    \UnaryInfC{$\lnot\Box!A$}
-    \DisplayProof
+    \begin{tabular}{cccc}
+        \AxiomC{}\DeduceC{$\lnot\Diamond!A$}
+        \RightLabel{Dual}
+        \UnaryInfC{$\Box\lnot!A$}
+        \DisplayProof
+    &
+        \AxiomC{}\DeduceC{$\Box\lnot!A$}
+        \RightLabel{Dual}
+        \UnaryInfC{$\lnot\Diamond!A$}
+        \DisplayProof
+    &
+        \AxiomC{}\DeduceC{$\Diamond\lnot!A$}
+        \RightLabel{Dual}
+        \UnaryInfC{$\lnot\Box!A$}
+        \DisplayProof
+    &
+        \AxiomC{}\DeduceC{$\Box\lnot!A$}
+        \RightLabel{Dual}
+        \UnaryInfC{$\lnot\Diamond!A$}
+        \DisplayProof
+    \\[3em]
+        \AxiomC{}\DeduceC{$\lnot\Diamond\lnot!A$}
+        \RightLabel{Dual}
+        \UnaryInfC{$\Box!A$}
+        \DisplayProof
+    &
+        \AxiomC{}\DeduceC{$\Box!A$}
+        \RightLabel{Dual}
+        \UnaryInfC{$\lnot\Diamond\lnot!A$}
+        \DisplayProof
+
+    \end{tabular}
+    
 \end{defish}
+
+}
 
 \iftag{prvDiamond}{
     \subsubsection{Generalized $\Box$\Ax{K}, \Intro{\Diamond}\Ax{K}}
@@ -33,13 +66,15 @@ superfluous. However, we may use them to simplify our !!{derivation}s.
     \subsubsection{Generalized $\Box$\Ax{K}}
 }
 
+Where $k\geq 0$:
+
 \begin{defish}
 
 \AxiomC{}\DeduceC{$\Box!A_1$}
     \AxiomC{}\DeduceC{$\ldots$}
     \AxiomC{}\DeduceC{$\Box!A_k$}
     \AxiomC{$\Discharge{!A_1}{n},\ldots,\Discharge{!A_k}{n}$ \emph{at most}}\DeduceC{$!B$}
-    \DischargeRule{\Intro{\Box}}{n}
+    \DischargeRule{$\Box$\Ax{K}}{n}
     \QuaternaryInfC{$\Box!B$}
 \DisplayProof
 
@@ -50,11 +85,123 @@ superfluous. However, we may use them to simplify our !!{derivation}s.
 \AxiomC{}\DeduceC{\ldots}
 \AxiomC{}\DeduceC{$\Box!B_k$}
 \AxiomC{$\Discharge{!A}{n},\Discharge{!B_1}{n},\ldots,\Discharge{!B_k}{n}$ \emph{at most}}\DeduceC{$!C$}
-\DischargeRule{\Intro{\Diamond}}{n}
+\DischargeRule{$\Diamond$\Ax{K}}{n}
 \QuinaryInfC{$\Diamond!C$}
 \DisplayProof
 }{} 
 
 \end{defish}
+
+Since we allow $k=0$, the $\Box$ premises are optional in both rules, 
+but the $\Diamond!A$ premise is mandatory in the $\Diamond$\Ax{K} 
+rule. Therefore the first three !!{derivation}s below are correct but
+the fourth incorrect:
+
+\bigskip\noindent
+\begin{tabular}{cccc}
+    \AxiomC{$\Box!A$}
+        \AxiomC{$\Discharge{!A}{n}$}
+        \DeduceC{$!B$}
+    \DischargeRule{$\Box$\Ax{K}}{n}
+    \BinaryInfC{$\Box!B$}
+    \DisplayProof
+&
+    \AxiomC{\emph{no undisch. as.}}
+    \DeduceC{$!B$}
+    \RightLabel{$\Box$\Ax{K}}
+    \UnaryInfC{$\Box!B$}
+    \DisplayProof
+&
+    \AxiomC{$\Diamond!A$}
+        \AxiomC{$\Discharge{!A}{n}$}
+        \DeduceC{$!B$}
+    \DischargeRule{$\Box$\Ax{K}}{n}
+    \BinaryInfC{$\Diamond!B$}
+    \DisplayProof
+&
+    \AxiomC{\emph{no undisch. as.}}
+    \DeduceC{$!B$}
+    \RightLabel{{\color{red}Incorrect}}
+    \UnaryInfC{$\Diamond!B$}
+    \DisplayProof
+\end{tabular}
+\bigskip
+
+\begin{note}
+We do \emph{not} have a rule allowing the aggregation of possibilities:
+\begin{prooftree}
+    \AxiomC{}
+    \DeduceC{$\Diamond!A$}
+    \AxiomC{}
+    \DeduceC{$\Diamond!B$}
+        \AxiomC{$\Discharge{!A}{n}, \Discharge{!B}{n}$\emph{ at most}}
+        \DeduceC{$!C$}
+    \DischargeRule{{\color{red}Incorrect}}{n}
+    \TrinaryInfC{$\Diamond!C$}
+\end{prooftree}
+Such a rule would not be sound, since $\Diamond!A,\Diamond!B 
+\Entails/[\Log{K}] \Diamond{!A\land!B}$.
+\end{note}
+
+\begin{explain}
+The $\Diamond$\Ax{K} rule captures the idea
+that \emph{possibility is closed under single-premise necessary
+consequence}, namely that if $!C$ is a necessary consequence of $!A$,
+then $\Diamond!C$ is a logical consequence of $\Diamond!A$. To clarify this idea,
+start with the related idea that possibility is closed under single-premise
+\emph{logical} consequence: if $!C$ is a \emph{logical} consequence of 
+$!A$, then $\Diamond!C$ is a logical consequence of $\Diamond!A$. 
+This is a special case of \Intro{\Diamond}\Ax{K} with $\Box!B$ missing.
+Then, define \emph{necessary} consequence as follows:
+\begin{quote}
+\emph{Necessary consequence}. $!C$ is a necessary consequence of $!A$
+iff $!A\lif!C$ is necessary. (Equivalently, iff $!C$ is a logical
+consequence of $!A$ \emph{together with} what is necessary.)
+\end{quote}
+This idea would be captured by the following rule:
+\begin{prooftree}
+    \AxiomC{}\DeduceC{$\Diamond!A$}
+    \AxiomC{}\DeduceC{$\Box(!A\lif!C)$}
+    \BinaryInfC{$\Diamond!C$}
+\end{prooftree}
+Which is equivalent to $\Diamond$\Ax{K} given the $\Box$\Ax{K}
+rule. Our $\Diamond$\Ax{K} is more elegant than the rule above
+because it does not involve a specific propositional operator ($\lif$). 
+
+Why `single premise' consequence? While we accept the idea that
+logical consequences of \emph{multiple} necessities are necessary, we
+reject the idea that logical consequences of \emph{multiple}
+possibilities are possible. For instance, if $!A$ is contingent it is
+possible that $!A$ and also possible that $\lnot!A$. Yet their
+conjunction, $!A\land\lnot!A$, is still impossible. Therefore even
+though $!A$ and $\lnot!A$ \emph{jointly} logically entail
+$!A\land\lnot!A$, we do not want to infer that $\Diamond!A$ and
+$\Diamond\lnot!A$ jointly entail $\Diamond(!A\land\lnot!A)$. \emph{A
+fortiori}, we reject the principle according to which necessary joint
+consequences of \emph{multiple} possibilities are themselves
+possibile. We only accept the principle that necessary consequences of
+\emph{one} possibility are possible.
+\end{explain}
+
+\iftag{prvDiamond}{
+    \subsubsection{Rule $\Diamond\lfalse$}
+
+The following rules are also derived:
+
+\begin{defish}
+\AxiomC{}
+\DeduceC{$\Diamond\lfalse$}
+\RightLabel{$\Diamond\lfalse$}
+\UnaryInfC{$\lfalse$}
+\DisplayProof
+\hfill
+\AxiomC{}
+\DeduceC{$\Diamond\lfalse$}
+\RightLabel{$\Diamond\lfalse$}
+\UnaryInfC{$!A$}
+\DisplayProof
+\end{defish}
+
+}{}
 
 \end{document}

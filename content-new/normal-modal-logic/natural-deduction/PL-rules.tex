@@ -45,7 +45,40 @@ may be abbreviated:
         \RightLabel{\Log{PL}}
     \BinaryInfC{$!B$}
 \end{prooftree}
-    
 \end{ex}
+
+\begin{ex}
+The !!{derivation} of excluded middle, $!A\lor\lnot!A$:
+\begin{prooftree}
+\AxiomC{$\Discharge{!A}{1}$}
+\RightLabel{\Intro{\lor}}
+\UnaryInfC{$!A\lor!\lnot!A$}
+    \AxiomC{$\Discharge{\lnot(!A\lor!\lnot!A)}{2}$}
+\DischargeRule{\Intro{\lnot}}{1}
+\BinaryInfC{$\lnot!A$}
+\RightLabel{\Intro{\lor}}
+\UnaryInfC{$!A\lor!\lnot!A$}
+    \AxiomC{$\Discharge{\lnot(!A\lor!\lnot!A)}{2}$}
+\DischargeRule{\Elim{\lnot}}{2}
+\BinaryInfC{$!A\lor\lnot!A$}
+\end{prooftree}
+May be abbreviated:
+\begin{prooftree}
+\AxiomC{~}
+\RightLabel{\Log{PL}}
+\UnaryInfC{$!A\lor\lnot!A$}
+\end{prooftree}
+\end{ex}
+
+% \begin{note}
+% The \Log{PL} rule does \emph{not} permit substituting propositional 
+% consequences or equivalents for sub-!!{formula}s \emph{embedded within 
+% modal operators}. For an illustration, compare the two !!{derivation}s:
+
+% \bigskip
+% \begin{tabular}{cc}
+% \end{tabular}
+% \bigskip
+% \end{note}
 
 \end{document}

@@ -12,8 +12,10 @@
 \olsection{Natural Deduction}
 
 \begin{figure}
+\begin{defish}
+\begin{center}
 {\setlength\extrarowheight{2em} 
-\begin{tabular}{llll}
+\begin{tabular}{cccc}
     \AxiomC{$!A$}\DisplayProof (\emph{Assumption})
     & \AxiomC{}\DeduceC{$!A$}
     \AxiomC{}\DeduceC{$\lnot!A$}
@@ -33,21 +35,25 @@
     & \AxiomC{}\DeduceC{$!A\land!B$}
     \RightLabel{\Elim{\land}}
     \UnaryInfC{$!B$}\DisplayProof
-    \\
+\end{tabular}
+\\[1em] \noindent
+\begin{tabular}{ccc}
     \AxiomC{}\DeduceC{$!A$}
     \RightLabel{\Intro{\lor}}
     \UnaryInfC{$!B\lor!A$}\DisplayProof
-    & \AxiomC{}\DeduceC{$!B$}
+    & 
+    \AxiomC{}\DeduceC{$!B$}
     \RightLabel{\Intro{\lor}}
     \UnaryInfC{$!B\lor!A$}\DisplayProof
-    & \multicolumn{2}{l}{
+    & 
     \AxiomC{}\DeduceC{$!A\lor!B$}
     \AxiomC{$\Discharge{\mathcolor{gray}{!A}}{n}$}\DeduceC{$!C$}
     \AxiomC{$\Discharge{\mathcolor{gray}{!B}}{n}$}\DeduceC{$!C$}
     \DischargeRule{\Elim{\lor}}{n}
     \TrinaryInfC{$!C$}\DisplayProof
-    }
-    \\
+\end{tabular}
+\\[1em] \noindent
+\begin{tabular}{cc}
     \AxiomC{$\Discharge{\mathcolor{gray}{!A}}{n}$}\DeduceC{$!B$}
     \DischargeRule{\Intro{\lif}}{n}
     \UnaryInfC{$!A\lif!B$}\DisplayProof
@@ -96,6 +102,8 @@
     \UnaryInfC{$!A$}\DisplayProof
 \end{tabular}
 }
+\end{center}
+\end{defish}
 \caption{Natural Deduction Rules for Propositional Logic.}
 \label{NatDedPropRules}
 \end{figure}

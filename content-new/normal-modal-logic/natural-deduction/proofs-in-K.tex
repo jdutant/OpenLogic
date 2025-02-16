@@ -55,12 +55,6 @@ Give !!a{derivation} of $\Box!A\land\Box!B\Proves[\Log{K}]
 \Box(!A\land!B)$.
 \end{prob}
 
-\begin{prob}
-    Give a !!{derivation} of $\Proves[\Log{K}]
-    \Diamond(!A\land!B)\lif(\Diamond!A\land\Diamond!B)$. 
-\end{prob}
-
-
 \begin{ex}
 !!^{derivation} of $\Proves[\Log{K}] \Box(!A\lif!B)\lif(\Box!A\lif\Box!B)$.
 
@@ -80,137 +74,216 @@ Give !!a{derivation} of $\Box!A\land\Box!B\Proves[\Log{K}]
 \end{prooftree}
 \end{ex}
 
-
-% TODO: apply \iftag{prvDiamond}
-\begin{prob}
-    Give a !!{derivation} of $\Proves[\Log{K}]
-    \Box(!A\lif!B)\lif(\Diamond!A\lif\Diamond!B)$.
-
-\end{prob}
-
+\iftag{prvDiamond}{
 \begin{ex}
-    The \emph{Duality} rules below are !!{derivable}:
+    We can derive further Duality rules, such as:
 
     \bigskip
     \begin{tabular}{cc}
-        \AxiomC{}\DeduceC{$\Box\lnot!A$}
-        \RightLabel{\Intro{\Diamond}\Ax{K}$^*$}
-        \UnaryInfC{$\lnot\Diamond!A$}
+        \AxiomC{}\DeduceC{$\lnot\Diamond!A$}
+        \RightLabel{Dual}
+        \UnaryInfC{$\Box\lnot!A$}
         \DisplayProof
     &
-        \AxiomC{}\DeduceC{$\Diamond\lnot!A$}
-        \RightLabel{\Elim{\Diamond}\Ax{K}$^*$}
-        \UnaryInfC{$\lnot\Box!A$}
+        \AxiomC{}\DeduceC{$\Box\lnot!A$}
+        \RightLabel{Dual}
+        \UnaryInfC{$\lnot\Diamond!A$}
         \DisplayProof
     \end{tabular}
     \bigskip
 
-   For \Intro{\Diamond}\Ax{K}$^*$:
-    \begin{prooftree}
-        \AxiomC{$\Discharge{\Diamond!A}{2}$}
-        \AxiomC{}\DeduceC{$\Box\lnot!A$}
-            \AxiomC{$\Discharge{!A}{1}$}
-            \AxiomC{$\Discharge{\lnot!A}{1}$}
-            \RightLabel{\Elim{\lnot}}
-            \BinaryInfC{$\lfalse$}
-        \DischargeRule{\Intro{\Diamond}\Ax{K}}{1}
-        \TrinaryInfC{$\Diamond\lfalse$}
-        \RightLabel{\Elim{\Diamond}\Ax{K}}
-        \UnaryInfC{$\lfalse$}
-        \DischargeRule{\FalseCl}{2}
-        \UnaryInfC{$\lnot\Diamond!A$}        
+   For $\lnot\Diamond!A \Proves[K] \Box\lnot!A$:
+   \begin{prooftree}
+        \AxiomC{$\lnot\Diamond!A$}
+            \AxiomC{$\Discharge{\lnot\Box\lnot!A}{1}$}
+            \RightLabel{\Intro{\Diamond}}
+            \UnaryInfC{$\Diamond!A$}
+        \DischargeRule{\Elim{\lnot}}{1}
+        \BinaryInfC{$\Box\lnot!A$}
     \end{prooftree}
 
-    For \Elim{\Diamond}\Ax{K}$^*$:
+    For $\Box\lnot!A \Proves[K] \lnot\Diamond!A$:
     \begin{prooftree}
-        \AxiomC{}\DeduceC{$\Diamond\lnot!A$}
-        \AxiomC{$\Discharge{\Box!A}{2}$}
-            \AxiomC{$\Discharge{\lnot!A}{1}$}
-            \AxiomC{$\Discharge{!A}{1}$}
-            \RightLabel{\Elim{\lnot}}
-            \BinaryInfC{$\lfalse$}
-        \DischargeRule{\Intro{\Diamond}\Ax{K}}{1}
-        \TrinaryInfC{$\Diamond\lfalse$}
-        \RightLabel{\Elim{\Diamond}\Ax{K}}
-        \UnaryInfC{$\lfalse$}
-        \DischargeRule{\FalseCl}{2}
-        \UnaryInfC{$\lnot\Box!A$}        
+        \AxiomC{$\Box\lnot!A$}
+            \AxiomC{$\Discharge{\Diamond!A}{1}$}
+            \RightLabel{\Elim{\Diamond}}
+            \UnaryInfC{$\lnot\Box\lnot!A$}
+        \DischargeRule{\Elim{\lnot}}{1}
+        \BinaryInfC{$\lnot\Diamond!A$}
     \end{prooftree}
 
 \end{ex}
+}{}
 
-\begin{note}
-Conversely, we can derive rules \Intro{\Diamond}\Ax{K} and
-\Elim{\Diamond}\Ax{K} from rules \Intro{\Diamond}\Ax{K}$^*$ and
-\Elim{\Diamond}\Ax{K}$^*$ together with rule $\Box$\Ax{K}. Thus an
-equivalent system results from $\Box$\Ax{K},
-\Intro{\Diamond}\Ax{K}$^*$ and \Elim{\Diamond}\Ax{K}$^*$ as primitives
-instead.
-
-We start with the simpler case, deriving \Elim{\Diamond}\Ax{K} from
-$\Box$\Ax{K} and \Intro{\Diamond}\Ax{K}$^*$:
+\begin{ex}
+\iftag{prvDiamond}{
+!!^{derivation} of $\Box(!A\lif!B) \Proves[\Log{K}] \Diamond!A\lif\Diamond!B$.
 \begin{prooftree}
-    \AxiomC{$\Discharge{\lfalse}{1}$}
-    \DischargeRule{\FalseCl}{1}
-    \UnaryInfC{$\lnot\lfalse$}
-    \RightLabel{$\Box$\Ax{K}}
-    \UnaryInfC{$\Box\lnot\lfalse$}
-    \RightLabel{\Intro{\Diamond}\Ax{K}$^*$}
-    \UnaryInfC{$\lnot\Diamond\lfalse$}
-        \AxiomC{$\Diamond\lfalse$}
-        \RightLabel{\Elim{\lnot}}
-    \BinaryInfC{$\lfalse$}
+    \AxiomC{$\Box(!A\lif!B)$}
+    \AxiomC{$\Discharge{\Box\lnot!B}{3}$}
+        \AxiomC{$\Discharge{!A\lif!B}{2}$}
+        \AxiomC{$\Discharge{!A}{1}$}
+        \RightLabel{\Elim{\lif}}
+        \BinaryInfC{$!B$}
+        \AxiomC{$\Discharge{\lnot!B}{2}$}
+        \DischargeRule{\Intro{\lnot}}{1}
+        \BinaryInfC{$\lnot!A$}
+    \DischargeRule{$\Box$\Ax{K}}{2}
+    \TrinaryInfC{$\Box\lnot!A$}
+        \AxiomC{$\Discharge{\Diamond!A}{4}$}
+        \RightLabel{\Elim{\Diamond}}
+        \UnaryInfC{$\lnot\Box\lnot!A$}
+        \DischargeRule{\Intro{\lnot}}{3}
+    \BinaryInfC{$\lnot\Box\lnot!B$}
+    \RightLabel{\Intro{\Diamond}}
+    \UnaryInfC{$\Diamond!B$}
+    \DischargeRule{\Intro{\lif}}{4}
+    \UnaryInfC{$\Diamond!A\lif\Diamond!B$}
 \end{prooftree}
+\begin{explain}
+We need to show that, given $\Box(!A\lif!B)$, we can derive $\Diamond!B$
+from $\Diamond!A$. Given the Duality rules, this requires deriving 
+$\lnot\Box\lnot!B$ from $\lnot\Box\lnot!A$. Our strategy is to
+establish the equivalent contraposition first: given $\Box(!A\lif!B)$,
+we can derive $\Box\lnot !A$ from $\Box\lnot !B$. 
 
-Deriving \Intro{\Diamond}\Ax{K} from $\Box$\Ax{K},
-\Elim{\Diamond}\Ax{K}$^*$ and \Intro{\Diamond}\Ax{K}$^*$:
-\begin{prooftree}
-    \AxiomC{}\DeduceC{$\Diamond!A$}
-        \AxiomC{$\Discharge{\lnot\Diamond!C}{3}$}
-        \RightLabel{\Elim{\Diamond}\Ax{K}$^*$}
-        \UnaryInfC{$\Box\lnot!C$}
-        \AxiomC{}\DeduceC{$\Box!B$}
-            \AxiomC{$\Discharge{!A}{1},\Discharge{!B}{2}$ \emph{at
-            most}}\DeduceC{$!C$} 
-            \AxiomC{$\Discharge{\lnot!C}{2}$}
+The $\Box$\Ax{K} step is legitimate because at the time when it is applied 
+$!A\lif!B$ and $\lnot!B$ are the only undischarged assumptions of 
+the derivation on the right ($!A$ has been discharged already).
+\end{explain}
+}{
+!!^{derivation} of $\Box(!A\lif!B) \Proves[\Log{K}] \lnot\Box!B\lif\lnot\Box!A$.
+    \begin{prooftree}
+        \AxiomC{$\Box(!A\lif!B)$}
+        \AxiomC{$\Discharge{\Box\lnot!B}{3}$}
+            \AxiomC{$\Discharge{!A\lif!B}{2}$}
+            \AxiomC{$\Discharge{!A}{1}$}
+            \RightLabel{\Elim{\lif}}
+            \BinaryInfC{$!B$}
+            \AxiomC{$\Discharge{\lnot!B}{2}$}
             \DischargeRule{\Intro{\lnot}}{1}
             \BinaryInfC{$\lnot!A$}
         \DischargeRule{$\Box$\Ax{K}}{2}
         \TrinaryInfC{$\Box\lnot!A$}
-        \RightLabel{\Intro{\Diamond}\Ax{K}$^*$}
-        \UnaryInfC{$\lnot\Diamond$\Ax{K}}
-    \DischargeRule{\Elim{\lnot}}{3}
-    \BinaryInfC{$\Diamond!C$}
+        \DischargeRule{\Intro{\lif}}{3}
+        \UnaryInfC{$\Box\lnot!B\lif\Box\lnot!A$}
+    \end{prooftree}
+}
+\end{ex}
+
+\begin{prob}
+    \iftag{prvDiamond}
+    Give a !!{derivation} of \iftag{prvDiamond}
+    {$\Diamond(!A\land!B)\Proves[\Log{K}]\Diamond!A\land\Diamond!B $}
+    {$\lnot\Box(!A\land!B)\Proves[\Log{K}]\lnot\Box!A\lor\lnot\Box!B$}. 
+\end{prob}
+
+\iftag{prvDiamond}{
+\begin{ex}
+The following rule is derived:
+\begin{prooftree}
+    \AxiomC{}
+    \DeduceC{$\Diamond\lfalse$}
+    \RightLabel{$\Diamond\lfalse$}
+    \UnaryInfC{$\lfalse$}
 \end{prooftree}
 
-Deriving \Elim{\Diamond}\Ax{K} from $\Box$\Ax{K} and
-\Intro{\Diamond}\Ax{K}$^*$:
+!!^{derivation}:
+
 \begin{prooftree}
     \AxiomC{$\Discharge{\lfalse}{1}$}
-    \DischargeRule{\FalseCl}{1}
+    \DischargeRule{\Elim{\lnot}}{1}
     \UnaryInfC{$\lnot\lfalse$}
     \RightLabel{$\Box$\Ax{K}}
     \UnaryInfC{$\Box\lnot\lfalse$}
-    \RightLabel{\Intro{\Diamond}\Ax{K}$^*$}
-    \UnaryInfC{$\lnot\Diamond\lfalse$}
         \AxiomC{$\Diamond\lfalse$}
-        \RightLabel{\Elim{\lnot}}
+        \RightLabel{\Elim{\Diamond}}
+        \UnaryInfC{$\lnot\Box\lnot\lfalse$}
+    \RightLabel{\Intro{\lfalse}}
     \BinaryInfC{$\lfalse$}
+    \end{prooftree}
+
+\end{ex}
+}{}
+
+\iftag{prvDiamond}{
+
+\begin{ex}
+The following $\Diamond$\Ax{K} rule, analogue to $\Box$\Ax{K}, is derived: 
+\begin{prooftree}
+    \AxiomC{}\DeduceC{$\Diamond!A$}
+    \AxiomC{}\DeduceC{$\Box!B$}
+    \AxiomC{$\Discharge{!A}{n}\Discharge{!B}{n}$\emph{at most}}\DeduceC{$!C$}
+    \DischargeRule{$\Diamond$\Ax{K}}{n}
+    \TrinaryInfC{$\Diamond!C$}
 \end{prooftree}
+As with the $\Box$\Ax{K} rule, the sub-!!{derivation} on the right must
+have at most $!A,!B$ as undischarged assumptions, and the $\Box!B$ 
+premise is optional. However, unlike the $\Box$\Ax{K} rule, the premise
+$\Diamond !A$ is required. This can be seen from the !!{derivation}s
 
-\begin{explain}
-    We assume that we are given a !!{derivation} of $!C$ from $!A$, $!B$
-    at most, a !!{derivation} of $\Diamond!A$ and a !!{derivation} of
-    $\Box!B$. We first turn the !!{derivation} of $!C$ from $!A$, $!B$ at
-    most into a !!{derivation} of $\lnot!A$ from $!B$, $\lnot!C$ alone.
-    Combining this with the !!{derivation} of $\Box!B$ (given) and a
-    !!{derivation} of $\Box\lnot!C$ (from $\lnot\Diamond!C$ which we
-    assume for \emph{reductio} later on), we get $\Box\lnot!A$. Together
-    with the !!{derivation} of $\Diamond !A$ (given) this leads to a
-    contradiction, which allow us to reduce to absurdity our assumption of
-    $\lnot\Diamond!C$ and hence conclude $\Diamond !C$. 
-    \end{explain}
+Let $\mathcal{D}$ be !!a{derivation} of $!C$ from at most $!A$ and $!B$.
+We have:
+\begin{prooftree}
+\AxiomC{}
+\DeduceC{$\Diamond!A$}
+\RightLabel{\Elim{\Diamond}}
+\UnaryInfC{$\lnot\Box\lnot!A$}
+    \AxiomC{}
+    \DeduceC{$\Box!B$}
+    \AxiomC{$\Discharge{\Box\lnot!C}{3}$}
+        \AxiomC{$\Discharge{!A}{1},\Discharge{!B}{2}$\emph{ at most}}
+        \noLine
+        \UnaryInfC{$\mathcal{D}$}
+        \noLine
+        \UnaryInfC{$!C$}
+            \AxiomC{$\Discharge{\lnot!C}{2}$}
+        \DischargeRule{\Intro{\lnot}}{1}
+        \BinaryInfC{$\lnot!A$}
+    \DischargeRule{$\Box$\Ax{K}}{2}
+    \TrinaryInfC{$\Box\lnot!A$}
+\DischargeRule{\Intro{\lnot}}{3}
+\BinaryInfC{$\lnot\Box\lnot!C$}
+\RightLabel{\Intro{\Diamond}}
+\UnaryInfC{$\Diamond!C$}
+\end{prooftree}
+The $\Box$\Ax{K} step is correct because by the time we get to it $!A$ has
+been discharged and the only undischarged assumptions in its 
+rightmost sub-!!{derivation} are \emph{at most} $!B$, 
+$\lnot!C$. If $\mathcal{D}$ had any undischarged assumption beyond $!A$,
+$!B$ this would not be so and the $\Box$\Ax{K} step would be incorrect. 
+If $\mathcal{D}$ only has one of $!A,!B$ undischarged, or neither,
+the $\Box$\Ax{K} step is still correct. 
 
-\end{note}
+The $\Box!B$ premise is optional; the $\Diamond!A$ premise is mandatory.
+Without $\Box!B$ the proof is still correct, provided that 
+$\mathcal{D}$ then uses at most $!A$ as undischarged assumption:
+\begin{prooftree}
+    \AxiomC{}
+    \DeduceC{$\Diamond!A$}
+    \RightLabel{\Elim{\Diamond}}
+    \UnaryInfC{$\lnot\Box\lnot!A$}
+        \AxiomC{$\Discharge{\Box\lnot!C}{3}$}
+            \AxiomC{$\Discharge{!A}{1}$\emph{ at most}}
+            \noLine
+            \UnaryInfC{$\mathcal{D}$}
+            \noLine
+            \UnaryInfC{$!C$}
+                \AxiomC{$\Discharge{\lnot!C}{2}$}
+            \DischargeRule{\Intro{\lnot}}{1}
+            \BinaryInfC{$\lnot!A$}
+        \DischargeRule{$\Box$\Ax{K}}{2}
+        \BinaryInfC{$\Box\lnot!A$}
+    \DischargeRule{\Intro{\lnot}}{3}
+    \BinaryInfC{$\lnot\Box\lnot!C$}
+    \RightLabel{\Intro{\Diamond}}
+    \UnaryInfC{$\Diamond!C$}
+\end{prooftree}
+However, the premise $\Diamond!A$ is mandatory. It is needed to derive 
+$\lnot\Box\lnot!A$, thereby contradicting $\Box\lnot!A$ and concluding
+$\lnot\Box\lnot!C$ (and therefore $\Diamond!C$) by \emph{reductio}.
+\end{ex}
+}{}
+
 
 \end{document}

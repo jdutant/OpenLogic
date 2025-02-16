@@ -32,6 +32,9 @@
 % CUSTOMIZATIONS
 % -------------------------------------------------------------------
 
+% Redefine ntheorem's proof-end symbol (QED symbol), see open-logic.sty
+\gdef\proofSymbol{\ensuremath{\blacksquare}}
+
 % Symbols
 % =======
 
@@ -155,18 +158,19 @@
 % and one optional argument (the world).  Use `\mSat/` to create
 % the negated relation.  By default, `\mSat{M}{!A}[w]` is typeset as
 % $\mathfrak{M}, w \models \varphi$.
-% Redefined to $\Vdash{\mModel M}^w \phi$ (MacFarlane)
+% Note that OpenLogic uses the forcing symbol $\Vdash$ instead of $\vDash$.
+% Redefined to $\vDash{\mModel M}^w \phi$ (MacFarlane)
 
 \DeclareDocumentCommand \mSat { t{/} m m o } {%
   \IfBooleanTF{#1}{%
     % negated
     \IfNoValueTF {#4} 
-        { \nVdash_{\mModel{#2}} #3 }
-        { \nVdash_{\mModel{#2}}^{#4} #3}}{%
+        { \nvDash_{\mModel{#2}} #3 }
+        { \nvDash_{\mModel{#2}}^{#4} #3}}{%
     % not negated
     \IfNoValueTF {#4} 
-        { \Vdash_{\mModel{#2}} #3 }
-        { \Vdash_{\mModel{#2}}^{#4} #3}}}
+        { \vDash_{\mModel{#2}} #3 }
+        { \vDash_{\mModel{#2}}^{#4} #3}}}
 
 
 % Special Sets and Mathematical Symbols

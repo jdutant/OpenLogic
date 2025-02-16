@@ -1,0 +1,111 @@
+% Part: normal-modal-logic
+% Chapter: natural-deduction 
+% Section: rules-for-K-choices.tex
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{nml}{nd}{rkc}
+
+\olsection{Note on the choice of rules for \Log{K}}
+
+Our \Elim{\Diamond} and \Intro{\Diamond} rules are 
+Duality rules are sound and sufficient for completeness. But they're
+not entirely satisfactory: ideally, we'd like to have rules that
+define $\Diamond$ on its own, not in terms of another operator
+($\Box$). Can we do better?
+
+Consider the $\Diamond$\Ax{K} and $\lfalse\Diamond$ rules:
+
+\bigskip \noindent
+{\def\defaultHypSeparation{\hskip .03in}
+\begin{tabular}{cc}
+\AxiomC{}\DeduceC{$\Diamond!A$}
+\AxiomC{}\DeduceC{$\Box!B_1$}
+\AxiomC{}\DeduceC{\ldots}
+\AxiomC{}\DeduceC{$\Box!B_k$}
+\AxiomC{$\Discharge{!A}{n},\Discharge{!B_1}{n},\ldots,\Discharge{!B_k}{n}$ \emph{at most}}\DeduceC{$!C$}
+\DischargeRule{$\Diamond$\Ax{K}}{n}
+\QuinaryInfC{$\Diamond!C$}
+\DisplayProof
+&
+\AxiomC{}
+\DeduceC{$\Diamond\lfalse$}
+\RightLabel{$\Diamond\lfalse$}
+\UnaryInfC{$\lfalse$}
+\DisplayProof
+\end{tabular}
+}
+
+\noindent Using these two rules as primitives instead, we could derive the
+\Elim{\Diamond} rule like so:
+
+\begin{prooftree}
+\AxiomC{}\DeduceC{$\Diamond!A$}
+\AxiomC{}\DeduceC{$\Discharge{\Box\lnot!A}{2}$}
+    \AxiomC{$\Discharge{!A}{1}$}
+    \AxiomC{$\Discharge{\lnot!A}{1}$}
+    \RightLabel{\Intro{\lfalse}}
+    \BinaryInfC{$\lfalse$}
+\DischargeRule{$\Diamond$\Ax{K}}{1}
+\TrinaryInfC{$\Diamond\lfalse$}
+\RightLabel{$\lfalse\Diamond$}
+\UnaryInfC{$\lfalse$}
+\DischargeRule{$\lfalse_C$}{2}
+\UnaryInfC{$\lnot\Box\lnot!A$}
+\end{prooftree}
+
+However, we would not be able to derive the \Intro{\Diamond} rule.
+For the same reason, we would only be able to derive half of
+the Duality rules.
+
+\begin{prob}
+Suppose we keep the semantic clause for $\Box$ as is, but change the 
+semantic clause for $\Diamond$ to:
+\begin{itemize}
+    \item $\mSat{M}{\Diamond!A}[w]$ iff there are \emph{two distinct} $w',w''\in W$
+    such that $Rww'$, $Rww''$ and $\mSat{M}{!A}[w']$ and $\mSat{M}{!A}[w'']$.
+\end{itemize}
+Answer the following:
+\begin{enumerate}
+    \item Show that with that semantics,
+    $\Diamond!A\liff\lnot\Box\lnot!A$ (Duality) is not valid. Say
+    whether both directions fail ($\Diamond!A\lif\lnot\Box\lnot!A$ and
+    $\lnot\Box\lnot!A\lif\Diamond!A$)
+    \item Show that with that semantics, the $\Diamond$\Ax{K} and
+    $\lfalse\Diamond$ rules are sound.
+
+    \bigskip \noindent
+    {\def\defaultHypSeparation{\hskip .03in}
+    \begin{tabular}{cc}
+    \AxiomC{}\DeduceC{$\Diamond!A$}
+    \AxiomC{}\DeduceC{$\Box!B_1$}
+    \AxiomC{}\DeduceC{\ldots}
+    \AxiomC{}\DeduceC{$\Box!B_k$}
+    \AxiomC{$\Discharge{!A}{n},\Discharge{!B_1}{n},\ldots,\Discharge{!B_k}{n}$ \emph{at most}}\DeduceC{$!C$}
+    \DischargeRule{$\Diamond$\Ax{K}}{n}
+    \QuinaryInfC{$\Diamond!C$}
+    \DisplayProof
+    &
+    \AxiomC{}
+    \DeduceC{$\Diamond\lfalse$}
+    \RightLabel{$\Diamond\lfalse$}
+    \UnaryInfC{$\lfalse$}
+    \DisplayProof
+    \end{tabular}
+    }
+
+    \item Using the previous result, explain why the \Intro{\Diamond}
+    rule below cannot be derived from the the $\Box$\Ax{K}, 
+    $\Diamond$\Ax{K} and $\lfalse\Diamond$ rules.
+    \begin{prooftree}
+        \AxiomC{}\DeduceC{$\lnot\Box\lnot!A$}
+        \RightLabel{\Intro{\Diamond}K}
+        \UnaryInfC{$\Diamond!A$}
+    \end{prooftree}
+    
+\end{enumerate}
+\end{prob}
+
+\end{document}

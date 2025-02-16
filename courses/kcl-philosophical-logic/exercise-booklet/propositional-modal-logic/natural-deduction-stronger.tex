@@ -1,0 +1,120 @@
+% Part: exercise-booklet
+% Chapter: propositional-modal-logic
+% Section: natural-deduction-stronger
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{exb}{pml}{nd}
+
+\olsection{Natural deduction in stronger systems}
+
+
+\begin{prob}[System $\Log{S4}$]
+    \citep[exercise 3.2 item 2]{MacFarlane-2020-PhilosophicalLogicContemporary}
+    Use !!{derivation}s to establish the following:
+
+    $\Box(\Obj{\pvar{A}}\land\lnot\Obj{\pvar{B}}) \Proves[\Log{S4}] 
+    \Box(\Box\Obj{\pvar{A}}\land\lnot\Diamond\Obj{\pvar{B}})$ 
+
+    \begin{ans}
+    !!^{derivation} of $\Box(\Obj{\pvar{A}}\land\lnot\Obj{\pvar{B}}) \Proves[\Log{S4}] 
+    \Box(\Box\Obj{\pvar{A}}\land\lnot\Diamond\Obj{\pvar{B}})$ 
+    \begin{prooftree}
+    \AxiomC{$\Box(\Obj{\pvar{A}}\land\lnot\Obj{\pvar{B}})$}
+    \RightLabel{$\Box$\Ax{4}}
+    \UnaryInfC{$\Box\Box(\Obj{\pvar{A}}\land\lnot\Obj{\pvar{B}})$}
+        \AxiomC{$\Discharge{\Box(\Obj{\pvar{A}}\land\lnot\Obj{\pvar{B}})}{3}$}
+            \AxiomC{$\Discharge{\Obj{\pvar{A}}\land\lnot\Obj{\pvar{B}}}{1}$}
+            \RightLabel{\Log{PL}}
+            \UnaryInfC{$\Obj{\pvar{A}}$}
+        \DischargeRule{$\Box$\Ax{K}}{1}
+        \BinaryInfC{$\Box\Obj{\pvar{A}}$}
+            \AxiomC{$\Discharge{\Box(\Obj{\pvar{A}}\land\lnot\Obj{\pvar{B}})}{3}$}
+                \AxiomC{$\Discharge{\Obj{\pvar{A}}\land\lnot\Obj{\pvar{B}}}{2}$}
+                \RightLabel{\Log{PL}}
+                \UnaryInfC{$\lnot\Obj{\pvar{B}}$}
+            \DischargeRule{$\Box$\Ax{K}}{2}
+            \BinaryInfC{$\Box\lnot\Obj{\pvar{B}}$}
+            \RightLabel{Dual}
+            \UnaryInfC{$\lnot\Diamond\Obj{\pvar{B}}$}
+        \BinaryInfC{$\Box\Obj{\pvar{A}}\land\lnot\Diamond\Obj{\pvar{B}}$}
+    \DischargeRule{$\Box$\Ax{K}}{3}
+    \BinaryInfC{$\Box(\Box\Obj{\pvar{A}}\land\lnot\Diamond\Obj{\pvar{B}})$}
+    \end{prooftree}
+
+    To better understand the !!{derivation} we can break it down into
+    two parts. First, a sub-!!{derivation} $\mathcal{D}$ of 
+    $\Box(\Obj{\pvar{A}}\land\lnot\Obj{\pvar{B}})\Proves[\Log{S4}]
+    \Box\Obj{\pvar{A}}\land\lnot\Diamond\Obj{\pvar{B}}$:
+    \begin{prooftree}
+        \AxiomC{$\Box(\Obj{\pvar{A}}\land\lnot\Obj{\pvar{B}})$}
+            \AxiomC{$\Discharge{\Obj{\pvar{A}}\land\lnot\Obj{\pvar{B}}}{1}$}
+            \RightLabel{\Log{PL}}
+            \UnaryInfC{$\Obj{\pvar{A}}$}
+        \DischargeRule{$\Box$\Ax{K}}{1}
+        \BinaryInfC{$\Box\Obj{\pvar{A}}$}
+            \AxiomC{$\Box(\Obj{\pvar{A}}\land\lnot\Obj{\pvar{B}})$}
+                \AxiomC{$\Discharge{\Obj{\pvar{A}}\land\lnot\Obj{\pvar{B}}}{2}$}
+                \RightLabel{\Log{PL}}
+                \UnaryInfC{$\lnot\Obj{\pvar{B}}$}
+            \DischargeRule{$\Box$\Ax{K}}{2}
+            \BinaryInfC{$\Box\lnot\Obj{\pvar{B}}$}
+            \RightLabel{Dual}
+            \UnaryInfC{$\lnot\Diamond\Obj{\pvar{B}}$}
+        \BinaryInfC{$\Box\Obj{\pvar{A}}\land\lnot\Diamond\Obj{\pvar{B}}$}
+    \end{prooftree}
+    From this it follows (using the $\Box$\Ax{K} rule) that the result
+    of applying $\Box$ to premises and conclusion is valid too:
+    $\Box\Box(\Obj{\pvar{A}}\land\lnot\Obj{\pvar{B}})\Proves[\Log{S4}]
+    \Box(\Box\Obj{\pvar{A}}\land\lnot\Diamond\Obj{\pvar{B}})$. Therefore
+    we only need to get $\Box\Box(\Obj{\pvar{A}}\land\lnot\Obj{\pvar{B}})$
+    from our premise $\Box(\Obj{\pvar{A}}\land\lnot\Obj{\pvar{B}})$, 
+    but that is immediate by the $\Box$\Ax{4} rule. We thus embed the 
+    !!{derivation} $\mathcal{D}$ above in the following steps:
+    \begin{prooftree}
+        \AxiomC{$\Box(\Obj{\pvar{A}}\land\lnot\Obj{\pvar{B}})$}
+        \RightLabel{$\Box$\Ax{4}}
+        \UnaryInfC{$\Box\Box(\Obj{\pvar{A}}\land\lnot\Obj{\pvar{B}})$}
+            \AxiomC{$\Discharge{\Box(\Obj{\pvar{A}}\land\lnot\Obj{\pvar{B}})}{3}$}
+            \noLine
+            \UnaryInfC{$\mathcal{D}$}
+            \noLine
+            \UnaryInfC{$\Box\Obj{\pvar{A}}\land\lnot\Diamond\Obj{\pvar{B}}$}
+        \DischargeRule{$\Box$\Ax{K}}{3}
+        \BinaryInfC{$\Box(\Box\Obj{\pvar{A}}\land\lnot\Diamond\Obj{\pvar{B}})$}
+    \end{prooftree}
+    Which gives us the final !!{derivation} above.
+
+
+    \end{ans}
+
+\end{prob}
+
+\begin{prob}[System $\Log{S5}$]
+    \citep[exercise 3.2 item 3]{MacFarlane-2020-PhilosophicalLogicContemporary}
+    Use !!{derivation}s to establish the following:
+
+    $\Box\Obj{\pvar{A}}\lor\Diamond\Obj{\pvar{B}} \Proves[\Log{S5}] 
+        \Box(\Obj{\pvar{A}}\lor\Diamond\Obj{\pvar{B}})$ 
+\end{prob}
+
+\begin{prob}
+    \citep[exercise 3.2 item 4]{MacFarlane-2020-PhilosophicalLogicContemporary}
+    For each of the following, determine whether it is a logical truth
+    in \Log{T}, \Log{S4}, \Log{S5}. If it is, give a !!{derivation}.
+    If it is not, give a model in which it is false.
+
+    \begin{enumerate}
+    \item $\Box(\Obj{\pvar{A}}\lif\Box\Diamond\Obj{\pvar{A}})$
+    \item $\Box\Box\Obj{\pvar{A}}\lor\Box\lnot\Box\Obj{\pvar{A}}$
+    \item $\Diamond(\Obj{\pvar{A}}\lor\Obj{\pvar{B}})\lif\Diamond\Obj{\pvar{A}}$
+    \item $\Diamond\Box\Obj{\pvar{A}}\lif\Box{\Obj{\pvar{A}}}$
+    \item $\Diamond\Box\Diamond{\Obj{\pvar{A}}}\lif\Diamond{\Obj{\pvar{A}}}$
+    \end{enumerate}
+
+\end{prob}
+
+
+\end{document}

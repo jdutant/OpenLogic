@@ -19,21 +19,64 @@
     \smallskip\noindent
     \begin{tabular}{cccccc}
         1. 
-        & \AxiomC{$\pvar{A}$}
-            \noLine\UnaryInfC{$\pvar{B}\lif(\pvar{A}\lif\pvar{B})$}
-            \UnaryInfC{$\pvar{B}$}
+        & \AxiomC{$\Obj{\pvar{A}}$}
+            \noLine\UnaryInfC{$\Obj{\pvar{B}}\lif(\Obj{\pvar{A}}\lif\Obj{\pvar{B}})$}
+            \UnaryInfC{$\Obj{\pvar{B}}$}
             \DisplayProof
         & 2.
-        & \AxiomC{$\pvar{A} \liff (\pvar{B}\lor\pvar{C})$}
-              \noLine\UnaryInfC{$(\pvar{A}\lor \pvar{B})$}
-              \UnaryInfC{$\pvar{A}$}
+        & \AxiomC{$\Obj{\pvar{A}} \liff (\Obj{\pvar{B}}\lor\pvar{C})$}
+              \noLine\UnaryInfC{$(\Obj{\pvar{A}}\lor \Obj{\pvar{B}})$}
+              \UnaryInfC{$\Obj{\pvar{A}}$}
               \DisplayProof
         & 3.
-        & \AxiomC{$\pvar{A}\lor(\pvar{B}\lif\pvar{C})$}
-              \noLine\UnaryInfC{$\pvar{B}$}
-              \UnaryInfC{$\pvar{A}\lor\pvar{C}$}
+        & \AxiomC{$\Obj{\pvar{A}}\lor(\Obj{\pvar{B}}\lif\pvar{C})$}
+              \noLine\UnaryInfC{$\Obj{\pvar{B}}$}
+              \UnaryInfC{$\Obj{\pvar{A}}\lor\pvar{C}$}
               \DisplayProof 
     \end{tabular}
+
+    \begin{ans}
+    \begin{enumerate}
+    \item Not Valid. Consider !!a{valuation} $\pAssign{v}$ with
+        $\pAssign{v}(\Obj{\pvar{A}})=\True$ and
+        $\pAssign{v}(\Obj{\pvar{B}})=\False$. We have
+        $\pSat{v}{\Obj{\pvar{A}}}$ and
+        $\pSat{v}{\Obj{\pvar{B}}\lif(\Obj{\pvar{A}}\lif\Obj{\pvar{B}})}$ (since
+        $\pSat/{v}{\Obj{\pvar{B}}}$), but $\pSat/{v}{\Obj{\pvar{B}}}$. 
+    
+    \item Valid. Natural deduction proof:
+        \begin{prooftree}
+        \AxiomC{$\Obj{\pvar{A}}\lor \Obj{\pvar{B}}$}
+            \AxiomC{$\Discharge{\Obj{\pvar{A}}}{1}$}
+                \AxiomC{$\Discharge{\Obj{\pvar{B}}}{1}$}
+                \RightLabel{\Intro{\lor}}
+                \UnaryInfC{$\Obj{\pvar{B}}\lor\pvar{C}$}
+                    \AxiomC{$\Obj{\pvar{A}} \liff (\Obj{\pvar{B}}\lor\pvar{C})$}
+                \RightLabel{\Elim{\liff}}
+                \BinaryInfC{$\Obj{\pvar{A}}$}
+        \DischargeRule{\Elim{\lor}}{1}
+        \TrinaryInfC{$\Obj{\pvar{A}}$}
+        \end{prooftree}
+
+    \item Valid. Natural deduction proof:
+        \begin{prooftree}
+            \AxiomC{$\Obj{\pvar{A}}\lor(\Obj{\pvar{B}}\lif\pvar{C})$}
+                \AxiomC{$\Discharge{\Obj{\pvar{A}}}{1}$}
+                \RightLabel{\Intro{\lor}}
+                \UnaryInfC{$\Obj{\pvar{A}}\lor\pvar{C}$}
+                \AxiomC{$\Discharge{\Obj{\pvar{B}}\lif\pvar{C}}{1}$}
+                    \AxiomC{$\Obj{\pvar{B}}$}
+                    \RightLabel{\Elim{\lif}}
+                \BinaryInfC{$\pvar{C}$}
+                \RightLabel{\Intro{\lor}}
+                \UnaryInfC{$\Obj{\Obj{\pvar{A}}}\lor\pvar{C}$}
+            \DischargeRule{\Elim{\lor}}{1}
+            \TrinaryInfC{$\Obj{\Obj{\pvar{A}}}\lor\pvar{C}$}
+        \end{prooftree}
+    \end{enumerate}
+    \end{ans}
+
+    
 
 \end{prob}
 

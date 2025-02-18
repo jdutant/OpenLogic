@@ -12,6 +12,11 @@
 
 \begin{prob}
     Define $\Diamond$ in terms of $\Box$. Define $\Box$ in terms of $\Diamond$.
+    \begin{ans}
+    $\Diamond!A$ can be defined as $\lnot\Box\lnot!A$. 
+
+    $\Box!A$ can be defined as $\lnot\Diamond\lnot!A$.
+    \end{ans}
 \end{prob}
 
 \begin{prob}
@@ -19,10 +24,83 @@
     of propositional modal logic:
     \begin{itemize}
         \item Omar has to study or get a job, but he doesn't have to do both.
-        \item She must be at home. And if she can't be running if she's at home.
+        \item She must be at home. And she can't be running if she's at home.
         Therefore she can't be running.
         \item It's possible that God exists necessarily.
     \end{itemize}
+
+    \begin{ans}
+    \begin{itemize}
+        \item Omar has to study or get a job, but he doesn't have to do both.
+        
+        Dictionary:
+        
+        $\Obj{\pvar{A}}$: Omar has to study
+
+        $\Obj{\pvar{B}}$: Omar has to get a job
+
+        Formalization
+
+        $\Box(\Obj{\pvar{A}}\lor\Obj{\pvar{B}}) \land 
+            \lnot\Box(\Obj{\pvar{A}}\land\Obj{\pvar{B}})$
+        
+        \item She must be at home. And she can't be running if she's at home.
+        Therefore she can't be running.
+        
+        Dictionary:
+        
+        $\Obj{\pvar{A}}$: She is home
+        
+        $\Obj{\pvar{B}}$: She is running
+
+        Formalization(s), using $/$ to separate premise(s) and
+        conclusion:
+
+        Option 1:
+
+        $\Box\Obj{\pvar{A}}, 
+        \Obj{\pvar{A}}\lif\lnot\Diamond\Obj{\pvar{B}} / \lnot\Diamond\Obj{\pvar{B}}$
+
+        Option 2:
+
+        $\Box\Obj{\pvar{A}}, 
+        \lnot\Diamond(\Obj{\pvar{A}}\lif\lnot\Obj{\pvar{B}}) / \lnot\Diamond\Obj{\pvar{B}}$
+
+        \emph{Comment.} On the face of it, the second premise states that if she is in
+        fact home, then it is not possible that she is running:
+        $!A\lif\lnot\Diamond !B$. That is, $\Diamond$ has `narrow
+        scope', or, in medieval terminology, the statement affirms the
+        \emph{necessity of the consequent $!B$}, given the antecedent.
+        In possible world terms, this would mean that if the actual
+        world is one in which it is at home, there is no possible
+        world in which she is running. (Option 1)
+        
+        However, the premise can also understood as saying that it is
+        not possible that she is at home and running:
+        $\lnot\Diamond(!A\land!B)$ (equiv,
+        $\lnot\Diamond(!A\lif\lnot!B)$). That is, $\Diamond$ could
+        have `wide scope' instead, or, in medieval terminology, the
+        statement may affirm the \emph{necessity of the consequence
+        $!A\lif!B$}. In possible world terms, this means that there is
+        no world in which she is at home and running. (Option 2)
+
+        We thus provide two options. Either is defensible and would be
+        sufficient in exam; though pointout the ambiguity may give
+        extra points.
+    
+        \item It's possible that God exists necessarily.
+        
+        Dictionary
+
+        $\Obj{\pvar{A}}$: God exists
+
+        Formalization
+
+        $\Diamond\Box\Obj{\pvar{A}}$
+    
+    \end{itemize}
+    \end{ans}
+    
 \end{prob}
 
 \begin{prob}[Possibility vs Contingency]
@@ -33,14 +111,36 @@
 
     Say which of the following are correct (the answer is the same whether
     you use $\Log{K}$ or standard stronger systems like $\Log{S5}$):
-    \begin{itemize}
+    \begin{enumerate}
         \item $\Box !A \Entails \lnot \Diamond !A$
         \item $\Box !A \Entails \lnot \lindet !A$
         \item $\Diamond !A \Entails \Diamond \lnot !A$
         \item $\lindet !A \Entails \lindet \lnot !A$
         \item $\Diamond !A \Entails \lnot\Box !A$
         \item $\lindet !A \Entails \lnot\Box !A$
-    \end{itemize}
+    \end{enumerate}
+
+    \begin{ans}There are several ways to describe the difference.
+        Here is one. To say that $!A$ is possible is just to say that 
+        $\lnot!A$ isn't necessary. To say that $!A$ is contingent is to
+        say that neither $\lnot!A$ \emph{nor $!A$} are necessary. 
+
+        Here is another. Contingency entails non-necessity; possibility 
+        does not. That is, if $!A$ is contingent then it is not necessary.
+        If $!A$ is possible it doesn't follow that it is not necessary: it 
+        may be also necessary or it may not.
+
+        $\lindet !A$ can be defined as $\Diamond!A\land\Diamond\lnot!A$.
+        
+        \begin{enumerate}
+            \item $\Box !A \Entails \lnot \Diamond !A$: incorrect. 
+            \item $\Box !A \Entails \lnot \lindet !A$: correct.
+            \item $\Diamond !A \Entails \Diamond \lnot !A$: incorrect. 
+            \item $\lindet !A \Entails \lindet \lnot !A$: correct.
+            \item $\Diamond !A \Entails \lnot\Box !A$: incorrect.
+            \item $\lindet !A \Entails \lnot\Box !A$: correct.
+        \end{enumerate}
+    \end{ans}
 \end{prob}
 
 \begin{prob}[Distributing $\Box$ and $\Diamond$ over $\lor$ and $\land$]
@@ -49,16 +149,76 @@
     valid. Can you explain why each of the following is the case? 
     For valid ones, check that you see how the semantics ensures that it holds. 
     For invalid ones, check that you can think of a counterexample.
+    \begin{enumerate}
+        \item $\Box(!A\land!B) \Entails[\Log{K}] \Box !A \land \Box !B$
+        \item $\Box !A \land \Box !B \Entails[\Log{K}] \Box(!A \land !B)$
+        \item $\Diamond(!A\land!B) \Entails[\Log{K}] \Diamond !A \land \Diamond !B$
+        \item $\Diamond!A\land\Diamond!B \Entails/[\Log{K}] \Diamond (!A \land !B)$
+        \item $\Box(!A\lor!B) \Entails/[\Log{K}] \Box !A \lor \Box !B$
+        \item $\Box !A \lor \Box !B \Entails/[\Log{K}] \Box (!A \lor !B)$
+        \item $\Diamond(!A\lor!B) \Entails[\Log{K}] \Diamond !A \lor \Diamond !B$
+        \item $\Diamond !A \lor \Diamond !B \Entails/[\Log{K}] \Diamond(!A\lor!B)$ 
+    \end{enumerate}
+
+    \begin{ans}
+    Example of answers to some items.
     \begin{itemize}
-        \item $\Box(!A\land!B) \Entails{\Log{K}} \Box !A \land \Box !B$
-        \item $\Box !A \land \Box !B \Entails{\Log{K}} \Box(!A \land !B)$
-        \item $\Diamond(!A\land!B) \Entails{\Log{K}} \Diamond !A \land \Diamond !B$
-        \item $\Diamond(!A)\land\Diamond(!B) \Entails/{\Log{K}} \Diamond (!A \land !B)$
-        \item $\Box(!A\lor!B) \Entails/{\Log{K}} \Box !A \lor \Box !B$
-        \item $\Box !A \lor \Box !B \Entails/{\Log{K}} \Box (!A \lor !B)$
-        \item $\Diamond(!A\lor!B) \Entails{\Log{K}} \Diamond !A \lor \Diamond !B$
-        \item $\Diamond !A \lor \Diamond !B \Entails/{\Log{K} \Diamond(!A\lor!B)}$ 
+    \item $\Box(!A\land!B) \Entails[\Log{K}] \Box !A \land \Box !B$.
+    
+        Suppose $\Box(!A\land!B)$ holds at a world $w$ in some model.
+        Then $!A\land!B$ is true at any world accessible from $w$.
+        Therefore $!A$ is true at any world acessible from $w$, hence
+        $\Box!A$ is true at $w$. Similarly for $\Box!B$. Therefore
+        $\Box !A \land \Box !B$ is true at $w$.
+
+    \item $\Diamond!A\land\Diamond!B \Entails/[\Log{K}] \Diamond (!A \land !B)$
+    
+        Consider the schema instance with $\Obj{\pvar{A}}$ for $!A$ 
+        and $\Obj{\pvar{B}}$ for $!B$. Suppose some world $w$ in a 
+        model has access to exactly two worlds, one in which $\Obj{\pvar{A}}$
+        is true but $\Obj{\pvar{B}}$ isn't, and the other in which 
+        $\Obj{\pvar{B}}$ is true but $\Obj{\pvar{A}}$. Since $w$ has
+        access to a $\Obj{\pvar{A}}$-world and a $\Obj{\pvar{B}}$-world,
+        both $\Diamond\Obj{\pvar{A}}$ and $\Diamond\Obj{\pvar{B}}$ 
+        are true at $w$, but since none of the worlds $w$ has access
+        to is one in which both $\Obj{\pvar{A}}$ and $\Obj{\pvar{B}}$
+        hold, $\Diamond (\Obj{\pvar{A}} \land \Obj{\pvar{B}})$ is false at $w$.
+
     \end{itemize}
+
+    \emph{Comment.} Why did I use  $\Obj{\pvar{A}}$ and 
+    $\Obj{\pvar{B}}$? Couldn't I have just stated that my 
+    model makes $!A$ true at some world accessible to $w$, $!B$ true 
+    at another accessible world to $w$, but no world accessible to $w$ 
+    with both true? The problem is that we can't stipulate that $!A$
+    and $!B$ have particular truth values, because $!A$ and $!B$ 
+    are not !!{formula}s but stand for arbitrary !!{formula}s. 
+    For instance, they could stand for the same !!{formula}, in 
+    which case it is not possible for $!A$ and $!B$ to have 
+    different truth values at any world.
+    
+    $\Diamond!A\land\Diamond!B$ and $\Diamond(!A\land!B)$
+    are \emph{schemas}: they use $!A$ and $!B$ which are not actual
+    !!{formula}s but metalinguistic variables standing for any 
+    !!{formula}. Therefore $\Diamond!A\land\Diamond!B / \Diamond(!A\land!B)$
+    is an \emph{argument schema}, and to say that it is valid is 
+    to say that every instance of it, that is every argument you get
+    by replacing $!A$ and $!B$ by some actual !!{formula}, is a valid
+    argument. Conversely, to say that the schema is \emph{not}
+    valid is to say that \emph{some} instance of it is not valid.
+    The schema $\Diamond!A\land\Diamond!B / \Diamond(!A\land!B)$
+    has in fact some valid instances, e.g. when $!A$ and $!B$
+    are both the same !!{formula} or when they are both logical 
+    truths. We call it invalid though, because not all of its 
+    instances are valid. 
+    
+    That is why we pick specific \emph{instances} of $!A$ and $!B$.
+    I picked $\Obj{\pvar{A}}$ for $!A$ and $\Obj{\pvar{B}}$ for 
+    $!B$. You don't have to pick atomic !!{formula}s: you could 
+    pick e.g. $\Obj{\pvar{A}}$ for $!A$ and $\lnot\Obj{\pvar{A}}$
+    for $!B$.
+        
+    \end{ans}
 \end{prob}
 
 \begin{prob}
@@ -74,6 +234,60 @@
         they are invalid in weaker systems, including
          $\Log{D},\Log{T},\Log{S4},\Log{B}$. (Why?)
     \end{itemize}
+
+    \begin{ans}
+    All the \Log{K}-validities in \olref{moddistrib} are also valid in
+    stronger systems like \Log{S5}.
+
+    Suppose $\Gamma\Entails[\Log{K}]!A$: there is no \Log{K}
+    !!{structure} and world at which all the !!{formula}s in $\Gamma$
+    are true but $!A$ is false. Since \Log{S5} !!{structure}s are a
+    special case of \Log{K} !!{structure}s, it follows that there is
+    no  \Log{S5} !!{structure} and world at which all the !!{formula}s
+    in $\Gamma$ are true but $!A$ is false. Therefore
+    $\Gamma\Entails[\Log{S5}]!A$. The same holds for systems \Log{D},
+    \Log{T},\Log{B},\Log{S4}, because their !!{structure}s also are 
+    special cases of \Log{K} ones.
+
+    Show that the invalidites of \olref{moddistrib} are invalid in
+    \Log{S5}. That is not automatic: some arguments invalid in \Log{K}
+    are valid in \Log{S5}. We need to check each separately
+    by providing a \Log{S5} countermodel. Here is one case:
+    
+    $\Diamond!A\land\Diamond!B\Entails/[\Log{S5}]\Diamond(!A\land!B)$.
+    We'll show that the following instance is invalid: 
+    $\Diamond\Obj{\pvar{P}}\land\Diamond\lnot\Obj{\pvar{P}} 
+    \Entails/[\Log{S5}] \Diamond (\Obj{\pvar{P}} 
+    \land \lnot\Obj{\pvar{P}})$.
+    Consider a model $\mModel{M}$ with $W={u,v}$, $R$ the universal relation on 
+    $W$, $R=\Setabs{\langle w,w'\rangle}{w,w'\in W}$ ($R$ relates
+    any member of $W$ with any member of $W$; this is also written 
+    the Cartesian product $W\times W$, the set of all pairs whose 
+    first member is something in $W$ and second member something in $W$),
+    and $V(\Obj{\pvar{P}})=\{u\}$. $R$ is reflexive, transitive and 
+    symmetric, hence $\mModel{M}$ is a \Log{S5} model. Since $Ruu$ and 
+    $\mSat{M}{\Obj{\pvar{P}}}[u]$, we have 
+    $\mSat{M}{\Diamond\Obj{\pvar{P}}}[u]$; since
+    $\mSat{M}{\lnot\Obj{\pvar{P}}}[v]$ and $Ruv$ we also have 
+    $\mSat{M}{\Diamond\lnot\Obj{\pvar{P}}}[u]$; however 
+    $\Obj{\pvar{P}}\land\lnot\Obj{\pvar{P}}$ isn't true at any world 
+    (a fortiori any world accessible to $u$) so we have
+     $\mSat/{M}{\Diamond (\Obj{\pvar{P}} \land \lnot\Obj{\pvar{P}})}[u]$.
+    Therefore we have a \Log{S5} model $\mModel{M}$ and world $u$ with
+     $\mSat{M}{\Diamond\Obj{\pvar{P}} 
+     \land\Diamond\lnot\Obj{\pvar{P}}}[u]$ and  $\mSat/{M}{\Diamond 
+    (\Obj{\pvar{P}} \land \lnot\Obj{\pvar{P}})}[u]$, hence the 
+    argument is not valid in \Log{S5}.
+
+    If an argument has a \Log{S5} countermodel, then it has a 
+    countermodel in each of the weaker logics \Log{D}, \Log{T}, \Log{B},
+    \Log{S4} because a \Log{S5} model is also a \Log{D} model (because
+    it is serial), a \Log{T} model (because it is reflexive), and a 
+    \Log{B}, \Log{S4} model. Hence our \Log{S5} countermodels to 
+    the invalidities in \olref{moddistrib} are enough to show that 
+    these schemas are invalid in all these logics too. 
+
+    \end{ans}
 
 \end{prob}
 

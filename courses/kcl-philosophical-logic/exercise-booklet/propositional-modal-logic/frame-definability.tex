@@ -59,6 +59,54 @@ was arbitrary, that holds for any world: $\mSat{M}{\Box !A \lif !A}$.
 	symmetric and transitive. (It's also euclidean, because a relation that is both symmetric and transitive is euclidean.)
 \end{itemize}
 
+	\begin{ans} Examples of some answers.
+	\begin{itemize} 
+		\item $\Box(!A \lif !B)\lif(\Box !A \lif \Box !B)$ (Distribution)
+		holds in all models.
+
+		Suppose for \emph{reductio} that $\mSat/{\Box(!A \lif
+		!B)\lif(\Box !A \lif \Box !B)}[w]$ for some !!{structure}
+		$\mModel{M}$ and world $w$. Then $\Box!A\lif!B$ and $\Box!A$
+		are true at $w$ but $\Box!B$ is false at $w$. From the latter,
+		it follows that for some world $v$ accessible from $w$, 
+		$!B$ is false at $v$. However, since  $\Box!A\lif!B$ and
+		 $\Box!A$ are true at $w$ and $w$ has access to $v$, it must
+		 be that $!A\lif!B$ and $!A$ are true at $v$, so $!B$ must
+		 be true at $v$. Contradiction. Therefore there is no such 
+		$\mModel{M}$ and $w$.
+
+		\item ($\Ax D$) $\Box !A \lif \Diamond !A$ holds in all serial !!{structure}s.
+		
+		Let $\mModel{M}$ be a serial !!{structure} and $w$ any world in
+		$\mModel{M}$. Since $\mModel{M}$ is serial, there is some world,
+		call it $v$, that $w$ has access to. If $\Box!A$ is true at $w$,
+		then (since $w$ has access to $v$), $!A$ is true at $v$ and
+		therefore (since, again, $w$ has access to $v$) $\Diamond!A$ is 
+		true at $w$. Therefore $\Box!A\lif\Diamond!A$ is true at $w$.
+		Since  $\mModel{M}$ was an arbitrary serial !!{structure} and $w$ 
+		and arbitrary world, $\Box !A \lif \Diamond !A$ at any world in 
+		any such !!{structure}. 
+
+		\item $!A \lif \Box \Diamond !A$ is all symmetric !!{structure}s. 
+		
+		Let $\mModel{M}$ be a symmetric !!{structure} and $w$ any world in
+		$\mModel{M}$. If $!A$ is not true at $w$, then $!A \lif 
+		\Box \Diamond !A$ is true at $w$. Suppose instead $!A$ is true at $w$.
+		Either $w$ has acesss to some world $v$ or it doesn't. If it 
+		doesn't, $\Box\Diamond!A$ is trivially true at $w$, so again 
+		$!A \lif \Box \Diamond !A$ is true at $w$. So, suppose instead
+		$w$ has access to world world $v$. Since $\mModel{M}$ is symmetric
+		$v$ has acess to $w$ and since $!A$ is true at $w$, $\Diamond!A$
+		is true at $w$. But the same can be said for any world $v'$ that
+		$w$ has access to, therefore $\Diamond!A$ is true at any world $w$
+		has access to. Hence $\Box\Diamond!A$ is true at $w$ and again
+		$!A\lif\Box\Diamond!A$ is true at $w$. Either way, 
+		$!A \lif 
+		\Box \Diamond !A$ is true at $w$. Since $\mModel{M}$ was an 
+		arbitrary symmetric !!{structure} and $w$ an arbitrary world in it,
+		the schema is valid in any such !!{structure} and world. 
+	\end{itemize}
+	\end{ans}
 \end{prob}
 
 \begin{prob}[Relation between two systems]
@@ -76,25 +124,144 @@ the class of reflexive and euclidean models.
 	models \Log{KTB} and \Log{KT5}?
 	\item Say which of the following (if any) is true: 
 	\begin{enumerate}
-		\item If $\Gamma \Entails[KTB] !A$ then $\Gamma \Entails[KT5] !A$ 
-		\item If $\Gamma \Entails[KT5] !A$ then $\Gamma \Entails[KTB] !A$ 
+		\item If $\Gamma \Entails[\Log{KTB}] !A$ then $\Gamma \Entails[\Log{KT5}] !A$ 
+		\item If $\Gamma \Entails[\Log{KT5}] !A$ then $\Gamma \Entails[\Log{KTB}] !A$ 
 	\end{enumerate}	
 \end{enumerate}	
 
 \emph{Tips}. For (1) and (3) you only need examples to illustrates both possibilities. 
-	Three-worlds (or three-items) models suffice.
+	Three-worlds (or three-items) !!{structure}s suffice.
+
+	\begin{ans}
+	\begin{enumerate}
+		\item Euclidean but not symmetric: $W=\{u,v\}$ and
+		$R=\{\tuple{u,v},\tuple{v,v}\}$. Not symmetric because $u$ has
+		access to $v$ but not the other way round. Euclidean because
+		for any world $w$ in the model, if it has access to worlds
+		$w',w''$ they have access to each other: $u$ only has access
+		to $v$ and it sees itself, $v$ only has access to $v$ and it
+		sees itself. (Note that it is essential that $u$ doesn't have 
+		access to itself; otherwise the fact that it would have access
+		to $u$ and to $v$ together with euclideanity would entail that 
+		$v$ has access to $u$. See the answer below showing that 
+		euclidean and relfexive entails symmetric.)
+		
+		Symmetric but not euclidean: $W=\{t,u,v\}$ and
+		$R=\{\tuple{t,u},\tuple{u,t},\tuple{t,v},\tuple{v,t}\}$.
+		Symmetric because whenever $\tuple{w,w'}\in R$ we also have
+		$\tuple{w',w}\in R$. Not euclidean because $t$ has access to
+		both $u$ and $v$ but they don't have access to each other.
+		(Note that we could make the !!{structure} reflexive and it
+		would still not be euclidean: see the answer below showing
+		that reflexive and symmetric doesn't entail euclidean.)
+
+		\item If a relation is reflexive and euclidean then
+		it is symmetric.
+
+		Suppose $R$ is reflexive and euclidean and let $u,v$ be any 
+		worlds such that $Ruv$. Because $R$ is reflexive, $Ruu$. 
+		Because $u$ has relation $R$ 
+		to both $u$ and $v$ and $R$ is euclidean, $u$ and $v$ have
+		the relation to each other, and in particular, $Rvu$. 
+		Therefore whenever we have $Ruv$, we have $Rvu$: the relation
+		is symmetric.
+
+		\item Reflexive and symmetric but not euclidean. Consider
+		$W=\{t,u,v\}$ and $R=\{\tuple{t,t},\tuple{u,u},\tuple{v,v},
+		\tuple{t,u},\tuple{u,t},\tuple{t,v},\tuple{v,t}\}$. It is easy
+		to see that $R$ is reflexive and symmetric. It is not
+		euclidean because we have $Rtu$ and $Rtv$ but not $Ruv$.
+
+		\item The \Log{KT5} !!{structure}s are a proper subset of 
+		the \Log{KTB} !!{structure}s. That is, every \Log{KT5} 
+		!!{structure} is also a \Log{KTB} !!{structure} but not 
+		every \Log{KTB} !!{structure} is a \Log{KT5} 
+		!!{structure}.
+		
+		\Log{KTB} !!{structure}s are reflexive and symmetric,
+		and \Log{KT5} !!{structure}s are reflexive and euclidean.
+		Since reflexive and euclidean relations must be symmetric, 
+		any \Log{KT5} !!{structure} is a \Log{KTB} !!{structure}. 
+		Since relations can be reflexive and symmetric without 
+		being euclidean, not every \Log{KTB} !!{structure} is a 
+		\Log{KT5} !!{structure}.
+
+		\item Say which of the following (if any) is true: 
+		\begin{enumerate}
+			\item If $\Gamma \Entails[\Log{KTB}] !A$ then $\Gamma \Entails[\Log{KT5}] !A$. Correct.
+			\item If $\Gamma \Entails[\Log{KT5}] !A$ then $\Gamma \Entails[\Log{KTB}] !A$. Incorrect.
+		\end{enumerate}	
+
+		We have shown (previous answer) that every \Log{S5} 
+		!!{structure} is a \Log{KTB} !!{structure}. Therefore, if 
+		there are no \Log{KTB} !!{structure}s that make all of $\Gamma$ 
+		true but $!A$ false ($\Gamma \Entails[\Log{KTB}] !A$), a fortiori 
+		there are no \Log{S5} !!{structure}s that make it so
+		($\Gamma \Entails[\Log{KT5}] !A$). Thus the first claim is correct.
+
+		We have shown (previous answer) that not every \Log{KTB} 
+		!!{structure} is \Log{S5} !!{structure}. From this it doesn't
+		yet follow that the second claim is incorrect. It only  
+		follows that \emph{in principle} we could have more validities 
+		in \Log{S5} than in \Log{KTB}: it could be that for some 
+		$\Gamma,!A$ there are some \Log{KTB} !!{structure}s but no \Log{S5}
+		!!{structure}s that make all of $\Gamma$ true but $!A$ false. 
+		We need to show that this actually happens by exhibiting one 
+		such argument. One example is (an instance of) 
+		the characteristic \Log{S5} schema, 
+		$\Diamond\Obj{\pvar{A}}\lif\Box\Diamond\Obj{\pvar{A}}$.
+
+		$\Entails/[\Log{KTB}] \Diamond\Obj{\pvar{A}}\lif
+		\Box\Diamond\Obj{\pvar{A}}$. For consider $\mModel{M}$ 
+		with $W=\{@,u,v\}$,
+        $R=\{\tuple{@,@},\tuple{u,u},\tuple{v,v}$,
+        $\tuple{@,u},\tuple{u,@},\tuple{@,v},\tuple{v,@}
+        \}$, $V(\Obj\pvar{A})=\{u\}$. The !!{structure} is reflexive
+		and symmetric, hence it is a \Log{KTB} !!{structure}, 
+		but it is easy to check that 
+		$\Diamond\Obj{\pvar{A}}\lif\Box\Diamond\Obj{\pvar{A}}$
+		is false at $@$.
+
+		$\Entails/[\Log{KT5}] \Diamond\Obj{\pvar{A}}\lif
+		\Box\Diamond\Obj{\pvar{A}}$. 
+
+		Suppose for \emph{reductio} that $\Diamond\Obj{\pvar{A}}\lif
+		\Box\Diamond\Obj{\pvar{A}}$ is false at $@$ in a reflexive and
+		euclidean !!{structure} $\mModel{M}$. Hence at $@$,
+		$\Diamond\Obj{\pvar{A}}$ is true and
+		$\Box\Diamond\Obj{\pvar{A}}$ is false. Since
+		$\Diamond\Obj{\pvar{A}}$ is true at $@$, $@$ has access to
+		some world $w$ (which may or may not be $@$ itself) at which
+		$\Obj{\pvar{A}}$ is true. Since $\Box\Diamond\Obj{\pvar{A}}$
+		is false at $@$, $@$ must have access to some world $w'$
+		(which may or may not be $@$ or $w$) at which
+		$\Diamond\Obj{\pvar{A}}$ is false. Since
+		$\Diamond\Obj{\pvar{A}}$ is false at $w'$, $w'$ does not have
+		access to worlds at which $\Obj{\pvar{A}}$ is true, hence it
+		does not have access to $w$. Therefore $@$ has access to
+		worlds $w,w'$ that do not have access to each other:
+		accessibility is not euclidean. Contradiction. Therefore no
+		euclidean !!{structure} makes $\Diamond\Obj{\pvar{A}}\lif
+		\Box\Diamond\Obj{\pvar{A}}$ is false at any world.
+
+
+	\end{enumerate}
+	
+	\end{ans}
 
 \end{prob}
 
 \begin{prob}[From models to frames]
 Answer the following.
 \begin{enumerate}
-	\item Let $\mModel{M}$ be a model with $W=\{w,v\}$,
-	$R=\{\tuple{w,v}\}$, and $V$ that assigns the same
-	value to every !!{propositional variable} at $w$ 
-	and $v$, i.e. $V(\Obj{\pvar{A}}_i) = \{w,v\}$ or $V(\Obj{\pvar{A}}_i) = \varnothing$ 
+	\item Let $\mModel{M}$ be a model with $W=\{u,v\}$,
+	$R=\{\tuple{u,v},\tuple{v,u}\}$, and $V$ that assigns the same
+	value to every !!{propositional variable} at $u$ 
+	and $v$, i.e. $V(\Obj{\pvar{A}}_i) = \{u,v\}$ or $V(\Obj{\pvar{A}}_i) = \emptyset$ 
 	for all $i$.
 	\begin{enumerate}
+		\item Show that $\mSat{M}{!A}[u]$ iff $\mSat{M}{!A}[v]$ (use
+		induction on $!A$).
 		\item Show that $\mSat{M}{\Box !A \lif !A}$.
 		\item Let $\mModel{M'}$ be with $W$ and $R$ as before
 		but $V(\Obj{\pvar{A}})=\{v\}$. Show that 
@@ -112,6 +279,101 @@ Answer the following.
 		valuation in which the schema fails.)
 	\end{enumerate}
 \end{enumerate}
+
+	\begin{ans}
+	\begin{enumerate}
+		\item We show by induction on length of formulas that
+		$\mSat{M}{!A}[u]$ iff $\mSat{M}{!A}[v]$.
+
+		Let $!A$ be any !!{formula}. Inductive hypothesis: any
+		!!{formula} $!B$ shorter than $!A$ is such that
+		$\mSat{M}{!B}[u]$ iff $\mSat{M}{!B}[v]$.
+
+		\begin{itemize}
+			\item $!A$ is a !!{propositional variable} $\Obj{\pvar{A}}_i$.
+			$\mSat{M}{!A}[u]$ iff $\mSat{M}{!A}[v]$ since
+			$V(\Obj{\pvar{A}}_i) = \{u,v\}$ or $V(\Obj{\pvar{A}}_i) =
+			\varnothing$ for all $i$.
+
+			\item $!A$ is of the form $\lnot !B$. By the inductive 
+			hypothesis $\mSat{M}{!B}[u]$ iff  $\mSat{M}{!B}[v]$. 
+			Therefore $\mSat{M}{\lnot!B}[u]$ iff $\mSat/{M}{!B}[u]$, 
+			iff (ind. hyp.) $\mSat/{M}{!B}[v]$ iff $\mSat{M}{\lnot!B}[v]$.
+
+			\item Similarly for other propostional connectives, that is,
+			if $!A$ is of the form $!B\land!C$, $!B\lor!C$, $!B\lif!C$, 
+			$!B\liff!C$. 
+
+			\item $!A$ is of the form $\Box !B$. $\mSat{M}{\Box!B}[u]$
+			iff $\mSat{M}{!B}[v]$, (since $u$ has access to $v$ and $v$
+			only), iff $\mSat{M}{!B}[u]$ (by the inductive hypothesis),
+			iff $\mSat{M}{\Box!B}[v]$ (since $v$ has access to $u$ and
+			$u$ only). 
+
+			\item Analogously if $!A$ is of the form $\Diamond !B$.
+		\end{itemize}
+
+		This completes the induction, so $u,v$ agree on the truth 
+		value of every formula.
+
+		Every instance of $\Box!A\lif !A$ is true at every world in 
+		$\mModel{M}$. Suppose for \emph{reductio} that some instance
+		is false at $u$. Then $\Box!A$ is true at $u$ and $!A$ false
+		at $u$. Since  $\Box!A$ is true at $u$ and $u$ has 
+		access to $v$, $!A$ is true at $v$. But we have shown that 
+		in $\mModel{M}$ if $!A$ is true at $v$ it is true at $u$, 
+		so $!A$ is true at $u$. Contradiction: therefore every 
+		instance of $\Box!A\lif !A$ is true at $u$. We can Likewise
+		show that every instance is true at $v$; or we simply note 
+		that we have shown that in $\mModel{M}$ anything that is true 
+		at $u$ is true at $v$ too. 
+
+		If we consider $\mModel{M'}$ like $\mModel{M}$ but with 
+		$\Obj{\pvar{P}}$ true at $v$ only, we have $\Box!A$ true at 
+		$u$ because $u$ has access to $v$ and $v$ only, but $!A$ 
+		false at $u$, therefore $\Box!A\lif !A$ is false at $u$ in
+		$\mModel{M'}$.
+		
+		\item A \emph{non-transitive} !!{structure} in 
+		which schema $\Ax{4}$ is true. 
+
+		We'll just give the model. The rest of the answer is similar
+		to the answer to the previous question.
+
+		Consider $\mModel{M}$ with $W=\tuple{@,u,v}$ and 
+		$R=\{\tuple{@,u},\tuple{u,v},\tuple{v,u}\}$, and let $V$ be such that 
+		$u$ and $v$ agree on all atoms: $u\in V(\Obj{pvar{P}}_i)$ 
+		iff $v\in V(\Obj{pvar{P}}_i)$. 
+		
+		Note that not only $u$ and $v$
+		agree on all their atoms, but each only has access to the other.
+		We can show as in the previous answer that $\mSat{M}{!A}[u]$
+		iff $\mSat{M}{!A}[v]$. 
+
+		From this we can show that (1) every instance of 
+		$\Box!A\lif\Box\Box!A$ is true at $u$ and $v$, and (2) 
+		every instance of it is also true at $@$.
+
+		For (1): suppose $\Box!A$ is true at $u$. Then, 
+		as shown, it is true at $v$. But $v$ is the only world $u$ 
+		has access to, so $\Box\Box!A$ holds at $u$. Hence 
+		$\Box!A\lif\Box\Box!A$ holds at $u$, and the same goes for $v$.
+
+		For (2): $\Box!A\lif\Box\Box!A$ fails at $@$ only if $\Box!A$ 
+		is true at $@$ but $\Box\Box!A$ is false at $@$; iff (since 
+		$@$ only has access to $u$) $!A$ is true at $u$ but $\Box!A$ 
+		is false at $u$. Since $u$ only has access to $v$, $\Box!A$
+		is false at $u$ only if $!A$ is false at $v$. But we've shown
+		that $u$ and $v$ agree on every !!{formula}, so it cannot be
+		that $!A$ is true at $u$ and false at $v$. Therefore, 
+		$\Box!A\lif\Box\Box!A$ cannot be false at $@$. 
+		
+		This completes the proof that every instance of
+		$\Box!A\lif\Box\Box!A$ is true at every world in the
+		non-transitive !!{structure} $\mModel{M}$. 
+	\end{enumerate}
+	
+	\end{ans}
 
 \end{prob}
 

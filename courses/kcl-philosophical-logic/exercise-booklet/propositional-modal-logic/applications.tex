@@ -31,12 +31,70 @@ Which logic does (Sam) belief obey, on our view?
 \Log{T}, \Log{B}, \Log{S4}, \Log{S5}. Rather,
 you should name the logic by listing the principles it obeys,
 starting with \Ax{K}, e.g. \Log{KTB4}.
+
+\begin{ans}
+	The logic \Log{KD45}. 
+	\begin{itemize}
+		\item
+	It is correct that Sam believes the logical consequences 
+	of what she believes. We need a normal modal logic (any logic 
+	at least as strong as\Log{K}): if $!A_1,\ldots,!A_n\Entails!B$
+	then $\Box!A_1,\ldots,\Box!A_n\Entails\Box!B$. 
+		\item It is correct that if Sam believes $!A$, 
+		she believes that she believes $!A$. We need schema \Ax{4}, 
+		$\Box!A\lif\Box\Box!A$.
+		\item It is not correct that if Sam believes $!A$, $!A$ is 
+		true. We do not want schema \Ax{T}, $\Box!A\lif!A$.
+		\item It is correct that if Sam believes $!A$, she does not 
+		believe not-$!A$. We need schema \Ax{D}, $\Box!A\lif\Diamond!A$, 
+		which is equivalent to $\Box!A\lif\lnot\Box\lnot!A$ (by Duality).
+		\item If Sam does not believe $!A$, she believes that she does
+		not believe $!A$. We need the schema
+		$\lnot\Box!A\lif\Box\lnot\Box!A$. By Duality this is
+		equivalent to $\Diamond\lnot!A\lif\Box\Diamond\lnot!A$. But if
+		this schema holds for any $!A$, it is equivalent to schema
+		\Ax{5}, $\Diamond!B\lif\Box\Diamond!B$ (just put $\lnot!B$ for
+		$!A$, you get
+		$\Diamond\lnot\lnot!B\lif\Box\Diamond\lnot\lnot!B$, and recall
+		that if the modal logic is normal $\Diamond\lnot\lnot!B$ is
+		equivalent to $\Diamond!B$).
+	\end{itemize}
+	Therefore we need a normal modal logic (extension of \Log{K}) with
+	schemas \Ax{D}, \Ax{4}, \Ax{5}, but not \Ax{T}: \Log{KD45}. 
+\end{ans}
 \end{prob}
 
 \begin{prob}[From modal system to principles]
 Suppose we write `$\Box !A$' for `Sam knows that $ !A$' and we
 think $\Box$, under that reading, has the logic \Log{S4}. What
 does our view say about (Sam's) knowledge? 
+
+\begin{ans}
+	\Log{S4} is a normal modal logic with \Ax{D}, \Ax{T}, \Ax{4}.
+	Therefore if we take it as a logic for Sam's knowledge, it says
+	that:
+	\begin{itemize}
+	\item Sam knows the logical consequences of what she knows.
+	\item If Sam knows $!A$, she doesn't know that not-$!A$. (\Ax{D};
+	another way to put it: for any $!A$, it is not the case that 
+	Sam knows $!A$ and Sam also knows $\lnot!A$.)
+	\item What Sam knows is true. If Sam knows $!A$, then $!A$. (\Ax{T})
+	\item If Sam knows something, she knows that she knows it. If 
+	Sam knows $!A$, she knows that she knows $!A$. (\Ax{4}).
+	\end{itemize}
+	We may also note that \Ax{B} and \Ax{5} are not valid in that logic.
+	Therefore saying that the logic of Sam's knowledge isn't stronger
+	that \Log{S4} means that:
+	\begin{itemize}
+	\item It may happen, for some $!A$, that $!A$ is true but Sam 
+	does not know that she does not know that $\lnot!A$. (Failure of \Ax{B},
+	$!A\land\lnot\Box\lnot\Box\lnot!A$, equiv. to $!A\land\lnot\Box\Diamond!A$)
+	\item It may happen, for some $!A$, that Sam does not know $!A$
+	but she also does not know that she does not know it. (Failure of
+	\Ax{5}, $\lnot\Box!A\land\lnot\Box\lnot!A$, equiv. to
+	$\Diamond\lnot!A\land\lnot\Box\Diamond\lnot!A$).
+	\end{itemize}
+\end{ans}
 \end{prob}
 
 \begin{prob}
@@ -57,7 +115,7 @@ iff it is not obligatory that not-$!A$.
 	\item Which modal logic do deontic notions obey on that picture? (Give the
 	strongest of the standard modal logics \Log{K}, \Log{D},
 	\Log{T}, \Log{B}, \Log{S4}, \Log{S5} that applies.) 
-	\item For each of the principles or claims below, say whether is true in
+	\item For each of the principles or claims below, say whether is correct in
 	your model. Briefly justify your answers.
 		\begin{enumerate}
 			\item If it is true that $!A$, it is permitted that $!A$.
@@ -78,6 +136,119 @@ the sentences in question; for instance, if $\Obj{\pvar{A}}$ is the proposition
 that \emph{Ali replaces the lamp he has broken and $\Obj{\pvar{B}}$ is the proposition
 that \emph{Ali has broken the lamp}, every world where $V$ counts
 $\Obj{\pvar{A}}$ as true is a world where $\Obj{\pvar{B}}$ is true.}
+
+\begin{ans}
+	\begin{enumerate}
+	\item Every world has access to all and only the ideal worlds: 
+	$R=\Setabs{w,w'}{w\in W,w'\in I_W}$. 
+	\item $R$ is serial, transitive, euclidean. If there are non-ideal worlds, 
+	it is not reflexive nor symmetric.
+	\begin{itemize}
+		\item Serial: the set of ideal worlds $I_W$ is not empty, and every
+		has access to any world in it. So every world has access to some world.
+		\item Transitive. Suppose $Rww'$ and $Rw'w''$. Since $Rw'w''$ 
+		it must be that $Rw''$ is an ideal world. Hence $Rww''$. Therefore
+		whenever $Rww'$ and $Rw'w''$ we have $Rww''$: the model is transitive.
+		\item Euclidean. Suppose $w$ has access to worlds $w',w''$: 
+		$Rww'$ and $Rww''$. Then $w'$, $w''$ are both ideal worlds. 
+		Then $w',w''$ have access to each other: $Rw'w''$ (and $Rw''w'$). 
+		Therefore the relation $R$ is euclidean.
+		\item Not reflexive (if $I_W\neq W$). If some world $w$ is not 
+		in $I_W$, we do not have $Rww$ so the model is not reflexive.
+		\item Not symmetric (if $I_W\neq W$). Suppose some world $w$ is 
+		not ideal. Since $I_W$ is not empty, $w$ has access to some world 
+		$w'$ in $I_W$; but since $w$ is not in $I_W$, $w'$ does not have 
+		access to $w$. Since we have $Rww'$ but not $Rww'$ for some $w,w'$,
+		the relation is not symmetric.
+	\end{itemize}
+	\emph{Comment}: you would not get the full points if you said that 
+	$R$ was not reflexive nor symmetric without noting that this is 
+	only so if not all worlds are ideal.
+
+	\item The only properties that are guaranteed to hold are seriality,
+	transitivity and euclideanity. We've seen in the previous answer 
+	that some models compatible with the stated pictures have failures
+	of reflexivity or symmetry, therefore the logic should \emph{not}
+	include those. 
+
+	Therefore the desired logic is \Log{KD45} (corresponding to 
+	serial, transitive, euclidean frames). It is not, in fact, 
+	one of the standard logics  
+	\Log{K}, \Log{D}, \Log{T}, \Log{B}, \Log{S4}, \Log{S5}. Each of 
+	\Log{T}, \Log{B}, \Log{S4}, \Log{S5} includes \Ax{T}, which fails
+	in our picture (since the frame need not be reflexive). So the 
+	strongest of the \emph{standard} modal logics compatible with 
+	that picture is \Log{D}. 
+
+	\item Principles that are correct or not in the picture (\Log{KD45}).
+	\begin{enumerate}
+	\item If it is true that $!A$, it is permitted that $!A$: $!A\lif \Diamond !A$.
+	Incorrect. Consider a model with a non-ideal world where $\Obj{\pvar{A}}$ true 
+	at the non ideal world but false at all ideal worlds. (You may also note 
+	that $!A\lif \Diamond !A$ is characteristic of reflexive frames and 
+	our frames are not restricted to reflexive ones).
+	
+	\item If it is permitted that $!A$, it is obligatory that it is permitted
+	that $!A$: $\Diamond!A\lif\Box\Diamond !A$. Correct. If $!A$ is 
+	permitted, then it is true in some ideal world. But every ideal world
+	has access to every ideal worlds: so $!A$ is permitted in every 
+	ideal world too. So it is obligatory that $!A$ is permitted. (You 
+	may also note that $\Diamond!A\lif\Box\Diamond !A$ is characteristic
+	of euclidean frames and the picture requires euclidean frames.)
+
+	\item It is obligatory that: it is raining or it is not raining:
+	$\Box(\Obj{\pvar{A}}\lor\lnot\Obj{\pvar{A}})$. Correct: 
+	$\Obj{\pvar{A}}\lor\lnot\Obj{\pvar{A}}$
+	is true at any ideal world, therefore it is obligatory. (You may 
+	also note that for any logical truth $!A$, $\Box!A$ is a logical truth,
+	in possible worlds semantics for $\Box$.)
+
+	\item If it is obligatory that Boris sends the letter, then it is obligatory
+	that: Boris sends the letter or Boris burns it: 
+	$\Box\Obj{\pvar{A}}\lif\Box(\Obj{\pvar{A}}\lor\Obj{\pvar{B}})$.
+	Correct. If $\Obj{\pvar{A}}$ is true at all ideal worlds, then 
+	$Obj{\pvar{A}}\lor\Obj{\pvar{B}}$ is true at all ideal worlds. 
+	(You may also notice that $\Box!A\lif\Box(!A\lor\!B)$ is valid in 
+	\Log{K} and hence in our frames.)
+
+	\item If it is obligatory that Ali replaces the lamp he has broken, then
+	it is obligatory that Ali has broken the lamp. I'll assume that `the lamp'
+	is short for the lamp Ali has broken. Correct. Ali replacing the 
+	lamp that he has broken entails that he has broken a lamp. On the 
+	picture we're examining, if it is obligatory that Ali replaces the 
+	lamp he has broken, then in every ideal world Ali replaces the 
+	lamp he has broken. But then in every ideal world Ali has broken a 
+	lamp. On the picture we're examining, that entails that it is 
+	obligatory that Ali has broken a lamp. 
+
+	We could capture the entailment between `Ali replaces the lamp he
+	has broken' and `Ali has broken a lamp` by formalizing `Ali has
+	broken the lamp' as $\Obj{\pvar{A}}$ and `Ali replaces the lamp he
+	has broken' as $\Obj{\pvar{A}}\land \Obj{\pvar{B}}$ (`Ali has
+	broken the lamp and Ali replaces the lamp he has broken'). The
+	principle, then, is 
+	$\Box(\Obj{\pvar{A}}\land \Obj{\pvar{B}})\lif\Box\Obj{\pvar{A}}$.
+	This is valid in \Log{K} (hence in any normal modal logic, 
+	including \Log{KD45}).
+
+	\end{enumerate} 
+
+	\emph{Comment}. The upshot of the last item that if we find the
+	principle "If it is obligatory that Ali replaces the lamp he has
+	broken, then it is obligatory that Ali has broken the lamp"
+	implausible, we cannot use a normal modal logic (like \Log{K} or
+	the stronger standard systems) to formalize "it is obligatory
+	that". Alternatively, if we do think that a normal logic like
+	\Log{K} or stronger (say \Log{D} or \Log{KD45}) is right for "it
+	is obligatory that", we have to accept that principle, and find a
+	way to make sense of it. Both options exist in the literature. 
+	For more on this you can search the `paradox of contrary to duty
+	obligations'. 
+
+	\end{enumerate}
+
+	\end{ans}
+
 \end{prob}
 
 \begin{prob}
@@ -94,7 +265,7 @@ that the temperature is either $1$º C or $25$º C, and so on.
 
 Now suppose we think of `definitely' as follows. At a given world
 $w$, it is definitely the case that $!A$---'definitely $!A$',
-for short---iff $!A$ holds at worlds whose temperature is plus
+for short---iff $!A$ holds at worlds whose temperature is within plus
 or minus $5$º C the temperature of $w$. We write $\ldet!A$
 for `definitely $!A$', but $\ldet$ will work like a $\Box$
 operator in modal logic. 
@@ -128,15 +299,107 @@ Briefly justify your answers.
 	\end{enumerate}
 \end{enumerate}
 
+
+	\begin{ans}
+	\begin{enumerate}
+	\item $R=\Setabs{\tuple{w_i,w_j}}{i-5\geq j \i+5}$. That is, $w_i$ 
+	has $R$ to $w_j$ iff $j$ is between $i-5$ and $i+5$ inclusive. 
+	\item $\lindet!A$ can be defined as
+	$\lnot\ldet!A\land\lnot\ldet\lnot!A$. 
+	
+	\emph{Comment}. $\lindet$ is a contingency operator, not a mere 
+	possibility operator. That is, if we think of $\ldet!A$ has a 
+	necessity operator $\Box!A$, $\lindet!A$ is not merely $\Diamond\not!A$
+	but $\Diamond!A\land\Diamond\lnot!A$. 
+	
+	\item $R$ is reflexive (hence also serial), symmetric, but not transitive
+	nor euclidean. 
+
+	Reflexive: since $i$ is within $i-5$ and $i+5$, we have $Rw_iw_i$.
+
+	Serial: since it is reflexive, it is serial. 
+
+	Symmetric. Suppose $Rw_iw_j$. Then $j$ is within $i-5$ and $i+5$.
+	Therefore $i$ is within $j+5$ and $j-5$. (If $j$ is at most 5 steps
+	way from $i$, $i$ is at most 5 steps away from $j$.) Therefore 
+	$Rw_jw_i$. Hence $R$ is symmetric.
+
+	Not transitive. We have $Rw_1w_5$, $Rw_5w_{10}$ but not 
+	$Rw_1w_{10}$.
+
+	Not euclidean. We have $Rw_5w_1$, $Rw_5w_{10}$, but not 
+	$Rw_1w_{10}$.
+	
+	\item Principles:
+		\begin{enumerate}
+			\item If definitely $!A$ then $!A$: $\ldet !A\lif!A$. Correct
+			(by reflexivity).
+			\item If $!A$ then definitely $!A$: $!A \lif \ldet!A$.
+			Incorrect. Consider $\Obj{\pvar{A}}$ true at $w_5$ but 
+			nowhere else. ($\Obj{\pvar{A}}$ could be the claim that the 
+			temperature is 5ºC, for instance.)
+			\item If indefinitely $!A$ then not-$!A$: $\lindet!A \lif
+			\lnot!A$. Incorrect. Consider the same model as in the 
+			the previous question. We have $\lindet\Obj{\pvar{A}}$
+			at $w_5$ but $\lnot\Obj{\pvar{A}}$ false at $w_5$.
+			\item Definitely: $!A$ or not $!A$. $\ldet(!A\lor\lnot!A)$. 
+			Correct, because $!A\lor\lnot!A$ holds at every world.
+			\item Definitely $!A$ or definitely not-$!A$. Incorrect. 
+			Consider the same model as previously: $\Obj{\pvar{A}}$ 
+			true at $w_5$ but nowhere else. Neither $\Obj{\pvar{A}}$ 
+			nor its negation $\lnot\Obj{\pvar{A}}$ are true at all 
+			worlds accessible to $w_5$, namely $w_0,\ldots,w_{10}$. 
+			Therefore neither $\ldet\Obj{\pvar{A}}$ nor $\ldet\lnot\Obj{\pvar{A}}$
+			hold at $w_5$. 
+			\item If definitely $!A$, then definitely definitely $!A$: 
+			$\ldet!A\lif\ldet\ldet!A$.
+			Incorrect. Consider a !!{structure} with $\Obj{\pvar{A}}$ true 
+			at all worlds accessible from $w_5$, namely $w_0,\ldots,w_{10}$,
+			and false everywhere else. We have $\ldet\Obj{\pvar{A}}$ at
+			$w_5$. But $\Obj{\pvar{A}}$ is false at $w_{11}$, within
+			5 steps of $w_6$, so $\ldet\Obj{\pvar{A}}$ is not true at 
+			$w_6$. Since $w_6$ is acessible from $w_5$, $\ldet\ldet!A$
+			is not true at $w_5$. 
+			
+			You may also note that $\ldet!A\lif\ldet\ldet!A$, 
+			with the $\ldet$ understood as a $\Box$-like operator, is 
+			the characteristic schema \Ax{4} that fails in non-transitive frames.
+			Note also how our counterexample used a transitivity failure:
+			we used the fact that $w_5$ has access to $w_6$ which has 
+			access to $w_{11}$, but $w_5$ does not itself have access
+			to $w_{11}$.
+
+			\item If indefinitely definitely $!A$ then indefinitely $!A$:
+			$\lindet\ldet!A\lif\lindet!A$. Incorrect. Consider the 
+			!!{structure} given in answer to the previous question. 
+			Since $\Obj{\pvar{A}}$ is true at all worlds accessible 
+			from $w_5$, $\ldet\Obj{\pvar{A}}$ is true at $w_5$, 
+			and therefore $\lindet\Obj{\pvar{A}}$ is false at $w_5$.
+			But we also have that $\ldet\Obj{\pvar{A}}$ is true at 
+			some but not all worlds accessible to $w_5$: it is true 
+			at $w_5$, which $w_5$ has access to (reflexivity), but we 
+			also that it is false at $w_6$, which $w_5$ has access to.
+			Since $\ldet\Obj{\pvar{A}}$ is true at 
+			some but not all worlds accessible to $w_5$, 
+			$\lindet\ldet\Obj{pvar{A}}$ is false at $w_5$.
+
+			Therefore the schema $\lindet\ldet!A\lif\lindet!A$ is 
+			not valid. 
+
+		\end{enumerate}
+	\end{enumerate}
+\end{ans}
+
 \end{prob}
 
 \begin{prob}
 Suppose we think of logical `necessity' in the following way: it is
-logically necessary that $!A$ iff $!A$ is true no matter how
-we interpret its !!{propositional variable}s. We capture the idea with a relational model
-where $\Box !A$ is true at a world iff every interpretation of sentence
-letters makes $!A$ true. We say that a !!{formula} $!A$ is ``logically necessary''
-just if $\Box !A$ is true in that model. 
+logically necessary that $!A$ iff $!A$ is true no matter how we
+interpret its !!{propositional variable}s. We capture the idea with a
+relational model where $\Box !A$ is true at a world iff every
+interpretation of sentence letters makes $!A$ true. We say that a
+!!{formula} $!A$ is ``logically necessary'' just if $\Box !A$ is true
+in that model. 
 
 \begin{enumerate}
 	\item We let each world $w$ be a (propositional-logic) !!{valuation}

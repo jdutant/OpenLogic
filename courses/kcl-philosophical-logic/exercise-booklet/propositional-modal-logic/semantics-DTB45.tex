@@ -14,21 +14,186 @@
     \citep[exercise 3.1 items 1-7]{MacFarlane-2020-PhilosophicalLogicContemporary}
     Find pointed !!{structure}s of the following kinds. 
     \begin{enumerate}
-        \item Find a $\log{K}$ !!{structure} in which
+        \item Find a $\Log{K}$ !!{structure} in which
         $\Box\Obj{\pvar{A}}\lif\Diamond\Obj{\pvar{A}}$ is false.
-        \item Find a $\log{T}$ !!{structure} in which
+        \item Find a $\Log{T}$ !!{structure} in which
         $\Box\Obj{\pvar{A}}\lif\Box\Box\Obj{\pvar{A}}$ is false.
-        \item Find a $\log{D}$ !!{structure} that is not a $\log{T}$
+        \item Find a $\Log{D}$ !!{structure} that is not a $\Log{T}$
         !!{structure}.
-        \item Find a $\log{S4}$ !!{structure} in which 
+        \item Find a $\Log{S4}$ !!{structure} in which 
         $\Diamond\Obj{\pvar{A}}\lif\Box\Diamond\Obj{\pvar{A}}$ is false.
-        \item Find a $\log{S4}$ !!{structure} in which 
+        \item Find a $\Log{S4}$ !!{structure} in which 
         $\Diamond\Box\Obj{\pvar{A}}\lif\pvar{A}$ is false.
-        \item Find a $\log{B}$ !!{structure} in which 
+        \item Find a $\Log{B}$ !!{structure} in which 
         $\Diamond\Obj{\pvar{A}}\lif\Box\Diamond\Obj{\pvar{A}}$ is false.
-        \item Find a $\log{S5}$ !!{structure} in which
+        \item Find a $\Log{S5}$ !!{structure} in which
         $\Obj{\pvar{A}}\lif\Box\Obj{\pvar{A}}$ is false.
     \end{enumerate}
+
+    \begin{ans} In each case there are many (infinitely many) correct
+        answers; I'll give the simplest ones below. In each case 
+        I'll also explain which feature your !!{structure} must have to be 
+        a correct answer. For the first few answers I'll also illustrate
+        how you give a brief justification (if asked to do so): how you
+        explain that the !!{structure}s are of the right type and 
+        why the !!{formula} is false in them. 
+    \begin{enumerate}
+        \item A $\Log{K}$ !!{structure} in which
+        $\Box\Obj{\pvar{A}}\lif\Diamond\Obj{\pvar{A}}$ is false.
+
+        $\mModel{M}$ with $W=\{@\}$, $R=\emptyset$, $V$ any valuation.
+        This is a $\Log{K}$ !!{structure} since there are no constraints on
+        such !!{structure}s. At $@$ no world is accessible, so at $@$ any
+        $\Box!A$ !!{formula} is true and any $\Diamond!A$ !!{formula}
+        is false.
+
+        Feature for correct answer: your !!{structure} needs a world
+        that does not have access to any world.
+        
+        \item A $\Log{T}$ !!{structure} in which
+        $\Box\Obj{\pvar{A}}\lif\Box\Box\Obj{\pvar{A}}$ is false.
+
+        $\mModel{M}$ with $W=\{@,u,v\}$,
+        $R=\{\tuple{@,@},\tuple{@,u},\tuple{u,u},\tuple{u,v},
+        \tuple{v,v}\}$, $V(\Obj\pvar{A})=\{@,u\}$. That is a $\Log{T}$
+        !!{structure} is $R$ is reflexive. Since $Ruv$ and
+        $\mSat/{M}{\Obj\pvar{P}}[v]$,
+        $\mSat/{M}{\Box\Obj\pvar{P}}[u]$. Since $R@u$ and
+        $\mSat/{M}{\Box\Box\Obj\pvar{P}}[@]$. However, since $@,u$ are
+        the only worlds accessible from $@$ and
+        $\mSat{M}{\Obj\pvar{P}}[@]$ and $\mSat{M}{\Obj\pvar{P}}[u]$,
+        $\mSat{M}{\Box\Obj\pvar{P}}[@]$.
+
+        Feature for correct answer: your !!{structure} needs to be 
+        reflexive (every world accesses itself) and have a failure of 
+        transitivity. That is, three worlds such that the first 
+        accesses the second, the second the third, but not the first
+        the third. 
+
+        \item A $\Log{D}$ !!{structure} that is not a $\Log{T}$
+        !!{structure}.
+
+        $\mModel{M}$ with $W=\{@,u\}$,
+        $R=\{\tuple{@,@},\tuple{u,@}\}$, $V$ any valuation.
+        $\mModel{M}$ is a $\Log{D}$ !!{structure} since $R$ is serial
+        (for every $w$ in $W$, $w$ has access to some world). It is
+        not a $\Log{T}$ !!{structure} because $R$ is not reflexive
+        (because $u$ does not have access to itself).
+        
+        Feature for correct answer: your !!{structure} needs to be serial 
+        (every world accesses some world) but not reflexive: some 
+        world does not have access to itself. It's fine if \emph{some}
+        but not all worlds access themselves, as in our answer above.
+
+        \item A $\Log{S4}$ !!{structure} in which
+        $\Diamond\Obj{\pvar{A}}\lif\Box\Diamond\Obj{\pvar{A}}$ is
+        false.
+
+        $\mModel{M}$ with $W=\{@,u\}$,
+        $R=\{\tuple{@,@},\tuple{@,u},\tuple{u,u}\}$, 
+        $V(\Obj{\pvar{A}})=\{@\}$.
+        The model is reflexive. It's also transitive: for any worlds 
+        $w,w',w''$ in the !!{structure}, if $Rww'$ and $Rw'w''$
+        then $Rww''$. We could check all instances. Every instance 
+        with $w=w'$ or $w'=w''$ is trivial:
+
+        \smallskip
+        \begin{tabular}{ccc}
+            \hline
+            $Rww'$ is & $Rw'w''$ is     & we have $Rww''$: \\
+            \hline
+            $R@@$ & $R@@$ & $R@@$ \\
+            $R@@$ & $R@u$ & $R@u$ \\
+            $R@u$  & $Ruu$ & $R@u$ \\
+            \hline
+        \end{tabular}
+        \smallskip
+
+        With only two worlds the only way transitivity would fail 
+        would be to have $R@u$ and $Ru@$ but not $R@@$ or not $Ruu$.
+        Since we don't have $Ru@$ this does not arise here; 
+        the !!{structure} is transitive. 
+
+        Since the !!{structure} is reflexive and transitive, it is a
+        $\Log{S4}$ !!{structure}. Since $R@@$ and
+        $\mSat{M}{\Obj{\pvar{P}}}[@]$,
+        $\mSat{M}{\Diamond\Obj{\pvar{P}}}[@]$. Since $u$ only has 
+        access to $u$ and $\mSat/{M}{\Obj{\pvar{P}}}[u]$,
+        $\mSat/{M}{\Diamond\Obj{\pvar{P}}}[u]$. Since $R@u$ and 
+        $\mSat/{M}{\Diamond\Obj{\pvar{P}}}[u]$, 
+        $\mSat/{M}{\Box\Diamond\Obj{\pvar{P}}}[@]$.
+        
+        Feature for correct answer: a !!{structure} that is reflexive
+        and transitive but where symmetry fails at $@$, that is, $@$
+        has access to some world $u$ that doesn't have access to $@$,
+        and $\Obj{\pvar{P}}$ is true at $@$ but not $u$ nor any world
+        accessible from $u$. For transitivity, we must ensure that any
+        sequence of access steps ($Rw_1w_2$, $Rw_2w_3$, \dots,
+        $Rw_{n-1}w_n$) has a one-step shortcut ($Rw_1w_n$). This
+        means, in particular, that $u$ isn't at the start of a chain
+        of access steps that loops back to $@$.  
+
+        \item A $\Log{S4}$ !!{structure} in which
+        $\Diamond\Box\Obj{\pvar{A}}\lif\pvar{A}$ is false.
+
+        Use the same frame as in the previous answer with
+        $V(\Obj{\pvar{A}})=\{u\}$.
+
+        Feature for correct answer: a !!{structure} that is reflexive
+        and transitive but where symmetry fails at $@$, that is, $@$
+        has access to some world $u$ that doesn't have access to $@$,
+        and $\Obj{\pvar{P}}$ is false at $@$ but true at $u$ and any
+        world accessible from $u$.
+
+        \item A $\Log{B}$ !!{structure} in which
+        $\Diamond\Obj{\pvar{A}}\lif\Box\Diamond\Obj{\pvar{A}}$ is
+        false.
+
+        $\mModel{M}$ with $W=\{@,u,v\}$,
+        $R=\{\tuple{@,@},\tuple{u,u},\tuple{v,v},
+        \tuple{@,u},\tuple{u,@},\tuple{@,v},\tuple{v,@}
+        \}$, $V(\Obj\pvar{A})=\{u\}$.
+
+        The !!{structure} is reflexive and symmetric. Reflexive:
+        $\tuple{w,w}\in R$ for all $w\in W$. Symmetric: for any $w,w'$
+        in $W$, if we have $\tuple{w,w'}\in R$ then we have
+        $\tuple{w',w}\in R$ too (witness $@,v$ and $@,u$; the cases
+        with $w=w'$ are trivial.) So it is a $\Log{B}$ !!{structure}.
+        We have $\mSat{M}{\Diamond\Obj{\pvar{A}}}[@]$
+        (since $R@u$ and $\mSat{M}{\Obj{\pvar{A}}}[u]$). But we also 
+        have $\mSat/{M}{\Diamond\Obj{\pvar{A}}}[v]$ since $v$ only 
+        has access to $@$ and $v$ and $@,v\notin V(\Obj{\pvar{A}})$;
+        and since $R@v$ and $\mSat/{M}{\Diamond\Obj{\pvar{A}}}[v]$,
+        $\mSat/{M}{\Box\Diamond\Obj{\pvar{A}}}[@]$.
+
+        Feature for correct answer: a reflexive and symmetric
+        !!{structure} where euclideanity fails at $@$, that is $@$ has
+        access to two worlds $w_1$, $w_2$ that don't see each other;
+        $\Obj{\pvar{A}}$ is true at one of these worlds, say $w_1$,
+        but false at $@$, at $w_2$ and at any world the latter has
+        access to. Note that since we need to ensure that the model is 
+        symmetric we need $w_1$ and $w_2$ to both be distinct from $@$,
+        for by symmetry any world that $@$ accesses must access $@$
+        in return. 
+
+        \item A $\Log{S5}$ !!{structure} in which
+        $\Obj{\pvar{A}}\lif\Box\Obj{\pvar{A}}$ is false.
+
+        $\mModel{M}$ with $W=\{@,u\}$,
+        $R=\Setabs{\tuple{w,w}}{w\in W}$ (i.e. $R$ is universal, any 
+        world has access to itself; you could write that $R=W\times W$
+        too; see 'Cartesian product' in set theory), and 
+        $V(\Obj\pvar{A})=\{@\}$.
+
+        Feature for correct answer: $R$ must be an equivalence 
+        relation. That means that $W$ must be divisible in a 
+        \emph{partition} of 'cells' such that each world has access to all and 
+        only the worlds that are in its cell. $\Obj\pvar{A}$ is 
+        true at $@$ but false at some world in $@$'s cell. 
+
+    \end{enumerate}
+    
+    \end{ans}
     
 \end{prob}
 
@@ -43,7 +208,7 @@
 
     \begin{ans}
         Suppose $\Entails[\Log{T}]!A$: $!A$ is true in all pointed
-        $\Log{T}$ !!{structure}s. $\Log{S4}$ models are $\Log{T}$
+        $\Log{T}$ !!{structure}s. $\Log{S4}$ !!{structure}s are $\Log{T}$
         !!{structure}s, because their accessibility relation is
         reflexive. Therefore $!A$ is true in all pointed $\Log{S4}$
         !!{structure}s: $\Entails[\Log{S4}]!A$.

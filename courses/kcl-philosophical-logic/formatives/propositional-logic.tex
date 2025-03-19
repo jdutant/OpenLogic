@@ -11,7 +11,41 @@
 \olsection{Propositional Logic}
 
 \begin{prob}
-First exercise.
+    Check whether the following formulas are valid. If not, give a counterexample.
+    You may use (full or simplified) truth-tables, natural deduction (for
+    validity only), or informal reasoning from the semantics.
+
+    \begin{enumerate}
+    \item $(\Obj{\pvar{A}}\lif \Obj{\pvar{B}}\lor \Obj{\pvar{C}})\lif(\Obj{\pvar{A}}\lif \Obj{\pvar{B}})$
+    \item $\lnot(\Obj{\pvar{A}}\land(\Obj{\pvar{B}}\lor \Obj{\pvar{C}})\lif(\Obj{\pvar{A}}\land \Obj{\pvar{B}}))\lif \Obj{\pvar{C}}$
+    \end{enumerate}
+\end{prob}
+
+\begin{prob}
+    Explain what it means to say that the expressive power of 
+    propositional logic is \emph{truth-functionally complete}.
+    Give an example of a set of !!{operator}s that is \emph{not}
+    truth-functionally complete.
+\end{prob}
+
+\begin{prob}
+    The \emph{Sheffer stroke} $|$ is the !!{operator} such
+    that $\phi|\psi$ is true if and only if one of $\phi$ or $\psi$ is
+    false. 
+    \begin{enumerate}
+    \item Write a truth table for $|$.
+    \item Write a !!{formula} equivalent to $\lnot \Obj{\pvar{A}}$ where $|$ is the only !!{operator}.
+    \item Write a !!{formula} equivalent to $\Obj{\pvar{A}}\land \Obj{\pvar{B}}$ where $|$ is the only !!{operator}.
+    \item Give a logically true !!{formula} that uses only $|$ as !!{operator}.
+    \end{enumerate}
+\end{prob}
+
+\begin{prob}
+    Give natural deduction proofs of the following.
+    \begin{enumerate}
+        \item $\Obj{\pvar{A}}\lif \Obj{\pvar{B}}\vdash(\Obj{\pvar{A}}\lor \Obj{\pvar{C}})\lif(\Obj{\pvar{B}}\lor \Obj{\pvar{C}})$
+        \item $\vdash(\lnot\lnot \Obj{\pvar{A}}\lif\lnot \Obj{\pvar{A}})\lif\lnot \Obj{\pvar{A}}$
+    \end{enumerate}
 \end{prob}
 
 \end{document}

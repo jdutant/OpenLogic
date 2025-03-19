@@ -1,0 +1,24 @@
+% Part: exercise-booklet
+% Chapter: free-logic
+
+\documentclass[../../../../include/open-logic-chapter]{subfiles}
+
+\begin{document}
+
+\olchapter{exb}{frl}{Free Logic}
+
+\olimport{semantics}
+
+\iftag{prfND}{%
+  \olimport{natural-deduction}
+}{}
+
+\iftag{prfTab}{%
+  \olimport{tableaux}
+}{}
+
+\olimport{discussion}
+
+\OLEndChapterHook
+
+\end{document}

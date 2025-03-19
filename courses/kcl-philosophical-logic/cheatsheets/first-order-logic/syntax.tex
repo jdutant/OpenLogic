@@ -1,0 +1,376 @@
+% Part: cheat-sheets
+% Chapter: first-order-logic
+% Section: semantics
+
+\documentclass[../../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{chs}{fol}{sem}
+
+\olsection{Syntax}
+
+\subsection{Vocabulary}
+
+we make use of the following symbols in
+first-order logic:
+
+\begin{enumerate}
+\item Logical symbols
+\begin{enumerate}
+\item Logical connectives:
+  \startycommalist
+  \iftag{prvNot}{\ycomma $\lnot$ (negation)}{}%
+  \iftag{prvAnd}{\ycomma $\land$ (conjunction)}{}%
+  \iftag{prvOr}{\ycomma $\lor$ (disjunction)}{}%
+  \iftag{prvIf}{\ycomma $\lif$ (!!{conditional})}{}%
+  \iftag{prvIff}{\ycomma $\liff$ (!!{biconditional})}{}%
+  \iftag{prvAll}{\ycomma $\lforall$ (universal quantifier)}{}%
+  \iftag{prvEx}{\ycomma $\lexists$ (existential quantifier)}{}.
+\tagitem{prvFalse}{The propositional constant for !!{falsity}~$\lfalse$.}{}
+\tagitem{prvTrue}{The propositional constant for !!{truth}~$\ltrue$.}{}
+\item The two-place !!{identity}~$\eq$.
+\item A !!{denumerable}s set of !!{variable}s: $\Obj v_0$, $\Obj v_1$, $\Obj
+  v_2$, \dots
+\end{enumerate}
+\item Non-logical symbols, making up the \emph{standard
+  language} of first-order logic
+\begin{enumerate}
+\item A !!{denumerable}s set of $n$-place !!{predicate}s for each $n>0$: $\Obj
+  A^n_0$, $\Obj A^n_1$, $\Obj A^n_2$, \dots
+\item A !!{denumerable}s set of !!{constant}s: $\Obj c_0$, $\Obj c_1$, $\Obj
+  c_2$, \dots.
+\end{enumerate}
+\item Punctuation marks: (, ), and the comma.
+\end{enumerate}
+
+
+\iftag{defNot,defOr,defAnd,defIf,defIff,defTrue,defFalse,defEx,defAll}{%
+In addition to the primitive connectives and
+\iftag{notprvEx,notprvAll}{quantifier}{quantifiers} introduced
+above, we also use the following \emph{defined} symbols:
+\startycommalist
+  \iftag{defNot}{\ycomma $\lnot$ (negation)}{}%
+  \iftag{defAnd}{\ycomma $\land$ (conjunction)}{}%
+  \iftag{defOr}{\ycomma $\lor$ (disjunction)}{}%
+  \iftag{defIf}{\ycomma $\lif$ (!!{conditional})}{}%
+  \iftag{defIff}{\ycomma $\liff$ (!!{biconditional})}{}%
+  \iftag{defAll}{\ycomma $\lforall$ (universal quantifier)}{}%
+  \iftag{defEx}{\ycomma $\lexists$ (existential quantifier)}{}%
+  \iftag{defFalse}{\ycomma !!{falsity}~$\lfalse$}{}%
+  \iftag{defTrue}{\ycomma !!{truth}~$\ltrue$}}{}.
+
+    It is conventional to use lower case letters (e.g., $a$, $b$, $c$) from
+    the beginning of the Latin alphabet for !!{constant}s (sometimes called
+    names), and lower case letters from the end (e.g., $x$, $y$, $z$) for
+    !!{variable}s. Quantifiers combine with !!{variable}s, e.g., $x$;
+    notational variations include $\forall x$, $(\forall x)$, $(x)$, $\Pi x$,
+    $\bigwedge_x$ for the universal quantifier and $\exists x$, $(\exists
+    x)$, $(Ex)$, $\Sigma x$, $\bigvee_x$ for the existential quantifier.
+    
+    We might treat all the propositional operators and both quantifiers as
+    primitive symbols of the language.  We might instead choose a smaller
+    stock of primitive symbols and treat the other !!{operator}s as
+    defined. ``Truth functionally complete'' sets of Boolean operators
+    include $\{ \lnot, \lor \}$, $\{ \lnot, \land \}$, and $\{ \lnot,
+    \lif\}$---these can be combined with either quantifier for an
+    expressively complete first-order language.
+    
+    You may be familiar with two other !!{operator}s: the Sheffer
+    stroke~$|$ (named after Henry Sheffer), and Peirce's
+    arrow~$\downarrow$, also known as Quine's dagger.  When given their
+    usual readings of ``nand'' and ``nor'' (respectively), these operators
+    are truth functionally complete by themselves.
+
+\subsection{Formulas}
+
+A \emph{term} of $\Lang L$ a !!{variable} or a !!{constant}. 
+    
+\begin{defn}[Formulas]
+    \ollabel{defn:formulas}
+    The set of \emph{!!{formula}s}~$\Frm[L]$ of the language~$\Lang L$
+    is defined inductively as follows:
+    \begin{enumerate}
+    \tagitem{prvFalse}{$\lfalse$ is an atomic !!{formula}.}{}
+    
+    \tagitem{prvTrue}{$\ltrue$ is an atomic !!{formula}.}{}
+    
+    \item If $R$ is an $n$-place !!{predicate} of~$\Lang L$ and $t_1$, \dots,
+      $t_n$ are terms of~$\Lang L$, then $\Atom{R}{t_1,\ldots, t_n}$ is an
+      atomic !!{formula}. We may omit brackets and commas 
+      and write $\Obj{R}t_1\ldots t_n$ instead.
+    
+    \item If $t_1$ and $t_2$ are terms of~$\Lang L$, then $\Atom{\eq}{t_1, t_2}$
+      is an atomic !!{formula}.
+    
+    \tagitem{prvNot}{If $!A$ is !!a{formula}, then $\lnot !A$ is
+      !!a{formula}.}{}
+    
+    \tagitem{prvAnd}{If $!A$ and $!B$ are !!{formula}s, then $(!A \land
+      !B)$ is !!a{formula}.}{}
+    
+    \tagitem{prvOr}{If $!A$ and $!B$ are !!{formula}s, then $(!A \lor !B)$
+      is !!a{formula}.}{}
+    
+    \tagitem{prvIf}{If $!A$ and $!B$ are !!{formula}s, then $(!A \lif !B)$
+      is !!a{formula}.}{}
+    
+    \tagitem{prvIff}{If $!A$ and $!B$ are !!{formula}s, then $(!A \liff !B)$
+      is !!a{formula}.}{}
+    
+    \tagitem{prvAll}{If $!A$ is !!a{formula} and $x$ is !!a{variable},
+      then $\lforall[x][!A]$ is !!a{formula}.}{}
+    
+    \tagitem{prvEx}{If $!A$ is !!a{formula} and $x$ is !!a{variable},
+      then $\lexists[x][!A]$ is !!a{formula}.}{}
+    
+    \tagitem{limitClause}{Nothing else is !!a{formula}.}{}
+    \end{enumerate}
+\end{defn}
+    
+
+\begin{tagblock}{defNot,defOr,defAnd,defIf,defIff,defTrue,defFalse,defEx,defAll}
+    \begin{defn}
+    Formulas constructed using the defined operators are to be understood
+    as follows:
+    
+    \begin{tagenumerate}{defTrue,defFalse,defNot,defOr,defAnd,defIf,defIff,defEx,defAll}
+    
+    \tagitem{defTrue}{$\ltrue$ abbreviates
+      \iftag{prvFalse}{$\lnot\lfalse$}{$(!A \lor \lnot !A)$ for some
+        fixed atomic !!{formula}~$!A$}.}{}
+    
+    \tagitem{defFalse}{$\lfalse$ abbreviates
+      \iftag{prvTrue}{$\lnot\ltrue$}{$(!A \land \lnot !A)$ for some
+        fixed atomic !!{formula}~$!A$}.}{}
+    
+    \tagitem{defNot}{$\lnot !A$ abbreviates $!A \lif \lfalse$.}{}
+    
+    \tagitem{defOr}{$!A \lor !B$ abbreviates
+      \iftag{prvAnd}{$\lnot(\lnot !A \land \lnot !B)$}{$\lnot !A \lif
+        !B$}.}{}
+    
+    \tagitem{defAnd}{$!A \land !B$ abbreviates
+      \iftag{prvOr}{$\lnot(\lnot !A \lor \lnot !B)$}{$\lnot (!A \lif
+        \lnot !B)$}.}{}
+    
+    \tagitem{defIf}{$!A \lif !B$ abbreviates
+      \iftag{prvOr}{$\lnot !A \lor !B)$}{$\lnot (!A \land \lnot !B)$}.}{}
+    
+    \tagitem{defIff}{$!A \liff !B$ abbreviates $(!A \lif !B) \land (!B
+      \lif !A)$.}{}
+    
+    \tagitem{defAll}{$\lforall[x][!A]$ abbreviates $\lnot\lexists[x][\lnot !A]$.}{}
+    
+    \tagitem{defEx}{$\lexists[x][!A]$ abbreviates $\lnot\lforall[x][\lnot !A]$.}{}
+    \end{tagenumerate}
+    \end{defn}
+\end{tagblock}
+
+\subsection{Main operator}
+
+A rigorous definition of `!!{main operator}' is given in the textbook.
+It is enough for you to understand what it is, and to be able to 
+identify the !!{main operator} of any given !!{formula}. For that
+purpose the following is enough:
+
+\begin{defn}[!!^{main operator}]
+    The \emph{!!{main operator}} of !!a{formula}~$!A$ is the last 
+    !!{operator} introduced in the construction of !!a{formula}. 
+    For instance, the !!{main operator} of $\lnot !A$ is $\lnot$,
+the !!{main operator} of $(!A \lor !B)$ is $\lor$, the 
+!!{main operator} of $\lexists[x][!A]$ is $\lexists x$.
+\end{defn}
+
+We call !!{formula}s by the names in \olref{tab:main-op} depending on
+which symbol their !!{main operator}
+is.\iftag{defNot,defOr,defAnd,defIf,defIff,defTrue,defFalse,defEx,defAll}
+{ Recall, however, that defined operators do not officially appear in
+!!{formula}s. They are just abbreviations, so officially they cannot
+be the main operator of a formula. In proofs about all !!{formula}s
+they therefore do not have to be treated separately.}
+
+\begin{table}[!h]
+\centering
+\begin{tabular}{c | c | c}
+!!^{main operator} & Type of !!{formula} & Example\\
+\hline
+none & atomic (!!{formula}) &
+\iftag{prvFalse}{$\lfalse$,}{}
+\iftag{prvTrue}{$\ltrue$,}{}
+$\Atom{R}{t_1, \dots, t_n}$,
+$\eq[t_1][t_2]$\\
+$\lnot$ & negation & $\lnot !A$ \\
+$\land$ & conjunction & $(!A \land !B$) \\
+$\lor$ & disjunction & $(!A \lor !B$) \\
+$\lif$ & !!{conditional} & $(!A \lif !B$) \\
+$\liff$ & !!{biconditional} & $(!A \liff !B)$ \\
+$\lforall[][]$ & universal (!!{formula})& $\lforall[x][!A]$ \\
+$\lexists[][]$ & existential (!!{formula})& $\lexists[x][!A]$
+\end{tabular}
+\caption{Main operator and names of !!{formula}s}
+\ollabel{tab:main-op}
+\end{table}
+
+\subsection{Free \printtoken{P}{variable} and \printtoken{P}{sentence}}
+
+You should understand and be able to use the following syntactic 
+notions:
+\begin{itemize}
+\item !!^{variable}s $x,y,\ldots$ and quantifiers $\lforall x,\lexists
+x,\lforall y,\ldots$ may have one or more \emph{occurrences in a !!{formula}}.
+\item Occurrences of quantifiers have a \emph{scope}. 
+\item Occurrences of !!{variable}s are \emph{free} or \emph{bound}. 
+\item Bound occurrences of variables (in a given !!{formula}) 
+are \emph{bound by} a (unique) occurrence of a quantifier (in that 
+!!{formula}). 
+\item !!^{formula}s are \emph{open} or \emph{closed}. They are 
+\emph{open} if some variables occur free in them. They are
+ \emph{closed} if !!{variable}s that occur in them (if any) are bound.
+\item  Closed !!{formula}s are called \emph{!!{sentence}s}. 
+\end{itemize}
+
+All these notions are defined rigorously in the textbook. The 
+rigorous definitions of scope and free/bound occurrences of variables
+are inductive. You do not need to be able to give them in this module.
+\emph{What you need to be able to do is to understand this notions, 
+and identify their instances in specific !!{formula}s.} For instance,
+you should be able to underline the scope of an occurrence of a 
+quantifer, to tell which occurrence of a quantifier binds which 
+!!{variable} occurrences, and to tell whether a given !!{formula}
+is a sentence. 
+
+For this purposes, the following informal definitions suffice. 
+
+\begin{defn}[Ocurrences of a !!{variable} in a !!{formula}]
+The \emph{occurrences of a !!{variable}} $x$ in a !!{formula} $!A$ 
+are each of its distinct uses (possibly none, possibly several) 
+in building the !!{formula}.
+\end{defn}
+
+For instance, in $\Atom{F}{x}\lor\Atom{G}{x,y}$ the !!{variable} $x$ has
+two occurences, the !!{variable} $y$ has one occurrence, and the variable
+$z$ has zero occurrences. 
+
+\begin{defn}[Ocurrences of a quantifier in a !!{formula}]
+The \emph{occurrences of a quantifier} $\lforall x$ in a !!{formula}
+are its multiple each of its distinct uses (possibly none, possibly several) 
+in building the !!{formula}. 
+\end{defn}
+
+For instance, in 
+$\lforall[x][\Atom{F}{x}]\lif\lforall[x][\Atom{G}{x}]$ 
+the quantifier $\lforall x$ has two occurrences.
+
+Quantifiers $\lforall x$, 
+$\lexists x$ do \emph{not} count as occurrences of the !!{variable}: 
+in $\lforall[x][\Atom{F}{x}]$ there is only \emph{one} occurrence of the 
+\emph{!!{variable}} $x$ and one occurrence of the \emph{quantifier} 
+$\lforall x$.
+
+\begin{defn}[Scope of a quantifer occurrence]
+The \emph{scope} of a quantifier occurrence in a !!{formula} $!A$ is
+the sub-!!{formula} it is combined with when we construct $!A$. 
+\end{defn}
+
+To illustrate, consider the !!{formula}
+ $\lforall[x][\Atom{G}{xy}]\land\Atom{F}{x}$. There is only one way to
+ construct it: we have to combine $\Atom{G}{xy}$ with $\lforall x$ and
+ then combine $\lforall[x][\Atom{G}{xy}]$ and $\Atom{F}{x}$ using
+ $\land$, resulting in $(\lforall[x][\Atom{G}{xy}]\land\Atom{F}{x})$.
+ (Note that we usually omit the outer parentheses when writing it, by
+ convention.) Since the (unique) occurrence of $\lforall x$ in this
+ !!{formula} was combined with $\Atom{G}{xy}$, the \emph{scope} of
+ that occurrence in the !!{formula}
+ $\lforall[x][\Atom{G}{xy}]\land\Atom{F}{x}$ is just $\Atom{G}{xy}$.
+ Therefore the first occurrence of the !!{variable} $x$ and the only
+ occurrence of $y$ in that !!{formula} are within its scope, but the
+ second occurrence of the !!{variable} $x$ isn't.
+
+By contrast, consider $\lforall[x][(\Atom{G}{xy}\land\Atom{F}{x})]$.
+There is only one way to construct this !!{formula}: we have to
+combine $\Atom{G}{xy}$ and $\Atom{F}{x}$ with $\land$, resulting in
+$(\Atom{G}{xy}\land\Atom{F}{x})$, and the latter with $\lforall x$,
+resulting in our !!{formula}
+$\lforall[x][(\Atom{G}{xy}\land\Atom{F}{x})]$. (There are no omitted
+outer parentheses here because combining a formula $!A$ with $\lforall
+x$, like combining it with $\lnot$ and unlike combining with $\land$,
+does not add parentheses: check the definition of !!{formula} is that
+is not clear to you.) Since the occurrence of $\lforall x$ is 
+combined with $(\Atom{G}{xy}\land\Atom{F}{x})$, its \emph{scope}
+in $\lforall[x][(\Atom{G}{xy}\land\Atom{F}{x})]$ is all of 
+$(\Atom{G}{xy}\land\Atom{F}{x})$. Therefore \emph{both} occurrences of
+the !!{variable} $x$ are within its scope, as well as the occurrence 
+of $y$.
+
+\begin{defn}[Free vs bound occurrences of !!a{variable} in !!a{formula}]
+An occurrence of !!a{variable} $v$ is \emph{bound in !!a{formula} $!A$}
+ iff it is within the scope of an occurrence of the
+ quantifier $\lforall v$ or $\lexists v$ in $!A$; it is free in $!A$ otherwise.
+
+Every occurrence of a !!{variable} bound in a !!{formula} $!A$ is
+\emph{bound by} a \emph{unique} occurrence of a quantifier $\lforall
+v$ or $\lexists v$ in that !!{formula}, namely the first occurrence of
+a quantifier $\lforall v$ or $\lexists v$ in which scope it falls when
+we build $!A$. In general, though, we avoid using !!{formula}s in
+which an occurrence of $v$ falls under the scope of multiple
+quantifier occurrences. So typically, if a !!{variable} $v$ is bound,
+it occurs within the scope of a unique quantifer occurrences $\lforall
+v$ or $\lexists v$ and it bound \emph{by} that occurrence.
+\end{defn}
+
+To illustrate, in the !!{formula}
+ $\lforall[x][\Atom{G}{xy}]\land\Atom{F}{x}$ the first occurrence of
+ $x$ is \emph{bound} (by the unique occurrence of $\lforall x$) but
+ the second occurrence is free. The occurrence of $y$ is free. In the
+ !!{formula} $\lforall[x][(\Atom{G}{xy}\land\Atom{F}{x})]$ both
+ occurrences of $x$ are bound (by the unique occurrence of $\lforall
+ x$)  but the occurrence of $y$ is free. 
+
+The !!{formula}
+$\lforall[x][(\Atom{G}{xy}\land\lforall[x][\Atom{F}{x}])]$ is well
+formed (as can be checked from the definition of !!{formula}s). The
+second occurrence of $x$ in the formula (the one in $\Atom{F}{x}$) is
+within the scope of \emph{two} occurrences of $x$-quantifiers, namely
+both occurrences of $\lforall x$. It is therefore bound in that
+!!{formula}, but by which of these two occurrence of $x$-quantifiers?
+By the first one applied to it when constructing the !!{formula}. 
+To construct that formula, we must first combine $\lforall x$ with
+ constructing $\Atom{F}{x}$, then the latter with $\Atom{G}{xy}$ to 
+ form $(\Atom{G}{xy}\land\lforall[x][\Atom{F}{x}])$ and, finally, 
+ combine the latter with $\lforall x$ to get 
+ $\lforall[x][(\Atom{G}{xy}\land\lforall[x][\Atom{F}{x}])]$. Since the
+ \emph{second} occurrence of $\lforall x$ here is the one that was 
+ first applied to $\Atom{F}{x}$, the occurrence of $x$ in $\Atom{F}{x}$
+ is bound \emph{by} the second occurrence of $\lforall x$ in the
+ !!{formula} 
+ $\lforall[x][(\Atom{G}{xy}\land\lforall[x][\Atom{F}{x}])]$.
+
+That being said, we usally avoid using !!{formula}s like 
+$\lforall[x][(\Atom{G}{xy}\land\lforall[x][\Atom{F}{x}])]$ which place
+a $x$-quantifier within the scope of another $x$-quantifier, precisely
+because we cannot immediately see which quantifier occurrence binds
+which variable occurrence. These !!{formula}s are always have 
+equivalents in which we use distinct quantifiers instead: thus instead
+of 
+$\lforall[x][(\Atom{G}{xy}\land\lforall[x][\Atom{F}{x}])]$ we can use
+the !!{formula} 
+$\lforall[x][(\Atom{G}{xy}\land\lforall[z][\Atom{F}{z}])]$, which is 
+equivalent. 
+
+\begin{defn}[Open vs closed !!{formula}s, !!{sentence}s]
+A !!{formula} is \emph{open} iff some occurrences of variables
+in it are free; it is \emph{closed} otherwise. Equivalently, 
+!!{formula} is \emph{closed} iff any
+occurrences of !!{variable}s in it are bound (or the !!{formula} does
+not contain !!{variable}s at all).
+
+Closed !!{formula}s are also called \emph{!!{sentence}s}.
+\end{defn}
+
+An important feature of !!{sentence}s is that they have a fixed truth
+value in a given model, irrespective of what we assign to any
+!!{variable}s. Open !!{formula}s, by contrast, may vary in truth-value
+relative to distinct assignments of objects to !!{variable}.
+
+\end{document}

@@ -1,0 +1,66 @@
+% Part: quantified-modal-logic
+% Chapter: introduction
+% Section: necessity-of-existence
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{qml}{int}{noe}
+
+\olsection{Necessity of Existence}
+
+Combining standard first-order logic with identity and modal logic 
+allows us to prove that (a) necessarily, something exists, 
+and (b) everything exists necessarily---that is, everything is such
+that it could not have not existed. The second result is highly 
+contentious, of course.
+
+For the first:
+
+\begin{prooftree}
+    \AxiomC{}
+    \RightLabel{\Intro{\eq}}
+    \UnaryInfC{$\eq[a][a]$}
+    \RightLabel{\Intro{\lexists}}
+    \UnaryInfC{$\lexists[x][\eq[x][x]]$}
+    \RightLabel{$\Box$\Ax{K}}
+    \UnaryInfC{$\Box\lexists[x][\eq[x][x]]$}
+\end{prooftree}
+
+For the second:
+
+\begin{prooftree}
+    \AxiomC{}
+    \RightLabel{\Intro{\eq}}
+    \UnaryInfC{$\eq[a][a]$}
+    \RightLabel{\Intro{\lexists}}
+    \UnaryInfC{$\lexists[x][\eq[x][x]]$}
+    \RightLabel{$\Box$\Ax{K}}
+    \UnaryInfC{$\Box\lexists[x][\eq[x][x]]$}
+\end{prooftree}
+
+We can show the same point using possible world semantics.
+
+In \emph{fixed domain} semantics for Quantified Modal Logic, a model
+has a set of world and a unique domain of object. It's easy to see
+that the necessity of existence holds on such models. See Sider for 
+a detailed presentation.
+
+To avoid the consequence, one must give up at least one of
+Necessitation, the Reflexivity of Identity, or the rules of
+Existential Instantiation. The dominant approach is a to change the 
+quantifier rule and adopt a \emph{free logic}.
+
+In terms of models, we must adopt *variable*
+domains: the domain of individuals may change from world to world. 
+This means that a constant like $\Obj a$ may denote an object that is not
+in the domain of some worlds. We must then evaluate formulas like 
+$\Obj{Fa}$ or $\Obj(a=b)$ at worlds \emph{where $a$ doesn't denote
+anything in the domain}. Classical semantics for predicate logic 
+doesn't have a way to do that. Free logics have been designed to 
+accomodate denotation-less constants. Hence a Quantified Modal Logic
+that avoids the necessity of existence must combine modal logic with 
+\emph{free} first order logic logic.
+
+\end{document}

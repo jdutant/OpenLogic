@@ -1,0 +1,33 @@
+% Part: exercise-booklet
+% Chapter: free-logic
+% Section: tableaux
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{exb}{frl}{tab}
+
+\olsection{Tableaus}
+
+% To be revised: use proper object language codes
+
+\begin{prob}[Tableaus for positive free logic]
+Give tableau proofs of the following in positive free logics:
+\begin{enumerate}
+\item $\forall xFx\vdash Fa\lor\sim \lfrexists a$.
+\item $\forall x(Fx\rightarrow Gx),\exists xFx\vdash\exists xGx$. % REPLACE last with Gx!
+\item $\vdash\forall x\lfrexists x$.
+\end{enumerate}
+\end{prob}
+
+\begin{prob}[Tableaus for negative free logic]
+Give tableau proofs of the following in negative free logics:
+\begin{enumerate}
+\item $\sim \lfrexists a\vdash\sim Fa$.
+\item $\forall x(Fx\rightarrow Gx),\exists xFx\vdash\exists xGx$.
+\item $\forall x(Fx\rightarrow Gax),\exists xFx\vdash \lfrexists a$.
+\end{enumerate}
+\end{prob}
+
+\end{document}

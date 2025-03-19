@@ -12,7 +12,19 @@
 
 \olimport[syntax-and-semantics]{syntax-and-semantics}
 
-\olimport[tableaux]{tableaux}
+\iftag{prfSC}{%
+}{}
+
+\iftag{prfND}{%
+  \olimport[natural-deduction]{natural-deduction}
+}{}
+
+\iftag{prfTab}{%
+  \olimport[tableaux]{tableaux}
+}{}
+
+\iftag{prfAX}{%
+}{}
 
 \OLEndPartHook
 

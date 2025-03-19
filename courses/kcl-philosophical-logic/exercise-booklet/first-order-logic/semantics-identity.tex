@@ -1,0 +1,88 @@
+% Part: exercise-booklet
+% Chapter: first-order-logic
+% Section: semantics-identity
+
+\documentclass[../../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{exb}{fol}{sid}
+
+\olsection{Semantics with identity}
+
+\begin{prob}[Expressing cardinalities]
+Cardinalities are number of things: one things, a thousand things, infinitely many things, as many things as there are natural numbers, as many things as there are real numbers, etc. First-order logic with identity can express some facts 
+about cardinalities. 
+\begin{enumerate}
+	\item Write !!a{formula} of first-order logic that holds only if the domain contains at least two individuals.
+	\item Write !!a{formula} of first-order logic that holds only if the domain contains exactly two individuals.
+	\item Write !!a{formula} of first-order logic that holds only if the domain contains at most three individuals.
+	\item Write !!a{formula} of first-order logic that holds only if the domain contains infinitely many things.
+\end{enumerate}
+\begin{ans}
+\begin{enumerate}
+	\item $\lexists[x] \lexists[y][\eq/[x][y]]$
+	\item $\lexists[x] \lexists[y] (\eq/[x][y] \land \lforall[z] (\eq[z][x] \lor \eq[z][y])$
+	\item $\lexists[x] \lexists[y] \lexists[z] (\lforall[x'] (\eq[x'][x] \lor \eq[x'][y] \lor \eq[x'][z]))$. \emph{Comment: it would be wrong to add $\eq/[x][y] \land \eq/[x][z] \land \eq/[y][z]$, for that would make the formula false if the domain contains only one or two individuals.}
+	\item $\lforall[x] \lexists[y] \Atom{\Obj R}{x,y} \land 
+		\lforall[x]\lforall[y](\Atom{\Obj R}{x,y} \rightarrow \eq/[x][y])
+		\land \lforall[x]\lforall[y]\lforall[z](\Atom{\Obj R}{x,y} \land \Atom{\Obj R}{y,z}\rightarrow \Atom{\Obj R}{x,z})$\\ \emph{Comment: the first conjunct tells us that everything must be $R$-related to something. The second tells us that $R$ is antireflexive: nothing can have it to itself. The third tells us that it is transitive: if one thing has it to a second and the second to a third, the first has it to the third. To see that this requires infinitely many things, note first that antireflexivity and transitivity together prohibit (finite) `loops' of $R$. For suppose there's a loop starting from $1$: since $1$ has $R$ to the next object, and that object has $R$ to the third, by transitivity $1$ has $R$ to the third, and so on and so forth for all objects in the loop; so $1$ must have $R$ to itself. But if $R$ is antireflexive, that's impossible. Now the first conjunct tells us that everything has $R$ to something. In first-order logic, there must be at least one thing in the domain --- call it $1$. It must have $R$ to something, but (antireflexivity) this can't be $1$ itself. So there must be a second object --- call it $2$. Now by the first conjunct, $2$ must have $R$ to something as well. But it can't be $1$, for we would have a loop, nor $2$ (anti-reflexivity). So there must be a third object. That third object must have $R$ to something, but it can't be one of $1,2,3$, for analogue reasons. So there must be a fourth. In general, each object we add cannot have $R$ to any of the objects we already have, so there must always be yet another object. Hence the formula can only be true if there are infinitely many things.}
+\end{enumerate}
+\end{ans}
+\end{prob}
+
+\begin{prob}[Formalizing claims about quantity]
+Write !!{formula}s of first-order logic with identity that express the following: 
+\begin{enumerate}
+	\item There are at least three things.
+	\item There are exactly three things that are red.\\ 
+	(Use $\Atom{\Obj F}{x}$ to express the claim that $x$ is red.)
+\end{enumerate}
+\begin{ans}
+\begin{enumerate}
+	\item $\lexists[x] \lexists[y] \lexists [z] (\eq/[x][y] \land \eq/[x][z] \land \eq/[y][z])$
+	\item $\lexists[x] \lexists[y] \lexists [z] (\eq/[x][y] \land \eq/[x][z] \land \eq/[y][z] \land \Atom{\Obj F}{x} \land \Atom{\Obj F}{y} \land \Atom{\Obj F}{z} \land 
+	\lforall[x'] ( \Atom{\Obj F}{x'} \rightarrow \lforall[x'] (\eq[x'][x] \lor \eq[x'][y] \lor \eq[x'][z])))$\\
+	\emph{Comment: the formula says that there are three distinct things such that all of them are $F$, and anything that is $F$ is one of these three things. The formula doesn't rule out the existence of \emph{other} things, provided these aren't red. This is as desired: the English sentence doesn't tell us ``There are exactly three things and these things are all red''. Thus it would be wrong to answer: $\lexists[x] \lexists[y] \lexists [z] (\eq/[x][y] \land \eq/[x][z] \land \eq/[y][z] \land \lforall[x'] (\eq[x'][x] \lor \eq[x'][y] \lor \eq[x'][z]) \land \lforall[x] Fx$.\\
+	Make sure that the parentheses of $\lexists[x] \lexists[y] \lexists [z]$ enclose the whole formula, so that every occurrence of $x$, $y$, $z$ is bound by these 
+	quantifiers. For instance $\lexists[x] \lexists[y] \lexists [z] (\eq/[x][y] \land \eq/[x][z] \land \eq/[y][z]) \land \Atom{\Obj F}{x} \land \Atom{\Obj F}{y} \land \Atom{\Obj F}{z} \land 
+	\lforall[x'] ( \Atom{\Obj F}{x'} \rightarrow \lforall[x'] (\eq[x'][x] \lor \eq[x'][y] \lor \eq[x'][z]))$ would be wrong because $x$, $y$, $z$ are free in the rest of the formulas: $the \Atom{\Obj F}{x}$ conjunct, for instance, roughly says ``it is red'' without ``it'' refering to anything.} 
+\end{enumerate}
+\end{ans}
+\end{prob}
+
+\begin{prob}[Leibniz's law]
+In first-order logic, Leibniz's law is expressed by the following schema, where $!A$ can stand for any formula in which $y$ is free for $x$ in $!A$:
+$$\lforall x \lforall y (\eq[x][y] \lif (!A \liff \Subst{!A}{y}{x}))$$
+(Recall that $y$ is free for $x$ in $!A$ if none of the free occurrences of $x$ in $!A$ are bound by a $\forall y$ quantifier and $\Subst{!A}{y}{x}$ stands for the !!{formula} resulting from substituting $y$ for all free occurrences of $x$ in $!A$.) Answer the following.
+\begin{enumerate}
+	\item Explain why if (for some assignement $g$ in some model $\Struct{M}$) $\Value{y}{M}[g] = \Value{x}{M}[g]$, then $\Sat{M}{\Atom{\Obj F}{y}}[g]$ iff $\Sat{M}{\Atom{\Obj F}{x}}[g]$. 
+	\item (Generalize your answer.) Let $\Atom{!A}$ be an atomic !!{formula} in which $y$ doesn't appear free. Explain why, if $\Value{y}{M}[g] = \Value{x}{M}[g]$, $\Sat{M}{!A}[g]$ iff $\Sat{M}{\Subst{!A}{y}{x}}[g]$.
+	\item Explain why, if $\Sat{M}{!A}[g]$ iff $\Sat{M}{\Subst{!A}{y}{x}}[g]$ and $\Sat{M}{!B}[g]$ iff $\Sat{M}{\Subst{!B}{y}{x}}[g]$, then $\Sat{M}{!A \land !B}[g]$ iff $\Sat{M}{\Subst{!A \land !B}{y}{x}}[g]$.
+	\item Suppose $\Sat{M}{!A}[g]$ iff $\Sat{M}{\Subst{!A}{y}{x}}[g]$ for any $g$ such that $\Value{y}{M}[g] = \Value{x}{M}[g]$. Explain why it follows that either $y$ is not free for $x$ in $\forall[\nu]!A$, or $\Sat{M}{\lforall[\nu]!A}[g]$ iff $\Sat{M}{\Subst{\lforall[\nu]!A}{y}{x}}[g]$ for any variable $\nu$ and any $g$ such that $\Value{y}{M}[g] = \Value{x}{M}[g]$. (Tips: (a) if $\nu$ is $y$, then the free occurrences of $x$ in $!A$ are under the score of $\lforall[\nu]$ in $\lforall[\nu]!A$, (b) if $\nu$ is $x$, any occurrence of $x$ in $!A$ is bound by $\lforall[\nu]$, so there is no free occurrence of $x$ in $\lforall[\nu]$, therefore  $\Subst{\lforall[\nu]!A}{y}{x}$ is just $\lforall[\nu]!A$).
+	\item Using the claims above, explain why Leibniz's law holds in first-order logic with identity. 
+\end{enumerate}
+\end{prob}
+\begin{ans}
+\begin{enumerate}
+	\item $\Sat{M}{\Atom{\Obj F}{y}}[g]$ just if $\Value{y}{M}[g] \in \Assign{F}{M}$, and since 
+	$\Value{y}{M}[g] = \Value{x}{M}[g]$, just if $\Value{x}{M}[g] \in \Assign{F}{M}$, hence 
+	just if $\Sat{M}{\Atom{\Obj F}{x}}[g]$. \emph{Comment. Less rigorous, but still acceptable
+	answer:} $\Atom{\Obj F}{y}$ is true relative to an assignment just if $F$ applies to the object assigned to $y$; if the same object is assigned to $x$ then $Fx$ will be true relative to that assignment too.
+	\item If $!A$ is of the form $\Phi t_1t_2\ldots t_n$, $\Sat{M}{!A}[g]$ iff $\langle \Value{t_1}{M}[g], \ldots \Value{t_1}{M}[g] \rangle \in \Assign{\Phi}{M}$. If some of the $t_i$ ($1\leq i\leq n$) are $x$ but $\Value{y}{M}[g] \in \Assign{F}{M}$, then it is also the case that $\Sat{M}{\Subst{!A}{y}{x}}[g]$ iff $\langle \Value{t_1}{M}[g], \ldots \Value{t_1}{M}[g] \rangle \in \Assign{\Phi}{M}$. \emph{Comment. A less formal but also acceptable answer}: An atomic formula $\Phi t_1t_2\ldots t_n$ relative to an assignment if $\Phi$ applies to the tuple of objects denoted by $t_1$, $\ldots$, $t_n$. If we substitute all terms $x$ in that formula with $y$, where $\Value{y}{M}[g] = \Value{x}{M}[g]$, the resulting formula is also true just if $\Phi$ applies to the same objects.
+	\item Suppose $\Sat{M}{!A}[g]$ iff $\Sat{M}{\Subst{!A}{y}{x}}[g]$ and $\Sat{M}{!B}[g]$ iff $\Sat{M}{\Subst{!B}{y}{x}}[g]$. Then $\Sat{M}{!A \land !B}[g]$ iff $\Sat{M}{!A}[g]$ and $\Sat{M}{!B}[g]$, iff $\Sat{M}{\Subst{!A}{y}{x}}[g]$ and $\Sat{M}{\Subst{!B}{y}{x}}[g]$ (by supposition), iff  $\Sat{M}{\Subst{!A \land !B}{y}{x}}[g]$ (since $\Subst{!A}{y}{x} \land \Subst{!A}{y}{x}$ is just $\Subst{!A \land !B}{y}{x}$). 
+	\item Suppose $\Sat{M}{!A}[g]$ iff $\Sat{M}{\Subst{!A}{y}{x}}[g]$ for any $g$ such that $\Value{y}{M}[g] = \Value{x}{M}[g]$. If $\nu$ is $x$, then $\Subst{\lforall[\nu]!A}{y}{x}$ is just $\lforall[\nu]!A$, so trivially $\Sat{M}{\lforall[\nu]!A}[g]$ iff $\Sat{M}{\Subst{\lforall[\nu]!A}{y}{x}}[g]$ for any $g$. If $\nu$ is than $y$, then free occurrences of $x$ in $!A$ are in the scope of $\lforall[\nu]$ in $\lforall[\nu]!A$ so $y$ is not free for $x$ in $\lforall[\nu]!A$. If $\nu$ is other than $x$ or $y$, then for any $\nu$-variant $g'$ of $g$, $\Value{x}{M}[g'] = \Value{x}{M}[g]$ and $\Value{x}{M}[y'] = \Value{x}{M}[g]$, so (by our supposition),  $\Sat{M}{!A}[g']$ iff $\Sat{M}{\Subst{!A}{y}{x}}[g']$ for any $\nu$-variant $g'$ of $g$, hence $\Sat{M}{\lforall[\nu]!A}[g']$ iff $\Sat{M}{\Subst{\lforall[\nu]!A}{y}{x}}[g']$.
+	\item We show that (if $y$ is free for $x$ in $!A$) $\Sat{M}{\eq[x][y] \lif (!A \liff \Subst{!A}{y}{x})}[g]$ for any $\Sat{M}$,$g$, from which the validity of Leibniz's law immediately follows. We prove this by induction on the length of formuals.\\
+	Base case. Suppose $!A$ is an atomic formula. If $\Sat{M}{\eq[x][y]}$ then $\Value{y}{M}[g] = \Value{x}{M}[g]$ and, as show in (2) above, $\Sat{M}{!A}[g]$ iff $\Sat{M}{\Subst{!A}{y}{x}}[g]$, hence $\Sat{M}{!A \liff \Subst{!A}{y}{x}}[g]$. Hence for any $\Struct{M}$, $g$ we have $\Sat{M}{\eq[x][y] \lif (!A \liff \Subst{!A}{y}{x})}[g]$.\\
+	Induction step. Suppose that for any $!B$ shorter than $!A$, $\Sat{M}{\eq[x][y] \lif (!B \liff \Subst{!B}{y}{x})}[g]$. Thus for any $!B$ shorter than $!A$, if $\Value{y}{M}[g] = \Value{x}{M}[g]$ then $\Sat{M}{!B}[g]$ iff $\Sat{M}{\Subst{!B}{y}{x}}[g]$. We show that $\Sat{M}{\eq[x][y] \lif (!A \liff \Subst{!A}{y}{x})}[g]$.\\
+	Case 1. $!A$ is an atomic formula. This is as in the base case.\\
+	Case 2. $!A$ is of the form $\lnot !B$. If $\Sat{M}{\eq[x][y]}$ then $\Value{y}{M}[g] = \Value{x}{M}[g]$ and (by the induction hypothesis, since $!B$ is shorter than $!A$), $\Sat{M}{!B}[g]$ iff $\Sat{M}{\Subst{!B}{y}{x}}[g]$, hence $\Sat{M}{\lnot !B}[g]$ iff $\Sat{M}{\Subst{\lnot !B}{y}{x}}[g]$, hence $\Sat{M}{!A}[g]$ iff $\Sat{M}{\Subst{!A}{y}{x}}[g]$. So $\Sat{M}{\eq[x][y] \lif (!A \liff \Subst{!A}{y}{x})}[g]$.\\
+	Case 3. $!A$ is of the form $!B \land !C$. If $\Sat{M}{\eq[x][y]}$ then $\Value{y}{M}[g] = \Value{x}{M}[g]$ and (by the induction hypothesis, since $!B$ and $C$ are shorter than $!A$)  $\Sat{M}{!B}[g]$ iff $\Sat{M}{\Subst{!B}{y}{x}}[g]$ and $\Sat{M}{!C}[g]$ iff $\Sat{M}{\Subst{!C}{y}{x}}[g]$, so (as shown in (3) above) $\Sat{M}{!B \land !C}[g]$ iff $\Sat{M}{!B}[g]$ and $\Sat{M}{!C}[g]$. So $\Sat{M}{\eq[x][y] \lif (!A \liff \Subst{!A}{y}{x})}[g]$.\\
+	Case 4. $!A$ is of the form $!B \lor !C$, $!B \lif !C$, $!B \liff !C$: the proof is analogue to the case of $\land$.\\
+	Case 5. $!A$ is of the form $\lforall[\nu]!B$. By the induction hypothesis, $\Sat{M}{!B}[g]$ iff $\Sat{M}{\Subst{!B}{y}{x}}[g]$ for any $g$ such that $\Sat{M}{\eq[x][y]}[g]$. Since
+	$y$ is free for $x$ in $!A$, it is free for $x$ in $!B$ too. So (as shown in 3 above) if $\Sat{M}{\eq[x][y]}[g]$ then $\Sat{M}{\lforall[\nu]!A}[g]$ iff $\Sat{M}{\lforall[\nu]\Subst{!A}{y}{x}}[g]$. Hence $\Sat{M}{\eq[x][y] \lif (!A \liff \Subst{!A}{y}{x})}[g]$.\\
+	The case for $\lexists$ would be analogue.\\
+	This completes the induction.
+\end{enumerate}
+\end{ans}
+\end{document}

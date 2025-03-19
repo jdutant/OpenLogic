@@ -1,0 +1,46 @@
+% Part: exercise-booklet
+% Chapter: first-order-logic
+% Section: tableaus
+
+\documentclass[../../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{exb}{fol}{tbl}
+
+\olsection{Tableau proofs}
+
+\begin{prob}[Tableau proofs]
+Give tableau proofs of the following:
+\begin{enumerate}
+\item $\Proves\lforall x\Atom{\Obj F}{x}\lif\lforall y\Atom{\Obj F}{y}$.
+\item $\Proves \Atom{\Obj F}{a}\lif\lexists x\Atom{\Obj F}{x}$.
+\item $\Proves\lforall x\Atom{\Obj F}{x}\lif\lforall y(\Atom{\Obj F}{y}\lor Gy)$.
+\item $\Proves\lexists x\Atom{\Obj F}{x}\lif\lexists y\Atom{\Obj F}{y}$.
+\item $\lforall x\Atom{\Obj F}{x},\lforall x(\Atom{\Obj F}{x}\lif \Atom{\Obj G}{x})\Proves\lforall x\Atom{\Obj G}{x}$.
+\item $\lforall x(\Atom{\Obj F}{x}\lif \Atom{\Obj G}{x}),\lforall x(\Atom{\Obj G}{x}\lif \Atom{\Obj H}{x})\Proves\lforall x(\Atom{\Obj F}{x}\lif \Atom{\Obj H}{x})$.
+\item $\Proves\lforall x(!A \lif !B)\lif(\lforall x !A\lif\lforall x !B)$.\footnote{This is a schema rather than a formula. You'll give a ``proof schema'', which is just like a normal tableau but using
+$!A$,$!B$, $\ldots$ instead, that can stand for any variable / formula whatsoever.}
+\item $\lforall x\Atom{\Obj F}{x},\lexists x\Atom{\Obj G}{x}\Proves\lexists x(\Atom{\Obj F}{x}\land \Atom{\Obj G}{x})$.
+\item $\Proves\lforall x\Atom{\Obj G}{a,x}\lif\lforall x\lexists y\Atom{\Obj G}{y,x}$.
+\item $\lexists x\lforall y\Atom{\Obj G}{x,y}\Proves\lforall y\lexists x\Atom{\Obj G}{x,y}$.
+\item $\lforall x\lforall y(\Atom{\Obj G}{x,y}\lif\lnot \Atom{\Obj G}{y,x})\Proves\lforall x\lnot \Atom{\Obj G}{x,x}$.
+\item $\lexists x\Atom{\Obj G}{a,x},\lforall y(\Atom{\Obj G}{a,y}\lif\lforall z\Atom{\Obj G}{z,y})\Proves\lexists x\lforall z\Atom{\Obj G}{z,x}$.
+\end{enumerate}
+\begin{ans}
+	See scanned document.
+\end{ans}
+\end{prob}
+
+\begin{prob}
+Use tableaus to find !!{structure}s that establish the following:
+\begin{enumerate}
+	\item $\lforall x \lexists y \Atom{\Obj G}{x,y} \Entails/ \lexists y \lforall x \Atom{\Obj G}{x,y}$ 
+	\item $\lforall x \lforall y (\Atom{\Obj G}{x,y} \lif \Atom{\Obj G}{y,x}) \Entails/ \forall x \Atom{\Obj G}{x,x}$
+\end{enumerate}
+\begin{ans}
+	See scanned document.
+\end{ans}
+\end{prob}
+
+\end{document}

@@ -1,0 +1,26 @@
+% Part: exercise-booklet
+% Chapter: first-order-logic
+% Section: tableaus identity
+
+\documentclass[../../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{exb}{fol}{tbi}
+
+\olsection{Tableau proofs with identity}
+
+\begin{prob}[Tableau proofs with identity]
+Give tableau proofs of the following:
+\begin{enumerate}
+	\item $\Atom{\Obj G}{a,b}\Proves \lforall x(\eq[x][a]\lif \Atom{\Obj G}{x,b})$
+	\item $\Proves \lforall x\lforall y((\eq[x][y] \land \Atom{\Obj G}{x,y}) \lif \Atom{\Obj G}{y,x})$
+	\item $\lforall x\lforall y ((\Atom{\Obj F}{x}\land\Atom{\Obj F}{y})\lif \eq[x][y]), 
+	\lforall x\Atom{\Obj G}{x,x} \Proves (\Atom{\Obj F}{a} \land \Atom{\Obj F}{b}) \lif \Atom{G}{a,a}$ % REPLACE with Gab at the end!
+\end{enumerate}
+\begin{ans}
+See scanned document. 
+\end{ans}
+\end{prob}
+
+\end{document}

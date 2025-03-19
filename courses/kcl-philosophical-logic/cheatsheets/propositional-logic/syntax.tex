@@ -41,6 +41,32 @@
     \end{enumerate}
 \end{defn}
 
+\iftag{defNot,defOr,defAnd,defIf,defIff,defTrue,defFalse,defEx,defAll}{%
+In addition to the primitive connectives introduced
+above, we also use the following \emph{defined} symbols:
+\startycommalist
+  \iftag{defNot}{\ycomma $\lnot$ (negation)}{}%
+  \iftag{defAnd}{\ycomma $\land$ (conjunction)}{}%
+  \iftag{defOr}{\ycomma $\lor$ (disjunction)}{}%
+  \iftag{defIf}{\ycomma $\lif$ (!!{conditional})}{}%
+  \iftag{defIff}{\ycomma $\liff$ (!!{biconditional})}{}%
+  \iftag{defFalse}{\ycomma !!{falsity}~$\lfalse$}{}%
+  \iftag{defTrue}{\ycomma !!{truth}~$\ltrue$}}{}.
+
+
+You may be familiar with different terminology and symbols than the
+    ones we use above. Logic texts (and teachers) commonly use 
+    $\sim$, $\neg$, or~!\ for ``negation'', $\wedge$, $\cdot$, or $\&$
+    for ``conjunction''.  Commonly used symbols for the ``conditional'' or
+    ``implication'' are $\rightarrow$, $\Rightarrow$, and $\supset$.
+    \iftag{prvIff,defIff}{Symbols for ``biconditional,'' ``bi-implication,''
+      or ``(material) equivalence'' are $\leftrightarrow$,
+      $\Leftrightarrow$, and $\equiv$.}{}
+    \iftag{prvFalse,defFalse}{The $\lfalse$ symbol is variously called
+      ``falsity,'' ``falsum,'', ``absurdity,'' or ``bottom.''}{}
+    \iftag{prvTrue,defTrue}{The $\ltrue$ symbol is variously called
+      ``truth,'' ``verum,'' or ``top.''}{}
+
 \begin{defn}[Main connective]
     The \emph{main connective} of a non-atomic !!{formula} is the last
     connective introduced in the construction of the formula.

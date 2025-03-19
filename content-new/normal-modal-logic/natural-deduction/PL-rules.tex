@@ -70,15 +70,48 @@ May be abbreviated:
 \end{prooftree}
 \end{ex}
 
-% \begin{note}
-% The \Log{PL} rule does \emph{not} permit substituting propositional 
-% consequences or equivalents for sub-!!{formula}s \emph{embedded within 
-% modal operators}. For an illustration, compare the two !!{derivation}s:
+Note that $\Log{PL}$ cannot be used to apply propositional steps 
+to subformulas \emph{embedded} within modal operators. For instance:
 
-% \bigskip
-% \begin{tabular}{cc}
-% \end{tabular}
-% \bigskip
-% \end{note}
+\smallskip
+\begin{tabular}{cc}
+    \AxiomC{$\lnot\lnot\Box\Obj{\pvar{A}}$}
+    \RightLabel{\Log{PL} {\color{blue}Correct}}
+    \UnaryInfC{$\Box\Obj{\pvar{A}}$}
+    \DisplayProof
+    &
+    \AxiomC{$\Box\lnot\lnot\Obj{\pvar{A}}$}
+    \RightLabel{\Log{PL} {\color{red}Incorrect}}
+    \UnaryInfC{$\Box\Obj{\pvar{A}}$}
+    \DisplayProof
+\end{tabular}
+\smallskip
+
+The first is correct because from !!a{formula} $\lnot\lnot!A$ you can
+derive $!A$ using propositional rules alone. It does not matter
+whether $!A$ contains a modal operator: you need not `unpack' it. 
+The second is incorrect because from !!a{formula} $\Box\lnot\lnot!A$ 
+you cannot derive $\Box!A$ by propositonal rules alone. You need to 
+`unpack' the !!{operator} $\Box$ first. See the full !!{derivation}s
+below.
+
+\smallskip
+\begin{tabular}{cc}
+    \AxiomC{$\lnot\lnot\Box\Obj{\pvar{A}}$}
+        \AxiomC{$\Discharge{\lnot\Box\Obj{\pvar{A}}}{1}$}
+    \DischargeRule{\Elim{\lnot}}{1}
+    \BinaryInfC{$\Box\Obj{\pvar{A}}$}
+    \DisplayProof
+&
+    \AxiomC{$\Box\lnot\lnot\Obj{\pvar{A}}$}
+        \AxiomC{$\Discharge{\lnot\lnot\Obj{\pvar{A}}}{2}$}
+            \AxiomC{$\Discharge{\lnot\Obj{\pvar{A}}}{1}$}
+        \DischargeRule{\Elim{\lnot}}{1}
+        \BinaryInfC{$\Obj{\pvar{A}}$}
+    \DischargeRule{$\Box$\Ax{K}}{2}
+    \BinaryInfC{$\Box\Obj{\pvar{A}}$}
+    \DisplayProof
+\end{tabular}
+\smallskip
 
 \end{document}

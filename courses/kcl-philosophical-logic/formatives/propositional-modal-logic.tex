@@ -1,6 +1,6 @@
 % Part: formatives
 % Chapter: one
-% Section: propositional-logic
+% Section: propositional-modal-logic
 
 \documentclass[../../../include/open-logic-section]{subfiles}
 
@@ -8,14 +8,70 @@
 
 \olfileid{for}{one}{pmod}
 
+\newpage
 \olsection{Propositional Modal Logic}
 
 \begin{prob}
-    (weak) Secondary reflexive. If Rwv, then Rvv.
-    explain that a model can be secondary reflexive without being serial.
-    show that every model that is euclidean is secondary reflexive, but not the other way round.
-    show that every model that is transitive and symmetric is secondary reflexive.
-    can you give a characteristic schema for secondary reflexive frames?
+ Consider the model $\mModel{M}$ with:
+ \begin{itemize}
+    \item Worlds $W=\{@,u,v\}$, where $@$ is the actual world,
+    \item Accessibility relation 
+    $R=\{\tuple{@,u},\tuple{@,v},\tuple{u,@},\tuple{v,u},\tuple{v,v}\}$
+    \item Valuation $V(\Obj{\pvar{P}},@)=V(\Obj{\pvar{Q}},u)=V(\Obj{\pvar{R}},v)=\True$, all else $\False$.
+ \end{itemize}
+ Say whether the formulas below are true in the model (i.e., true at
+    $@$). Briefly justify your answers.
+    \begin{enumerate}
+    \item $\Diamond \Obj{\pvar{P}}$
+    \item $\Box(\Obj{\pvar{R}}\rightarrow\Diamond \Obj{\pvar{Q}})$
+    \item $\Box(\Diamond \Obj{\pvar{\Obj{\pvar{R}}}}\lor\Diamond \Obj{\pvar{P}})$
+    \item $\Box\Box\Diamond \Obj{\pvar{Q}}$
+    \end{enumerate}
+    
+\end{prob}
+
+\begin{prob}
+    Establish the following. Use countermodels for invalidities, 
+    natural deduction !!{derivation}s for validities. 
+    \begin{enumerate}
+        \item $\Box\lnot\Obj{\pvar{A}}, 
+        \Box(\Obj{\pvar{A}}\lor\Obj{\pvar{B}})
+        \Entails[\Log{K}] \Box{\Obj{\pvar{B}}}$
+
+        \item $\Diamond\lnot\Obj{\pvar{A}}, 
+        \Box(\Obj{\pvar{A}}\lor\Obj{\pvar{B}})
+        \Entails/[\Log{T}] \Box{\Obj{\pvar{B}}}$
+
+        \item $\Entails[\Log{T}]\Diamond(
+            (\Obj{\pvar{A}}\land\Obj{\pvar{B}})\lif\Obj{\pvar{A}}
+        )$
+
+        \item $\Diamond\Diamond \Obj{\pvar{A}},
+        \Box(\Obj{\pvar{B}}\lif\lnot\Obj{\pvar{A}})
+        \Entails[\Log{S4}] \lnot\Box\Obj{\pvar{B}}$
+    
+    \end{enumerate}
+
+\end{prob}
+
+\begin{prob}
+    We say that relation $R$ has \emph{secondary reflexivity} iff 
+    whenever something has that relation to something, the latter has
+    that relation to itself: if $Rww'$ then $Rw'w'$. A modal !!{structure}
+    is secondary reflexive iff its accessibility relation is secondary 
+    reflexive.
+
+    \begin{enumerate}
+    \item Can a model can be secondary reflexive without 
+    being serial? Briefly justify your answer.
+    \item Show that any transitive and symmetric model is secondary 
+    reflexive, but not the other way round.
+    \item Can you give a characteristic schema for secondary reflexive 
+    frames? Show that the schema is valid for any secondary reflexive frames.
+    Optional: show that it is not valid on frames that are not secondary 
+    reflexive.
+    \end{enumerate}
+    
 \end{prob}
 
 \end{document}

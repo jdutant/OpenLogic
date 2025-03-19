@@ -1,0 +1,181 @@
+% Part: cheat-sheets
+% Chapter: first-order-logic
+% Section: semantics
+
+\documentclass[../../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{chs}{fol}{sem}
+
+\olsection{Semantics}
+
+\begin{defn}[!!^{structure}s]
+    \Article{structure} \emph{!!{structure}}~$\Struct M$, for a language
+    $\Lang{L}$ of first-order logic consists of the following elements:
+    \begin{enumerate}
+    \item \emph{Domain:} a non-empty set, $\Domain M$
+    \item \emph{Interpretation of !!{constant}s:} for each !!{constant}~$c$ of
+      $\Lang{L}$, !!a{element} $\Assign{c}{M} \in \Domain M$
+    \item \emph{Interpretation of !!{predicate}s:} for each $n$-place
+      !!{predicate}~$R$ of $\Lang{L}$ (other than $\eq$), an $n$-place
+      relation $\Assign{R}{M} \subseteq \Domain{M}^n$
+    \item \emph{Interpretation of !!{function}s:} for each $n$-place
+      !!{function}~$f$ of $\Lang{L}$, an $n$-place function $\Assign{f}{M}
+      \colon \Domain{M}^n \to \Domain{M}$
+    \end{enumerate}
+\end{defn}
+    
+\begin{defn}[Variable Assignment]
+    A \emph{variable assignment}~$s$ for !!a{structure}~$\Struct{M}$ is a
+    function which maps each !!{variable} to !!a{element} of~$\Domain M$,
+    i.e., $s\colon \Var \to \Domain M$.
+\end{defn}
+
+
+\begin{defn}[$x$-Variant]
+    If $s$ is !!a{variable} assignment for !!a{structure}~$\Struct M$, then any
+    !!{variable} assignment~$s'$ for~$\Struct M$ which differs from~$s$ at most
+    in what it assigns to~$x$ is called an \emph{$x$-variant} of~$s$.  If
+    $s'$ is an $x$-variant of~$s$ we write $\varAssign{s'}{s}{x}$.
+\end{defn}
+
+
+\begin{defn}[!!^{value} of Terms]
+    If $t$ is a term of the language~$\Lang L$, $\Struct M$ is a
+    !!{structure} for~$\Lang L$, and $s$ is !!a{variable} assignment
+    for~$\Struct M$, the \emph{!!{value}}~$\Value{t}{M}[s]$ is defined as
+    follows:
+    \begin{enumerate}
+    \item \indcase{t}{c}{$\Value{\indfrm}{M}[s] = \Assign{\indcomplex}{M}$.}
+    \item \indcase{t}{x}{$\Value{\indfrm}{M}[s] = s(\indcomplex)$.}
+    % \item \indcase{t}{\Atom{f}{t_1, \ldots, t_n}}{
+    % \[
+    % \Value{\indfrm}{M}[s] = \Assign{f}{M}(\Value{t_1}{M}[s], \ldots,
+    % \Value{t_n}{M}[s]).
+    % \]}
+    \end{enumerate}
+\end{defn}
+
+
+\begin{defn}[Satisfaction]
+\ollabel{defn:satisfaction}
+Satisfaction of a !!{formula}~$!A$ in a !!{structure}~$\Struct M$
+relative to a !!{variable} assignment~$s$, in symbols:
+$\Sat{M}{!A}[s]$, is defined recursively as follows. (We write
+$\Sat/{M}{!A}[s]$ to mean ``not $\Sat{M}{!A}[s]$.'')
+\begin{enumerate}
+\tagitem{prvFalse}{%
+  \indcase{!A}{\lfalse}{$\Sat/{M}{\indfrm}[s]$.}}{}
+
+\tagitem{prvTrue}{%
+  \indcase{!A}{\ltrue}{$\Sat{M}{\indfrm}[s]$.}}{}
+
+\item \indcase{!A}{\Atom{R}{t_1, \dots, t_n}}{$\Sat{M}{\indfrm}[s]$
+  iff $\langle \Value{t_1}{M}[s], \dots, \Value{t_n}{M}[s] \rangle \in
+  \Assign{R}{M}$.}
+
+\item \indcase{!A}{\eq[t_1][t_2]}{$\Sat{M}{\indfrm}[s]$ iff
+  $\Value{t_1}{M}[s] = \Value{t_2}{M}[s]$.}
+
+\tagitem{prvNot}{%
+  \indcase{!A}{\lnot !B}{$\Sat{M}{\indfrm}[s]$ iff
+    $\Sat/{M}{!B}[s]$.}}{}
+
+\tagitem{prvAnd}{%
+  \indcase{!A}{(!B \land !C)}{$\Sat{M}{\indfrm}[s]$ iff $\Sat{M}{!B}[s]$
+    and $\Sat{M}{!C}[s]$.}}{}
+
+\tagitem{prvOr}{%
+  \indcase{!A}{(!B \lor !C)}{$\Sat{M}{\indfrm}[s]$ iff
+    $\Sat{M}{!A}[s]$ or $\Sat{M}{!B}[s]$ (or both).}}{}
+
+\tagitem{prvIf}{%
+  \indcase{!A}{(!B \lif !C)}{$\Sat{M}{\indfrm}[s]$ iff $\Sat/{M}{!B}[s]$
+    or $\Sat{M}{!C}[s]$ (or both).}}{}
+
+\tagitem{prvIff}{%
+  \indcase{!A}{(!B \liff !C)}{$\Sat{M}{\indfrm}[s]$ iff either both
+    $\Sat{M}{!B}[s]$ and $\Sat{M}{!C}[s]$, or neither $\Sat{M}{!B}[s]$
+    nor $\Sat{M}{!C}[s]$.}}{}
+
+\tagitem{prvAll}{%
+  \indcase{!A}{\lforall[x][!B]}{$\Sat{M}{\indfrm}[s]$ iff for every
+    $x$-variant~$s'$ of $s$, $\Sat{M}{!B}[s']$.}}{}
+
+\tagitem{prvEx}{%
+  \indcase{!A}{\lexists[x][!B]}{$\Sat{M}{\indfrm}[s]$ iff there is an
+    $x$-variant~$s'$ of $s$ so that $\Sat{M}{!B}[s']$.}}{}
+\end{enumerate}
+\end{defn}
+
+We write $\Sat{M}{!A}$ to say that $!A$ is satisfied relative to 
+any assignment in $\Struct{M}$ ($\Sat{M}{!A}[s]$ for any 
+$s$ in $\Struct{M}$). $\Sat/{M}{!A}$ means that $!A$ is not satisfied
+for \emph{some} assignement in $\Struct{M}$.
+
+If $!A$ is a \emph{sentence} (a !!{formula} without free
+!!{variable}s), whether it is satisfied in a given !!{structure} does
+not vary from one assignment to another. That is:
+
+\begin{prop}
+If $!A$ is a sentence then for any !!{structure} $\Struct{M}$ 
+and assignments $s,s'$ and sentence $!A$:
+$$\Sat{M}{!A}[s]\text{ iff }\Sat{M}{!A}[s']$$
+\end{prop}
+
+Therefore we have \emph{bivalence} for sentences: each sentence is 
+either true relative to any assignement, or false relative to any
+assignement. 
+
+\begin{prop}[Bivalence]
+    If $!A$ is a sentence then either $\Sat{M}{!A}$ or 
+    $\Sat{M}{\lnot!A}$. If the former, we say that $!A$ is 
+    \emph{true in $\Struct{M}$}; if the latter, we say that $!A$
+    is \emph{false in $\Struct{M}$}.
+\end{prop}
+
+\begin{defn}[Validity]
+A sentence $!A$ is \emph{logically true}, $\Entails !A$, iff
+$\Sat{M}{!A}$ for every !!{structure}~$\Struct M$. We also say that
+the sentence is \emph{valid}.
+
+A set of sentences~$\Gamma$ \emph{entails} a sentence~$!A$, $\Gamma
+\Entails !A$, iff for every !!{structure}~$\Struct M$ with
+$\Sat{M}{\Gamma}$, $\Sat{M}{!A}$. We also say that the argument
+from~$\Gamma$ to~$!A$ is valid.
+\end{defn}
+
+Make sure you can explain why the following holds.
+
+\begin{prop}[Important properties of entailement]
+    Entailement is reflexive, monotonic and satisfies Cut.
+    \begin{itemize}
+    \item Entailment is reflexive. $!A\Entails !A$.
+    \item Entailment is monotonic. If $\Gamma \subseteq \Delta$ and 
+    $\Gamma \Entails !A$, then $\Delta \Entails !A$.
+    \item Entailement satisfies Cut. If $\Gamma\Entails !A$ and 
+    $\Delta, !A \Entails !B$ then $\Gamma,\Delta \Entails !B$.
+    \end{itemize}
+\end{prop}
+
+\begin{defn}[Satisfiability]
+A set of sentences~$\Gamma$ is \emph{satisfiable} if $\Sat{M}{\Gamma}$
+for some !!{structure}~$\Struct M$.  If $\Gamma$ is not satisfiable it is
+called \emph{unsatisfiable}.
+\end{defn}
+
+Make sure you can explain why the following holds.
+
+\begin{prop}[Important properties of entailment and satisfiability]
+    Entailement and satisfiability have the following properties.
+    \begin{itemize}
+    \item If $\Gamma$ is unsatisfiable and $\Gamma\subseteq\Delta$ then 
+    $\Delta$ is unsatisfiable.
+    \item $\Gamma \Entails \bot$ iff $\Gamma$ is unsatisfiable.
+    \item $\Gamma \Entails !A$ iff $\Gamma \cup \{\lnot !A\}$ is unsatisfiable.
+    \item $\Gamma \cup \{!A\} \Entails \bot$ iff $\Gamma \Entails \lnot !A$.
+    \end{itemize}
+\end{prop}
+
+\end{document}

@@ -1,0 +1,225 @@
+% Part: cheat-sheets
+% Chapter: first-order-logic
+% Section: semantics
+
+\documentclass[../../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{chs}{fol}{nd}
+
+% page for all rules at once
+\newpage
+\olsection{Natural Deduction}
+
+\begin{figure}
+    \begin{defish}
+    \emph{All propositional logic rules are allowed.}
+
+    \emph{When $!B$ can be derived from $!A_1,\ldots,!A_n$ using
+    propositional logic rules alone:}
+        \begin{prooftree}
+            \AxiomC{}\DeduceC{$!A_1$}
+            \AxiomC{}\DeduceC{$\ldots$}
+            \AxiomC{}\DeduceC{$!A_n$}
+            \RightLabel{\Log{PL}}
+            \TrinaryInfC{$!B$}
+        \end{prooftree}
+
+    \emph{Quantifier rules}
+
+    \smallskip\noindent
+    {\setlength\extrarowheight{3em} 
+    \begin{tabular}{cp{8em}cp{4em}}
+        \multicolumn{2}{c}{
+        \AxiomC{}\DeduceC{$\lforall[v][!A]$}
+        \RightLabel{\Elim{\lforall}}
+        \UnaryInfC{$!A[c/v]$}
+        \DisplayProof
+        }
+    &
+        \multicolumn{2}{c}{
+        \AxiomC{}\DeduceC{$!A[c/v]$}
+        \RightLabel{\Intro{\lexists}}
+        \UnaryInfC{$\lexists[v][!A]$}
+        \DisplayProof
+        }
+    \\
+        \AxiomC{$\mathcal{D}$}\noLine
+        \UnaryInfC{$!A[c/v]$}
+        \RightLabel{\Intro{\lforall}}
+        \UnaryInfC{$\lforall[v][!A]$}
+        \DisplayProof
+
+    &   
+        \emph{Restrictions:}
+
+        - $c$ not in undischarged assumptions of $\mathcal{D}$.
+
+        - $c$ not in $!A$
+
+    \\
+
+        \AxiomC{$\lexists[v][!A]$}
+            \AxiomC{$\Discharge{!A[c/v]}{n}$}
+            \noLine
+            \UnaryInfC{$\mathcal{D}$}
+            \UnaryInfC{$!B$}
+        \DischargeRule{\Elim{\lexists}}{n}
+        \BinaryInfC{$!B$}
+        \DisplayProof
+
+    & 
+        \emph{Restrictions:}
+
+        - $c$ no in undischarged assumptions of $\mathcal{D}$ other
+          than $!A[c/v]$.
+
+        - $c$ not in $!A$
+
+        - $c$ not in $!B$
+
+    \\
+    \end{tabular}
+    }
+
+    \smallskip\noindent
+    \emph{Identity rules}
+
+    \smallskip\noindent
+    \begin{tabular}{ll}
+        \AxiomC{}
+        \RightLabel{\Intro{\eq}}
+        \UnaryInfC{$\eq[c][c]$}
+        \DisplayProof
+        &
+        \AxiomC{$\eq[c][d]$}
+            \AxiomC{$!A[c/v]$}
+        \RightLabel{\Elim{\eq}}
+        \BinaryInfC{$!A[d/v]$}
+        \DisplayProof
+    \end{tabular}
+
+    \end{defish}
+    \caption{Natural Deduction rules for First Order Logic with Identity.}
+    \ollabel{natdedfol}
+\end{figure}
+    
+The rules are summarized in \olref{natdedfol}
+
+\subsection{Propositional Rules}
+
+You can use all the rules of propositional logic. In addition, you 
+can omit the detail of propositional steps in your proofs by 
+using the \Log{PL} rule:
+
+\begin{defish}
+    When $!B$ can be derived from $!A_1,\ldots,!A_n$ ($n\geq 0$) using
+    propositional logic rules alone, we may simply write: 
+    \begin{prooftree}
+        \AxiomC{}\DeduceC{$!A_1$}
+        \AxiomC{}\DeduceC{$\ldots$}
+        \AxiomC{}\DeduceC{$!A_n$}
+        \RightLabel{\Log{PL}}
+        \TrinaryInfC{$!B$}
+    \end{prooftree}
+\end{defish}
+    
+
+\begin{ex}
+    The following !!{derivation} of $!A\lor!B,\lnot!A\Proves{\Log{K}}!B$:
+    \begin{prooftree}
+    \AxiomC{$!A\lor!B$}
+        \AxiomC{$\Discharge{!A}{1}$}
+        \AxiomC{$\lnot!A$}
+        \RightLabel{\Elim{\lnot}}
+        \BinaryInfC{$!B$}
+                \AxiomC{$!B$}
+        \DischargeRule{\Elim{\lor}}{1}
+        \TrinaryInfC{$!B$}
+    \end{prooftree}
+may be abbreviated:
+\begin{prooftree}
+    \AxiomC{$!A\lor!B$}
+        \AxiomC{$\lnot!A$}
+        \RightLabel{\Log{PL}}
+    \BinaryInfC{$!B$}
+\end{prooftree}
+\end{ex}
+
+    
+Note that $\Log{PL}$ cannot be used to apply propositional steps 
+to subformulas \emph{embedded} within quantifiers. For instance:
+    
+    \smallskip
+    \begin{tabular}{cc}
+        \AxiomC{$\lnot\lnot\lforall[x][\Atom{P}{x}]$}
+        \RightLabel{\Log{PL} {\color{blue}Correct}}
+        \UnaryInfC{$\lforall[x][\Atom{P}{x}]$}
+        \DisplayProof
+        &
+        \AxiomC{$\lforall[x][\lnot\lnot\Atom{P}{x}]$}
+        \RightLabel{\Log{PL} {\color{red}Incorrect}}
+        \UnaryInfC{$\lforall[x][\Atom{P}{x}]$}
+        \DisplayProof
+    \end{tabular}
+    \smallskip
+    
+    The first is correct because from !!a{formula} $\lnot\lnot!A$ you can
+    derive $!A$ using propositional rules alone. It does not matter
+    whether $!A$ contains a quantifier: you need not `unpack' it. 
+    The second is incorrect because from !!a{formula} 
+    $\lforall[x][\lnot\lnot\Atom{P}{x}]$ you cannot apply double negation
+    elimination unless you `unpack' the quantifier $\lforall x$ first. 
+    See the full !!{derivation}s below.
+    
+    \smallskip
+    \begin{tabular}{cc}
+        \AxiomC{$\lnot\lnot\lforall[x][\Atom{P}{x}]$}
+        \AxiomC{$\Discharge{\lnot\lforall[x][\Atom{P}{x}]}{1}$}
+        \DischargeRule{\Elim{\lnot}}{1}
+        \BinaryInfC{$\lforall[x][\Atom{P}{x}]$}
+        \DisplayProof
+        &
+        \AxiomC{$\lforall[x][\lnot\lnot\Atom{P}{x}]$}
+        \RightLabel{\Elim{\lforall}}
+        \UnaryInfC{$\lnot\lnot\Atom{P}{a}$}
+            \AxiomC{$\Discharge{\lnot\Atom{P}{a}}{1}$}
+        \DischargeRule{\Elim{\lnot}}{1}
+        \BinaryInfC{$\Atom{P}{a}$}
+        \RightLabel{\Intro{\lforall}}
+        \UnaryInfC{$\lforall[x][\Atom{P}{x}]$}
+        \DisplayProof
+    \end{tabular}
+    \smallskip
+
+\subsection{Quantifier rules}
+
+\subsubsection{Unrestricted rules}
+
+Universal instantiation \Elim{\lforall} and existential generalization
+\Intro{\lexists} are easy, because unrestricted.
+
+\subsubsection{Restricted rules}
+
+Universal generalization \Intro{\lforall} and existential instantiation
+\Intro{\lexists} must be used with care, because they are restricted.
+In both cases the restrictions are here to ensure $c$ 
+represent an \emph{arbitrary} object. They do so by ensuring that 
+whatever you derive could have been derived for any constant you 
+would chose other than $c$. 
+
+A safe way to apply to rule is to make sure you pick a $c$ that 
+does not already appear anywhere else in the proof. For \Elim{\lforall} 
+also make sure that the conclusion $!B$ you derive with the rule does 
+not contain $c$ either.
+
+\subsection{Identity rules}
+
+The identity rules are Reflexivity and Leibniz's law. They are 
+straightforward.
+
+Note that Leibniz's law allow you to replace \emph{one or more} 
+occurrences of $c$ in $!A$ with $d$.
+
+\end{document}

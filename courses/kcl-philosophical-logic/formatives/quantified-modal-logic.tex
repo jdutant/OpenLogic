@@ -1,0 +1,57 @@
+% Part: formatives
+% Chapter: two
+% Section: quantified-modal-logic
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{for}{two}{qmod}
+
+\newpage
+\olsection{Quantified Modal Logic and Free Logic}
+
+\emph{Notation}. \Log{SQML} (`Simple Quantified Modal Logic', Sider) 
+natural deduction proofs can use any rules of first order logic plus 
+modal logic $\Log{K}$. \Log{SQML} models have a \emph{fixed} domain of 
+objects.
+
+\begin{prob}
+    Answer the following.
+    \begin{enumerate}
+    \item 
+    Formalize the following in the language of Quantified Modal Logic 
+    using Russell's theory of definite descriptions. Show that the 
+    sentence is ambiguous by giving \emph{two} formalizations. 
+    \begin{quote}
+        The red crab is necessarily red.
+    \end{quote}
+    
+
+    \item
+    One of these formalizations is a logical truth: give a natural 
+    deduction proof of it in \Log{SQML}. 
+    \end{enumerate}
+
+\end{prob}
+
+\begin{prob}
+    Give a proof of the following in \Log{SQML}:
+    $$\vdash_{\Log{SQML}}\Box\lexists[x][\eq[x][a]]$$
+    
+    Should we reject this consequence of \Log{SQML}? If so, how can
+    we avoid it? If not, why not? Briefly justify your answer (<500 words). 
+
+\end{prob}
+
+\begin{prob}
+    Say whether the arguments below are valid in \emph{negative} free logic.
+    If yes, give a natural deduction proof. Otherwise, 
+    give a counterexample.
+    \begin{enumerate}
+        \item $\lforall[x][\Obj{G}xb] \vdash \Obj{G}ab$
+        \item $\lforall[x][\Obj{G}xb] \vdash \lexists[y]\lexists[x][\Obj{G}xy]$
+    \end{enumerate}
+\end{prob}
+
+\end{document}

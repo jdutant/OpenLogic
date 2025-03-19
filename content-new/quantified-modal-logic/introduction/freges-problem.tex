@@ -1,0 +1,60 @@
+% Part: quantified-modal-logic
+% Chapter: introduction
+% Section: freges-problem
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{qml}{int}{frg}
+
+\olsection{Frege's Problem}
+
+We use modal operators to express not only necessity but also epistemic
+notions, like knowledge, belief, and others. For instance, we may 
+introduce a unary operator of propositions $K$ to talk about what a 
+certain subject knows: $K!A$ states that `one' (that subject) `knows
+that $!A$'. 
+
+Frege's problem arises from a simple application of Leibniz's law. 
+Informally, if $a$ is $b$ then whatever is true of $a$ is true of 
+$b$ (Leibniz's law). If, in particular, it is true of $a$ that 
+one knows it to be $a$, then it is true of $b$ that one knows it 
+to $b$. So if one knows that $a$ is $a$ then one knows that $b$ is 
+$a$. 
+
+Formally, the proof only uses Leibniz's law and propositional logic:
+\begin{prooftree}
+    \AxiomC{$\Discharge{\eq[a][b]}{2}$}
+        \AxiomC{$\Discharge{K\eq[a][a]}{1}$}
+    \RightLabel{\Elim{\eq}}
+    \BinaryInfC{$K\eq[a][b]$}
+    \RightLabel{\Intro{\rightarrow}}
+    \UnaryInfC{$K\eq[a][a]\rightarrow K\eq[a][b]$}
+    \RightLabel{\Intro{\rightarrow}}
+    \UnaryInfC{$\eq[a][b]\rightarrow(K\eq[a][a]\rightarrow K\eq[a][b])$}
+\end{prooftree}
+
+On the face of it, the result is paradoxical. Even though Jay-Z is 
+Shaw Carter, many people who know that Jay-Z is Jay-Z don't know 
+that Shawn Carter is Jay-Z. Or so it seems. Yet the !!{derivation} 
+concludes otherwise: everyone who knows that Jay-Z is Jay-Z knows 
+that Shawn Carter is Jay-Z.
+
+Of course, we could go further. With the Reflexivity of identity and 
+Necessitation we derive $K\eq[a][a]$ from no premises. We can then 
+simplify our conclusion to $\eq[a][b]\rightarrow K\eq[a][b]$. (Namely,
+repeat the proof of Necessity of Identity with $K$ instead of $\Box$.)
+However, it's worth stressing that the extra step is inessential to 
+the main problem. Perhaps $\ulcorner K\eq[a][a] \ulcorner$ is a 
+logical truth and anyone knows that Jay-Z is Jay-Z. Or perhaps we 
+should reject one of Necessitation or Reflexivity and deny that 
+everyone knows that Jay-Z is Jay-Z. Perhaps the people who have 
+never heard of him do not know that. No matter. All the problem needs
+is first, that there are in fact some people who know that Jay-Z is 
+Jay-Z. And surely there are. And second, that some of these people 
+plausibly don't know that Jay-Z is Shawn Carter. These two things 
+are enough to generate a problem. For they conflict with Leibniz's 
+law.  
+
+\end{document}

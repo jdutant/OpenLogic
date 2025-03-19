@@ -1,0 +1,215 @@
+% Part: exercise-booklet
+% Chapter: free-logic
+% Section: semantics
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{exb}{frl}{sem}
+
+\olsection{Semantics}
+
+\begin{prob}[Semantics]
+Explain why the following are not valid in any of the free logics.
+\begin{enumerate}
+\item $\lexists[x][(\eq[a][x])]$
+\item $\lexists[x][(\eq[x][x])]$
+\end{enumerate}
+\begin{ans}
+The simplest acceptable answers just describe the !!{structure}s that
+make each formula not true. 
+\begin{enumerate}
+\item In negative free logic, there are !!{structure}s in which the
+	interpretation of $a$ is undefined. In those !!{structure}s,
+	$\lexists[x][(\eq[a][x])]$ is false. So the formula is not valid
+	in negative free logic.\\
+	In positive free logic, there are !!{structure}s in which the
+	interpretation of $a$ is an object of the \emph{outer} domain not
+	in the (inner) domain. In those !!{structure}s,
+	$\lexists[x][(\eq[a][x])]$ is false. So the formula is not valid
+	in positive free logic.
+    \iftag{neuFrl}{\\
+	In neutral free logic, there are !!{structure}s in which the
+	interpretation of $a$ is not an object of the (inner) domain. In
+	those !!{structure}s, $\eq[a][x]$ is $\Undef$ relative to any
+	assignment of an object of the (inner) to $x$. Hence
+	$\lexists[x][(\eq[a][x])]$ is $\Undef$. So the formula is not
+	valid in neutral free logic.}{}
+\item In negative free logic, there are !!{structure}s with an empty
+	domain. In those !!{structure}s $\lexists[x][(\eq[x][x])]$ is
+	false. So the formula is not valid in negative free logic. \\
+	In positive free logic, there are !!{structure}s with an empty
+	\emph{inner} domain. In those !!{structure}s,
+	$\lexists[x][(\eq[x][x])]$ is false. So the formula is not valid
+	in positive free logic. \iftag{neuFrl}{\\
+	In neutral free logic, there are !!{structure}s with an empty
+	(inner) domain. In those !!{structure}s,
+	$\lexists[x][(\eq[x][x])]$ is false. So the formula is not valid
+	in neutral free logic.}{}
+\end{enumerate}
+More rigorous answers say more about the assignments that make the
+formulas not true in the relevant !!{structure}s. 
+\begin{enumerate}
+\item Negative free logic. $\lexists[x][(\eq[a][x])]$ is true in
+	!!a{structure} of NFL iff there is an assignment that assigns to
+	$x$ that an object of the domain that the !!{structure}'s
+	interpretation assigns to $a$. But in negative free logic, the
+	interpretation of $a$ can be undefined (the interpretation does
+	not assign any object to $a$). If so, there is no assignement that
+	assigns to $x$ an object of the domain that the !!{structure}'s
+	interpretation assigns to $a$.\\
+	Positive free logic. $\lexists[x][(\eq[a][x])]$ is true in
+	!!a{structure} of PFL iff there is an assignement that assigns to
+	$x$ that an object of the \emph{inner} domain that the
+	!!{structure}'s interpretation assigns to $a$. But in positive
+	free logic, the interpretation of $a$ can be an object of the
+	\emph{outer} domain that is not in the inner domain. If so, there
+	is no assignement that assigns to $x$ an object of the domain that
+	the !!{structure}'s interpretation assigns to $a$.
+    \iftag{neuFrl}{\\
+	Neutral free logic. In neutral free logic, a formula $!A(a)$ is
+	true if the interpretation assigns $a$ to an object of the domain
+	and $!A(a)$ is true of it, false if the if the interpretation
+	assigns $a$ to an object of the domain and $!A(a)$ is false of it,
+	but undefined if the interpretation of $a$ is undefined (or in the
+	outer domain, if we're using !!a{structure} of PFL). Thus if in
+	some !!{structure} the interpretation of $a$ is undefined (or an
+	object of the outerdomain), there is no assignement of object in
+	the (inner) domain that makes $\eq[a][x]$ true, so
+	$\lexists[x][(\eq[a][x])]$ $\lexists[x][(\eq[a][x])]$ is true
+	!!a{structure} }
+\item $\lexists[x][(\eq[x][x])]$ is true in a model of free logic (of
+	any kind) iff there is some assignement under which $x$ and $x$
+	are assigned to the same object. But assignements must assign to
+	variables objects of the domain (negative free logic) or inner
+	domain (positive free logic) (and either of these options in
+	neutral free logic). And !!{structure}s of free logics may have an
+	empty (inner) domain. On those !!{structure}s there are no
+	assignments at all, so $\lexists[x][(\eq[x][x])]$ is false on all
+	three logics. So the formula is not valid in any of the free
+	logics.
+\end{enumerate}
+\end{ans}
+\end{prob}
+
+\begin{prob}[Existence]
+Explain why no formula of the form $\lexists[x][!A]$ is valid in any
+of the (inclusive) free logics. 
+\iftag{neuFrl}{(For neutral free logic assume a truth-preservation
+notion of validity.)}
+\begin{ans}
+In all free logics, a formula of the form $\lexists[x][!A]$ is true in
+a !!{structure} only if \emph{there is an assignment} that assigns
+objects of the \emph{(inner) domain} to each variable relative to
+which $!A$ is true. Inclusive free logics allow !!{structure}s with an
+empty (inner) domain. In those !!{structure}s \emph{there are no
+assignments}, so formulas of the form $\lexists[x][!A]$ are false in
+those !!{structure}s. 
+
+\iftag{neuFrl}{\emph{Comment}. Even in neutral free logic
+$\lexists[x][!A]$ is false when the domain is empty. For
+$\lexists[x][!A]$ to be $\Undef$ in a neutral free logic, it must be
+that \emph{there is an assigment} that assigns $x$ to some object
+relative to which $!A$ is false. For instance, you may have an (inner)
+domain with one individual, and $a$ undefined (or assigned to an
+object of the outer domain). Then $\lexists[x][(\eq[a][x])]$ is
+$\Undef$.}
+\end{ans}
+\end{prob}
+
+\begin{prob}[Validity in negative and positive free logics]
+For each of the formulas below, say whether it is valid in negative
+free logic and whether it is valid in positive free logic. Briefly
+justify your answers.
+\begin{enumerate}
+\item $\eq[a][a]$.\\
+\emph{Example answer}. Positive: yes. Negative: no. In positive free
+logic, $\eq[t_{1}][t_{2}]$ is true as long as $t_{1}$ and $t_{2}$ have
+the same denotation, so $\eq[a][a]$ is guaranteed to hold. In negative
+FL, $\eq[t_{1}][t_{2}]$ is false if the denotation of $t_{1}$ or
+$t_{2}$ is in the outer domain, so $\eq[a][a]$ may fail. 
+\item $\lforall[x][(\lfrexists x)]$. 
+\item $\Atom{\Obj F}{a} \lif \lfrexists a$.
+\item $\eq/[a][b] \lif \lnot\lfrexists a$.
+\item $\lnot\lfrexists a \lif \eq/[a][b]$.
+\item $\lforall[x][\Atom{\Obj G}{xb}] \lif (\lfrexists a\lif \Atom{\Obj G}{ab})$.
+\item $\eq[a][b]\lif(\Atom{\Obj F}{a}\lif \Atom{\Obj F}{b})$.
+\item $\lfrexists a\land\lnot \lfrexists b\lif\lnot \Atom{\Obj G}{ab}$.
+\end{enumerate}
+\begin{ans}
+\begin{enumerate}
+\item Positive: yes. Negative: no. In positive FL, $\eq[t_{1}][t_{2}]$
+	is true as long as $t_{1}$ and $t_{2}$ have the same denotation,
+	so $\eq[a][a]$ is guaranteed to hold. In negative FL,
+	$\eq[t_{1}][t_{2}]$ is false if the denotation of $t_{1}$ or
+	$t_{2}$ is in the outer domain, so $\eq[a][a]$ may fail. 
+\item Valid in negative and positive FL. If the (inner) domain is
+	empty, formulas of the form $\lforall[x][!A]$ are trivially true.
+	If not, $\lforall[x][!A]$ if true if $!A$ is true relative to any
+	assignement that assigns to $x$ and object of the domain (negative
+	free logic) or inner domain (positive free logic). Since (in both
+	free logics) $\lfrexists x$ is true relative to any assignment
+	that assigns to $x$ an object of the domain (negative free logic)
+	or inner domain (positive free logic, $\forall[x][(\lfrexists x)]$
+	is true. So $\forall[x][(\lfrexists x)]$ is true on any
+	!!{structure} of positive or negative free logic. 
+\item Valid in negative FL, not valid in positive FL. In negative FL,
+	$Fa$ is false if the  interpretation of $a$ is undefined, and
+	$\lfrexists a$ is true if the interpretation of $a$ is defined. So
+	$Fa\lif \lfrexists a$ is true in any !!{structure} of negative
+	FL.\\ 
+	In positive free logic, $Fa$ is true and $\lfrexists a$ false when
+	the interpretation of  $a$ is an object of the \emph{outer} domain
+	that is not in the inner domain (but within the interpretation of
+	$F$). Hence $Fa\lif \lfrexists a$ is not true in all
+	!!{structure}s of positive FL. 
+\item Not valid in negative or positive FL. Consider !!a{structure} in
+	which the  interpretations of $a$ and $b$ are distinct objects of
+	the domain (negative free logic) or of the \emph{inner} domain
+	(positive free logic). Then $\eq/[a][b]$ is true but $\lnot
+	\lfrexists a$ is false. So the formula is not valid in either
+	logic. 
+\item Valid in negative FL, not valid in positive FL. In negative FL,
+	either the interpretation of $a$ is defined, and $\lnot \lfrexists
+	a$ is false, or it is undefined, and $\eq/[a][b]$ is true (no
+	matter what the interpretation of $b$ is). So $\lnot \lfrexists
+	a\lif\eq/[a][b]$ is true in any !!{structure} of negative
+	FL.\\ 
+	In positive FL, $\eq[a][b]$ are true in !!a{structure} in which
+	the interpretation of $a$ and $b$ is the same object of the
+	\emph{outer} domain that is not in the inner domain. If so, $\lnot
+	\lfrexists a $ is true but $\eq/[a][b]$ is false. So the
+	formula is not true in all !!{structure}s of positive FL.
+\item Valid in negative and positive FL. Suppose $\lforall[x][Gxb]$ is
+	true in some !!{structure} of these logics. Then $Gxb$ is true
+	relative to any assignment that assigns $x$ to some object of the
+	domain (negative free logic) or of the inner domain (positive free
+	logic). If so, either the interpretation of $a$ is not an object
+	of the (inner) domain, or $Gab$ is true. Either way, if
+	$\lforall[x][Gxb]$ is true $\lfrexists a \lif Gab$ is true.
+\item Valid in negative and positive FL. If $\eq[a][b]$ is true in a
+	!!{structure}, then the interpretations of $a$ and of $b$ are both
+	defined and the same object of the domain (negative free logic),
+	or both the same object of the outer domain (positive free logic).
+	Thus the interpretation of $a$ is in the interpretation of $F$
+	just if the interpretation of $b$ is, hence $Fa \lif Fb$ is true.
+	So there is no !!{structure} in which $\eq[a][b]$ is true and $Fa
+	\lif Fb$ not true.
+\item Valid in negative FL, not valid in positive FL.\\
+	In negative FL, if $\lfrexists a \land \lnot \lfrexists b$ then
+	the interpretation of $b$ is undefined. If so, $Gab$ is false.
+	Hence $\lfrexists a \land \lnot \lfrexists b \lif Gab$ is true in
+	any !!{structure} of negative FL.\\
+	In positive FL, $\lfrexists a \land \lnot \lfrexists b$ is true in
+	a $\Struct{M}$ then $\Assign{a}{M}$ is an object of the inner
+	domain and $\Assign{b}{M}$ is an object of the outer domain that
+	is not in the inner domain. Still, $\langle
+	\Assign{a}{M},\Assign{b}{M} \rangle$ may be $\Assign{G}{M}$, in
+	which case $Gab$ is true in $\Struct{M}$. So the formula is not
+	true in all !!{structure}s of positive FL.
+\end{enumerate}
+\end{ans}
+\end{prob}
+
+\end{document}

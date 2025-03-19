@@ -1,0 +1,194 @@
+% Part: free-logic
+% Chapter: natural-deduction
+% Section: negative-positive-rules
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{frl}{nd}{npr}
+
+\olsection{Negative and Postive Free Logic Rules}
+
+\subsection{Negative Free Logic}
+
+Negative free logic has the common rules plus a rule specific to
+\emph{atomic} !!{formula}s and identity claims. Where $R$ is a
+$n$-place !!{predicate} of~$\Lang L$ and $c$ any constant: , \dots,
+$t_n$ are terms of~$\Lang L$, then $\Atom{R}{t_1,\ldots, t_n}$ is an
+atomic !!{formula}.
+
+\begin{defish}
+    \emph{Negative Free Logic rules}
+
+    \begin{center}        
+    \smallskip
+    \begin{tabular}{cc}
+    \AxiomC{$\Atom{R}{\ldots,c,\ldots}$}
+    \RightLabel{\Log{NFL}}
+    \UnaryInfC{$\lfrexists c$}
+    \DisplayProof
+    &
+    \AxiomC{$\eq[c][c]$}
+    \RightLabel{\Log{NFL\eq}}
+    \UnaryInfC{$\lfrexists c$}
+    \DisplayProof
+    \end{tabular}
+    \end{center}
+
+\end{defish}
+
+The contraposed rules are derived immediately. You may use them too:
+\begin{center}        
+    \smallskip
+    \begin{tabular}{cc}
+    \AxiomC{$\lnot\lfrexists c$}
+    \RightLabel{$\lnot$\Log{NFL}}
+    \UnaryInfC{$\lnot\Atom{R}{\ldots,c,\ldots}$}
+    \DisplayProof
+    &
+    \AxiomC{$\lnot\lfrexists c$}
+    \RightLabel{$\lnot$\Log{NFL\eq}}
+    \UnaryInfC{$\eq/[c][c]$}
+    \DisplayProof
+    \end{tabular}
+\end{center}
+\smallskip
+
+\subsection{Positive Free Logic}
+
+Positive Free Logic has the common rules plus the unrestricted
+$\Intro{\eq}$ rule from first order logic with identity. 
+
+\begin{defish}
+    \emph{Positive Free Logic rule}
+
+    \begin{center}        
+    \smallskip
+    \AxiomC{}
+    \RightLabel{\Intro{\eq} a.k.a. \Log{PFL}}
+    \UnaryInfC{$\eq[c][c]$}
+    \DisplayProof
+    \end{center}
+
+\end{defish}
+
+The weaker \Intro{\eq} \Log{FL} is then redundant. 
+
+Positive free logic does \emph{not} have the \Log{NFL} rule. Thus 
+in Positive Free Logic, unlike in Negative Free Logic, 
+$\Obj{F}a\land\lnot\lfrexists a$ (`$a$ is $\Obj{F}$ and nothing is $a$')
+is consistent. 
+
+\subsection{Negative Free Logic looses the Uniform Substitution Rule}
+
+
+Because of the rule \Log{NFL}, Negative Free Logic violates the 
+\emph{uniforn substitution rule} that other logics uphold. 
+
+\begin{defn}[Uniform Substitution Rule]
+    If $!A$ is a logical truth, and $!A[!B/\Obj{P}]$ is the 
+    result of uniformly substituting $!B$ for 
+    the atomic !!{formula} $\Obj{P}$ in $!A$, then 
+    $!A[!B/\Obj{P}]$.
+\end{defn}
+
+\begin{ex}
+The Uniform Substitution Rule holds in propositional logic. For instance
+$\Obj{P}\lor\lnot\Obj{P}$ is a logical truth (where $\Obj{P}$ is 
+atomic), but so is any !!{formula} of the form $!A\lor\lnot!B$.
+\end{ex}
+
+The same holds in modal logic, first order logic, positive free logic, 
+and many others.
+
+Negative Free Logic violates the substitution rule. Where $\Obj{P}a$
+is \emph{atomic}, we have the logical truth of Negative Free Logic:
+$$\vdash_{\Log{NFL}}Obj{P}a\lif \lfrexists a$$
+However, if we substitute the non-atomic $\lnot\Obj{P}a$ for $\Obj{P}a$,
+the result is \emph{not} a logical truth of Negative Free Logic:
+$$\nvdash_{\Log{NFL}}\lnot Obj{P}a\lif \lfrexists a$$
+
+Is violating uniform substitution a problem? Two contrasting views on the issue:
+\begin{itemize}
+    \item The Uniform Substitution Rule is essential to logic. Logical truths are 
+    true in virtue of their form. The rule captures that idea, because it 
+    says that if $!A$ is a logical truth, then any !!{formula} with \emph{the 
+    same form} should be a logical truth too. Because the principles
+    of Negative Free Logic treat atomic vs non-atomic !!{formula}s differently, 
+    they are not formal hence not logical.
+    \item The difference between atomic and complex !!{formula}s \emph{is}
+    a matter of form. Negative Free Logic upholds the general idea that 
+    if $!A$ is a logical truth, then any !!{formula} of the same `form'
+    is a logical truth; it just denies that replacing atomic sub-!!{formula}s
+    by complex ones preserves the form. 
+\end{itemize}
+
+\subsection{Note on another Negative Free Logic}
+
+To simplify matters, we only consider the Negative Free Logic above.
+
+You should be aware that there is another way of developping Negative 
+Free logic that allows $c=c$ to be a logical truth even if $c$ doesn't 
+exist. I'll discuss that variant briefly below, but you can ignore it.
+The bottom line is: it's ugly and complicates things. 
+
+On that alternative Negative Free Logic, we adopt the unrestricted
+\Intro{\eq} rules as in Positive Free Logic. So $\eq[c][c]$ is a
+logical truth; it holds even if $c$ is empty (doesn't denote
+anything). The logic is still a \emph{negative} free logic because it
+retains \Log{NFL}: \emph{atomic} claims like $\Obj{F}a$ cannot be true
+if $a$ is empty. But we drop the analogue rule for $\eq$,
+\Log{NFL\eq}. Thus in that version of Negative Free Logic:
+\begin{itemize}
+\item $\Obj{F}a\land\lnot\lfrexists a$ is inconsistent, as in our
+original version of Negative Free Logic.
+\item $\eq[a][a]\land\lfrexists a$ is not inconsistent.
+\end{itemize}
+So far this might seem nice. Unfortunately, ugly complications arise.
+To make $\eq[a][a]$ a logic truth, we have to change the NFL semantics
+for $\eq$. We face a choice: keeping the negative semantics in which
+empty names don't refer to any object, or adopting the postive semantics 
+on which empty names refer to 'non-existing' objects (the `outer' domain). 
+Both options have serious downsides. 
+
+If we keep the negative semantics, to make $\eq[c][c]$ a logical truth
+we say that it's always true even if $c$ is empty. But when $c,d$ are 
+both empty, what do we say about $\eq[c][d]$? The negative semantics 
+has only two options: all of these are true, or all false. If all 
+false, not only that feels artificial, but that requires a new ugly
+rule: 
+\begin{prooftree}
+    \AxiomC{$\eq[c][d]$}
+    \RightLabel{where $c$ and $d$ are \emph{distinct} constants}
+    \UnaryInfC{$\lfrexists c$}    
+\end{prooftree}
+If all true, that might still feel artificial, and we also have to 
+accept a new unappealing rule:
+\begin{prooftree}
+    \AxiomC{$\lnot\lfrexists c$}
+        \AxiomC{$\lnot\lfrexists d$}
+    \RightLabel{??}
+    \BinaryInfC{$\eq[c][d]$}    
+\end{prooftree}
+Bottom line: with the negative semantics, saying that $\eq[c][c]$ 
+is false when $c$ is empty might sound counterintuitive, but the 
+other options aren't great either.
+
+Let's consider the positive semantics instead. On that option we could
+make $\eq[c][c]$ a logical truth even when $c$ is empty, \emph{and} 
+saying that when $c,d$ are empty, $\eq[c][d]$ may or may not be true.
+We would avoid the two arbitrary-seeming options above. This option 
+is Positive Free Logic (rules and semantics) with the added
+the signature law of Negative Free Logic, $\Log{NFL}$. That solution 
+seems to have the worst of both worlds. Because it has the \Log{NFL} rule, 
+its logic doesn't obey the nice principle of uniform substitution (unlike 
+propositoinal logic, modal logic, first order logic and Positive Free Logic).
+Because it uses the semantics of Positive Free Logic, it has a semantics
+that assigns objects to empty names, hence a semantics that we cannot 
+take at face value (unless we adopt a strange Meinongian metaphysics 
+of things that are but don't exist). It's not clear what the motivation
+would be for adopting that variant of Negative Free Logic over the 
+simpler Positive Free Logic. 
+
+\end{document}

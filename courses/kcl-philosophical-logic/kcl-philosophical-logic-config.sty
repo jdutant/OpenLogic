@@ -11,6 +11,9 @@
 % - tag fnTerms to show/remove function terms
 \tagfalse{fnTerms}
 
+% - tag neuFrl to show/remove neutral free logic
+\tagfalse{neuFrl}
+
 % - Free logic existence operator (redefine for \mathord{E{!}})
 \DeclareDocumentMacro \lfrexists {\mathord{\mathfrak{E}}}
 
@@ -78,6 +81,12 @@
 % Object language formulas: sans-serif but not italic
 \DeclareDocumentCommand \Obj { m }{\mathsf{#1}}
 
+% Atomic formulas: no parentheses
+%  - `\Atom{P}{t_1, t_2)` 
+
+\DeclareDocumentCommand \Atom { m m }{ \mathord{#1}#2 }
+
+
 % Logical symbols
 % ---------------
 
@@ -98,7 +107,7 @@
 
 % Quantifiers: leave defaults
 
-% Identity (\eq): leave default =
+% Identity (\eq): default = 
 
 % Truth values
 \DeclareDocumentMacro \True {\mathbf{T}}
@@ -135,9 +144,9 @@
 \DeclareDocumentCommand \pAssign { m } {\mathit{#1}}
 
 % - `\ident`: syntactic identity between expressions (infix relation),
-% we use `=` to avoid confusion with iff
-
-\DeclareDocumentMacro \ident {=}
+% can't use default `\equiv' as MacFarlane uses it for `\liff'
+% can't use `=` as it gives ugly semantic clauses `!A = t_1 = t_2'
+\DeclareDocumentMacro \ident {\text{ is }}
 
 % Recursion-theoretic Notions and Symbols
 % ---------------------------------------

@@ -10,6 +10,67 @@
 
 \olsection{Natural Deduction}
 
+\subsection{Simplifying propositional rules}
+
+All rules from propositional logic are allowed. In addition, we used
+ a rule to omit purely propositional logic steps. 
+
+\begin{defish}
+When $!B$ can be derived from $!A_1,\ldots,!A_n$ ($n\geq 0$) using
+propositional logic rules alone, we may simply write: 
+\begin{prooftree}
+    \AxiomC{}\DeduceC{$!A_1$}
+    \AxiomC{}\DeduceC{$\ldots$}
+    \AxiomC{}\DeduceC{$!A_n$}
+    \RightLabel{\Log{PL}}
+    \TrinaryInfC{$!B$}
+\end{prooftree}
+\end{defish}
+
+Note that $\Log{PL}$ cannot be used to apply propositional steps 
+to subformulas \emph{embedded} within modal operators. For instance:
+
+\smallskip
+\begin{tabular}{cc}
+    \AxiomC{$\lnot\lnot\Box\Obj{\pvar{A}}$}
+    \RightLabel{\Log{PL} {\color{blue}Correct}}
+    \UnaryInfC{$\Box\Obj{\pvar{A}}$}
+    \DisplayProof
+    &
+    \AxiomC{$\Box\lnot\lnot\Obj{\pvar{A}}$}
+    \RightLabel{\Log{PL} {\color{red}Incorrect}}
+    \UnaryInfC{$\Box\Obj{\pvar{A}}$}
+    \DisplayProof
+\end{tabular}
+\smallskip
+
+The first is correct because from !!a{formula} $\lnot\lnot!A$ you can
+derive $!A$ using propositional rules alone. It does not matter
+whether $!A$ contains a modal operator: you need not `unpack' it. 
+The second is incorrect because from !!a{formula} $\Box\lnot\lnot!A$ 
+you cannot derive $\Box!A$ by propositonal rules alone. You need to 
+`unpack' the !!{operator} $\Box$ first. See the full !!{derivation}s
+below.
+
+\smallskip
+\begin{tabular}{cc}
+    \AxiomC{$\lnot\lnot\Box\Obj{\pvar{A}}$}
+        \AxiomC{$\Discharge{\lnot\Box\Obj{\pvar{A}}}{1}$}
+    \DischargeRule{\Elim{\lnot}}{1}
+    \BinaryInfC{$\Box\Obj{\pvar{A}}$}
+    \DisplayProof
+&
+    \AxiomC{$\Box\lnot\lnot\Obj{\pvar{A}}$}
+        \AxiomC{$\Discharge{\lnot\lnot\Obj{\pvar{A}}}{2}$}
+            \AxiomC{$\Discharge{\lnot\Obj{\pvar{A}}}{1}$}
+        \DischargeRule{\Elim{\lnot}}{1}
+        \BinaryInfC{$\Obj{\pvar{A}}$}
+    \DischargeRule{$\Box$\Ax{K}}{2}
+    \BinaryInfC{$\Box\Obj{\pvar{A}}$}
+    \DisplayProof
+\end{tabular}
+\smallskip
+
 \subsection{Rules for \Log{K}}
 
 \begin{figure}

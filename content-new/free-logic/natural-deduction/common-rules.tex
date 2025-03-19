@@ -1,0 +1,318 @@
+% Part: free-logic
+% Chapter: natural-deduction
+% Section: common-rules
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{frl}{nd}{cor}
+
+\olsection{Common Rules}
+
+Free logic is an alternative to (standard) first order logic with
+identity. Its proof system replaces the rules of first order logic
+with identity with weaker ones. There are two possible systems:
+negative free logic \Log{NFL} and positive free logic \Log{PFL}. Both
+share a common core.
+
+\subsection{Overview}
+
+\emph{Propositional Logic rules}. All rules of propositional logic are
+included. To simplify !!{derivation}s, we may use a derived \Log{PL}
+rule to skip purely propositional steps. 
+
+\begin{defish}
+    \emph{All propositional logic rules are allowed.}
+
+    \emph{When $!B$ can be derived from $!A_1,\ldots,!A_n$ using
+    propositional logic rules alone:}
+        \begin{prooftree}
+            \AxiomC{}\DeduceC{$!A_1$}
+            \AxiomC{}\DeduceC{$\ldots$}
+            \AxiomC{}\DeduceC{$!A_n$}
+            \RightLabel{\Log{PL}}
+            \TrinaryInfC{$!B$}
+        \end{prooftree}
+\end{defish}
+
+\emph{Quantifier and Identity rules}
+An overview of the common free logic rules for quantifiers and 
+identity is in \olref{natdedfreecore}. These rules replace those 
+of first order logic with identity. Only Leibniz's law (\Elim{\eq})
+is unchanged.
+
+Do not learn them rote. Rather, you should understand in each case why
+the standard first order logic rule must be modified as it is. These
+modifications are explained below. Train yourself to rediscover the
+rules on your own a few times until you have learned them.
+
+\begin{figure}
+    \begin{defish}
+
+        \emph{Free Logic Quantifier Rules}
+       
+        \smallskip\noindent
+        \begin{tabular}{ll}
+            \AxiomC{}\DeduceC{$\lfrexists c$}
+            \AxiomC{}\DeduceC{$\lforall[v][!A]$}
+            \RightLabel{\Elim{\lforall} \Log{FL}}
+            \BinaryInfC{$!A[c/v]$}
+            \DisplayProof
+        &
+            \AxiomC{}\DeduceC{$\lfrexists c$}
+            \AxiomC{}\DeduceC{$!A[c/v]$}
+            \RightLabel{\Intro{\lexists} \Log{FL}}
+            \BinaryInfC{$\lexists[v][!A]$}
+            \DisplayProof
+        \end{tabular} 
+        
+        \smallskip\noindent
+        {\setlength\extrarowheight{3em} 
+        \begin{tabular}{cp{10em}}
+            \AxiomC{$\Discharge{\lfrexists c}{n}$}\noLine
+            \UnaryInfC{$\mathcal{D}$}\noLine
+            \UnaryInfC{$!A[c/v]$}
+            \DischargeRule{\Intro{\lforall} \Log{FL}}{n}
+            \UnaryInfC{$\lforall[v][!A]$}
+            \DisplayProof
+        
+        &   
+            \emph{Restrictions:}
+        
+            - $c$ not in undischarged assumptions of $\mathcal{D}$
+                other than $\lfrexists c$.
+        
+            - $c$ not in $!A$
+        
+        \\
+        
+            \AxiomC{$\lexists[v][!A]$}
+                \AxiomC{$\Discharge{\lfrexists c}{n},\Discharge{!A[c/v]}{n}$}
+                \noLine
+                \UnaryInfC{$\mathcal{D}$}
+                \UnaryInfC{$!B$}
+            \DischargeRule{\Elim{\lexists} \Log{FL}}{n}
+            \BinaryInfC{$!B$}
+            \DisplayProof
+        
+        & 
+            \emph{Restrictions:}
+        
+            - $c$ no in undischarged assumptions of $\mathcal{D}$
+              other than $!A[c/v]$ and $\lfrexists c$.
+        
+            - $c$ not in $!A$
+        
+            - $c$ not in $!B$
+        
+        \\
+            
+        \end{tabular}
+        }   
+
+        \smallskip\noindent
+        \emph{Free Logic Identity Rules}
+       
+        \smallskip\noindent
+        \begin{tabular}{ll}
+            \AxiomC{$\lfrexists c$}
+            \RightLabel{\Intro{\eq} \Log{FL}}
+            \UnaryInfC{$\eq[c][c]$}
+            \DisplayProof
+            &
+            \AxiomC{$\eq[c][d]$}
+                \AxiomC{$!A[c/v]$}
+            \RightLabel{\Elim{\eq}}
+            \BinaryInfC{$!A[d/v]$}
+            \DisplayProof                
+        \end{tabular}
+
+    \end{defish}
+    \caption{Natural Deduction rules common to \Log{NFL} and \Log{PFL}.}
+    \ollabel{natdedfreecore}
+\end{figure}
+
+We also the following derived rules for $\lfrexists$. They allow you 
+to replace $\lfrexists c$ by $\lexists[v][\eq[c][v]]$ and conversely.
+
+\begin{defish}
+    \begin{tabular}{ll}
+        \AxiomC{$\lfrexists c$}
+        \RightLabel{\Elim{\lfrexists}}
+        \UnaryInfC{$\lexists[v][\eq[c][v]]$}
+        \DisplayProof
+        &
+        \AxiomC{$\lexists[v][\eq[c][v]]$}
+        \RightLabel{\Intro{\lfrexists}}
+        \UnaryInfC{$\lfrexists c$}
+        \DisplayProof
+    \end{tabular}
+\end{defish}
+
+\subsection{Explanation of the new quantifier rules}
+
+\subsubsection{Free Universal Instantiation}
+
+In standard first order logic, we may instantiate $\lforall[x][\Obj{F}x]$
+directly with $\Obj{F}c$, for any constant $c$. In Free Logic, that 
+is not enough. We need the extra premise that $c$ exists, $\lfrexists c$.
+
+This explains our \Elim{\lforall} \Log{FL} rule.
+\begin{prooftree}
+\AxiomC{}\DeduceC{$\lfrexists c$}
+\AxiomC{}\DeduceC{$\lforall[v][!A]$}
+\RightLabel{\Elim{\lforall} \Log{FL}}
+\BinaryInfC{$!A[c/v]$}
+\end{prooftree}
+
+\subsubsection{Free Existential Generalization}
+
+In standard first order logic, to show that $\lexists[x][\Obj{F}x]$ 
+it is enough to derive $\Obj{F}c$ for some constant $c$. 
+
+In free logic, that is enough. We also need that $c$ exists. To see
+this, recall that free logic allows empty constants. If $c$ is empty,
+the claim that nothing is $c$ is true:
+$$\lnot\lexists[x][\eq[c][x]]$$
+If we applied the standard first order logic \Intro{\lexists} to this
+we would derive the claim that something is nothing:
+$$\lexists [y][\lnot\lexists[x][\eq[x][y]]]$$
+Which is a contradiction (in both standard and free logics).
+
+Therefore, in free logic, to show that $\lexists[x][\Obj{F}x]$ it is
+enough to derive $\Obj{F}c$ \emph{and $\lfrexists c$} from 
+
+This explains our \Intro{\lexists} \Log{FL} rule.
+\begin{prooftree}
+    \AxiomC{}\DeduceC{$\lfrexists c$}
+    \AxiomC{}\DeduceC{$!A[c/v]$}
+    \RightLabel{\Intro{\lexists} \Log{FL}}
+    \BinaryInfC{$\lexists[v][!A]$}
+\end{prooftree}
+
+\subsubsection{Free Universal Generalization}
+
+In standard first order logic, to show that $\lforall[x][\Obj{F}x]$ 
+you need to !!{derive} $\Obj{F}x$ for \emph{any} $c$. To ensure
+that $c$ is arbitrary we require that no assumption is made about it---hence,
+it should not appear free in undischarged assumptions of your derivation. 
+
+In free logic, to show that $\lforall[x][\Obj{F}x]$ 
+you need to !!{derive} $\Obj{F}x$ for \emph{any} $c$ \emph{that exists}.
+To ensure that $c$ is arbitrary we require that no assumption is made
+about it \emph{except that it exists}. Hence, $c$ might appear in an 
+undiscarged assumption $\lfrexists c$, but no other. 
+
+That explains our \Intro{\lforall} \Log{FL} rule.
+
+\smallskip\noindent
+\begin{tabular}{cp{10em}}
+    \AxiomC{$\Discharge{\lfrexists c}{n}$}\noLine
+    \UnaryInfC{$\mathcal{D}$}\noLine
+    \UnaryInfC{$!A[c/v]$}
+    \DischargeRule{\Intro{\lforall} \Log{FL}}{n}
+    \UnaryInfC{$\lforall[v][!A]$}
+    \DisplayProof
+
+&   
+    \emph{Restrictions:}
+
+    - $c$ not in undischarged assumptions of $\mathcal{D}$
+        other than $\lfrexists c$.
+
+    - $c$ not in $!A$
+\end{tabular}
+
+\subsubsection{Free Existential Instantiation}
+
+In standard first order logic, the !!{formula} $\lexists[v][\Obj{F}v]$ 
+states that something is $F$. To derive some conclusion $!B$ from this
+claim, we need to show that $!B$ can be derived from the mere
+assumption that some \emph{arbitrary} $c$ is $F$, $!A[c/v]$.
+
+In free logic, it is enough to derive our conclusion from the
+assumption that some arbitrary \emph{existing} $c$ is $F$: the
+assumptions $\lfrexists c$ \emph{and} $!A[c/v]$. In standard first
+order logic, the supposition that $!A[c/v]$ holds for some $c$ already
+implicitly assumes that $c$ exists. In free logic, that a certain 
+!!{formula} $!A[c/v]$ holds doesn't tell us that $c$ exists. Hence
+in free logic the mere assumption that some
+$c$ is $F$ doesn't fully capture the force of the premise
+$\lexists[v][\Obj{F}v]$. That premise not only tells us that 
+that $!A[c/v]$ holds for some $c$ or other, but also that it holds 
+for some $c$ or other \emph{that exists}. Hence our rule says 
+that we can derive $!B$ from $\lexists[v][\Obj{F}v]$ provided 
+that we can derive it from the assumption that $!A[c/v]$ holds for 
+some arbitrary \emph{existing} $c$.
+
+Hence our \Elim{\lexists} \Log{FL} rule:
+
+\smallskip\noindent
+{\setlength\extrarowheight{3em} 
+\begin{tabular}{cp{10em}}
+   \AxiomC{$\lexists[v][!A]$}
+        \AxiomC{$\Discharge{\lfrexists c}{n},\Discharge{!A[c/v]}{n}$}
+        \noLine
+        \UnaryInfC{$\mathcal{D}$}
+        \UnaryInfC{$!B$}
+    \DischargeRule{\Elim{\lexists} \Log{FL}}{n}
+    \BinaryInfC{$!B$}
+    \DisplayProof
+
+& 
+    \emph{Restrictions:}
+
+    - $c$ no in undischarged assumptions of $\mathcal{D}$
+      other than $!A[c/v]$ and $\lfrexists c$.
+
+    - $c$ not in $!A$
+
+    - $c$ not in $!B$
+
+\\
+    
+\end{tabular}
+}   
+
+\subsection{Deriving the $\lfrexists$ rules}
+
+The rules showing that  $\lfrexists c$ is equivalent to
+$\lexists[v][\eq[c][v]]$ are derived from the quantifier and identity
+rules as follows.
+
+\smallskip\noindent
+\begin{tabular}{ll}
+
+\AxiomC{$\lfrexists c$}
+    \AxiomC{$\lfrexists c$}
+    \RightLabel{\Intro{\eq} \Log{FL}}
+    \UnaryInfC{$\eq[c][c]$}
+\RightLabel{\Intro{\lexists} \Log{FL}}
+\BinaryInfC{$\lexists[v][\eq[c][v]]$}
+\DisplayProof
+&
+\AxiomC{$\lexists[v][\eq[c][v]]$}
+    \AxiomC{$\Discharge{\lfrexists d}{1}$}
+        \AxiomC{$\Discharge{\eq[c][d]}{1}$}
+    \RightLabel{\Elim{\eq}}
+    \BinaryInfC{$\lfrexists c$}
+\DischargeRule{\Elim{\lexists} \Log{FL}}{1}
+\BinaryInfC{$\lfrexists c$}
+\DisplayProof    
+\end{tabular}
+\smallskip
+
+The \Elim{\lexists} \Log{FL} is restricted. We check that the 
+restriction are obeyed. We chose to instantiate $\lexists[v][\eq[c][v]]$
+with $\eq[d][v]$ (picking the new variable $d$) and:
+\begin{itemize}
+    \item $d$ doesn't appear in undischarged assumptions of the 
+    sub-!!{derivation} on the right other than $\lfrexists d$ and
+    $\eq[c][d]$.
+    \item $d$ doesn't appear in the instantiated !!{formula} $\eq[c][v]$.
+    \item $d$ doesn't appear in our conclusion $\lfrexists c$.
+\end{itemize}
+Therefore the step is legitimate.
+
+\end{document}

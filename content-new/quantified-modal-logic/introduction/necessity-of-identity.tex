@@ -1,0 +1,185 @@
+% Part: quantified-modal-logic
+% Chapter: introduction
+% Section: necessity-of-identity
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{qml}{int}{noi}
+
+\olsection{Necessity of Identity}
+
+Combining standard first-order logic with identity and modal logic 
+allows us to prove the necessity of identity. 
+
+\begin{defn}[Necessity of identity]
+The necessity of identity is the claim that true identities are 
+necessary. For particular constants $a,b$, it is the claim that 
+if $a$ and $b$ are one and the same thing, it is necessarily so:
+$$\eq[a][b]\lif\Box\eq[a][b]$$ 
+
+We can also express it as a universal claim. If a thing and a thing
+are one and the same, it is necessary that  are necessarily one and
+the same: 
+$$\lforall[x][\lforall[y][(\eq[x][y]\lif\Box\eq[x][y])]]$$
+\end{defn}
+
+(Avoid saying: `if \emph{two things} are identical \dots'. Calling $a$
+ and $b$ \emph{two} things entails that they are distinct.)
+
+According to the necessity of identity, it is never the case that 
+some thing $a$ is in fact some thing $b$ but also 
+could have not been $b$. To illustrate it denies claims such as:
+\begin{itemize}
+\item Hesperus is Phosphorus but could have failed to be Phosphorus.
+\item Clark Kent is Superman but could have failed to be Superman.
+\item Slab (a block of marble) is Oscar (a statue) but could have 
+failed to be Oscar. 
+\end{itemize} 
+
+Informally, the proof rests on two claims:
+\begin{enumerate}
+    \item It is necessary that $a$ is $a$. (Where $a$ can be any name.)
+    \item If $a$ is $b$ and it is necessary that $a$ is $a$, then it 
+    is necesasry that $a$ is $b$.
+\end{enumerate}
+The first claim can be further derived from Reflexivity and the
+Necessitation rule and the second is an instance of Leibniz's Law.
+\begin{itemize}
+    \item Reflexivity. For any name $a$, `$a$ is $a$' is a logical truth.
+    \item Necessitation rule. If $!A$ is a logical truth, $\Box!A$ is
+    a logical truth.
+    \item Lebiniz's law. If $a$ is $b$ and $!A[a/c]$ is so, then 
+    $!A[b/c]$ is so.
+\end{itemize}
+
+Formally:
+\begin{prooftree}
+    \AxiomC{}
+    \RightLabel{\Intro{\eq}}
+    \UnaryInfC{$\eq[a][a]$}
+    \RightLabel{$\Box$\Ax{K}}
+    \UnaryInfC{$\Box\eq[a][a]$}
+\AxiomC{$\Discharge{\eq[a][b]}{1}$}
+\RightLabel{\Elim{\eq}}
+\BinaryInfC{$\Box\eq[a][b]$}
+\DischargeRule{\Elim{\lif}}{1}
+\UnaryInfC{$\eq[a][b]\lif\Box\eq[a][b]$}
+\RightLabel{\Intro{\lforall}}
+\UnaryInfC{$\lforall[y][(\eq[a][y]\lif\Box\eq[a][y])]$}
+\RightLabel{\Intro{\lforall}}
+\UnaryInfC{$\lforall[x][(\lforall[y][\eq[a][y]\lif\Box\eq[a][y]])]$}
+\end{prooftree}
+As the formal !!{derivation} makes clear the proof only rests on 
+the Reflexivity of Identity, Lebiniz's Law (applied to de re 
+modal claims) and Necessitation. 
+
+We can extend the proof with \Intro{\lforall} steps to establish the 
+universal version of the Necessity of Identity:
+\begin{prooftree}
+    \AxiomC{}
+    \RightLabel{\Intro{\eq}}
+    \UnaryInfC{$\eq[a][a]$}
+    \RightLabel{$\Box$\Ax{K}}
+    \UnaryInfC{$\Box\eq[a][a]$}
+\AxiomC{$\Discharge{\eq[a][b]}{1}$}
+\RightLabel{\Elim{\eq}}
+\BinaryInfC{$\Box\eq[a][b]$}
+\DischargeRule{\Elim{\lif}}{1}
+\UnaryInfC{$\eq[a][b]\lif\Box\eq[a][b]$}
+\RightLabel{\Intro{\lforall}}
+\UnaryInfC{$\lforall[y][(\eq[a][y]\lif\Box\eq[a][y])]$}
+\RightLabel{\Intro{\lforall}}
+\UnaryInfC{$\lforall[x][(\lforall[y][\eq[a][y]\lif\Box\eq[a][y]])]$}
+\end{prooftree}
+
+Since the necessity of identity follows from just three principles
+(Reflexivity, the Necessitation rule and Leibniz's law), anyone who
+finds fault with the necessity of identity must reject at least one of
+these three principles. 
+
+Note that \emph{de re} modal claims are central to the proof: $a$ is
+necessarily $a$ (necessitation of reflexivity) and if $a$ is $b$, then
+from $a$ being necessarily $a$ we can infer than $b$ is necessarily
+$a$ too (Leibniz's law applied to \emph{de re} modal claims). Those
+suspicious of \emph{de re} modal claims (like Quine) are suspicious of
+the proof too.
+
+Suppose, on the other hand, that we accept the proof's conclusion. 
+This has two important consequences: the necessary a posteriori 
+and the distinction between necessity and logicality. 
+
+Necessary a posteriori. In Hume and Kant we find the idea that 
+experience cannot teach us that something is necessarily so. Experience
+only teaches us what is, it doesn't show that something couldn't have 
+been otherwise. Hence no necessary truth is discovered empirically
+(`a posteriori').
+
+If the !!{derivation} is correct, Hume's and Kant's idea is (arguably) 
+wrong. For (arguably) observation can teach us that certain identities
+are true: that Hesperus is Phosphorus, for instance. If the !!{derivation}
+is correct, we know on its basis that if Hesperus is Phosphorus, it is 
+necessary that Hesperus is Phosphorus. Putting the two together, we 
+learn that  it is necessary that Hesperus is Phosphorus. That is a 
+true necessity that is discovered a posteriori (on the basis of 
+experience): a necessary a posteriori. 
+
+Necessity vs Logicality. You may find modal notions (what could have 
+been or not been the case, possible world, \dots) obscure, but logical
+ones (validity) clear. If so, you could be tempted by the idea that 
+necessity is just logicality. We can put that idea in a principle:
+
+\begin{itemize}
+\item (Necessity as Logicality). It is necessary that $!A$ iff
+$\ulcorner!A\urcorner$ is a logical truth.
+\end{itemize}
+
+For instance: it is necessary that Alice is Alice iff `Alice is Alice'
+is a logical truth. Note that on the left side we're \emph{using} the
+sentence Alice and Alice. On the right side we're \emph{mentioning}
+the sentence, i.e. talking about it, and saying that it is a logical
+truth (it is true relative to any interpretation of the non-logical
+vocabulary in it). (The corner quotes $\ulcorner\ldots\urcorner$ are a piece of notation 
+introduced by Quine to mean, for any sentence $!A$, a name of that 
+sentence.)
+
+If the proof of the necessity of identity is correct, then Necessity 
+as Logicality is false because its right to left direction fails. 
+That is, from some $a$, $b$ such that $a$ is in fact $b$ (`Hesperus'
+and `Phosphorus', say), we have: 
+
+\begin{itemize}
+\item It's necessary that $a$ is $b$.
+\item But, `$a=b$' isn't a logical truth.
+\end{itemize}
+
+We still have the converse: if $\ulcorner!A\urcorner$ is a logical 
+truth, then it is necessary that $!A$.
+
+\emph{Rough historical background.} Logical Positivists (like Carnap) and 
+philosophers close to them (like Wittgenstein, Carnap) hoped to 
+understand necessity in terms of logical truth. For a bit of background:
+traditional metaphysics (Aristotle, Descartes
+and post-Cartesian Rationalists like Spinoza and Leibniz) abounds in
+modal claims about what could be or could not be the case. Aristotelians
+endorse essentialism, for instance: things have an essence or nature 
+that puts limits on what they could be (Socrates is essentially human,
+hence could not have been a lamp). At the
+beginning of the XXth century, neo-Kantians and Logical Positivists
+are suspicious of that kind of metaphysics (like Kant and Hume
+earlier). But Logical Positivists are happy with the notion of 
+\emph{logical truth}, for instance, that $!A\lif!A$ expresses a 
+truth, whatever one puts for $!A$. Their hypothesis is that all 
+genuine necessities will turn out to be (something like) 
+logical truths, and that others are non-sensical. Thus we find the idea
+that necessity is logicality in Carnap and Quine. Carnap's approach was
+constructive: he tried to account for necessity in terms of 
+'state-descriptions', which anticipate the possible worlds semantics
+of Kripke and others. Quine's was sceptical: he saw that if quantified
+modal logic made sense, de re modality had to make sense, and that if
+de re modality made sense, then necessity couldn't be logicality (as
+shown by the proof of necessity of identity); he concluded that 
+quantified modal logic made no sense.
+
+\end{document}

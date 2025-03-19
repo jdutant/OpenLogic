@@ -1,0 +1,48 @@
+% Part: quantified-modal-logic
+% Chapter: introduction
+% Section: what-is-qml
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{qml}{int}{wiqml}
+
+\olsection{What is Quantified Modal Logic?}
+
+Quantified modal logics combine first-order logic, usually with
+ identity, with modal logics. \emph{First-order logic with identity}
+ can express claims about particular things: how things are and how
+ they are related (subject-predicate sentences), whether something is
+ the same thing as something else (identity), and, to some extent, how
+ many things there are (e.g., for any natural number $n$, the claims
+ that there are at least $n$ things). Modal logics can express claims
+ about whether something is necessarily so, possibly so but also
+ claims about what is known to be so, knowned to be so, believed to be
+ so, hoped to be so and so on. Many claims of philosophical interest
+ combine notions of both lists, and can only be captured by combining
+ the resources of both logics:
+
+\begin{itemize}
+\item Annie is necessarily human. $\Box\Atom{H}{a}$
+\item Every human is necessarily human. $\lforall[x][\Atom{H}{x}\lif\Box\Atom{H}{x}]$
+\item God necessarily exists. $\Box\lexists{x}{\eq[a][x]}$
+\item There could have been nothing. $\Diamond\lnot\lexists[x][\eq[x][x]]$
+\item Everything is necessarily physical. $\lforall[x][\Box\Atom{P}{x}]$
+\item If $a$ is $b$ then necessarily $a$ is $b$. $\eq[a][b]\lif\Box(\eq[a][b])$
+\item It is a priori that all humans are humans.
+$A(\Atom{H}{a}\lif\Atom{H}{a})$ (with $A$ a $\Box$-like operator 
+for `it is a priori that \dots')
+\item If one knows that Phosphorus shines, and one doesn't knows that
+Hesperus shines, then one doesn't know that Hesperus is Phosphorus.
+$(K\Atom{P}{a}\land\lnot K\Atom{P}{b})\lif\lnot K\eq[a][b]$ (with $K$ 
+a $\Box$-like operator for `one knows that \dots')
+\end{itemize}
+
+Accordingly, Quantified Modal Logics are central to several important
+philosophical debates. 
+
+This introduction introduces major philosophical issues arising from
+Quantified Modal Logic.
+
+\end{document}

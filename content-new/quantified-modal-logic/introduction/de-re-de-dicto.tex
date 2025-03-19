@@ -1,0 +1,118 @@
+% Part: quantified-modal-logic
+% Chapter: introduction
+% Section: de-re-de-dicto
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{qml}{int}{drdd}
+
+\olsection{De re vs. de dicto}
+
+This section introduces the distinction between \emph{de re} vs
+\emph{de dicto} modal claims and the related notion of 
+\emph{quantifying in a modal context}.
+
+These notions crucial to understand Quantified Modal Logic. In fact,
+Quine's influential attack on Quantified Modal Logic can be summarized
+thus: (a) \emph{de dicto} modal claims are intelligible, but they are
+to be understood as metalinguistic claims, and (b) \emph{de re} modal
+claims don't make sense, and (c) because \emph{de re} modal claims
+don't make sense, quantifying in modal contexts doesn't make sense.
+
+Western medieval logicians drew a distinction between `necessity of
+claims' (necessity \emph{de dicto}) and `necessity of things' 
+(\emph{de re}). Consider:
+
+\begin{itemize}
+\item Every blacksmith is necessarily a blacksmith.
+\end{itemize}
+
+Taken in one sense, this says something true: namely, that it couldn't
+be that there are blacksmiths who are not blacksmith. In another sense,
+it says something (arguably) false: namely, that those people who are
+blacksmiths couldn't have had any other profession. Some 
+Medieval logicians saw the former as attributing necessity to a claim
+---it says that claim `a blacksmith is a blacksmith' is a necessity---
+and the latter as attributing necessity to a thing---those people
+are claimed to be `necessarily blacksmiths'. In contemporary logic 
+we still use the `\emph{de dicto}` and `\emph{de re}' terminology
+but characterize the two readings using different \emph{scopes} for 
+`necessity' instead:
+
+\begin{enumerate}
+\item $\Box\lforall[x][(\Atom{B}{x}\lif\Atom{B}{x})]$.\\ 
+It is necessary that every blacksmith is a blacksmith (\emph{de
+dicto}, true).
+\item $\lforall[x][\Atom{B}{x}\lif\Box\Atom{B}{x}]$.\\
+Every blacksmith is something that is necessarily a blacksmith
+(\emph{de re}, false).
+\end{enumerate}
+
+The crucial difference between these two claims is that, in the former,
+the `$\Box$' is applied to a closed sentence, while in the latter,
+the `$\Box$' is applied to a open !!{formula}. Consider applying
+ $\Box$ a !!{formula} with a constant or a free !!{variable}:
+
+\begin{itemize}
+    \item $\Box\Atom{F}{a}$
+    \item $\Box\Atom{F}{x}$
+\end{itemize}
+
+Read $F$ as `\dots flies' and `$a$' as a name for Alice. The first
+says that Alice necessarily flies. The second says, relative to the
+assignement of some object to $x$, that \emph{it} necessarily flies.
+In both cases we are assigning a necessary feature to specific
+individuals (`things', \emph{rea}). These are \emph{de re} modal
+claims. By contrast consider applying $\Box$ to a sentence without 
+free !!{variable}s or constants, say $\lexists[x][\Atom{F}{x}]$:
+
+\begin{itemize}
+    \item $\Box\lexists[x][\Box\Atom{F}{x}]$
+\end{itemize}
+
+This says that necessarily, there is a flying thing. Here we say that 
+a certain fact has to be the case (it has to be that there is a flying
+thing). We're not attributing a necessary property to any object. 
+That is a \emph{de dicto} modal claim.
+
+The distinction between \emph{de re} or \emph{de dicto} modal !!{formula}s
+is drawn as follows.
+
+\begin{defn}[De re vs de dicto]
+\ollabel{de-re-de-dicto}
+!!^a{formula} is \emph{modal} iff it contains $\Box$ or 
+$\Diamond$. Modal !!{formula}s are either \emph{de re} or \emph{de dicto}:
+\begin{itemize}
+\item If $!A$ contains a free variable or constant, then $\Box!A$, $\Diamond!A$
+are \emph{de re} modal !!{formula}s,
+\item Any !!{formula} that contains a \emph{de re} modal !!{formula} is
+itself a \emph{de re} modal !!{formula}.
+\item Other modal !!{formula}s are \emph{de dicto}
+\end{itemize}
+
+\end{defn}
+
+\emph{Quantifying in a modal context} is using a quantifier to bind
+!!a{variable} within a \emph{de re} modal claim: 
+
+\begin{itemize}
+\item $\lexists[x][\Box\Atom{H}{x}]$.\\
+Something is such that \emph{it} is necessarily human.
+\end{itemize}
+
+Here the quantifier $\lexists$ binds !!a{variable} that is within 
+the \emph{de re} modal claim $\Box\Atom{H}{x}$. It quantifies `across'
+the modal operator, so to say. 
+
+A claim quantifying into modal context such as `Something is such that
+it is necessarily human' does not contain constants (names) nor free
+!!{variable}s. But like simpler \emph{de re} modal claims, it involves
+ascribing modal properties to things: it says that there is something
+or other such that \emph{it} has the property of being necessarily
+human. Thus quantifying in modal context makes sense only if simpler
+\emph{de re} modal claims make sense. That is our formal definition
+of \emph{de re} modal claims counts such claims as \emph{de re} too.
+
+\end{document}

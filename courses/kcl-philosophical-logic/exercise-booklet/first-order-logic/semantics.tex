@@ -1,0 +1,192 @@
+% Part: exercise-booklet
+% Chapter: first-order-logic
+% Section: semantics
+
+\documentclass[../../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{exb}{fol}{sem}
+
+\olsection{Semantics}
+
+\begin{prob}[Truth in !!a{structure}]
+Say whether the formulas below are true
+in the !!{structure} $\Struct{M}$ with:
+
+$\Domain{M}=\{$Arthur, Balin, Caelia$\}$.
+
+$\Assign{a}{M} =$ Arthur. 
+
+$\Assign{b}{M} =$ Balin.
+
+$\Assign{c}{M} =$ Celia.
+
+$\Assign{\mathord{F}}{M} =\{\langle\mbox{Arthur},\mbox{Arthur}\rangle,\langle\mbox{Arthur},\mbox{Caelia}\rangle,\langle\mbox{Balin},\mbox{Arthur}\rangle,$
+$\langle\mbox{Balin},\mbox{Balin}\rangle,\langle\mbox{Balin},\mbox{Celia}\rangle,$
+$\langle\mbox{Celia},\mbox{Celia}\rangle,\langle\mbox{Celia},\mbox{Arthur}\rangle\}$.
+\begin{enumerate}
+\item $\Atom{\Obj F}{b,b}$
+\item $\Atom{\Obj F}{a,b}$
+\item $\Atom{\Obj F}{c,b}\lor \Atom{\Obj F}{b,c}$
+\item $\lforall x\Atom{\Obj F}{x,x}$
+\item $\lexists x\lexists y(\Atom{\Obj F}{x,y}\land\lnot \Atom{\Obj F}{y,x})$
+\item $\lexists x\lexists y(\Atom{\Obj F}{x,y}\land \Atom{\Obj F}{y,x})$
+\item $\lexists x\lforall y\Atom{\Obj F}{x,y}$
+\item $\lexists x\lforall y\Atom{\Obj F}{y,x}$
+\item $\lforall x(\lexists y\Atom{\Obj F}{x,y}\lif \Atom{\Obj F}{x,x})$
+\end{enumerate}
+\emph{Tip: }draw the model!
+\begin{ans}
+1.~True, 2.~False, 3.~True, 4.~True, 5.~True (witness Balin, Arthur), 
+6.~True (witness Arthur, Celia) 7.~True (witness Balin), 
+8.~True (witness Celia), 9.~True.
+\end{ans}
+\end{prob}
+
+\begin{prob}[Build !!a{structure}]
+For each of the !!{formula}s below, build !!a{structure}
+in which it is true and one in which it is false.
+\begin{enumerate}
+\item $\lexists x(\Atom{\Obj G}{x}\land\lnot \Atom{\Obj F}{x})$.
+\item $\lforall x\lforall y(\Atom{\Obj G}{x,y}\lif \Atom{\Obj G}{x,x})$.
+\item $\lexists x\Atom{\Obj F}{x}\lif\lforall x(\Atom{\Obj F}{x}\lor \Atom{\Obj G}{x})$.
+\item $\lforall x\lexists y\Atom{\Obj L}{x,y}\lif\lexists y\lforall x\Atom{\Obj L}{x,y}$.
+\item $\lforall x\lforall y\lforall z(\Atom{\Obj L}{x,y}\lif(\Atom{\Obj L}{y,z}\lif \Atom{\Obj L}{x,z}))$.
+\end{enumerate}
+\begin{ans}
+\begin{enumerate}
+	\item !!^{structure} for truth. $\Struct{M}$ with
+	$\Domain{M}=\{1\}$ and $\Assign{G}{M}=\{1\}$,
+	$\Assign{F}{M}=\varnothing$.\\
+	!!^{structure} for falsehood. $\Struct{M}$ with $\Domain{M}=\{1\}$
+	and $\Assign{G}{M}=\Assign{F}{M}=\varnothing$.
+
+	\item !!^{structure} for truth. $\Struct{M}$ with
+	$\Domain{M}=\{1\}$ and $\Assign{G}{M}=\varnothing$. Another
+	!!{structure} for truth: $\Domain{M}=\{1\}$ and
+	$\Assign{G}{M}=\{\langle 1,1\rangle\}$.\\
+	!!^{structure} for falsehood. $\Struct{M}$ with
+	$\Domain{M}=\{1,2\}$ and $\Assign{G}{M}=\{\langle 1,2\rangle\}$.
+
+	\item !!^{structure} for truth. $\Struct{M}$ with
+	$\Domain{M}=\{1\}$ and $\Assign{F}{M}=\Assign{G}{M}=\varnothing$.
+	Another structure for truth: $\Domain{M}=\{1\}$ and
+	$\Assign{F}{M}=\{1\}$ and $\Assign{F}{M}=\varnothing$.\\
+	!!^{structure} for falsehood. $\Struct{M}$ with
+	$\Domain{M}=\{1,2\}$ with $\Assign{F}{M}=\{1\}$ and
+	$\Assign{G}{M}=\varnothing$. 
+
+	\item !!^{structure} for truth. $\Struct{M}$
+	with $\Domain{M}=\{1\}$ and $\Assign{L}{M}=\varnothing$. \emph{Comment: in that structure, $\Atom{\Obj L}{x,y}$ is false relative to any assignment, so $\lexists x \Atom{\Obj L}{x,y}$ is false relative to some assignments, so the antecedent is false and the entire formula true.} Another structure for truth: $\Struct{M}$
+	with $\Domain{M}=\{1,2\}$ and $\Assign{L}{M}=\{\langle 1,2 \rangle, 
+	\langle 2,2 \rangle \}$. \emph{Comment: in that structure the antecedent 
+	is true, since $\lexists x \Atom{\Obj L}{x,y}$ is true relative to any assignment of an object to $x$, and the consequent is true, since $\forall x \Atom{\Obj L}{x,y}$ is true relative to the assignment of $2$ to $x$.}\\
+	!!^{structure} for falsehood. $\Struct{M}$ with
+	$\Domain{M}=\{1,2\}$ and $\Assign{L}{M}=\{\langle 1,1 \rangle,
+	\langle 2,2 \rangle\}$. Another structure for falsehood:
+	$\Domain{M}=\{1,2\}$ and $\Assign{L}{M}=\{\langle 1,2 \rangle,
+	\langle 2,1 \rangle\}$.
+
+	\item !!^{structure} for truth. $\Struct{M}$ with
+	$\Domain{M}=\{1\}$ and $\Assign{L}{M}=\varnothing$. \emph{Comment:
+	in that structure, $\Atom{\Obj L}{x,y}$ is false relative to any
+	assignment, so $\Atom{\Obj L}{x,y} \rightarrow (\Atom{\Obj L}{y,z}
+	\rightarrow \Atom{\Obj L}{x,z})$ is true relative to any
+	assignment.} Another structure for truth: $\Domain{M}=\{1,2\}$ and
+	$\Assign{L}{M}=\{\langle 1,2 \rangle \}$. Another structure for
+	truth: $\Domain{M}=\{1,2\}$ and $\Assign{L}{M}=\{\langle 1,2
+	\rangle, \langle 2,2 \rangle \}$.\\
+	!!^{structure} for falsehood. $\Struct{M}$ with
+	$\Domain{M}=\{1,2,3\}$ and $\Assign{L}{M}=\{\langle 1,2 \rangle,
+	\langle 2,3 \rangle \}$. \emph{Comment: relative to the
+	assignement of $1$ to $x$, $2$ to $y$ and $3$ to $z$, the embedded
+	formula is false.}
+\end{enumerate}
+\end{ans}
+\end{prob}
+
+\begin{prob}[Variable assignments]
+Consider the !!{structure} $\Struct{M}$
+with $\Domain{M}=\{1,2,3\}$ and $\Assign{a}{M}=1$, $\Assign{b}{M}=2$
+, $\Assign{c}{M}=3$, $\Assign{F}{M}=\{2,3\}$, $\Assign{G}{M}=\{\langle1,2\rangle,\langle2,1\rangle,\langle2,2\rangle,\langle2,3\rangle,\langle3,3\rangle\}$. \\
+Let $g$ be an assignment such that $g(x)=1$ and $g(y)=3$. Say what
+the following are:
+\begin{enumerate}
+	\item $\Value{a}{M}[g]$
+	\item $\Value{b}{M}[g]$
+	\item $\Value{y}{M}[g]$
+	\item $\Value{x}{M}[g']$, where $\varAssign{g'}{g}{x}[2]$
+	\item $\Value{y}{M}[g']$, where $\varAssign{g'}{g}{y}[1]$
+	\item $\Value{y}{M}[g']$, where $\varAssign{g'}{g}{yx}[13]$
+\end{enumerate}
+Now let $g$ be an arbitrary assignement. Say whether the following
+are correct.
+\begin{enumerate}
+	\item $\Value{a}{M}[g]$ is in $\Assign{F}{M}$
+	\item $\Value{b}{M}[g]$ is in $\Assign{F}{M}$
+	\item $\Value{x}{M}[g']$, where $\varAssign{g'}{g}{x}[3]$, is in $\Assign{F}{M}$
+	\item $\Value{y}{M}[g']$, where $\varAssign{g'}{g}{xy}[12]$, is in $\Assign{G}{M}$
+	\item $\langle\Value{a}{M}[g'], \Value{x}{M}[g']\rangle$ is in $\Assign{G}{M}$, with $\varAssign{g'}{g}{x}[2]$
+	\item $\langle\Value{x}{M}[g'], \Value{y}{M}[g']\rangle$ is in $\Assign{G}{M}$, with $\varAssign{g'}{g}{xy}[23]$
+	\item $\Sat{M}{Fa}[g]$
+	\item $\Sat{M}{Gbc}[g]$
+	\item $\Sat{M}{\Atom{\Obj G}{x,a}}[g']$, where $\varAssign{g'}{g}{x}[2]$
+	\item $\Sat{M}{\eq[a][b]}[g]$
+	\item $\Sat{M}{\eq[c][y]}[g']$ where $\varAssign{g'}{g}{xy}[13]$
+	\item $\Sat{M}{\eq/[x][y]}[g']$ where $\varAssign{g'}{g}{xy}[13]$
+	\item $\Sat{M}{\Atom{\Obj G}{y,x}}[g']$ where $\varAssign{g'}{g}{xy}[23]$
+	\item $\Sat{M}{\Atom{\Obj F}{x}\lif \Atom{\Obj G}{x,x}}[g']$ where $\varAssign{g'}{g}{x}[1]$
+	\item $\Sat{M}{\Atom{\Obj F}{x}\lif \Atom{\Obj G}{x,x}}[g']$ where $\varAssign{g'}{g}{x}[2]$
+	\item $\Sat{M}{\Atom{\Obj F}{x}\lif \Atom{\Obj G}{x,x}}[g']$ where $\varAssign{g'}{g}{x}[3]$
+	\item $\Sat{M}{\lforall x(\Atom{\Obj F}{x}\lif \Atom{\Obj G}{x,x})}[g]$
+	\item $\Sat{M}{\Atom{\Obj G}{x,x}}[g']$ where $\varAssign{g'}{g}{x}[1]$
+	\item $\Sat{M}{\lexists x\Atom{\Obj G}{x,x}}[g]$
+\end{enumerate}
+\emph{Tip}: draw the model! 
+\begin{ans}
+\emph{Commment: to draw the model, place three dots $1,2,3$ and $a$ next to $1$, $b$ 
+next to $2$, $c$ next to $3$. Then represent $F$ by a circle around $2,3$ (labelled $F$). 
+Finally represent $G$ by arrows from $1$ to $2$, from $2$ to all three objects and from
+$3$ to itself.}
+
+With $g$ such that $g(x)=1$ and $g(y)=3$:
+\begin{enumerate}
+	\item $\Value{a}{M}[g] = 1$
+	\item $\Value{b}{M}[g] = 2$
+	\item $\Value{y}{M}[g] = 3$
+	\item Where $\varAssign{g'}{g}{x}[2]$, $\Value{x}{M}[g'] = 2$
+	\item Where $\varAssign{g'}{g}{y}[1]$, $\Value{y}{M}[g'] = 1$, 
+	\item Where $\varAssign{g'}{g}{yx}[13]$, $\Value{y}{M}[g'] = 1$, 
+\end{enumerate}
+With $g$ an arbitrary assignment:
+\begin{enumerate}
+	\item $\Value{a}{M}[g]$ is in $\Assign{F}{M}$: incorrect.
+	\item $\Value{b}{M}[g]$ is in $\Assign{F}{M}$: correct.
+	\item $\Value{x}{M}[g']$, where $\varAssign{g'}{g}{x}[3]$, is in $\Assign{F}{M}$: correct.
+	\item $\Value{y}{M}[g']$, where $\varAssign{g'}{g}{xy}[12]$, is in $\Assign{G}{M}$: incorrect. \emph{The only things in $\Assign{G}{M}$ are pairs of objects.}
+	\item $\langle\Value{a}{M}[g'], \Value{x}{M}[g']\rangle$ is in $\Assign{G}{M}$, with $\varAssign{g'}{g}{x}[2]$: correct. \emph{Comment: $\langle 1,2\rangle$ is in $\Assign{G}{M}$.}
+	\item $\langle\Value{x}{M}[g'], \Value{y}{M}[g']\rangle$ is in $\Assign{G}{M}$, with $\varAssign{g'}{g}{xy}[23]$: correct. \emph{Comment: $\langle 2,3\rangle$ is in $\Assign{G}{M}$.}
+	\item $\Sat{M}{Fa}[g]$: correct.
+	\item $\Sat{M}{Gbc}[g]$: correct.
+	\item $\Sat{M}{\Atom{\Obj G}{x,a}}[g']$, where $\varAssign{g'}{g}{x}[2]$: correct.
+	\item $\Sat{M}{\eq[a][b]}[g]$: incorrect.
+	\item $\Sat{M}{\eq[c][y]}[g']$ where $\varAssign{g'}{g}{xy}[13]$: correct.
+	\item $\Sat{M}{\eq/[x][y]}[g']$ where $\varAssign{g'}{g}{xy}[13]$: correct.
+	\item $\Sat{M}{\Atom{\Obj G}{y,x}}[g']$ where $\varAssign{g'}{g}{xy}[23]$: 
+	incorrect. \emph{Comment: $\langle 3,2\rangle$ is not in $\Assign{G}{M}$.}
+	\item $\Sat{M}{\Atom{\Obj F}{x}\lif \Atom{\Obj G}{x,x}}[g']$ where 
+	$\varAssign{g'}{g}{x}[1]$: correct. \emph{Relative to this assignment
+	the antecedent is false.}
+	\item $\Sat{M}{\Atom{\Obj F}{x}\lif \Atom{\Obj G}{x,x}}[g']$ where 
+	$\varAssign{g'}{g}{x}[2]$: correct.
+	\item $\Sat{M}{\Atom{\Obj F}{x}\lif \Atom{\Obj G}{x,x}}[g']$ where 
+	$\varAssign{g'}{g}{x}[3]$: correct.
+	\item $\Sat{M}{\lforall x(\Atom{\Obj F}{x}\lif \Atom{\Obj G}{x,x})}[g]$: correct.
+	\item $\Sat{M}{\Atom{\Obj G}{x,x}}[g']$ where $\varAssign{g'}{g}{x}[1]$: incorrect.
+	\item $\Sat{M}{\lexists x\Atom{\Obj G}{x,x}}[g]$: correct.
+\end{enumerate}
+\end{ans}
+\end{prob}
+
+\end{document}

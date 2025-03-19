@@ -1,0 +1,34 @@
+% Part: exercise-booklet
+% Chapter: free-logic
+% Section: semantics
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{exb}{frl}{nd}
+
+\olsection{Natural Deduction}
+
+\begin{prob}[Natural Deduction proofs in Positive Free Logic]
+    Give natural deduction proofs of the following in \Log{PFL}.
+    \begin{enumerate}
+    \item $\lforall[x][\Atom{\Obj{P}}{x}] \vdash \lfrexists a\lif\Atom{\Obj{P}}{a}$
+    \item $\vdash \lforall[x][\eq[x][x]]$
+    \item $\lforall[x][\Atom{\Obj{P}}{x}\lif\Atom{\Obj{P}}{x}],\lexists[x][\Atom{\Obj{P}}{x}] 
+        \vdash \lexists[x][\Atom{\Obj{Q}}{x}]$
+    \item $\vdash \lforall[x][\lexists[y][\eq[x][y]]]$
+    \end{enumerate}
+    For each your proofs, say whether it is a proof in \Log{NFL} too.
+\end{prob}
+
+\begin{prob}[Natural Deduction proofs in Negative Free Logic]
+    Give natural deduction proofs of the following in \Log{NFL}.
+    \begin{enumerate}
+    \item $\lforall[x][\eq/[x][a]] \vdash \lnot\Atom{\Obj{P}}{a}$
+    \item $\lforall[x][\Atom{\Obj{F}}{x}\lif\Atom{\Obj{G}}{ax}],
+        \lexists[x][\Atom{\Obj F}{x}] \vdash \lfrexists a$.
+    \end{enumerate}
+
+
+\end{document}

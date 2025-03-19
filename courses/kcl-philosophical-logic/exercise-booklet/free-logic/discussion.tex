@@ -1,0 +1,134 @@
+% Part: exercise-booklet
+% Chapter: free-logic
+% Section: discussion
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{exb}{frl}{dis}
+
+\olsection{Discussion}
+
+\begin{prob}
+Give an English equivalent of each of the following and explain
+ briefly why both are valid in standard first-order logic.
+\begin{enumerate}
+\item $\vDash \lexists[x][(\eq[x][x])]$
+\item $\vDash \lexists[x][(\eq[x][a])]$
+\end{enumerate}
+
+\noindent Suppose we extend first-order logic with a necessity
+operator $\Box$ with the  
+necessitation property:
+\begin{defn}[Necessitation rule]
+If $\Entails !A$, then $\Entails \Box !A$
+\end{defn}
+
+\begin{enumerate}
+	\item[3.] Applying the necessitation rule to the two valid
+	formulas of first-order logic above. Which validities do we get?
+	(Give only two.) 
+	\item[4.] Explain briefly why one would not want to accept the
+	resulting validities.
+\end{enumerate}
+
+\begin{ans}
+\begin{enumerate}
+\item !!^{structure}s of first-order logic have a non-empty domain. In
+	any such structure $\lexists[x][(\eq[x][x])]$ is true (since,
+	unlike in free logics, it is guaranteed that there are
+	assignements, and any assignments will trivially assign the same
+	object to $x$ as they assign to $x$). So
+	$\lexists[x][(\eq[x][x])]$ is valid in first-order logic. 
+\item In !!{structure}s of first-order logic the interpretation
+	assigns an object of the  domain to every !!{constant}. Hence in
+	any !!{structure} the interpretation of $a$ is an object of the
+	domain, so $\eq[x][a]$ will be true relative to some assignment
+	(namely, any assignment that assigns to $x$ the object that $a$
+	denotes). Hence $\lexists[x][(\eq[x][a])]$ valid in first-order
+	logic. 
+\item $\Box\lexists[x][(\eq[x][x])]$ and
+$\Box\lexists[x][(\eq[x][a])]$.
+\item $\Box\lexists[x][(\eq[x][x])]$ says that it is necessary that
+	there is something rather than nothing. But we may think that it
+	is false: it could have been that there is nothing. \\
+	Suppose that $a$ is a name for me. $\Box\lexists[x][(\eq[x][a])]$
+	says that necessarily there is something that is me. But I could
+	have failed to exist; that is, it could have been the case that
+	nothing is me. (I do not necessarily exist.)
+\end{enumerate}
+\end{ans}
+\end{prob}
+
+\begin{prob}[advanced, optional]
+Negative free logic is committed to primitive predicates.
+\begin{enumerate}
+	\item Explain what that means.
+	\item Explain why that is the case.
+	\item Give a reason to think that this is a problem.
+\end{enumerate}
+\begin{ans}
+\item In negative free logic we cannot introduce a predicate ``nadult'' 
+	that means ``not an adult'' (i.e. by the definition $\Atom{\Obj N}{t} \liff 
+	\lnot \Atom{\Obj A}{t}$ where $A$ stands for ``is an adult'' and 
+	$N$ for ``is a nadult''). Negative free logic must say that 
+	``Bob is a nadult'' is not genuinely of the form $\Atom{\Obj N}{b}$ because
+	``nadult'' is not an elementary or primitive predicate.
+\item That is because in negative free logic formulas of the form $Fa$ are
+	existence-entailing but  formulas of the form $\lnot \Atom{\Obj F}{a}$ are not. Now
+	if ``Bob is a nadult'' is definitionally equivalent to
+	``Bob is not an adult'' and the latter is not existence-entailing, 
+	then the former is not existence-entailing either. Hence the former
+	could not be expressed in negative free logic as $\Atom{\Obj N}{a}$, 
+	because that formula is existence-entailing in negative free logic.
+\item If we think that logic is formal, independent of subject matter,
+	then logic should not draw differences between predicates. If logic is
+	formal, independent of subject matter, then logical truths should be 
+	truth \emph{no matter what the non-logical terms mean}. But negative
+	free logic cannot preserve the idea that logical truths are 
+	independent of subject matter, because it must make a difference
+	between predicates like ``adult'' and ``nadult''. 
+\end{ans}
+\end{prob}
+
+\begin{prob}[advanced, optional]
+Consider the following formula:
+$$\lforall[x][(\Atom{\Obj F}{x} \lif \lfrexists x)]$$
+\begin{enumerate}
+	\item Explain why this is valid in positive and negative free logic.
+	\item Give a reason to think that this is a problem.
+\end{enumerate}
+\begin{ans}
+\begin{enumerate}
+\item Any assignment (in a !!{structure} of either positive or
+	negative free logic) assigns to $x$ some object of the domain
+	(negative free logic) or inner domain (positive free logic). In
+	both cases, $\lfrexists x$ is true relative to that assignement.
+	So $\lforall[x][(\Atom{\Obj F}{x} \lif \lfrexists x)]$ is true in
+	any !!{structure} of positive or negative free logic.
+\item In metaphysics, we want to say that certain predicates denote
+	\emph{sufficient conditions for existence}: whatever thinks exist,
+	whatever is material exists, and so on. On the face of it, these
+	are expressed by $\lforall[x][(\Atom{\Obj F}{x} \lif \lfrexists
+	x)]$ or $\Box\lforall[x][(\Atom{\Obj F}{x} \lif \lfrexists x)]$,
+	where $\Obj F$ stands for the predicate in question. However, as the
+	above result shows, these claims turn out to be logical truths for
+	\emph{any} predicate in free logic (for the second, in a modal
+	free logic with the rule that every logical truth is necessary).
+	So we cannot express the idea that some predicates, as opposed to
+	others, state sufficient conditions for existence. It would be
+	wrong, for instance, to say that ``everything that is material
+	exists, but it's not the case that everything that is a ghost
+	exists'' if that is translated in a free logic by:
+	$$\lforall[x][(\Atom{\Obj M}{x} \lif \lfrexists x)] \land \lnot
+    \lforall[x][(\Atom{\Obj G}{x} \lif \lfrexists x)]$$ or, in a modal
+    free logic: $$\Box \lforall[x][(\Atom{\Obj M}{x} \lif \lfrexists
+    x)] \land \lnot \Box \lforall[x][(\Atom{\Obj G}{x} \lif \lfrexists
+    x)]$$ for the second conjunct would be a logical falsehood. 
+\end{enumerate}
+\end{ans}
+\end{prob}
+
+
+\end{document}

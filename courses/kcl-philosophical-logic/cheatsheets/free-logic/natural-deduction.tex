@@ -1,0 +1,209 @@
+% Part: cheat-sheets
+% Chapter: free-logic
+% Section: natural-deduction
+
+\documentclass[../../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{chs}{fre}{nd}
+
+\olsection{Natural Deduction}
+
+\subsection{Rules Common to all Free Logics}
+
+\subsubsection{Propositional Logic}
+
+\emph{Propositional Logic rules}. All rules of propositional logic are
+included. To simplify !!{derivation}s, we may use a derived \Log{PL}
+rule to skip purely propositional steps. 
+
+\begin{defish}
+    \emph{All propositional logic rules are allowed.}
+
+    \emph{When $!B$ can be derived from $!A_1,\ldots,!A_n$ using
+    propositional logic rules alone:}
+        \begin{prooftree}
+            \AxiomC{}\DeduceC{$!A_1$}
+            \AxiomC{}\DeduceC{$\ldots$}
+            \AxiomC{}\DeduceC{$!A_n$}
+            \RightLabel{\Log{PL}}
+            \TrinaryInfC{$!B$}
+        \end{prooftree}
+\end{defish}
+
+\newpage
+\subsubsection{Quantifier and Identity}
+
+See \olref{natdedfreecore}.
+
+\begin{figure}
+    \begin{defish}
+
+        \emph{Free Logic Quantifier Rules}
+       
+        \smallskip\noindent
+        \begin{tabular}{ll}
+            \AxiomC{}\DeduceC{$\lfrexists c$}
+            \AxiomC{}\DeduceC{$\lforall[v][!A]$}
+            \RightLabel{\Elim{\lforall} \Log{FL}}
+            \BinaryInfC{$!A[c/v]$}
+            \DisplayProof
+        &
+            \AxiomC{}\DeduceC{$\lfrexists c$}
+            \AxiomC{}\DeduceC{$!A[c/v]$}
+            \RightLabel{\Intro{\lexists} \Log{FL}}
+            \BinaryInfC{$\lexists[v][!A]$}
+            \DisplayProof
+        \end{tabular} 
+        
+        \smallskip\noindent
+        {\setlength\extrarowheight{3em} 
+        \begin{tabular}{cp{10em}}
+            \AxiomC{$\Discharge{\lfrexists c}{n}$}\noLine
+            \UnaryInfC{$\mathcal{D}$}\noLine
+            \UnaryInfC{$!A[c/v]$}
+            \DischargeRule{\Intro{\lforall} \Log{FL}}{n}
+            \UnaryInfC{$\lforall[v][!A]$}
+            \DisplayProof
+        
+        &   
+            \emph{Restrictions:}
+        
+            - $c$ not in undischarged assumptions of $\mathcal{D}$
+                other than $\lfrexists c$.
+        
+            - $c$ not in $!A$
+        
+        \\
+        
+            \AxiomC{$\lexists[v][!A]$}
+                \AxiomC{$\Discharge{\lfrexists c}{n},\Discharge{!A[c/v]}{n}$}
+                \noLine
+                \UnaryInfC{$\mathcal{D}$}
+                \UnaryInfC{$!B$}
+            \DischargeRule{\Elim{\lexists} \Log{FL}}{n}
+            \BinaryInfC{$!B$}
+            \DisplayProof
+        
+        & 
+            \emph{Restrictions:}
+        
+            - $c$ no in undischarged assumptions of $\mathcal{D}$
+              other than $!A[c/v]$ and $\lfrexists c$.
+        
+            - $c$ not in $!A$
+        
+            - $c$ not in $!B$
+        
+        \\
+            
+        \end{tabular}
+        }   
+
+        \smallskip\noindent
+        \emph{Free Logic Identity Rules}
+       
+        \smallskip\noindent
+        \begin{tabular}{ll}
+            \AxiomC{$\lfrexists c$}
+            \RightLabel{\Intro{\eq} \Log{FL}}
+            \UnaryInfC{$\eq[c][c]$}
+            \DisplayProof
+            &
+            \AxiomC{$\eq[c][d]$}
+                \AxiomC{$!A[c/v]$}
+            \RightLabel{\Elim{\eq}}
+            \BinaryInfC{$!A[d/v]$}
+            \DisplayProof                
+        \end{tabular}
+
+    \end{defish}
+    \caption{Natural Deduction rules common to \Log{NFL} and \Log{PFL}.}
+    \ollabel{natdedfreecore}
+\end{figure}
+
+\subsubsection{Existence Predicate}
+
+The following derived rules for $\lfrexists$ allow you 
+to replace $\lfrexists c$ by $\lexists[v][\eq[c][v]]$ and conversely.
+
+\begin{defish}
+    \begin{tabular}{ll}
+        \AxiomC{$\lfrexists c$}
+        \RightLabel{\Elim{\lfrexists}}
+        \UnaryInfC{$\lexists[v][\eq[c][v]]$}
+        \DisplayProof
+        &
+        \AxiomC{$\lexists[v][\eq[c][v]]$}
+        \RightLabel{\Intro{\lfrexists}}
+        \UnaryInfC{$\lfrexists c$}
+        \DisplayProof
+    \end{tabular}
+\end{defish}
+
+\subsection{Rules for Negative Free Logic and Positive Free Logic}
+
+\subsubsection{Negative Free Logic}
+
+Negative free logic has the common rules plus:
+
+\begin{defish}
+    \emph{Negative Free Logic rules}
+
+    \begin{center}        
+    \smallskip
+    \begin{tabular}{cc}
+    \AxiomC{$\Atom{R}{\ldots,c,\ldots}$}
+    \RightLabel{\Log{NFL}}
+    \UnaryInfC{$\lfrexists c$}
+    \DisplayProof
+    &
+    \AxiomC{$\eq[c][c]$}
+    \RightLabel{\Log{NFL\eq}}
+    \UnaryInfC{$\lfrexists c$}
+    \DisplayProof
+    \end{tabular}
+    \end{center}
+
+\end{defish}
+
+The contraposed rules are derived immediately. You may use them too:
+\begin{center}        
+    \smallskip
+    \begin{tabular}{cc}
+    \AxiomC{$\lnot\lfrexists c$}
+    \RightLabel{$\lnot$\Log{NFL}}
+    \UnaryInfC{$\lnot\Atom{R}{\ldots,c,\ldots}$}
+    \DisplayProof
+    &
+    \AxiomC{$\lnot\lfrexists c$}
+    \RightLabel{$\lnot$\Log{NFL\eq}}
+    \UnaryInfC{$\eq/[c][c]$}
+    \DisplayProof
+    \end{tabular}
+\end{center}
+\smallskip
+
+\subsection{Positive Free Logic}
+
+Positive Free Logic has the common rules plus the unrestricted
+$\Intro{\eq}$ rule from first order logic with identity. 
+
+\begin{defish}
+    \emph{Positive Free Logic rule}
+
+    \begin{center}        
+    \smallskip
+    \AxiomC{}
+    \RightLabel{\Intro{\eq} a.k.a. \Log{PFL}}
+    \UnaryInfC{$\eq[c][c]$}
+    \DisplayProof
+    \end{center}
+
+\end{defish}
+
+The weaker \Intro{\eq} \Log{FL} is then redundant. Positive Free Logic 
+does \emph{not} have the \Log{NFL} rule. 
+
+\end{document}

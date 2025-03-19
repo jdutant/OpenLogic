@@ -81,11 +81,17 @@
 % Object language formulas: sans-serif but not italic
 \DeclareDocumentCommand \Obj { m }{\mathsf{#1}}
 
-% Atomic formulas: no parentheses
+% Atomic formulas: no parentheses, remove commas
 %  - `\Atom{P}{t_1, t_2)` 
-
-\DeclareDocumentCommand \Atom { m m }{ \mathord{#1}#2 }
-
+% using Expl3 syntax
+% H/T https://tex.stackexchange.com/questions/603995/string-replacement-in-math-mode
+\ExplSyntaxOn
+\NewDocumentCommand{\removecommas}{m}{
+  \seq_set_split:Nnn \l_tmpa_seq {,} {#1}
+  \seq_use:Nn \l_tmpa_seq {}
+}
+\ExplSyntaxOff
+\DeclareDocumentCommand \Atom { m m }{ \mathord{#1}\removecommas{#2} }
 
 % Logical symbols
 % ---------------

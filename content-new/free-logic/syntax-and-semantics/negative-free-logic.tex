@@ -10,8 +10,8 @@
 
 \olsection{Negative Free Logic}
 
-The guiding idea of negative free logic is that atomic claims have
-existence committments. The following inference seems correct:
+The guiding idea of negative free logic is that \emph{atomic} claims
+have existence committments. The following inference seems correct:
 
 \begin{enumerate}
   \item René thinks.
@@ -20,8 +20,9 @@ existence committments. The following inference seems correct:
 
 This suggests that the claim that René thinks does require that \emph{there is 
 something}, René, which is said to think.  Accordingly, negative free logic 
-considers that (where $F$ is any predicate) $\Atom{F}{a}$ holds only 
-if $a$ is not empty, hence only if $\lfrexists a$ holds. 
+considers that, where $\Obj F$ is any predicate, the atomic sentence
+ $\Atom{\Obj F}{a}$ holds only if $a$ is not empty, 
+ hence only if $\lfrexists a$ holds. 
 
 \begin{explain}
 The corresponding !!{structure}s are the most straightforward way to 
@@ -31,7 +32,7 @@ and (for an inclusive negative free logic) we allow the domain to be empty.
 \end{explain}
 
 \begin{defn}[!!^{structure}s]
-In the negative system of free logic, $\Log NFL$,
+In the negative system of free logic, $\Log{NFL}$,
 \article{structure} \emph{!!{structure}}~$\Struct M$ for a language
 $\Lang L_{\Log{FL}}$ of free logic consists of:
 \begin{enumerate}
@@ -54,7 +55,7 @@ can only be defined one way when the domain is empty. We call it the
 
 \begin{prob}[The empty !!{structure}]
 Describe the interpretation of !!{constant}s and predicates in 
-an !!{structure} whose domain is the empty set.
+an !!{structure} whose domain is the empty set in Negative Free Logic.
 \end{prob}
 
 !!^{variable} assignements are defined as before, except that we allow
@@ -63,11 +64,17 @@ partial assignments that fail to assign anything to some (or even all)
 
 \begin{defn}[Variable Assignment]
 A \emph{variable assignment}~$s$ for a !!{structure}~$\Struct{M}$ is a
-(partial) function such that for any !!{variable}~$x$ of
-$\Lang L_{\Log{FL}}$, $s(x) \in \Domain M$ if defined. In addition, we stipulate
+\emph{partial} function from the set of variables to
+$\Domain M$: for any !!{variable}~$x$ of
+$\Lang L_{\Log{FL}}$, $s(x) \in \Domain M$ or $s(x)$ is undefined. 
+In addition, we stipulate
 an \emph{empty variable assignement} $s^{*}$ that doesn't assign any value to
 any variable.
 \end{defn}
+
+Note that by the definition, !!{structure}s with an empty domain still
+have a variable assignment, namely the empty assignment $s$ that is 
+undefined for every variable. 
 
 \begin{defn}[!!^{value} of Terms]
 If $t$ is a term of the language~$\Lang L_{\Log{FL}}$, $\Struct M$ is a
@@ -86,33 +93,52 @@ follows:
 \end{enumerate}
 \end{defn}
 
-\begin{defn}[$x$-Variant]
-If $s$ is a !!{variable} assignment for a !!{structure}~$\Struct M$, we
-call !!a{variable} assignment $s'$ an \emph{$x$-variant} of $s$ iff:
-\begin{enumerate}
-\item it differs from $s$ at most in what it assigns for $s$, that is 
-either $\Value{y}{M}[s'] = \Value{y}{M}[s]$, or both are undefined, for
-any variable $y$ other than $x$.
-\item it is defined for $x$, that is, $\Value{y}{M}[s'] \in \Domain M$.
-We write $\varAssign{s'}{s}{x}$ when $s'$ is an $x$-variant of $s$.
-\end{enumerate}
+\begin{defn}[Assignement variants]
+If $s$ is a !!{variable} assignment for a !!{structure}~$\Struct M$,
+and $o$ an object in $\Domain M$, and $v$ any variable, the
+\emph{assignment variant} $s(o/v)$ is the assignement that assigns $o$
+to $s$ and agrees with $s$ on every other variable. That is, for any
+variable $u$:
+$$
+s(o/v)(u)=\begin{cases}
+  o & \text{if $u$ is $v$},\\
+  s(u) & \text{if $u$ is not $v$ and $s(u)$ is defined},\\
+  \text{undefined} & \text{otherwise}.  
+\end{cases}
+$$
+We call $s(o/v)$ a \emph{$v$-variant} of $s$.
 \end{defn}
 
-Note that an $x$-variant of some !!{variable} assignment $s$ must be 
-defined for $x$, that is, it must assign an existing object to $x$. 
-If, for instance, $s$ is undefined for $x$, then $s$ is not an $x$-variant
-of itself. Only those variants of $s$ who do assign an object to $x$ 
-are $x$-variants of $s$. 
+Two important things to note:
+\begin{itemize}
+\item While assignments in general needn't defined for a given variable,
+  the assignement variant $s(o/x)$ \emph{must} be defined for the 
+  variable $x$ at least, since $s(o/x)=o$. This is what ultimately
+  ensures that our quantifiers range over existing objects.
+\item In first order logic, $s$ is an assignement variant of itself,
+  since $s=s(s(x)/x)$ for every variable $x$ (since $s(s(x)/x)$
+  assigns to $x$ the object $s(x)$, i.e. whatever $s$ assigns to $x$,
+  and agrees with $s$ on every other variable, hence it's just $s$).
+  Here we cannot be sure that $s(x)$ is defined. \emph{If} $s(x)$ is defined,
+  then $s(x)$ is an $x$-variant of itself, namely $s=s(s(x)/x)$.
+  However, if $s(x)$ is \emph{not} defined, there is no object $o$ such 
+  that $s=s(o/x)$, so $s$ isn't an $x$-variant of itself. As a special
+  case, the empty assignement that is undefined for every variable
+  isn't a variant of itself.
+\end{itemize}
 
 \begin{explain}
-The only reason to let !!{variable} assignments go undefined for some
-!!{variable}s is to cater  for the empty !!{structure}. We need to have 
-!!{variable} assignments in  every !!{structure} because we define 
-truth in a !!{structure} in terms of truth relative to an !!{variable} assignement. In the 
-empty !!{structure} there are no !!{element}s of the domain to assign 
-to !!{variable}. So the only way to have a  !!{variable} assignment 
-in the empty !!{structure} is to allow assignments
-that are not defined for all (or any) !!{variable}.
+The only reason to let !!{variable} assignments go undefined
+for some !!{variable}s is to allow !!{structure}s with empty domains.
+We need to have !!{variable} assignments in  every !!{structure}
+because we define truth in a !!{structure} in terms of truth relative
+to an !!{variable} assignement. In the empty !!{structure} there is
+no !!{element}s of the domain to assign to !!{variable}. So the only
+way to have a !!{variable} assignment in the empty !!{structure} is to
+allow assignments that are not defined for all (or any) !!{variable}.
+If we were writing a semantics for non-inclusive negative free logic 
+(a logic that allows empty constants but prohibits empty domains),
+we could use the standard notion of assignment.
 \end{explain}
 
 \begin{defn}[Satisfaction]
@@ -163,11 +189,11 @@ $\Sat/{M}{!A}[s]$ to mean ``not $\Sat{M}{!A}[s]$.'')
 
 \tagitem{prvAll}{%
   \indcase{!A}{\lforall[x][!B]}{$\Sat{M}{\indfrm}[s]$ iff for every
-    $x$-variant~$s'$ of $s$ \emph{for which $s'(x)$ is defined}, $\Sat{M}{!B}[s']$.}}{}
+    object $o\in \Domain M$, $\Sat{M}{!B}[s(o/x)]$.}}{}
 
 \tagitem{prvEx}{%
-  \indcase{!A}{\lexists[x][!B]}{$\Sat{M}{\indfrm}[s]$ iff there is an
-    $x$-variant~$s'$ of $s$ \emph{for which $s'(x)$ is defined} such that $\Sat{M}{!B}[s']$.}}{}
+  \indcase{!A}{\lexists[x][!B]}{$\Sat{M}{\indfrm}[s]$ iff iff for some
+  object $o\in \Domain M$, $\Sat{M}{!B}[s(o/x)]$.}}{}
 \end{enumerate}
 \end{defn}
 
@@ -214,7 +240,14 @@ $$\Sat{M}{!A}\textrm{ iff }\Sat{M}{!A}[s]\textrm{ for any }s\textrm{ in }\Struct
 \end{prop}
 
 \begin{prob}
-Show that $\Entails/ \lexists x (x = x)$.
+Show that $\Entails/_{\Log{NFL}} \lexists x (x = x)$.
+\end{prob}
+
+\begin{prob}
+Show by induction on length of !!{formula}s that $\Log{NFL}$ validates 
+the \emph{indiscernibility of non-existents}:
+$$\lnot\lfrexists a\land\lnot\lfrexists b \Entails_{\Log{NFL}} 
+!A[a/v]\liff !A[b/v]$$
 \end{prob}
 
 \end{document}

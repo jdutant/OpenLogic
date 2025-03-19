@@ -123,24 +123,33 @@ follows:
 \end{enumerate}
 \end{defn}
 
-\begin{defn}[$x$-Variant]
-If $s$ is a !!{variable} assignment for a !!{structure}~$\Struct M$, we
-call !!a{variable} assignment $s'$ an \emph{$x$-variant} of $s$ iff:
-\begin{enumerate}
-\item it differs from $s$ at most in what it assigns for $s$, that is 
- $\Value{y}{M}[s'] = \Value{y}{M}[s]$, for any variable $y$ other 
- than $x$.
-\item it is defined for $x$, that is, $\Value{y}{M}[s'] \in \Domain M$.
-We write $\varAssign{s'}{s}{x}$ when $s'$ is an $x$-variant of $s$.
-\end{enumerate}
+\begin{defn}[Assignement variants]
+  If $s$ is a !!{variable} assignment for a !!{structure}~$\Struct M$,
+  and $o$ an object in the \emph{inner} $\Domain M$, and $v$ any variable, the
+  \emph{assignment variant} $s(o/v)$ is the assignement that assigns $o$
+  to $s$ and agrees with $s$ on every other variable. That is, for any
+  variable $u$:
+  $$
+  s(o/v)(u)=\begin{cases}
+    o & \text{if $u$ is $v$},\\
+    s(u) & \text{otherwise}.  
+  \end{cases}
+  $$
+  We call $s(o/v)$ a \emph{$v$-variant} of $s$.
 \end{defn}
 
-Note that an $x$-variant of some !!{variable} assignment $s$ must assign
-an object of the \emph{inner} domain to $x$, that is, it must assign 
-an existing object to $x$. If, for instance, $s$ assigns an object of
-the outer domain that is not in the inner domain, then $s$ is not an $x$-variant
-of itself. Only those variants of $s$ who do assign an !!{element} of
-the inner domain to $x$ are $x$-variants of $s$. 
+\begin{explain}
+Note that while an assignment $s$ can assign any object in the outer 
+domain to $x$, the assignement variants $s(o/x)$ only assign
+\emph{inner} domain objects to $x$. This will ensure that our 
+quantifiers only range over the \emph{inner} domain. 
+
+If $\Struct M$ has an empty inner domain, then there are assignments
+in $s$, but no assignment variant $s(o/x)$ of $s$ for any $x$. This
+will have the desired result that in that !!{structure},
+$\lforall[x][!A]$ !!{formula}s are all trivially true and
+$\lexists[x][!A]$ all trivially false. 
+\end{explain}
 
 \begin{defn}[Satisfaction]
 \ollabel{defn:satisfaction}
@@ -187,12 +196,14 @@ $\Sat/{M}{!A}[s]$ to mean ``not $\Sat{M}{!A}[s]$.'')
     nor $\Sat{M}{!C}[s]$.}}{}
 
 \tagitem{prvAll}{%
-  \indcase{!A}{\lforall[x][!B]}{$\Sat{M}{\indfrm}[s]$ iff for every
-    $x$-variant~$s'$ of $s$, $\Sat{M}{!B}[s']$.}}{}
+  \indcase{!A}{\lforall[x][!B]}{$\Sat{M}{\indfrm}[s]$ iff for every 
+  object $o$ in the \emph{inner} domain $\Domain M$, 
+  $\Sat{M}{!B}[s(o/x)]$.}}{}
 
 \tagitem{prvEx}{%
-  \indcase{!A}{\lexists[x][!B]}{$\Sat{M}{\indfrm}[s]$ iff there is an
-    $x$-variant~$s'$ of $s$ so that $\Sat{M}{!B}[s']$.}}{}
+  \indcase{!A}{\lexists[x][!B]}{$\Sat{M}{\indfrm}[s]$ iff for some 
+  object $o$ in the \emph{inner} domain $\Domain M$, 
+  $\Sat{M}{!B}[s(o/x)]$}}{}
 \end{enumerate}
 \end{defn}
 
@@ -215,11 +226,11 @@ If $\Sat{M}{Fa}$ then $\Sat{M}{\lfrexists a}$.
 \end{ex}
 
 \begin{ex}
-If $\Entails/ \eq[a][a]\lif\lfrexists a$.
+If $\Entails/_{\Log{PFL}} \eq[a][a]\lif\lfrexists a$.
 \end{ex}
 
 \begin{ex}
-$\Entails/ \lexists x (x = x)$.
+$\Entails/_{\Log{PFL}} \lexists x (x = x)$.
 \end{ex}
 
 \end{document}

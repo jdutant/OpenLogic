@@ -48,46 +48,58 @@ order logic.
     allowed to be empty. There is only one such !!{structure}, for interpretations
     can only be defined one way when the domain is empty. We call it the 
     \emph{empty !!{structure}}.
-    \end{defn}
-
-
-    \begin{defn}[Variable Assignment]
-        A \emph{variable assignment}~$s$ for a !!{structure}~$\Struct{M}$ is a
-        (partial) function such that for any !!{variable}~$x$ of
-        $\Lang L_{\Log{FL}}$, $s(x) \in \Domain M$ if defined. In addition, we stipulate
-        an \emph{empty variable assignement} $s^{*}$ that doesn't assign any value to
-        any variable.
-        \end{defn}
-        
-        \begin{defn}[!!^{value} of Terms]
-        If $t$ is a term of the language~$\Lang L_{\Log{FL}}$, $\Struct M$ is a
-        !!{structure} for~$\Lang L_{\Log{FL}}$, and $s$ is a !!{variable} assignment
-        for~$\Struct M$, the \emph{!!{value}}~$\Value{t}{M}[s]$ is defined as
-        follows:
-        \begin{enumerate}
-        \item \indcase{t}{c}{$\Value{\indfrm}{M}[s] = \Assign{\indcomplex}{M}$, if defined.}
-        \item \indcase{t}{x}{$\Value{\indfrm}{M}[s] = s(\indcomplex)$, if defined.}
-        \tagitem{fnTerms}{\indcase{t}{\Atom{f}{t_1, \ldots, t_n}}{
-        \[
-        \Value{\indfrm}{M}[s] = \Assign{f}{M}(\Value{t_1}{M}[s], \ldots,
-        \Value{t_n}{M}[s])\textrm{, if defined}.
-        \]}
-        }{}
-        \end{enumerate}
 \end{defn}
 
+\begin{defn}[Variable Assignment]
+    A \emph{variable assignment}~$s$ for a !!{structure}~$\Struct{M}$ is a
+    \emph{partial} function from the set of variables to
+    $\Domain M$: for any !!{variable}~$x$ of
+    $\Lang L_{\Log{FL}}$, $s(x) \in \Domain M$ or $s(x)$ is undefined. 
+    In addition, we stipulate
+    an \emph{empty variable assignement} $s^{*}$ that doesn't assign any value to
+    any variable.
+\end{defn}
 
-\begin{defn}[$x$-Variant]
-    If $s$ is a !!{variable} assignment for a !!{structure}~$\Struct M$, we
-    call !!a{variable} assignment $s'$ an \emph{$x$-variant} of $s$ iff:
+\begin{defn}[!!^{value} of Terms]
+    If $t$ is a term of the language~$\Lang L_{\Log{FL}}$, $\Struct M$ is a
+    !!{structure} for~$\Lang L_{\Log{FL}}$, and $s$ is a !!{variable} assignment
+    for~$\Struct M$, the \emph{!!{value}}~$\Value{t}{M}[s]$ is defined as
+    follows:
     \begin{enumerate}
-    \item it differs from $s$ at most in what it assigns for $s$, that is 
-    either $\Value{y}{M}[s'] = \Value{y}{M}[s]$, or both are undefined, for
-    any variable $y$ other than $x$.
-    \item it is defined for $x$, that is, $\Value{y}{M}[s'] \in \Domain M$.
-    We write $\varAssign{s'}{s}{x}$ when $s'$ is an $x$-variant of $s$.
+    \item \indcase{t}{c}{$\Value{\indfrm}{M}[s] = \Assign{\indcomplex}{M}$, if defined.}
+    \item \indcase{t}{x}{$\Value{\indfrm}{M}[s] = s(\indcomplex)$, if defined.}
+    \tagitem{fnTerms}{\indcase{t}{\Atom{f}{t_1, \ldots, t_n}}{
+    \[
+    \Value{\indfrm}{M}[s] = \Assign{f}{M}(\Value{t_1}{M}[s], \ldots,
+    \Value{t_n}{M}[s])\textrm{, if defined}.
+    \]}
+    }{}
     \end{enumerate}
 \end{defn}
+
+We need to allow undefined assignments to ensure that we have 
+assignments even in !!{structure}s with an empty domain.
+
+\begin{defn}[Assignement variants]
+  If $s$ is a !!{variable} assignment for a !!{structure}~$\Struct M$,
+  and $o$ an object in $\Domain M$, and $v$ any variable, the
+  \emph{assignment variant} $s(o/v)$ is the assignement that assigns $o$
+  to $s$ and agrees with $s$ on every other variable. That is, for any
+  variable $u$:
+  $$
+  s(o/v)(u)=\begin{cases}
+    o & \text{if $u$ is $v$},\\
+    s(u) & \text{if $u$ is not $v$ and $s(u)$ is defined},\\
+    \text{undefined} & \text{otherwise}.  
+  \end{cases}
+  $$
+  We call $s(o/v)$ a \emph{$v$-variant} of $s$.
+\end{defn}  
+
+Note that while assignments in general needn't defined for a given
+variable, the assignement variant $s(o/x)$ \emph{must} be defined for
+the variable $x$ at least, since $s(o/x)=o$. This is what ultimately
+ensures that our quantifiers range over existing objects.
         
 \begin{defn}[Satisfaction]
     \ollabel{defn:satisfaction}
@@ -137,11 +149,11 @@ order logic.
     
     \tagitem{prvAll}{%
       \indcase{!A}{\lforall[x][!B]}{$\Sat{M}{\indfrm}[s]$ iff for every
-        $x$-variant~$s'$ of $s$ \emph{for which $s'(x)$ is defined}, $\Sat{M}{!B}[s']$.}}{}
-    
+      object $o\in \Domain M$, $\Sat{M}{!B}[s(o/x)]$.}}{}
+  
     \tagitem{prvEx}{%
-      \indcase{!A}{\lexists[x][!B]}{$\Sat{M}{\indfrm}[s]$ iff there is an
-        $x$-variant~$s'$ of $s$ \emph{for which $s'(x)$ is defined} such that $\Sat{M}{!B}[s']$.}}{}
+      \indcase{!A}{\lexists[x][!B]}{$\Sat{M}{\indfrm}[s]$ iff iff for some
+      object $o\in \Domain M$, $\Sat{M}{!B}[s(o/x)]$.}}{}
     \end{enumerate}
 \end{defn}
     
@@ -183,7 +195,6 @@ Quantifiers only range over the inner domain, however. This is ensured
 by restricting variable assignments to objects in the \emph{inner}
 domain.
 
-
 \begin{defn}[!!^{structure}s]
     In the positive system of free logic, $\Log NFL$,
     \article{structure} \emph{!!{structure}}~$\Struct M$ for a language
@@ -210,40 +221,61 @@ domain.
 \end{defn}
     
 \begin{defn}[Variable Assignment]
-    A \emph{variable assignment}~$s$ for a !!{structure}~$\Struct{M}$ is a
-      function such that for any !!{variable}~$x$ of
-      $\Lang L_{\Log{FL}}$, $s(x) \in \OuterDomain M$. 
+  A \emph{variable assignment}~$s$ for a !!{structure}~$\Struct{M}$ is a
+    function such that for any !!{variable}~$x$ of
+    $\Lang L_{\Log{FL}}$, $s(x) \in \OuterDomain M$. 
 \end{defn}
-    
+
+In this semantics, assignements are defined for all variables: 
+$s(x)$ is always defined. In !!{structure}s with empty \emph{inner}
+domain, we have at least one object in the outer domain to which 
+variables can be assigned. 
+
 \begin{defn}[!!^{value} of Terms]
-    If $t$ is a term of the language~$\Lang L_{\Log{FL}}$, $\Struct M$ is a
-    !!{structure} for~$\Lang L_{\Log{FL}}$, and $s$ is a !!{variable} assignment
-    for~$\Struct M$, the \emph{!!{value}}~$\Value{t}{M}[s]$ is defined as
-    follows:
-    \begin{enumerate}
-    \item \indcase{t}{c}{$\Value{\indfrm}{M}[s] = \Assign{\indcomplex}{M}$.}
-    \item \indcase{t}{x}{$\Value{\indfrm}{M}[s] = s(\indcomplex)$.}
-    \tagitem{fnTerms}{\indcase{t}{\Atom{f}{t_1, \ldots, t_n}}{
-    \[
-    \Value{\indfrm}{M}[s] = \Assign{f}{M}(\Value{t_1}{M}[s], \ldots,
-    \Value{t_n}{M}[s])\textrm{, if defined}.
-    \]}
-    }{}
-    \end{enumerate}
+  If $t$ is a term of the language~$\Lang L_{\Log{FL}}$, $\Struct M$ is a
+  !!{structure} for~$\Lang L_{\Log{FL}}$, and $s$ is a !!{variable} assignment
+  for~$\Struct M$, the \emph{!!{value}}~$\Value{t}{M}[s]$ is defined as
+  follows:
+  \begin{enumerate}
+  \item \indcase{t}{c}{$\Value{\indfrm}{M}[s] = \Assign{\indcomplex}{M}$.}
+  \item \indcase{t}{x}{$\Value{\indfrm}{M}[s] = s(\indcomplex)$.}
+  \tagitem{fnTerms}{\indcase{t}{\Atom{f}{t_1, \ldots, t_n}}{
+  \[
+  \Value{\indfrm}{M}[s] = \Assign{f}{M}(\Value{t_1}{M}[s], \ldots,
+  \Value{t_n}{M}[s])\textrm{, if defined}.
+  \]}
+  }{}
+  \end{enumerate}
 \end{defn}
-    
-\begin{defn}[$x$-Variant]
-    If $s$ is a !!{variable} assignment for a !!{structure}~$\Struct M$, we
-    call !!a{variable} assignment $s'$ an \emph{$x$-variant} of $s$ iff:
-    \begin{enumerate}
-    \item it differs from $s$ at most in what it assigns for $s$, that is 
-     $\Value{y}{M}[s'] = \Value{y}{M}[s]$, for any variable $y$ other 
-     than $x$.
-    \item it is defined for $x$, that is, $\Value{y}{M}[s'] \in \Domain M$.
-    We write $\varAssign{s'}{s}{x}$ when $s'$ is an $x$-variant of $s$.
-    \end{enumerate}
+      
+
+\begin{defn}[Assignement variants]
+  If $s$ is a !!{variable} assignment for a !!{structure}~$\Struct M$,
+  and $o$ an object in the \emph{inner} $\Domain M$, and $v$ any variable, the
+  \emph{assignment variant} $s(o/v)$ is the assignement that assigns $o$
+  to $s$ and agrees with $s$ on every other variable. That is, for any
+  variable $u$:
+  $$
+  s(o/v)(u)=\begin{cases}
+    o & \text{if $u$ is $v$},\\
+    s(u) & \text{otherwise}.  
+  \end{cases}
+  $$
+  We call $s(o/v)$ a \emph{$v$-variant} of $s$.
 \end{defn}
-    
+
+Note that while an assignment $s$ can assign any object in the outer 
+domain to $x$, the assignement variants $s(o/x)$ only assign
+\emph{inner} domain objects to $x$. This will ensure that our 
+quantifiers only range over the \emph{inner} domain. 
+
+If $\Struct M$ has an empty domain, it still has assignments $s$, as we 
+noted above. But there are no $x$-variants of $s$, since there is 
+no inner domain object to assign to $s$. This
+has the desired result that in that !!{structure},
+$\lforall[x][!A]$ !!{formula}s are all trivially true and
+$\lexists[x][!A]$ all trivially false. 
+
 \begin{defn}[Satisfaction]
     \ollabel{defn:satisfaction}
     Satisfaction of a !!{formula}~$!A$ in a !!{structure}~$\Struct M$
@@ -288,18 +320,19 @@ domain.
         $\Sat{M}{!B}[s]$ and $\Sat{M}{!C}[s]$, or neither $\Sat{M}{!B}[s]$
         nor $\Sat{M}{!C}[s]$.}}{}
     
+
     \tagitem{prvAll}{%
-      \indcase{!A}{\lforall[x][!B]}{$\Sat{M}{\indfrm}[s]$ iff for every
-        $x$-variant~$s'$ of $s$, $\Sat{M}{!B}[s']$.}}{}
-    
+        \indcase{!A}{\lforall[x][!B]}{$\Sat{M}{\indfrm}[s]$ iff for every 
+        object $o$ in the \emph{inner} domain $\Domain M$, 
+        $\Sat{M}{!B}[s(o/x)]$.}}{}
+      
     \tagitem{prvEx}{%
-      \indcase{!A}{\lexists[x][!B]}{$\Sat{M}{\indfrm}[s]$ iff there is an
-        $x$-variant~$s'$ of $s$ so that $\Sat{M}{!B}[s']$.}}{}
+        \indcase{!A}{\lexists[x][!B]}{$\Sat{M}{\indfrm}[s]$ iff for some 
+        object $o$ in the \emph{inner} domain $\Domain M$, 
+        $\Sat{M}{!B}[s(o/x)]$}}{}
     \end{enumerate}
 \end{defn}
     
 Truth and validity are defined as usual.
-   
-
 
 \end{document}

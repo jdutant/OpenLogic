@@ -19,6 +19,26 @@
     \item $(\Obj{\pvar{A}}\lif \Obj{\pvar{B}}\lor \Obj{\pvar{C}})\lif(\Obj{\pvar{A}}\lif \Obj{\pvar{B}})$
     \item $\lnot(\Obj{\pvar{A}}\land(\Obj{\pvar{B}}\lor \Obj{\pvar{C}})\lif(\Obj{\pvar{A}}\land \Obj{\pvar{B}}))\lif \Obj{\pvar{C}}$
     \end{enumerate}
+
+    \begin{ans}
+        Check first that you parse !!{formula}s correctly. Remember
+        that $\lor$ and $\land$ bind more strongly than $\lif$ and
+        $\liff$. That is, $!A\land !B\lif !C$ is $(!A\land !B)\lif !C$,
+        $!A\lif!B\land!C$ is $!A\lif(!B\land!C)$ and likewise with $\lor$.
+        Therefore:
+        \begin{enumerate}
+        \item $\Obj{\pvar{A}}\lif \Obj{\pvar{B}}\lor \Obj{\pvar{C}}$
+        is  $\Obj{\pvar{A}}\lif \underline{(\Obj{\pvar{B}}\lor \Obj{\pvar{C}})}$.
+        \item $\Obj{\pvar{A}}\land(\Obj{\pvar{B}}\lor
+        \Obj{\pvar{C}})\lif(\Obj{\pvar{A}}\land \Obj{\pvar{B}})$ is
+        $\underline{(\Obj{\pvar{A}}\land(\Obj{\pvar{B}}\lor
+        \Obj{\pvar{C}}))}\lif(\Obj{\pvar{A}}\land \Obj{\pvar{B}})$
+        \end{enumerate}
+
+    % \begin{enumerate}
+    % \item 
+    % \end{enumerate}
+    \end{ans}
 \end{prob}
 
 \begin{prob}

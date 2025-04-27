@@ -149,6 +149,18 @@
 
 \DeclareDocumentCommand \pAssign { m } {\mathit{#1}}
 
+% - `\Domain{M}` - domain of a structure, e.g., `\Domain{M}` gives
+% $\left|\mathfrak M\right|$.
+
+\DeclareDocumentCommand \Domain { m }{D_{\Struct{#1}}}
+
+% - `\Assign{R}{M}` - Assignment (value of) of a constant/predicate symbol
+% in a structure; e.g., `\Assign{R}{M}` produces $R^\mathfrak{M}$.
+
+\DeclareDocumentCommand \Assign { m m }{I_{\Struct{#2}}(#1)}
+
+
+
 % - `\ident`: syntactic identity between expressions (infix relation),
 % can't use default `\equiv' as MacFarlane uses it for `\liff'
 % can't use `=` as it gives ugly semantic clauses `!A = t_1 = t_2'
@@ -219,6 +231,8 @@
 \settexttoken{derivability}{provability}{provabilities}
 \settexttoken{derivable}{provable}{provable}
 \settexttoken{nonderivability}{unprovability}{unprovability}
+\settexttoken{falsity}{falsum}{falsums}
+\settexttoken{truth}{verum}{verums}
 
 % infinity (following Phil Methodology)
 \settexttoken{enumerable}{countable}{countable}

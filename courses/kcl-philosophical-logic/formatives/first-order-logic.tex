@@ -12,14 +12,87 @@
 
 \begin{prob}
 
-    Consider the model $\mathcal{M}$ with $\mathcal{D}=\{1,2,3\}$ and
-    $\mathcal{I}(F)=\{1,3\}$, $\mathcal{I}(G)=\{\langle1,1\rangle,\langle2,1\rangle,\langle2,2\rangle,\langle3,2\rangle\}$.
-    Say whether the following formulas are true in $\mathcal{M}$. No
+    Consider the !!{structure}~$\Struct M$ with domain 
+    $\Domain{M}=\{1,2,3\}$ and interpretation
+    $\Assign{F}{M}=\{1,3\}$, $\Assign{G}{M}=\{\langle1,1\rangle,\langle2,1\rangle,\langle2,2\rangle,\langle3,2\rangle\}$.
+    Say whether the following formulas are true in $\Struct{M}$. No
     need to justify your answers.
     \begin{enumerate}
-    \item $\forall x(Fx\lif\exists yGxy)$
-    \item $\forall x\exists y(Gxx\lif Gyx)$
+    \item $\lforall[x](\Atom{F}{x}\lif\lexists[y][\Atom{G}{x,y}])$
+    \item $\lforall[x][\lexists[y](\Atom{G}{x,x}\lif \Atom{G}{y,x})]$
     \end{enumerate}
+
+    \begin{ans}
+    \begin{enumerate}
+    \item $\lforall[x](\Atom{F}{x}\lif\lexists[y][\Atom{G}{x,y}])$ is
+    true in $\Struct{M}$.
+
+    \emph{Explanation. With $s(x)=2$ we have
+    $\Atom{F}{x}\lif\lexists[x][\Atom{G}{x,y}]$ true because
+    $\Atom{F}{x}$ is false. With $s(x)=1$ or $s(x)=3$ we also have
+    $\Atom{F}{x}\lif\lexists[x][\Atom{G}{x,y}]$ true because we have
+    $\lexists[x][\Atom{G}{x,y}]$ true: take $s(y)=1$ with $s(x)=1$ and
+    $s(y)=2$ when $s(x)=3$. So
+    $\Atom{F}{x}\lif\lexists[x][\Atom{G}{x,y}]$ is true for any
+    assignment to $x$, hence $\forall x(Fx\lif\lexists[y][\Atom{G}{x,y}])$.} 
+    
+    \emph{If you need to justify.} Let $s$ be any !!{variable} 
+    assignment. We have: 
+    \begin{align*}
+    \Sat{M}{\lexists[y][Gxy]}[\Subst{s}{1}{x}] 
+        & \text{ since }\Sat{M}{Gxy}[\Subst{\Subst{s}{1}{x}}{1}{y}] 
+    \\
+        & \text{ since }\tuple{1,1}\in\Assign{G}{M}
+    \\        
+    \Sat/{M}{Fx}[\Subst{s}{2}{x}]
+        & \text{ since }2\notin\Assign{F}{M}
+    \\
+    \Sat{M}{\lexists[y][Gxy]}[\Subst{s}{3}{x}] 
+        & \text{ since }\Sat{M}{Gxy}[\Subst{\Subst{s}{3}{x}}{2}{y}] 
+    \\
+        & \text{ since }\tuple{3,2}\in\Assign{G}{M}
+    \end{align*}
+    From this we have $\Sat{M}{\Atom{F}{x}\lif\lexists[y][\Atom{G}{x,y}]}[\Subst{s}{m}{x}]$
+    for every $m\in\Domain{M}$, hence $\Sat{M}{\lforall[x](\Atom{F}{x}\lif\lexists[y][\Atom{G}{x,y}])}[s]$.
+
+    \item $\lforall[x][\lexists[y](\Atom{G}{x,x}\lif \Atom{G}{y,x})]$ is true in
+    $\Struct{M}$. 
+
+    \emph{If you need to justify.} Let $s$ be any !!{variable} 
+        assignment. We have: 
+        \begin{align*}
+        \Sat{M}{\lexists[y](\Atom{G}{x,x}\lif \Atom{G}{y,x})}[\Subst{s}{1}{x}]
+             & \text{ since }\Sat{M}{\Atom{G}{x,x}\lif \Atom{G}{y,x}}[\Subst{\Subst{s}{1}{x}}{1}{y}]
+        \\
+             & \text{ since }\Sat{M}{\Atom{G}{y,x}}[\Subst{\Subst{s}{1}{x}}{1}{y}]
+        \\
+        \Sat{M}{\lexists[y](\Atom{G}{x,x}\lif \Atom{G}{y,x})}[\Subst{s}{2}{x}]
+             & \text{ since }\Sat{M}{\Atom{G}{x,x}\lif \Atom{G}{y,x}}[\Subst{\Subst{s}{2}{x}}{2}{y}]
+        \\
+             & \text{ since }\Sat{M}{\Atom{G}{y,x}}[\Subst{\Subst{s}{2}{x}}{2}{y}]
+        \\
+        \Sat{M}{\lexists[y](\Atom{G}{x,x}\lif \Atom{G}{y,x})}[\Subst{s}{3}{x}]
+             & \text{ since }\Sat{M}{\Atom{G}{x,x}\lif \Atom{G}{y,x}}[\Subst{\Subst{s}{3}{x}}{1}{y}]
+        \\
+             & \text{ since }\Sat/{M}{\Atom{G}{x,x}}[\Subst{\Subst{s}{3}{x}}{1}{y}]
+        \end{align*}
+    \end{enumerate}
+    From this we have $\Sat{M}{\lforall[x][\lexists[y](\Atom{G}{x,x}\lif \Atom{G}{y,x})]}[s]$. 
+
+    For a smarter justification, you could notice that the formula is
+    a logical truth because $\lexists[y](\Atom{G}{x,x}\lif \Atom{G}{y,x})$ is
+    guaranteed to be satisfied relative to any assignment in any
+    !!{structure}. For if $\Sat{M}{\Atom{G}{x,x}}[s]$, then
+    $\Sat{M}{\Atom{G}{y,x}}[\Subst{s}{s(x)}{y}]$. Therefore either
+    $\Sat/{M}{\Atom{G}{x,x}}[s]$ and
+    $\Sat/{M}{\Atom{G}{x,x}}[\Subst{s}{s(x)}{y}]$ or
+    $\Sat{M}{\Atom{G}{y,x}}[\Subst{s}{s(x)}{y}]$. Either way, 
+    $\Sat{M}{\lexists[y](\Atom{G}{x,x}\lif \Atom{G}{y,x})}[s]$.
+    Generalizing on $s$, $\Sat{M}{\lforall[x][\lexists[y](\Atom{G}{x,x}\lif \Atom{G}{y,x})]}$.
+
+    % longish answer, clear page
+    \clearpage
+    \end{ans}
 
 \end{prob}
 
@@ -34,14 +107,514 @@
     
     Therefore: no player followed any player who followed someone.
     \end{quote}
+
+    \begin{ans}
+    There is an ambiguity in the first premise: we could read with 
+    `some player' taking wide scope (there's some specific player Ali
+    didn't see that every player followed). However, I find the 
+    reading in which `some player' take narrow scope more natural.
+    That is the reading I formalise. 
+    
+    Dictionary:
+
+    \begin{tabular}{ll}
+    $P$ & \dots is a player \\
+    $S$ & \dots saw \dots \\
+    $F$ & \dots followed \dots
+    \end{tabular}
+    
+    Formalization:
+    \begin{enumerate}
+    \item $\lforall[x](\Atom{P}{x}\lif\lexists[y](\Atom{P}{y}\land\lnot\Atom{S}{a,y}\land\Atom{F}{x,y}))$
+    \item $\lforall[x]((\Atom{P}{x}\land \lexists[y][\Atom{F}{x,y}])\lif\Atom{S}{a,x})$
+    \item $\lnot\lexists[x](\Atom{P}{x}\land\lexists[y]((\Atom{P}{y}\land\lexists[z][\Atom{F}{y,z}])\land\Atom{F}{x,y}))$
+    \end{enumerate}
+
+    The argument is valid. Full !!{derivation} on the next page.
+    Labels for non-discharging rules are omitted for reasons of space,
+    see the break-down of the !!{derivation} in the commentary
+    afterwards for full labels.
+
+    Alternative answer: read `some player' with a narrow scope in 
+    the first premise. Replace the formalisation of the first 
+    premise with:
+    $$
+    \lexists[x](\Atom{P}{x}\land\lnot\Atom{S}{a,x}\land\lforall[y](\Atom{P}{y}\lif\Atom{F}{x,y}))
+    $$
+    The argument is valid under that reading too. In this case the 
+    premises are inconsistent, so any conclusion follows. See
+    !!{derivation} page after next.
+    
+    \newpage\thispagestyle{empty}
+    \rotatebox{90}{
+        \begin{minipage}{\textheight}
+            \begin{minipage}{25em}
+                Proof of $\lforall[x](\Atom{P}{x}\lif\lexists[y](\Atom{P}{y}\land\lnot\Atom{S}{a,y}\land\Atom{F}{x,y})),
+                \lforall[x]((\Atom{P}{x}\land \lexists[y][\Atom{F}{x,y}])\lif\Atom{S}{a,x}),
+                \Proves \lnot\lexists[x](\Atom{P}{x}\land\lexists[y]((\Atom{P}{y}\land\lexists[z][\Atom{F}{y,z}])\land\Atom{F}{x,y}))$.
+                \bigskip
+
+                Let $\mathcal{D}$ be the following derivation of $\bot$
+                from our premises together with
+                $\lexists[y](\Atom{P}{y}\land\lnot\Atom{S}{a,y}\land\Atom{F}{b,y})$:
+            \end{minipage}
+            \bigskip
+            
+        {\tiny
+        \AxiomC{$\lexists[y](\Atom{P}{y}\land\lnot\Atom{S}{a,y}\land\Atom{F}{b,y})$}
+            \AxiomC{$\Discharge{\Atom{P}{c}\land\lnot\Atom{S}{a,c}\land\Atom{F}{b,c}}{2}$}
+           %\RightLabel{\Elim{\land}}
+            \UnaryInfC{$\lnot\Atom{S}{a,c}$}
+                \AxiomC{$\Discharge{\Atom{P}{c}\land\lnot\Atom{S}{a,c}\land\Atom{F}{b,c}}{2}$}
+                %\RightLabel{\Elim{\land}}
+                \UnaryInfC{$\Atom{P}{c}$}
+                    \AxiomC{$\lforall[x](\Atom{P}{x}\lif\lexists[y](\Atom{P}{y}\land\lnot\Atom{S}{a,y}\land\Atom{F}{x,y}))$}
+                    %\RightLabel{\Elim{\lforall}}
+                    \UnaryInfC{$\Atom{P}{c}\lif\lexists[y](\Atom{P}{y}\land\lnot\Atom{S}{a,y}\land\Atom{F}{c,y})$}
+                        \AxiomC{$\Discharge{\Atom{P}{c}\land\lnot\Atom{S}{a,c}\land\Atom{F}{b,c}}{2}$}
+                        %\RightLabel{\Elim{\land}}
+                        \UnaryInfC{$\Atom{P}{c}$}
+                    %\RightLabel{\Elim{\lif}}
+                    \BinaryInfC{$\lexists[y](\Atom{P}{y}\land\lnot\Atom{S}{a,y}\land\Atom{F}{c,y})$}
+                        \AxiomC{$\Discharge{\Atom{P}{d}\land\lnot\Atom{S}{a,d}\land\Atom{F}{c,d}}{1}$}
+                        %\RightLabel{\Elim{\land}}
+                        \UnaryInfC{$\Atom{F}{c,d}$}
+                        %\RightLabel{\Intro{\lexists}}
+                        \UnaryInfC{$\lexists[y][\Atom{F}{c,y}]$}
+                    \DischargeRule{\Elim{\lexists}}{1}
+                    \BinaryInfC{$\lexists[y][\Atom{F}{c,y}]$}
+                \BinaryInfC{$\Atom{P}{c}\land\lexists[y][\Atom{F}{c,y}]$}
+                    \AxiomC{$\lforall[x]((\Atom{P}{x}\land \lexists[y][\Atom{F}{x,y}])\lif\Atom{S}{a,x})$}
+                    %\RightLabel{\Elim{\lforall}}
+                    \UnaryInfC{$(\Atom{P}{c}\land \lexists[y][\Atom{F}{c,y}])\lif\Atom{S}{a,x}$}
+                %\RightLabel{\Elim{\lif}}
+                \BinaryInfC{$\Atom{S}{a,c}$}
+            %\RightLabel{\Intro{\bot}}
+            \BinaryInfC{$\bot$}
+        \DischargeRule{\Elim{\lexists}}{2}
+        \BinaryInfC{$\bot$}
+        \DisplayProof
+        }
+
+            \bigskip
+            \begin{minipage}{25em}
+            Abbreviate our conclusion as
+            $\lexists[x](\Atom{P}{x}\land\ldots)$. The overall
+            !!{derivation} is:
+            \end{minipage}
+            \bigskip
+
+        {\tiny
+        \AxiomC{$\Discharge{\lexists[x](\Atom{P}{x}\land\ldots)}{4}$}
+            \AxiomC{$\Discharge{\Atom{P}{b}\land\ldots}{3}$}
+            \RightLabel{\Elim{\land}}
+            \UnaryInfC{$\Atom{P}{b}$}
+                \AxiomC{$\lforall[x](\Atom{P}{x}\lif\lexists[y](\Atom{P}{y}\land\lnot\Atom{S}{a,y}\land\Atom{F}{x,y}))$}
+                \RightLabel{\Elim{\lforall}}
+                \UnaryInfC{$\Atom{P}{b}\lif\lexists[y](\Atom{P}{y}\land\lnot\Atom{S}{a,y}\land\Atom{F}{b,y})$}
+            \RightLabel{\Elim{\lif}}
+            \BinaryInfC{$\lexists[y](\Atom{P}{y}\land\lnot\Atom{S}{a,y}\land\Atom{F}{b,y})$}
+                \AxiomC{$\lforall[x](\Atom{P}{x}\lif\lexists[y](\Atom{P}{y}\land\lnot\Atom{S}{a,y}\land\Atom{F}{x,y}))$}
+                    \AxiomC{$\lforall[x]((\Atom{P}{x}\land \lexists[y][\Atom{F}{x,y}])\lif\Atom{S}{a,x})$}
+            \TrinaryInfC{$\mathcal{D}$}
+            \noLine
+            \UnaryInfC{$\bot$}
+        \DischargeRule{\Elim{\lexists}}{3}
+        \BinaryInfC{$\bot$}
+        \DischargeRule{$\bot_C$}{4}
+        \UnaryInfC{$\lnot\lexists[x](\Atom{P}{x}\land\ldots)$}
+        \DisplayProof
+        }
+
+        \end{minipage}
+    }
+
+   
+    \newpage\thispagestyle{empty}
+    \rotatebox{90}{
+        \begin{minipage}{\textheight}
+            \begin{minipage}{25em}
+                Proof of $\lexists[x](\Atom{P}{x}\land\lnot\Atom{S}{a,x}\land\lforall[y](\Atom{P}{y}\lif\Atom{F}{x,y})),
+                \lforall[x]((\Atom{P}{x}\land \lexists[y][\Atom{F}{x,y}])\lif\Atom{S}{a,x}),
+                \Proves \lnot\lexists[x](\Atom{P}{x}\land\lexists[y]((\Atom{P}{y}\land\lexists[z][\Atom{F}{y,z}])\land\Atom{F}{x,y}))$.
+                \bigskip
+
+                Let $\mathcal{D}$ be the following derivation of $\Atom{S}{a,b}$
+                from our second premise together with
+                $\Atom{P}{b}\land\lnot\Atom{S}{a,b}\land\lforall[y](\Atom{P}{y}\lif\Atom{F}{b,y})$:
+            \end{minipage}
+            \bigskip
+            
+        {\tiny
+            \AxiomC{$\Atom{P}{b}\land\lnot\Atom{S}{a,b}\land\lforall[y](\Atom{P}{y}\lif\Atom{F}{b,y})$}
+            \RightLabel{\Elim{\land}}
+            \UnaryInfC{$\Atom{P}{b}$}
+                \AxiomC{$\Atom{P}{b}\land\lnot\Atom{S}{a,b}\land\lforall[y](\Atom{P}{y}\lif\Atom{F}{b,y})$}
+                \RightLabel{\Elim{\land}}
+                \UnaryInfC{$\lforall[y](\Atom{P}{y}\lif\Atom{F}{b,y})$}
+                \RightLabel{\Elim{\lforall}}
+                \UnaryInfC{$\Atom{P}{b}\lif\Atom{F}{b,b}$}
+                    \AxiomC{$\Atom{P}{b}\land\lnot\Atom{S}{a,b}\land\lforall[y](\Atom{P}{y}\lif\Atom{F}{b,y})$}
+                    \RightLabel{\Elim{\land}}
+                    \UnaryInfC{$\Atom{P}{b}$}
+                \BinaryInfC{$\Atom{F}{b,b}$}
+                \RightLabel{\Intro{\lexists}}
+                \UnaryInfC{$\lexists[y][\Atom{F}{b,y}]$}
+            \BinaryInfC{$\Atom{P}{b}\land\lexists[y][\Atom{F}{b,y}]$}
+                \AxiomC{$\lforall[x]((\Atom{P}{x}\land \lexists[y][\Atom{F}{x,y}])\lif\Atom{S}{a,x})$}
+                \RightLabel{\Elim{\lforall}}
+                \UnaryInfC{$(\Atom{P}{b}\land \lexists[y][\Atom{F}{b,y}])\lif\Atom{S}{a,b}$}
+            \RightLabel{\Elim{\lif}}
+            \BinaryInfC{$\Atom{S}{a,b}$}
+        \DisplayProof
+        }
+
+            \bigskip
+            \begin{minipage}{25em}
+            Abbreviate our conclusion as
+            $\lexists[x](\Atom{P}{x}\land\ldots)$. The overall
+            !!{derivation} is:
+            \end{minipage}
+            \bigskip
+
+        {\tiny
+        \AxiomC{$\lexists[x](\Atom{P}{x}\land\lnot\Atom{S}{a,x}\land\lforall[y](\Atom{P}{y}\lif\Atom{F}{x,y}))$}
+            \AxiomC{$\Discharge{\Atom{P}{b}\land\lnot\Atom{S}{a,b}\land\lforall[y](\Atom{P}{y}\lif\Atom{F}{b,y})}{1}$}
+            \RightLabel{\Elim{\land}}
+            \UnaryInfC{$\lnot\Atom{S}{a,b}$}
+                \AxiomC{$\Discharge{\Atom{P}{b}\land\lnot\Atom{S}{a,b}\land\lforall[y](\Atom{P}{y}\lif\Atom{F}{b,y})}{1}$}
+                    \AxiomC{$\lforall[x]((\Atom{P}{x}\land \lexists[y][\Atom{F}{x,y}])\lif\Atom{S}{a,x})$}
+                \BinaryInfC{$\mathcal{D}$}
+                \noLine
+                \UnaryInfC{$\Atom{S}{a,b}$}
+            \BinaryInfC{$\bot$}
+        \DischargeRule{\Elim{\lexists}}{1}
+        \BinaryInfC{$\bot$}
+        \RightLabel{$\bot_C$ (or $\bot_I$, EFQ)}
+        \UnaryInfC{$\lnot\lexists[x](\Atom{P}{x}\land\ldots)$}
+        \DisplayProof
+        }
+
+        \end{minipage}
+    }
+
+    
+    \emph{Comment. We find the formalisations by first noticing that
+    the original sentences are equivalent to the following,
+    respectively:}
+    \begin{enumerate}
+    \item \emph{``Every player followed some player whom Ali didn't
+    see.'' For every player $x$, there's some $y$ such that $y$ is a
+    player, Ali didn't see $y$, and $x$ followed $y$.}
+
+    \emph{Or, alternatively: there's some specific player $x$ 
+    such that Ali didn't see $x$ and such that 
+    for every player $y$, $y$ followed $x$.}
+
+    \item \emph{``Ali saw every player who followed someone.'' For
+    every $x$ such that $x$ is a player and there's some $y$ $x$
+    followed, Ali didn't see $x$}
+    \item \emph{``No player followed any player who followed
+    someone.'' There is no $x$ such that: $x$ is player and there is
+    some $y$ that is a player, that followed someone, and that $x$
+    followed.}
+
+    \emph{Why not $\lnot\lexists[x](\Atom{P}{x}\land\lforall[y](\Atom{F}{x,y}\lif
+    \Atom{P}{y}\land\lexists[z][\Atom{F}{y,z}]))$? That is pretty close
+    but not quite right (would get most but not all the points). 
+    For the conclusion isn't `no player followed
+    \emph{every} player who...'. Compare `no player
+    followed any cat' vs `no player followed every cat'. The first is
+    false as soon as a player followed \emph{some} cat; the second is
+    false only if some player failed to follow \emph{any of} the cats. 
+    So we formalise `no player followed any cat' as 
+    $\lnot\lexists[x](\Atom{P}{x}\land\lexists[y](\Atom{C}{y}\land Fxy))$ 
+    and `no player followed every
+    cat' as $\lnot\lexists[x](Px\land\lforall[y](Cy\lif Fxy))$. The same
+    applies here.}
+    \end{enumerate}
+
+    \emph{The argument is valid whichever way we formalise 
+    the first premise.}
+    
+    \emph{First formalisation (`some player' narrow scope in the
+    first premise). The premises seem inconsistent, in which case the
+    argument would be valid simply because contradictory premises
+    entail everything. They are not quite inconsistent though; rather,
+    they contradict the assumption that there are players at all. For
+    suppose that there is some player, call it $b$: $\Atom{P}{b}$. By
+    the first premise, $b$ followed some player that Ali didn't see:
+    $\lexists[y](\Atom{P}{y}\land\lnot\Atom{S}{a,y}\land\Atom{F}{b,y})$.
+    Call this player $c$: $\Atom{P}{c}\land\lnot \Atom{S}{a,c}\land
+    \Atom{F}{b,c}$. By the first premise again, since $c$ is a player,
+    they followed someone: $\lexists[y][\Atom{F}{c,y}]$. By the second
+    premise, since $\Atom{P}{b}\land\lexists[y][\Atom{F}{c,y}]$, Ali
+    saw $c$: $\Atom{S}{a,c}$. But we had that $\lnot\Atom{S}{a,c}$,
+    contradiction: so $\Atom{P}{b}$ was false, and in general, there
+    is no player: $\lnot\lexists[x][\Atom{P}{x}]$. A fortiori there is no player
+    that followed etc.: $\lnot\lexists[x](\Atom{P}{x}\land\ldots)$.}
+
+    \emph{The proof essentially follows these steps.
+    We assume $\Atom{P}{b}$ and seek to derive a contradiction. We
+    then use that sub-proof as part of a \emph{reductio} of $\exists
+    x(Px\land\ldots)$.}
+
+    \emph{Our first job, then, is to work out a contradiction 
+    from $\Atom{P}{c}\land\lnot \Atom{S}{a,c}\land
+    \Atom{F}{b,c}$
+    together with our premises. The first step is to use
+    the first premise to show that $c$ followed someone,
+    since $c$ are a player. We first derive that they 
+    followed someone that Ali didn't see:
+    $\lexists[y](\Atom{P}{y}\land\lnot\Atom{S}{a,y}\land\Atom{F}{c,y})$:}
+    \begin{prooftree}
+        \AxiomC{$\lforall[x](\Atom{P}{x}\lif\lexists[y](\Atom{P}{y}\land\lnot\Atom{S}{a,y}\land\Atom{F}{x,y}))$}
+        \RightLabel{\Elim{\lforall}}
+        \UnaryInfC{$\Atom{P}{c}\lif\lexists[y](\Atom{P}{y}\land\lnot\Atom{S}{a,y}\land\Atom{F}{c,y})$}
+            \AxiomC{$\Atom{P}{c}\land\lnot\Atom{S}{a,c}\land\Atom{F}{b,c}$}
+            \RightLabel{\Elim{\land}}
+            \UnaryInfC{$\Atom{P}{c}$}
+        \RightLabel{\Elim{\lif}}
+        \BinaryInfC{$\lexists[y](\Atom{P}{y}\land\lnot\Atom{S}{a,y}\land\Atom{F}{c,y})$}
+    \end{prooftree}
+    \emph{From the claim that followed someone that Ali didn't
+    see, we should be able to show that they followed someone.
+    Indeed, we use one step of \Elim{\lexists}:}
+    \begin{prooftree}
+    \AxiomC{$\lexists[y](\Atom{P}{y}\land\lnot\Atom{S}{a,y}\land\Atom{F}{c,y})$}
+        \AxiomC{$\Discharge{\Atom{P}{d}\land\lnot\Atom{S}{a,d}\land\Atom{F}{c,d}}{1}$}
+        \RightLabel{\Elim{\land}}
+        \UnaryInfC{$\Atom{F}{c,d}$}
+        \RightLabel{\Intro{\lexists}}
+        \UnaryInfC{$\lexists[y][\Atom{F}{c,y}]$}
+    \DischargeRule{\Elim{\lexists}}{1}
+    \BinaryInfC{$\lexists[y][\Atom{F}{c,y}]$}
+    \end{prooftree}
+    \emph{We put this together with another use of $\Atom{P}{c}\land\lnot\Atom{S}{a,c}\land\Atom{F}{b,c}$
+    to derive derive that $c$ is \emph{a player} who followed someone:}
+    {\footnotesize
+    \begin{prooftree}
+    \AxiomC{$\Atom{P}{c}\land\lnot\Atom{S}{a,c}\land\Atom{F}{b,c}$}
+    \RightLabel{\Elim{\land}}
+    \UnaryInfC{$\Atom{P}{c}$}
+        \AxiomC{$\Atom{P}{c}\land\lnot\Atom{S}{a,c}\land\Atom{F}{b,c}$, first premise}
+        \DeduceC{$\lexists[y](\Atom{P}{y}\land\lnot\Atom{S}{a,y}\land\Atom{F}{c,y})$}
+            \AxiomC{$\Discharge{\Atom{P}{d}\land\lnot\Atom{S}{a,d}\land\Atom{F}{c,d}}{1}$}
+            \RightLabel{\Elim{\land}}
+            \UnaryInfC{$\Atom{F}{c,d}$}
+            \RightLabel{\Intro{\lexists}}
+            \UnaryInfC{$\lexists[y][\Atom{F}{c,y}]$}
+        \DischargeRule{\Elim{\lexists}}{1}
+        \BinaryInfC{$\lexists[y][\Atom{F}{c,y}]$}
+    \RightLabel{\Intro{\land}}
+    \BinaryInfC{$\Atom{P}{c}\land\lexists[y][\Atom{F}{c,y}]$}
+    \end{prooftree}
+    }
+
+    \emph{The second step is to use the second premise,
+    together with the derived claim that $c$ is a 
+    player who followed someone, to conclude that Ali saw $c$.
+    That is straightforward:}
+    \begin{prooftree}
+    \AxiomC{$\Atom{P}{c}\land\lnot\Atom{S}{a,c}\land\Atom{F}{b,c}$, first premise}
+    \DeduceC{$\Atom{P}{c}\land\lexists[y][\Atom{F}{c,y}]$}
+        \AxiomC{$\lforall[x]((\Atom{P}{x}\land \lexists[y][\Atom{F}{x,y}])\lif\Atom{S}{a,x})$}
+        \RightLabel{\Elim{\lforall}}
+        \UnaryInfC{$(\Atom{P}{c}\land \lexists[y][\Atom{F}{c,y}])\lif\Atom{S}{a,x}$}
+    \RightLabel{\Elim{\lif}}
+    \BinaryInfC{$\Atom{S}{a,c}$}
+    \end{prooftree}
+    
+    \emph{We've thus shown that from the assumption that $c$ is a 
+    player whom Ali didn't see and who $b$ followed,
+    $\Atom{P}{c}\land\lnot\Atom{S}{a,c}\land\Atom{F}{b,c}$, and our premises
+    it follows that Ali saw $c$. But of course it also 
+    followed that Ali didn't see $c$. We therefore put
+    the previous together with yet another use 
+    of the assumption $\Atom{P}{c}\land\lnot\Atom{S}{a,c}\land\Atom{F}{b,c}$
+    to get a contradiction:}
+    \begin{prooftree}
+    \AxiomC{$\Atom{P}{c}\land\lnot\Atom{S}{a,c}\land\Atom{F}{b,c}$}
+    \RightLabel{\Elim{\land}}
+    \UnaryInfC{$\lnot\Atom{S}{a,c}$}
+    \AxiomC{$\Atom{P}{c}\land\lnot\Atom{S}{a,c}\land\Atom{F}{b,c}$, both premises}
+        \DeduceC{$\Atom{S}{a,c}$}
+    \RightLabel{\Intro{\bot}}
+    \BinaryInfC{$\bot$}
+    \end{prooftree}
+    \emph{Our first job is done: getting a contradiction
+    out of $\Atom{P}{c}\land\lnot \Atom{S}{a,c}\land
+    \Atom{F}{b,c}$ together with the argument's premises.}
+
+    \emph{The second job is to derive a contradiction
+    from the assumption that there is a player ($b$), 
+    using the result of our first job and (again) the
+    first premises. The first step is to generalize the
+    previous result over $c$: if there is 
+    \emph{some} player that Ali didn't see that followed someone, 
+    a contradiction follows:}
+    \begin{prooftree}
+    \AxiomC{$\lexists[y](\Atom{P}{y}\land\lnot\Atom{S}{a,y}\land\Atom{F}{b,y})$}
+        \AxiomC{$\Discharge{\Atom{P}{c}\land\lnot\Atom{S}{a,c}\land\Atom{F}{b,c}}{2}$, both premises}
+        \DeduceC{$\bot$}
+    \DischargeRule{\Elim{\lexists}}{2}
+    \BinaryInfC{$\bot$}
+    \end{prooftree}
+
+    \emph{The second step is to use the first premise to show that 
+    if there is a player $b$, then we have some player that Ali 
+    didn't see that followed someone, from which we've 
+    derived a contradiction:}
+    \begin{prooftree}
+    \AxiomC{$\Atom{P}{b}$}
+        \AxiomC{$\lforall[x](\Atom{P}{x}\lif\lexists[y](\Atom{P}{y}\land\lnot\Atom{S}{a,y}\land\Atom{F}{x,y}))$}
+        \RightLabel{\Elim{\lforall}}
+        \UnaryInfC{$\Atom{P}{b}\lif\lexists[y](\Atom{P}{y}\land\lnot\Atom{S}{a,y}\land\Atom{F}{b,y})$}
+    \RightLabel{\Elim{\lif}}
+    \BinaryInfC{$\lexists[y](\Atom{P}{y}\land\lnot\Atom{S}{a,y}\land\Atom{F}{b,y})$}
+        \AxiomC{both premises}
+    \BinaryInfC{$\vdots$}\noLine
+    \UnaryInfC{$\bot$}
+    \end{prooftree}
+    \emph{Our second job is complete. The !!{derivation} can be used to negate (by
+    \emph{reductio} any hypothesis that entails that there is a
+    player.}
+
+    \emph{Finally, we use the !!{derivation} obtained in our second
+    job to get our desired conclusion. We may abbreviate it the
+    conclusion as $\lexists[x](\Atom{P}{x}\land\ldots)$ since the
+    $\ldots$ part is irrelevant to the proof:}
+    \begin{prooftree}
+    \AxiomC{$\Discharge{\lexists[x](\Atom{P}{x}\land\ldots)}{4}$}
+        \AxiomC{$\Discharge{\Atom{P}{b}\land\ldots}{3}$}
+        \RightLabel{\Elim{\land}}
+        \UnaryInfC{$\Atom{P}{b}$}
+            \AxiomC{both premises}
+        \BinaryInfC{$\vdots$}
+        \noLine
+        \UnaryInfC{$\bot$}
+    \DischargeRule{\Elim{\lexists}}{3}
+    \BinaryInfC{$\bot$}
+    \DischargeRule{$\bot_C$}{4}
+    \UnaryInfC{$\lnot\lexists[x](\Atom{P}{x}\land\ldots)$}    
+    \end{prooftree}
+    
+    \emph{This comcludes the proof. Note that the only undischarged
+    assumptions are the argument's premises.}
+
+    \emph{Second formalisation (`some player' wide scope in the first
+    premise). Here the premises are inconsistent, for the first
+    premise on its own entails that there is a player (call them $b$)
+    that followed someone, but that Ali didn't see. The second premise
+    tells us that any such player is seen by Ali: contradiction. The
+    main difficulty is to work out the mechanics to derive
+    $\lnot\Atom{S}{a,b}$ from
+    $\Atom{P}{b}\land\lnot\Atom{S}{a,b}\land\lforall[y](\Atom{P}{y}\lif\Atom{F}{b,y})$
+    I won't detail this here; the steps are slightly easier than 
+    in other !!{derivation}. See the model answer above.
+    }
+
+    % long answer, clear page
+    \clearpage
+    \end{ans}
 \end{prob}
 
 \begin{prob}
     Give natural deduction !!{derivation}s of the following.
     \begin{enumerate}
-    \item $\forall x(Fx\lif\exists yGxy),\forall x\forall y(Gxy\lif Gyx)\vdash\forall x(Fx\lif\exists yGyx)$
-    \item $\exists xGax\vdash\forall x(x=a\lif\exists yGxy)$
+    \item $\lforall[x](\Atom{F}{x}\lif\lexists[y][\Atom{G}{x,y}]),
+    \lforall[x][\lforall[y](\Atom{G}{x,y}\lif \Atom{G}{y,x})]
+    \Proves\lforall[x](\Atom{F}{x}\lif\lexists[y][\Atom{G}{y,x}])$
+    \item $\lexists[x][\Atom{G}{a,x}]
+    \Proves\lforall[x](\eq[x][a]\lif\lexists[y][\Atom{G}{x,y}])$
     \end{enumerate}
+
+    \begin{ans}
+    !!^{derivation} of $\lforall[x](\Atom{F}{x}\lif\lexists[y][\Atom{G}{x,y}]),
+    \lforall[x][\lforall[y](\Atom{G}{x,y}\lif \Atom{G}{y,x})]
+    \Proves\lforall[x](\Atom{F}{x}\lif\lexists[y][\Atom{G}{y,x}])$
+    
+    \begin{prooftree}
+    \AxiomC{$\Discharge{\Atom{F}{a}}{2}$}
+        \AxiomC{$\lforall[x](\Atom{F}{x}\lif\lexists[y][\Atom{G}{x,y}])$}
+        \RightLabel{\Elim{\lforall}}
+        \UnaryInfC{$\Atom{F}{a}\lif\lexists[y][\Atom{G}{a,y}]$}
+    \RightLabel{\Elim{\lif}}
+    \BinaryInfC{$\lexists[y][\Atom{G}{a,y}]$}
+        \AxiomC{$\Discharge{\Atom{G}{a,b}}{1}$}
+            \AxiomC{$\lforall[x][\lforall[y](\Atom{G}{x,y}\lif \Atom{G}{y,x})]$}
+            \RightLabel{\Elim{\lforall}}
+            \UnaryInfC{$\lforall[y](\Atom{G}{a,y}\lif \Atom{G}{y,a})$}
+            \RightLabel{\Elim{\lforall}}
+            \UnaryInfC{$\Atom{G}{a,b}\lif\Atom{G}{b,a}$}
+        \RightLabel{\Elim{\lif}}
+        \BinaryInfC{$\Atom{G}{b,a}$}
+        \RightLabel{\Intro{\lexists}}
+        \UnaryInfC{$\lexists[y][\Atom{G}{y,a}]$}
+    \DischargeRule{\Elim{\lexists}}{1}
+    \BinaryInfC{$\lexists[y][\Atom{G}{y,a}]$}
+    \DischargeRule{\Intro{\lif}}{2}
+    \UnaryInfC{$\Atom{F}{a}\lif\lexists[y][\Atom{G}{y,a}]$}
+    \RightLabel{\Intro{\lforall}}
+    \UnaryInfC{$\lforall[x](\Atom{F}{x}\lif\lexists[y][\Atom{G}{y,x}])$}
+    \end{prooftree}
+
+    !!^{derivation} of 
+    $\lexists[x][\Atom{G}{a,x}]
+    \Proves\lforall[x](\eq[x][a]\lif\lexists[y][\Atom{G}{x,y}])$
+
+    \begin{prooftree}
+    \AxiomC{$\lexists[x][\Atom{G}{a,x}]$}
+        \AxiomC{$\Discharge{\Atom{G}{a,b}}{2}$}
+            \AxiomC{$\Discharge{\eq[c][a]}{1}$}
+        \RightLabel{\Elim{\eq}}
+        \BinaryInfC{$\Atom{G}{c,b}$}
+        \RightLabel{\Intro{\lexists}}
+        \UnaryInfC{$\lexists[y][\Atom{G}{c,y}]$}
+        \DischargeRule{\Intro{\lif}}{1}
+        \UnaryInfC{$\eq[c][a]\lif\lexists[y][\Atom{G}{c,y}]$}
+    \DischargeRule{\Elim{\lexists}}{2}
+    \BinaryInfC{$\eq[c][a]\lif\lexists[y][\Atom{G}{c,y}]$}
+    \RightLabel{\Intro{\lforall}}
+    \UnaryInfC{$\lforall[x](\eq[x][a]\lif\lexists[y][\Atom{G}{x,y}])$}
+
+    \end{prooftree}
+
+    \emph{Comment. The \Elim{\lexists} step is legit because 
+    we've instantiated $x$ with a new constant, $b$, that doesn't
+    appear anywhere else, and we've derived a formula 
+    that doesn't contain $b$. The 
+    \Intro{\forall} step is legit because when we reach it 
+    the assumption $\eq[c][a]$ has been discharged, so 
+    $c$ doesn't then appear in undischarged assumptions 
+    above that step. In $\eq[c][a]$ must use a constant $c$ distinct
+    from both $a$ and $b$: if we used $b$ instead 
+    the \Elim{\lexists} would not be legit and if we used
+    $a$ the \Intro{\lforall} step could only conclude 
+    $\lforall[x](\eq[x][x]\lif\lexists[y][\Atom{G}{x,y}])$.}
+    
+    \emph{The \Intro{\lforall} step can be placed after
+    as well as before the \Elim{\lexists} one. The 
+    following is correct too:}
+
+    \begin{prooftree}
+        \AxiomC{$\lexists[x][\Atom{G}{a,x}]$}
+            \AxiomC{$\Discharge{\Atom{G}{a,b}}{2}$}
+                \AxiomC{$\Discharge{\eq[c][a]}{1}$}
+            \RightLabel{\Elim{\eq}}
+            \BinaryInfC{$\Atom{G}{c,b}$}
+            \RightLabel{\Intro{\lexists}}
+            \UnaryInfC{$\lexists[y][\Atom{G}{c,y}]$}
+            \DischargeRule{\Intro{\lif}}{1}
+            \UnaryInfC{$\eq[c][a]\lif\lexists[y][\Atom{G}{c,y}]$}
+            \RightLabel{\Intro{\lforall}}
+            \UnaryInfC{$\lforall[x](\eq[x][a]\lif\lexists[y][\Atom{G}{x,y}])$}
+        \DischargeRule{\Elim{\lexists}}{2}
+        \BinaryInfC{$\lforall[x](\eq[x][a]\lif\lexists[y][\Atom{G}{x,y}])$}
+    \end{prooftree}
+
+
+    \end{ans}
 \end{prob}
 
 \end{document}

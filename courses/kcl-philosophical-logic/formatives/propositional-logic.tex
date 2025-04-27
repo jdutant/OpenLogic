@@ -16,8 +16,11 @@
     validity only), or informal reasoning from the semantics.
 
     \begin{enumerate}
-    \item $(\Obj{\pvar{A}}\lif \Obj{\pvar{B}}\lor \Obj{\pvar{C}})\lif(\Obj{\pvar{A}}\lif \Obj{\pvar{B}})$
-    \item $\lnot(\Obj{\pvar{A}}\land(\Obj{\pvar{B}}\lor \Obj{\pvar{C}})\lif(\Obj{\pvar{A}}\land \Obj{\pvar{B}}))\lif \Obj{\pvar{C}}$
+    \item $(\Obj{\pvar{A}}\lif \Obj{\pvar{B}}\lor
+    \Obj{\pvar{C}})\lif(\Obj{\pvar{A}}\lif \Obj{\pvar{B}})$
+    \item $\lnot(\Obj{\pvar{A}}\land(\Obj{\pvar{B}}\lor
+    \Obj{\pvar{C}})\lif(\Obj{\pvar{A}}\land \Obj{\pvar{B}}))\lif
+    \Obj{\pvar{C}}$
     \end{enumerate}
 
     \begin{ans}
@@ -35,9 +38,93 @@
         \Obj{\pvar{C}}))}\lif(\Obj{\pvar{A}}\land \Obj{\pvar{B}})$
         \end{enumerate}
 
-    % \begin{enumerate}
-    % \item 
-    % \end{enumerate}
+    Now the answers proper. I give full truth-tables and partial ones.
+
+    \begin{enumerate} 
+    \item $(\Obj{\pvar{A}}\lif \Obj{\pvar{B}}\lor
+      \Obj{\pvar{C}})\lif(\Obj{\pvar{A}}\lif \Obj{\pvar{B}})$
+
+      Full truth-table:
+
+      \begin{tabular}{cccccccc}
+        \hline
+        & & & & ($!A$) & ($!B$) \\
+        $\Obj{\pvar{A}}$ & $\Obj{\pvar{B}}$ & $\Obj{\pvar{C}}$ 
+            & $\Obj{\pvar{B}}\lor\Obj{\pvar{C}}$ 
+            & $\Obj{\pvar{A}}\lif \Obj{\pvar{B}}\lor\Obj{\pvar{C}}$
+            & $\Obj{\pvar{A}}\lif \Obj{\pvar{B}}$
+            & $!A\lif!B$ \\
+        \hline 
+        $\True$  & $\True$  & $\True$  & $\True$  & $\True$  & $\True$  & $\True$\\
+        $\True$  & $\True$  & $\False$ & $\True$  & $\True$  & $\True$ & $\True$\\
+        $\True$  & $\False$ & $\True$  & $\True$  & $\True$  & $\False$  & $\False$ & $\Leftarrow$\\
+        $\True$  & $\False$ & $\False$ & $\False$ & $\False$ & $\False$  & $\True$\\
+        $\False$ & $\True$  & $\True$  & $\True$  & $\True$  & $\True$  & $\True$\\
+        $\False$ & $\True$  & $\False$ & $\True$  & $\True$  & $\True$ & $\True$\\
+        $\False$ & $\False$ & $\True$  & $\True$  & $\True$  & $\True$  & $\True$\\
+        $\False$ & $\False$ & $\False$ & $\False$ & $\True$  & $\True$  & $\True$\\
+        \hline
+      \end{tabular}
+
+      The !!{formula} is not a logical truth. Counterexample 
+      $\pValue{v}(\Obj{A})=\True$, $\pValue{v}(\Obj{B})=\False$, $\pValue{v}(\Obj{C})=\True$.
+
+      Partial truth-table:
+
+    \begin{tabular}{ccc|ccccccccc}
+        \hline
+        $\Obj{\pvar{A}}$ & $\Obj{\pvar{B}}$ & $\Obj{\pvar{C}}$ & $(\Obj{\pvar{A}}$ & $\lif$ & $\Obj{\pvar{B}}$ & $\lor$ & $\Obj{\pvar{C}})$ & $\lif$ & $(\Obj{\pvar{A}}$ & $\lif$ & $\Obj{\pvar{B}})$ \\
+        \hline
+             $\True_4$    &  $\False_5$   &    $\True_9$  &        $\True_6$  & $\True_2$ &   $\False_7$  & $\True_8$ & $\True_9$  &   $\False_1$  & $\True_4$ & $\False_3$  & $\False_5$             \\
+        \hline
+    \end{tabular}
+
+    \item $\lnot(\Obj{\pvar{A}}\land(\Obj{\pvar{B}}\lor
+    \Obj{\pvar{C}})\lif(\Obj{\pvar{A}}\land \Obj{\pvar{B}}))\lif
+    \Obj{\pvar{C}}$
+
+    Full truth table:
+
+    \begin{tabular}{ccccccccc}
+        \hline
+        & & & & $!A$ & $!B$ \\
+        $\Obj{\pvar{A}}$ & $\Obj{\pvar{B}}$ & $\Obj{\pvar{C}}$ 
+            & $\Obj{\pvar{B}}\lor\Obj{\pvar{C}}$ 
+            & $\Obj{\pvar{A}}\land (\Obj{\pvar{B}}\lor\Obj{\pvar{C}})$
+            & $\Obj{\pvar{A}}\land \Obj{\pvar{B}}$
+            & $!A\lif!B$ & $\lnot(!A\lif!B)$ & $\lnot(!A\lif!B)\lif \Obj{\pvar{C}}$  \\
+        \hline 
+        $\True$  & $\True$  & $\True$  & $\True$  & $\True$   & $\True$   & $\True$  & $\False$ & $\True$ \\
+        $\True$  & $\True$  & $\False$ & $\True$  & $\True$   & $\True$   & $\True$  & $\False$ & $\True$\\
+        $\True$  & $\False$ & $\True$  & $\True$  & $\True$   & $\False$  & $\False$ & $\True$ & $\True$\\
+        $\True$  & $\False$ & $\False$ & $\False$ & $\False$  & $\False$  & $\True$  & $\False$ & $\True$\\
+        $\False$ & $\True$  & $\True$  & $\True$  & $\False$  & $\False$  & $\True$  & $\False$ & $\True$\\
+        $\False$ & $\True$  & $\False$ & $\True$  & $\False$  & $\False$  & $\True$  & $\False$ & $\True$\\
+        $\False$ & $\False$ & $\True$  & $\True$  & $\False$  & $\False$  & $\True$  & $\False$ & $\True$\\
+        $\False$ & $\False$ & $\False$ & $\False$ & $\False$  & $\False$  & $\True$  & $\False$ & $\True$\\
+        \hline
+      \end{tabular}
+
+      The !!{formula} is true in any !!{valuation}, hence it is 
+      a logical truth.
+
+      Partial truth table:
+
+      \begin{tabular}{ccc|cccccccccccc}
+        \hline
+        $\Obj{\pvar{A}}$ & $\Obj{\pvar{B}}$ & $\Obj{\pvar{C}}$ &
+                                    $\lnot$ & $(\Obj{\pvar{A}}$ & $\land$ & $(\Obj{\pvar{B}}$ & $\lor$ & $\Obj{\pvar{C}})$ & $\lif$ & $(\Obj{\pvar{A}}$ & $\land$ & $\Obj{\pvar{B}}))$ & $\lif$ & $\Obj{\pvar{C}}$ \\
+        $\True_7$ & $\True_10$ & $\False_3$ & $\True_2$ &  $\True_7$     & $\True_6$   &  $\True_{10}$   &  $\True_9$ &    $\False_4$   &  $\False_5$  &  $\True_8$   &  $\False_7$   &    ??  & $\False_1$ &  $\False_3$ \\
+        \hline
+      \end{tabular}
+
+      Is impossible to find a !!{valuation} under which the !!{formula}
+      is false, hence the !!{formula} is a logical truth.
+
+    \end{enumerate}
+
+    % longish answer, clear page
+    \clearpage
     \end{ans}
 \end{prob}
 
@@ -46,6 +133,30 @@
     propositional logic is \emph{truth-functionally complete}.
     Give an example of a set of !!{operator}s that is \emph{not}
     truth-functionally complete.
+
+    \begin{ans}
+    A set of connectives is \emph{truth-functionally complete} if a 
+    propositional language with those connectives only can express 
+    all the truth functions. That is, for every $n$-ary
+    truth function $f$, we can express the truth function $f$ using
+     a !!{formula} $\varphi^f$ that
+    only uses these connectives and !!{propositional variable}s. 
+    
+    \emph{Even better if you add an explanation of what it is to 
+    express a truth function.} That is: for any truth value, $V_1,\ldots,V_n$, if we let 
+    $\pAssign{v}$ the valuation that assigns $V_1,\ldots,V_n$ to 
+    !!{propositional variable}s $\Obj{\pvar{P}_1},\ldots,\Obj{\pvar{P}_n}$
+    ($\pValue{v}(\Obj{\pvar{P}_1})=V_i$ for $1\leq i\leq n$), then
+    the truth value of $\varphi^f$ in $\pAssign{v}$ is the same as 
+    the one obtained by applying $f$ to truth-values $V_1,\ldots,V_n$:
+    $$\pValue{v}(\varphi^f) = 
+    f^\varphi(\pValue{v}(\Obj{\pvar{P}_i}),
+        \ldots,\pValue{v}(\Obj{\pvar{P}_i}))$$
+    
+    % clear page for new problem when answers are shown
+    \clearpage
+    \end{ans}
+
 \end{prob}
 
 \begin{prob}
@@ -58,14 +169,110 @@
     \item Write a !!{formula} equivalent to $\Obj{\pvar{A}}\land \Obj{\pvar{B}}$ where $|$ is the only !!{operator}.
     \item Give a logically true !!{formula} that uses only $|$ as !!{operator}.
     \end{enumerate}
+
+    \begin{ans}
+    \begin{enumerate}
+    \item Truth table for $|$:
+    
+        \begin{tabular}{cc|c}
+        \hline
+        $\Obj{\pvar{A}}$ & $\Obj{\pvar{B}}$ & $\Obj{\pvar{A}}|\Obj{\pvar{B}}$ \\
+        \hline
+        $\True$ & $\True$ & $\False$\\
+        $\True$ & $\False$ & $\True$\\
+        $\False$ & $\True$ & $\True$\\
+        $\False$ & $\False$ & $\True$\\
+        \hline
+        \end{tabular}
+
+    \item $!A|!A$
+    
+    \emph{Optional: we may check with a truth table.} 
+    \begin{tabular}{c|c}
+        \hline
+        $\Obj{\pvar{A}}$ & $\Obj{\pvar{A}}|\Obj{\pvar{A}}$ \\
+        \hline
+        $\True$ & $\False$\\
+        $\False$ &  $\True$\\
+        \hline
+        \end{tabular}
+    
+    \item $(!A|!B)|(!A|!B)$.
+    
+    \emph{Optional: we may check with a truth table.} 
+
+    \begin{tabular}{cc|cccc}
+        \hline
+        $\Obj{\pvar{A}}$ & $\Obj{\pvar{B}}$ & $\Obj{\pvar{A}}|\Obj{\pvar{B}}$ & $(\Obj{\pvar{A}}|\Obj{\pvar{B}})|(\Obj{\pvar{A}}|\Obj{\pvar{B}}$) & \\
+        \hline
+        $\True$ & $\True$           & $\False$                               &  $\True$                   \\
+        $\True$ & $\False$           & $\True$                                 &  $\False$                 \\
+        $\False$ & $\True$          & $\True$                                    &  $\False$              \\
+        $\False$ & $\False$         & $\True$                                    &  $\False$         \\
+        \hline
+
+    
+    \end{tabular}
+
+    \emph{There are of course other, more complicated but equivalent 
+    answers.}
+
+
+    \item For example: $!A|(!A|!A)$ or $(!A|!A)|((!A|!B)|(!A|!B))$.
+    \end{enumerate}
+
+    \clearpage
+    \end{ans}
 \end{prob}
 
 \begin{prob}
     Give natural deduction proofs of the following.
     \begin{enumerate}
-        \item $\Obj{\pvar{A}}\lif \Obj{\pvar{B}}\vdash(\Obj{\pvar{A}}\lor \Obj{\pvar{C}})\lif(\Obj{\pvar{B}}\lor \Obj{\pvar{C}})$
+        \item $\Obj{\pvar{A}}\lif \Obj{\pvar{B}}
+        \vdash(\Obj{\pvar{A}}\lor \Obj{\pvar{C}})\lif(\Obj{\pvar{B}}\lor \Obj{\pvar{C}})$
         \item $\vdash(\lnot\lnot \Obj{\pvar{A}}\lif\lnot \Obj{\pvar{A}})\lif\lnot \Obj{\pvar{A}}$
     \end{enumerate}
+
+    \begin{ans}
+    \begin{enumerate}
+        \item Proof of $\Obj{\pvar{A}}\lif \Obj{\pvar{B}}
+    \vdash(\Obj{\pvar{A}}\lor \Obj{\pvar{C}})\lif(\Obj{\pvar{B}}\lor \Obj{\pvar{C}})$
+    
+    \begin{prooftree}
+    \AxiomC{$\Discharge{\Obj{\pvar{A}}\lor \Obj{\pvar{C}}}{2}$}
+        \AxiomC{$\Discharge{\Obj{\pvar{A}}}{1}$}
+            \AxiomC{$\Obj{\pvar{A}}\lif \Obj{\pvar{B}}$}
+        \RightLabel{\Elim{\lif}}
+        \BinaryInfC{$\Obj{\pvar{B}}$}
+        \RightLabel{\Intro{\lor}}
+        \UnaryInfC{$\Obj{\pvar{B}}\lor \Obj{\pvar{C}}$}
+            \AxiomC{$\Discharge{\Obj{\pvar{C}}}{1}$}
+            \RightLabel{\Intro{\lor}}
+            \UnaryInfC{$\Obj{\pvar{B}}\lor \Obj{\pvar{C}}$}
+    \DischargeRule{\Elim{\lor}}{1}
+    \TrinaryInfC{$\Obj{\pvar{B}}\lor \Obj{\pvar{C}}$}
+    \DischargeRule{\Intro{\lif}}{2}
+    \UnaryInfC{$(\Obj{\pvar{A}}\lor \Obj{\pvar{C}})\lif(\Obj{\pvar{B}}\lor \Obj{\pvar{C}})$}
+    \end{prooftree}
+
+    \item Proof of $\vdash(\lnot\lnot \Obj{\pvar{A}}\lif\lnot \Obj{\pvar{A}})\lif\lnot \Obj{\pvar{A}}$
+    
+    \begin{prooftree}
+    \AxiomC{$\Discharge{\lnot\lnot \Obj{\pvar{A}}\lif\lnot \Obj{\pvar{A}}}{2}$}
+        \AxiomC{$\Discharge{\lnot\lnot\Obj{\pvar{A}}}{1}$}
+        \RightLabel{\Elim{\lif}}
+        \BinaryInfC{$\lnot{\pvar{A}}$}
+            \AxiomC{$\Discharge{\lnot\lnot\Obj{\pvar{A}}}{1}$}
+            \DischargeRule{\Elim{\lnot}}{1}
+        \BinaryInfC{$\lnot{\pvar{A}}$}
+    \DischargeRule{\Intro{\lif}}{2}
+    \UnaryInfC{$(\lnot\lnot \Obj{\pvar{A}}\lif\lnot \Obj{\pvar{A}})\lif\lnot \Obj{\pvar{A}}$}
+    \end{prooftree}
+
+    \end{enumerate}
+
+    \clearpage
+    \end{ans}
 \end{prob}
 
 \end{document}

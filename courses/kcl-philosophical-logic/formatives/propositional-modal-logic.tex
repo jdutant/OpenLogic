@@ -23,11 +23,43 @@
     $@$). Briefly justify your answers.
     \begin{enumerate}
     \item $\Diamond \Obj{\pvar{P}}$
-    \item $\Box(\Obj{\pvar{R}}\rightarrow\Diamond \Obj{\pvar{Q}})$
+    \item $\Box(\Obj{\pvar{R}}\lif\Diamond \Obj{\pvar{Q}})$
     \item $\Box(\Diamond \Obj{\pvar{\Obj{\pvar{R}}}}\lor\Diamond \Obj{\pvar{P}})$
     \item $\Box\Box\Diamond \Obj{\pvar{Q}}$
     \end{enumerate}
-    
+
+\begin{ans}
+\item $\Diamond \Obj{\pvar{P}}$. False. Justification: $@$ only has
+access to worlds where $\Obj{\pvar{P}}$ is false.
+\item $\Box(\Obj{\pvar{R}}\lif\Diamond \Obj{\pvar{Q}})$. True.
+Justification: $\Obj{\pvar{R}}$ is false at $u$, $\Diamond
+\Obj{\pvar{Q}}$ is true at $v$ (since $v$ has access to world $u$
+where $\Obj{\pvar{Q}}$ is true), therefore $\Obj{\pvar{R}}\lif\Diamond
+\Obj{\pvar{Q}}$ is true at $u$ and $v$. Since these are the only two
+worlds $@$ has access to, $\Box(\Obj{\pvar{R}}\lif\Diamond
+\Obj{\pvar{Q}})$ is true at $@$, hence true.
+\item $\Box(\Diamond \Obj{\pvar{\Obj{\pvar{R}}}}\lor\Diamond \Obj{\pvar{P}})$. True. 
+Justification: $\Diamond\Obj{\pvar{P}}$ is true at $u$ (since $u$ has access
+to world $@$ where $\Obj{\pvar{P}}$ is true) and 
+$\Diamond\Obj{\pvar{R}}$ is true at $v$ (since $v$ has access to 
+itself where $\Obj{\pvar{R}}$ is true). Hence 
+$\Diamond\Obj{\pvar{R}}\lor\Diamond\Obj{\pvar{P}}$ is true at both $u,v$.
+Since these are the only two worlds $@$ has access to, 
+$\Box(\Diamond\Obj{\pvar{R}}\lor\Diamond\Obj{\pvar{P}})$ holds at $@$, 
+hence is true.
+\item $\Box\Box\Diamond \Obj{\pvar{Q}}$. False. Justification:
+$\Diamond\Obj{\pvar{Q}}$ is false at $u$, because $u$ doesn't 
+have access to a world where $\Obj{\pvar{Q}}$ is true (even though 
+$\Obj{\pvar{Q}}$ is true at $u$, $u$ doesn't have access to $u$, 
+it only has access to $@$ where $\Obj{\pvar{Q}}$ isn't true). Since
+$\Diamond\Obj{\pvar{Q}}$ is false at $u$ and $v$ has access to $u$, 
+$\Box\Diamond\Obj{\pvar{Q}}$ is false at $v$. Since 
+$\Box\Diamond\Obj{\pvar{Q}}$ is false at $v$ and $@$ has access to 
+$v$, $\Box\Box\Diamond\Obj{\pvar{Q}}$ is false at $@$.
+
+\clearpage
+\end{ans}
+
 \end{prob}
 
 \begin{prob}
@@ -43,14 +75,208 @@
         \Entails/[\Log{T}] \Box{\Obj{\pvar{B}}}$
 
         \item $\Entails[\Log{T}]\Diamond(
-            (\Obj{\pvar{A}}\land\Obj{\pvar{B}})\lif\Obj{\pvar{A}}
-        )$
+            (\Obj{\pvar{A}}\land\Obj{\pvar{B}})\lif\Obj{\pvar{A}})$
 
         \item $\Diamond\Diamond \Obj{\pvar{A}},
         \Box(\Obj{\pvar{B}}\lif\lnot\Obj{\pvar{A}})
         \Entails[\Log{S4}] \lnot\Box\Obj{\pvar{B}}$
     
     \end{enumerate}
+
+    \begin{ans}
+    \begin{enumerate}
+        \item Proof of $\Box\lnot\Obj{\pvar{A}}, 
+        \Box(\Obj{\pvar{A}}\lor\Obj{\pvar{B}})
+        \Proves[\Log{K}] \Box{\Obj{\pvar{B}}}$
+
+        \begin{prooftree}
+        \AxiomC{$\Box\lnot\Obj{\pvar{A}}$}
+            \AxiomC{$\Box(\Obj{\pvar{A}}\lor\Obj{\pvar{B}})$}
+                \AxiomC{$\Discharge{\lnot\Obj{\pvar{A}}}{1}$}
+                    \AxiomC{$\Discharge{\Obj{\pvar{A}}\lor\Obj{\pvar{B}}}{1}$}
+                \RightLabel{\Log{PL}}
+                \BinaryInfC{$\Obj{\pvar{B}}$}
+        \DischargeRule{$\Box$K}{1}
+        \TrinaryInfC{$\Box\Obj{\pvar{B}}$}
+        \end{prooftree}
+
+        \emph{Pedantic note.} I write ``proof of
+        $\ldots\Proves\ldots$'' rather than ``proof of
+        $\ldots\Entails\ldots$'' since a proof primarily establishes
+        that the argument is \emph{provable} ($\Proves$) rather than
+        \emph{valid} ($\Entails$). However, because our proof system is
+        sound for our semantics, if the argument is provable in it
+        then it is valid.
+
+        \item Counterexample to establish $\Diamond\lnot\Obj{\pvar{A}}, 
+        \Box(\Obj{\pvar{A}}\lor\Obj{\pvar{B}})
+        \Entails/[\Log{T}] \Box{\Obj{\pvar{B}}}$
+
+        Model $\mModel{M}$ with $W=\{@,u\}$,
+        $R=\{\tuple{@,@},\tuple{@,u},\tuple{u,u}\}$,
+        valuation $V(\Obj{\pvar{A}},@)=V(\Obj{\pvar{B}},u)=\True$,
+        $V(\Obj{\pvar{A}},u)=V(\Obj{\pvar{B}},@)=\False$, all else
+        $\False$.
+
+        Since $\Obj{\pvar{A}}$ is true at $@$ and $\Obj{\pvar{B}}$ is
+        true at $v$, $\Obj{\pvar{A}\lor\pvar{B}}$ is true at $@,u$.
+        Since these are the only worlds $@$ has access to,
+        $\Box(\Obj{\pvar{A}}\lor\Obj{\pvar{B}})$ is true at $@$. Since
+        $\Obj{\pvar{A}}$ is false at $u$, $\Obj{\lnot\pvar{A}}$ is
+        true at $u$; since $@$ has access to $u$,
+        $\Diamond\Obj{\lnot\pvar{A}}$ is true at $@$. However, since
+        $\Obj{\pvar{B}}$ is not true at $@$ and $@$ has access to $@$,
+        $\Box\Obj{\pvar{B}}$ is not true at $@$.
+        
+        \emph{Comment. This is the simplest kind of counterexample. It
+        would also work if you made $\Obj{\pvar{A}}$ false at $@$ and
+        true at $u$ and $\Obj{\pvar{B}}$ true at $@$ and false at $u$
+        instead. What's required is to have at least one of
+        $\Obj{\pvar{A}},\Obj{\pvar{B}}$ true at every world accessible
+        from $@$ (to make $\Box(\Obj{\pvar{A}}\lor\Obj{\pvar{B}})$
+        true), but $\Obj{\pvar{A}}$ false in one of these worlds (to
+        make $\Diamond\lnot\Obj{\pvar{A}}$ true) and $\Obj{\pvar{A}}$
+        false at another one of these worlds (to make
+        $\Box\Obj{\pvar{B}}$ false).}
+
+        
+        \item Proof of $\vdash_{\Log{T}}\Diamond(
+            (\Obj{\pvar{A}}\land\Obj{\pvar{B}})\lif\Obj{\pvar{A}})$
+
+        \begin{prooftree}
+        \AxiomC{}
+        \RightLabel{\Log{PL}}
+        \UnaryInfC{$(\Obj{\pvar{A}}\land\Obj{\pvar{B}})\lif\Obj{\pvar{A}}$}
+        \RightLabel{$\Diamond$T}
+        \UnaryInfC{$\Diamond(\Obj{\pvar{A}}\land\Obj{\pvar{B}})\lif\Obj{\pvar{A}}$}
+        \end{prooftree}
+
+        \emph{Comment. Note that the proof has no premise, since we 
+        can derive $(\Obj{\pvar{A}}\land\Obj{\pvar{B}})\lif\Obj{\pvar{A}}$
+        in propositional logic without premise, as follows:}
+        \begin{prooftree}
+        \AxiomC{$\Discharge{\Obj{\pvar{A}}\land\Obj{\pvar{B}}}{1}$}
+        \RightLabel{\Elim{\land}}
+        \UnaryInfC{$\Obj{\pvar{A}}$}
+        \DischargeRule{\Intro{\lif}}{1}
+        \UnaryInfC{$(\Obj{\pvar{A}}\land\Obj{\pvar{B}})\lif\Obj{\pvar{A}}$}
+        \end{prooftree}
+        \emph{We needn't spell that out. We simply use a \Log{PL} 
+        step. You don't even need to haved worked out the proof 
+        above: it's enough for you to realize that the formula is a 
+        logical truth of propositional logic; you then know 
+        (by soundness) that there will be a way to prove it.}
+
+        If you only know the $\Box$T rule, you can use this proof
+        instead:
+        \begin{prooftree}
+        \AxiomC{$\Discharge{\Box\lnot((\Obj{\pvar{A}}\land\Obj{\pvar{B}})\lif\Obj{\pvar{A}})}{2}$}
+            \AxiomC{$\Discharge{\lnot((\Obj{\pvar{A}}\land\Obj{\pvar{B}})\lif\Obj{\pvar{A}})}{1}$}
+            \RightLabel{\Log{PL}}
+            \UnaryInfC{$\bot$}
+        \DischargeRule{$\Box$K}{1}
+        \BinaryInfC{$\Box\bot$}
+        \RightLabel{$\Box$T}
+        \UnaryInfC{$\bot$}
+        \DischargeRule{\Log{PL} ($\bot_C$)}{2}
+        \UnaryInfC{$\lnot\Box\lnot((\Obj{\pvar{A}}\land\Obj{\pvar{B}})\lif\Obj{\pvar{A}})$}
+        \RightLabel{Dual}
+        \UnaryInfC{$\Diamond((\Obj{\pvar{A}}\land\Obj{\pvar{B}})\lif\Obj{\pvar{A}})$}
+        \end{prooftree}
+
+        \emph{Comment. The strategy is to establish the conclusion
+        $\Diamond!A$ by establishing $\lnot\Box\lnot!A$. We aim to
+        establish the later by \emph{reductio}: assume $\Box\lnot!A$
+        and derive a contradiction. We note that our $!A$ (that is,
+        $(\Obj{\pvar{A}}\land\Obj{\pvar{B}})\lif\Obj{\pvar{A}}$ is a
+        tautology), hence $\lnot!A$ a contradiction. Therefore we know
+        that $\lnot!A$ we can derive $\bot$: we needn't work out a
+        proof, but we can assume that there is one and use a
+        $\Log{PL}$ step instead. Using that fact, we get $\Box\bot$
+        from $\Box\lnot!A$. That is not yet a contradiction (it
+        wouldn't be in the \Log{K} system), but in the \Log{T} system
+        we can then derive $\bot$ itself, completing our
+        \emph{reductio}. Note that the $\bot_C$ step isn't merely
+        deriving anything from $\bot$ (the Ex Falso Quodlibet rule),
+        but discharging an assumption and inferring its negation (the
+        negation elimination or Reductio rule).}
+        
+        \item Proof of $\Diamond\Diamond \Obj{\pvar{A}},
+        \Box(\Obj{\pvar{B}}\lif\lnot\Obj{\pvar{A}})
+        \Proves[\Log{S4}] \lnot\Box\Obj{\pvar{B}}$
+
+        One strategy, using $\Diamond$K to prove
+        $\Diamond\lnot\Obj{\pvar{B}}$ first, then the conclusion by
+        Duality:
+
+        \begin{prooftree}
+            \AxiomC{$\Diamond\Diamond\Obj{\pvar{A}}$}
+            \RightLabel{$\Diamond$4}
+            \UnaryInfC{$\Diamond\Obj{\pvar{A}}$}
+                \AxiomC{$\Box(\Obj{\pvar{B\lif\lnot\pvar{A}}})$}
+                    \AxiomC{$\Discharge{\Obj{\pvar{A}}}{1}$}
+                        \AxiomC{$\Discharge{\Obj{\pvar{B\lif\lnot\pvar{A}}}}{1}$}
+                        \RightLabel{\Log{PL} (\Elim{\lif})}
+                    \BinaryInfC{$\lnot\Obj{\pvar{B}}$}
+            \DischargeRule{$\Diamond$K}{1}
+            \TrinaryInfC{$\Diamond\lnot\Obj{\pvar{B}}$}
+            \RightLabel{Dual}
+            \UnaryInfC{$\lnot\Box\Obj{\pvar{B}}$}
+            \end{prooftree}
+    
+        Another strategy, \emph{reductio} of $\Box\Obj{\pvar{B}}$:
+        \begin{prooftree}
+            \AxiomC{$\Discharge{\Box\Obj{\pvar{B}}}{2}$}
+            \AxiomC{$\Box(\Obj{\pvar{B}}\lif\lnot\Obj{\pvar{A}})$}
+                \AxiomC{$\Discharge{\Obj{\pvar{B}}}{1}$}
+                    \AxiomC{$\Discharge{\Obj{\pvar{B}}\lif\lnot\Obj{\pvar{A}}}{1}$}
+                \RightLabel{\Log{PL}}
+                \BinaryInfC{$\lnot\Obj{\pvar{A}}$}
+            \DischargeRule{$\Box$K}{1}
+            \TrinaryInfC{$\Box\lnot\Obj{\pvar{A}}$}
+            \RightLabel{Dual}
+            \UnaryInfC{$\lnot\Diamond\Obj{\pvar{A}}$}
+                \AxiomC{$\Diamond\Diamond\Obj{\pvar{A}}$}
+                \RightLabel{$\Diamond$4}
+                \UnaryInfC{$\Diamond\Obj{\pvar{A}}$}
+            \DischargeRule{\Log{PL} ($\bot_C$)}{2}
+            \BinaryInfC{$\lnot\Box\Obj{\pvar{B}}$}
+        \end{prooftree}
+    
+        If you do nor know the $\Diamond$4 or $\Diamond$K rules,
+        follow the \emph{reductio} strategy above but derive
+        $\Box\Box\lnot\Obj{\pvar{A}}$ first, then transform it into
+        $\lnot\Diamond\Diamond\Box\Obj{\pvar{B}}$ using the $\Box$K
+        and Dual rules like so:
+        {\footnotesize
+        \begin{prooftree}
+            \AxiomC{$\Discharge{\Box\Obj{\pvar{B}}}{3}$}
+            \AxiomC{$\Box(\Obj{\pvar{B}}\lif\lnot\Obj{\pvar{A}})$}
+                \AxiomC{$\Discharge{\Obj{\pvar{B}}}{1}$}
+                    \AxiomC{$\Discharge{\Obj{\pvar{B}}\lif\lnot\Obj{\pvar{A}}}{1}$}
+                \RightLabel{\Log{PL}}
+                \BinaryInfC{$\lnot\Obj{\pvar{A}}$}
+            \DischargeRule{$\Box$K}{1}
+            \TrinaryInfC{$\Box\lnot\Obj{\pvar{A}}$}
+            \RightLabel{$\Box$4}
+            \UnaryInfC{$\Box\Box\lnot\Obj{\pvar{A}}$}
+                \AxiomC{$\Discharge{\Box\lnot\Obj{\pvar{A}}}{2}$}
+                \RightLabel{Dual}
+                \UnaryInfC{$\lnot\Diamond\Obj{\pvar{A}}$}
+                \DischargeRule{$\Box$K}{2}
+            \BinaryInfC{$\Box\lnot\Diamond\Obj{\pvar{A}}$}
+            \RightLabel{Dual}
+            \UnaryInfC{$\lnot\Diamond\Diamond\Obj{\pvar{A}}$}
+                \AxiomC{$\Diamond\Diamond\Obj{\pvar{A}}$}
+            \DischargeRule{\Log{PL}}{3}
+            \BinaryInfC{$\lnot\Box\Obj{\pvar{B}}$}
+        \end{prooftree}
+        }
+     
+    \end{enumerate}
+
+    \clearpage
+    \end{ans}
 
 \end{prob}
 
@@ -66,11 +292,90 @@
     being serial? Briefly justify your answer.
     \item Show that any transitive and symmetric model is secondary 
     reflexive, but not the other way round.
-    \item Can you give a characteristic schema for secondary reflexive 
-    frames? Show that the schema is valid for any secondary reflexive frames.
-    Optional: show that it is not valid on frames that are not secondary 
-    reflexive.
+    \item Can you give a characteristic schema for secondary reflexive
+    models? Show that the schema is valid for any secondary reflexive
+    models. Optional: show that it is not valid on frames that are not
+    secondary reflexive.
     \end{enumerate}
+
+    \begin{ans}
+    \begin{enumerate}
+    \item Yes, a model can be secondary reflexive without 
+    being serial. All secondary reflexivity requires is that 
+    \emph{if} a world has access to some world, then the latter
+    has access to itself. Hence, for instance, a model where 
+    no world has $R$ to any world is vacuously secondary 
+    reflexive but not serial. 
+
+    \item Let $\mModel{M}$ be symmetric and transitive and 
+    suppose $Rwu$ for some $w,u$. Since $R$ is symmetric, 
+    we have $Ruw$. Since $Ruw$, $Rwu$ and $R$ is transitive,
+    we have $Ruu$. Generalizing over $w,u$, $R$ is 
+    secondary reflexive.
+
+    \emph{Comment. ``Generalizing over $w,u$'' is a way of 
+    saying that, because $w,u$ were arbitrary picked, the 
+    above holds for any $w,u$. Thus, we have shown that 
+    for any $w,u$, if $w$ has access to $u$, then $u$ 
+    has access to $u$, which is the definition of 
+    secondary reflexivity.}
+
+    \item Schema $\Box(\Box!A\lif!A)$ or $\Box\Box!A\lif \Box!A$
+    is characteristic of secondary reflexivity. 
+    
+    \emph{Comment. Both are correct; they are in fact equivalent 
+    in \Log{K} and stronger systems. The idea is this: call a world 
+    `factive' iff whatever is necessary at that world is true at that 
+    world. With reflexivity, every world is factive. With secondary
+    reflexivity, not every world need be factive (so $\Box!A\lif!A$ may not
+    be true for every $!A$ at every world) but it must be that 
+    every world \emph{that is accessed} is factive. Hence any world 
+    we see (from the actual world, or some given world) is a world
+    where $\Box!A\lif!A$ holds. Hence the characteristic formulas above.}
+    
+    \emph{Some \emph{incorrect} answers: $\Box!A\lif!A$,
+    $\Diamond!A\lif\Box\Diamond!A$, $\Box\Diamond!A\lif\Diamond!A$.}
+
+    Show that $\Box(\Box!A\lif!A)$ holds in secondary reflexive
+    models. Suppose $\mModel{M}$ is secondary reflexive, and let $!A$ be
+    any formula and $w$ any world. Suppose for reductio that
+    $\Box(\Box!A\lif!A)$ is false at $w$. Then there is some world
+    $wu$ such that $Rwu$ and $\Box!A\lif!A$ is false at $u$. $\Box!A$
+    is true at $u$ and $!A$ is not true at $u$: hence $u$ doesn't have
+    access to $u$. But by secondary reflexivity, since $Rwu$ we have
+    $Ruu$. Contradiction. 
+
+    Alternatively, show that  $\Box\Box!A\lif \Box!A$ holds in secondary reflexive
+    models. Suppose $\mModel{M}$ is secondary reflexive, and let $!A$
+    be a formula and $!A$ a $w$ any world. Suppose $\Box\Box!A$ is true
+    at $w$. Let $u$ be any world such that $Rwu$. Since  $\Box\Box!A$ is true
+    at $w$ and we have $Rwu$, $\Box!A$ is true at $u$. Since $Rwu$,
+    by secondary reflexivity $Ruu$. Since $\Box!A$ is true at $u$
+    and $Ruu$, $!A$ is true at $u$. Generalizing over $u$, 
+    $!A$ is true at any world that $w$ has access to. Hence
+    $\Box!A$ is true at $w$. Generalizing over $w$, any world 
+    is such that if $\Box\Box!A$ is true in it then $\Box!A$ 
+    is true too, hence $\Box\Box!A\lif \Box!A$ is true at 
+    every world.
+
+    Optional: show that the schema fails in non-secondary
+    reflexive \emph{frames}. Let $\mModel{F}$ be a frame 
+    that is not secondary reflexive: for some $w,u$ in 
+    that frame, we have $Rwu$ but not $Ruu$. Consider the model 
+    $\mModel{M}$ based on $\mModel{F}$ such that $\Obj{\pvar{P}}$
+    is true at every world expect at $u$. At $u$ we have 
+    $\Box\Obj{\pvar{P}}$, since any world $u$ has access to 
+    is other than $u$ (for we don't have $Ruu$) and $\Obj{\pvar{P}}$
+    is true at all worlds other than $u$. However, $\Obj{\pvar{P}}$ 
+    is false at $u$, hence $\Box!A\lif!A$ is false at $u$. 
+    Hence the schema $\Box(\Box!A\lif!A)$ fails. 
+    
+    The proof for schema $\Box\Box!A\lif \Box!A$ is similar.
+
+    \end{enumerate}
+
+    \clearpage
+    \end{ans}
     
 \end{prob}
 

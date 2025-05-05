@@ -400,21 +400,21 @@ combinations thereof, entail others, some rules and combination of
 rules entail others, as detailed in the table below:
 
 \bigskip\noindent
-\begin{tabular}{cccc}
+\begin{tabular}{p{10em}ccc}
 \hline
 If accessibility is\dots & it's also\dots & so from rule(s)\dots & we derive rule(s)\dots \\
 \hline 
 reflexive & serial & \Ax{T} & \Ax{D} \\
-serial + symmetric & reflexive &  \Ax{D}+\Ax{B} & \Ax{T} \\
 symmetric + transitive & euclidean & \Ax{B}+\Ax{4} & \Ax{5} \\
+serial + sym. + trans. & reflexive &  \Ax{D}+\Ax{B}+\Ax{4} & \Ax{T} \\
 reflexive + euclidean & sym. + trans. & \Ax{T}+\Ax{5} & \Ax{B},\Ax{4} \\
 \hline 
 \end{tabular}
 \bigskip
 
 This explains why \Log{B}, i.e. \Log{KDTB}, can also be called
-\Log{KTB} (since \Ax{T} gives you \Ax{D}) and \Log{KDB} (since \Ax{D}
-and \Ax{B} together give you \Ax{T}). 
+\Log{KTB} (since \Ax{T} gives you \Ax{D}) and \Log{KDB4} (since \Ax{D},
+\Ax{B} and \Ax{4} together give you \Ax{T}). 
 
 \emph{You do not need to remember all these facts}, expect the
 simplest one: reflexive entails serial. And \emph{you do not need to

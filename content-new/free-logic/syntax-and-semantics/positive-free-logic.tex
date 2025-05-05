@@ -221,16 +221,40 @@ A !!{formula} $!A$ is \emph{valid}, $\Entails !A$, iff $\Sat{M}{!A}$ for every
 !!{structure}~$\Struct M$.
 \end{defn}
 
-\begin{ex}
-If $\Sat{M}{Fa}$ then $\Sat{M}{\lfrexists a}$.
-\end{ex}
+\begin{prop}\ollabel{prop:Fa-doesnt-entail-ExFx}
+  For some \Log{PFL} !!{structure} $\Struct{M}$, $\Sat{M}{Fa}$ and $\Sat/{M}{\lfrexists a}$.
+\end{prop}
 
-\begin{ex}
-If $\Entails/_{\Log{PFL}} \eq[a][a]\lif\lfrexists a$.
-\end{ex}
+\begin{proof}
+  Exercise.
+\end{proof}
 
-\begin{ex}
+\begin{prob}
+  Prove \olref[frl][syn][pfl]\ollabel{prop:Fa-doesnt-entail-ExFx}
+\end{prob}
+
+\begin{prop}\ollabel{prop:identity-doesnt-entail-existence}
+$\Entails/_{\Log{PFL}} \eq[a][a]\lif\lfrexists a$.
+\end{prop}
+
+\begin{proof}
+Exercise.
+\end{proof}
+
+\begin{prob}
+  Prove \olref[frl][syn][pfl]\ollabel{prop:Fa-doesnt-entail-ExFx}
+\end{prob}
+
+\begin{prop}\ollabel{prop:pfl-is-inclusive}
 $\Entails/_{\Log{PFL}} \lexists x (x = x)$.
-\end{ex}
+\end{prop}
+
+\begin{proof}
+Exercise.
+\end{proof}
+
+\begin{prob}
+  Prove \olref[frl][syn][pfl]\ollabel{prop:pfl-is-inclusive}
+\end{prob}
 
 \end{document}

@@ -42,7 +42,7 @@ Write !!{formula}s of first-order logic with identity that express the following
 \begin{enumerate}
 	\item $\lexists[x] \lexists[y] \lexists [z] (\eq/[x][y] \land \eq/[x][z] \land \eq/[y][z])$
 	\item $\lexists[x] \lexists[y] \lexists [z] (\eq/[x][y] \land \eq/[x][z] \land \eq/[y][z] \land \Atom{\Obj F}{x} \land \Atom{\Obj F}{y} \land \Atom{\Obj F}{z} \land 
-	\lforall[x'] ( \Atom{\Obj F}{x'} \rightarrow \lforall[x'] (\eq[x'][x] \lor \eq[x'][y] \lor \eq[x'][z])))$\\
+	\lforall[x'] ( \Atom{\Obj F}{x'} \rightarrow (\eq[x'][x] \lor \eq[x'][y] \lor \eq[x'][z])))$\\
 	\emph{Comment: the formula says that there are three distinct things such that all of them are $F$, and anything that is $F$ is one of these three things. The formula doesn't rule out the existence of \emph{other} things, provided these aren't red. This is as desired: the English sentence doesn't tell us ``There are exactly three things and these things are all red''. Thus it would be wrong to answer: $\lexists[x] \lexists[y] \lexists [z] (\eq/[x][y] \land \eq/[x][z] \land \eq/[y][z] \land \lforall[x'] (\eq[x'][x] \lor \eq[x'][y] \lor \eq[x'][z]) \land \lforall[x] Fx$.\\
 	Make sure that the parentheses of $\lexists[x] \lexists[y] \lexists [z]$ enclose the whole formula, so that every occurrence of $x$, $y$, $z$ is bound by these 
 	quantifiers. For instance $\lexists[x] \lexists[y] \lexists [z] (\eq/[x][y] \land \eq/[x][z] \land \eq/[y][z]) \land \Atom{\Obj F}{x} \land \Atom{\Obj F}{y} \land \Atom{\Obj F}{z} \land 
@@ -54,7 +54,7 @@ Write !!{formula}s of first-order logic with identity that express the following
 \begin{prob}[Leibniz's law]
 In first-order logic, Leibniz's law is expressed by the following schema, where $!A$ can stand for any formula in which $y$ is free for $x$ in $!A$:
 $$\lforall x \lforall y (\eq[x][y] \lif (!A \liff \Subst{!A}{y}{x}))$$
-(Recall that $y$ is free for $x$ in $!A$ if none of the free occurrences of $x$ in $!A$ are bound by a $\forall y$ quantifier and $\Subst{!A}{y}{x}$ stands for the !!{formula} resulting from substituting $y$ for all free occurrences of $x$ in $!A$.) Answer the following.
+(Recall that $y$ is free for $x$ in $!A$ if none of the free occurrences of $x$ in $!A$ are in the scope of a $\lexists[y]$ or $\lexists[x]$ quantifier and $\Subst{!A}{y}{x}$ stands for the !!{formula} resulting from substituting $y$ for all free occurrences of $x$ in $!A$.) Answer the following.
 \begin{enumerate}
 	\item Explain why if (for some assignement $g$ in some model $\Struct{M}$) $\Value{y}{M}[g] = \Value{x}{M}[g]$, then $\Sat{M}{\Atom{\Obj F}{y}}[g]$ iff $\Sat{M}{\Atom{\Obj F}{x}}[g]$. 
 	\item (Generalize your answer.) Let $\Atom{!A}$ be an atomic !!{formula} in which $y$ doesn't appear free. Explain why, if $\Value{y}{M}[g] = \Value{x}{M}[g]$, $\Sat{M}{!A}[g]$ iff $\Sat{M}{\Subst{!A}{y}{x}}[g]$.

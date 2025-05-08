@@ -15,20 +15,160 @@
     \begin{enumerate}
     \item $\lforall[x][\Atom{\Obj{P}}{x}] \vdash \lfrexists a\lif\Atom{\Obj{P}}{a}$
     \item $\vdash \lforall[x][\eq[x][x]]$
-    \item $\lforall[x][\Atom{\Obj{P}}{x}\lif\Atom{\Obj{P}}{x}],\lexists[x][\Atom{\Obj{P}}{x}] 
+    \item $\lforall[x](\Atom{\Obj{P}}{x}\lif\Atom{\Obj{Q}}{x}),
+        \lexists[x][\Atom{\Obj{P}}{x}] 
         \vdash \lexists[x][\Atom{\Obj{Q}}{x}]$
     \item $\vdash \lforall[x][\lexists[y][\eq[x][y]]]$
     \end{enumerate}
     For each your proofs, say whether it is a proof in \Log{NFL} too.
+
+    \begin{ans}
+    \begin{enumerate}
+    \item !!^{derivation} of $\lforall[x][\Atom{\Obj{P}}{x}] 
+        \vdash \lfrexists a\lif\Atom{\Obj{P}}{a}$
+        \begin{prooftree}
+        \AxiomC{$\Discharge{\lfrexists a}{1}$}
+            \AxiomC{$\lforall[x][\Atom{\Obj{P}}{x}]$}
+        \RightLabel{\Elim{\forall} \Log{FL}}
+        \BinaryInfC{$\Atom{\Obj{P}}{a}$}
+        \DischargeRule{\Intro{\lif}}{1}
+        \UnaryInfC{$\lfrexists a\lif\Atom{\Obj{P}}{a}$}
+        \end{prooftree}
+        This is a !!{derivation} in \Log{NFL} too.
+
+    \item !!^{derivation} of $\vdash \lforall[x][\eq[x][x]]$. Two 
+        possible answers. One is a !!{derivation} in \Log{PFL} only, 
+        the other is a !!{derivation} is \Log{NFL} too. 
+
+        \begin{prooftree}
+        \AxiomC{}
+        \RightLabel{\Intro{\eq} (or \Log{PFL})}
+        \UnaryInfC{$\eq[a][a]$}
+        \RightLabel{\Intro{\lforall} \Log{FL}}
+        \UnaryInfC{$\forall[x][\eq[x][x]]$}
+        \end{prooftree}
+        This is not a !!{derivation} in \Log{NFL} because it uses the
+        \Intro{\eq} aka \Log{PFL} rule. 
+
+        \begin{prooftree}
+        \AxiomC{$\Discharge{\lfrexists a}{1}$}
+        \RightLabel{\Intro{\eq} \Log{FL}}
+        \UnaryInfC{$\eq[a][a]$}
+        \DischargeRule{\Intro{\lforall} \Log{FL}}{1}
+        \UnaryInfC{$\forall[x][\eq[x][x]]$}
+        \end{prooftree}
+        This is a !!{derivation} in \Log{NFL} too. 
+
+    \item !!^{derivation} of $\lforall[x](\Atom{\Obj{P}}{x}\lif
+        \Atom{\Obj{Q}}{x}),\lexists[x][\Atom{\Obj{P}}{x}] 
+        \vdash \lexists[x][\Atom{\Obj{Q}}{x}]$
+
+        \begin{prooftree}
+        \AxiomC{$\lexists[x][\Atom{\Obj{P}}{x}]$}
+            \AxiomC{$\Discharge{\Obj{P}a}{1}$}
+                \AxiomC{$\Discharge{\lfrexists a}{1}$}
+                    \AxiomC{$\lforall[x](\Atom{\Obj{P}}{x}\lif
+        \Atom{\Obj{Q}}{x})$}
+                \RightLabel{\Elim{\lforall} \Log{FL}}
+                \BinaryInfC{$\Obj{P}{a}\lif\Atom{\Obj{Q}}{a}$}
+            \RightLabel{\Elim{\lif}}
+            \BinaryInfC{$\Atom{\Obj{Q}}{a}$}
+                \AxiomC{$\Discharge{\lfrexists a}{1}$}
+            \RightLabel{\Intro{\lexists}}
+            \BinaryInfC{$\lexists[x][\Atom{\Obj{Q}}{x}]$}
+        \DischargeRule{\Elim{\lexists} \Log{FL}}{1}
+        \BinaryInfC{$\lexists[x][\Atom{\Obj{Q}}{x}]$}
+        \end{prooftree}
+        This is a !!{derivation} in \Log{NFL}.
+    
+    \item !!^{derivation} of 
+        $\vdash \lforall[x][\lexists[y][\eq[x][y]]]$
+        Two possible answers; one is a only \Log{PFL} !!{derivation} 
+        and the other is both a \Log{PFL} and \Log{NFL} !!{derivation}.
+    
+        \begin{prooftree}
+        \AxiomC{}
+        \RightLabel{\Intro{\eq} aka \Log{PFL}}
+        \UnaryInfC{$\eq[a][a]$}
+            \AxiomC{$\Discharge{\lfrexists a}{1}$}
+        \RightLabel{\Intro{\lexists}}
+        \BinaryInfC{$\lexists[y][y=a]$}
+        \DischargeRule{\Intro{\lforall}}{1}
+        \UnaryInfC{$\lforall[x]\lexists[y](\eq[y][x])$}
+        \end{prooftree}
+        This is not a !!{derivation} in \Log{NFL} because it uses 
+        the \Intro{\eq} aka \Log{PFL} rule.
+
+        However, we can write !!a{derivation} that works in \Log{NFL}
+        as well as \Log{PFL}:
+
+        \begin{prooftree}
+        \AxiomC{$\Discharge{\lfrexists a}{1}$}
+        \RightLabel{\Intro{\eq} \Log{FL}}
+        \UnaryInfC{$\eq[a][a]$}
+            \AxiomC{$\Discharge{\lfrexists a}{1}$}
+        \RightLabel{\Intro{\lexists}}
+        \BinaryInfC{$\lexists[y][y=a]$}
+        \DischargeRule{\Intro{\lforall}}{1}
+        \UnaryInfC{$\lforall[x]\lexists[y](\eq[y][x])$}                
+        \end{prooftree}
+        This is a proof in \Log{NFL} too.
+    \end{enumerate}
+    \end{ans}
+
 \end{prob}
 
 \begin{prob}[Natural Deduction proofs in Negative Free Logic]
     Give natural deduction proofs of the following in \Log{NFL}.
     \begin{enumerate}
     \item $\lforall[x][\eq/[x][a]] \vdash \lnot\Atom{\Obj{P}}{a}$
-    \item $\lforall[x][\Atom{\Obj{F}}{x}\lif\Atom{\Obj{G}}{ax}],
+    \item $\lforall[x](\Atom{\Obj{F}}{x}\lif\Atom{\Obj{G}}{ax}),
         \lexists[x][\Atom{\Obj F}{x}] \vdash \lfrexists a$.
     \end{enumerate}
 
+    \begin{ans}
+    \begin{enumerate}
+        \item !!^{derivation} of $\lforall[x][\eq/[x][a]] 
+        \vdash \lnot\Atom{\Obj{P}}{a}$
+
+        \begin{prooftree}
+        \AxiomC{$\Discharge{\Atom{\Obj{P}}{a}}{1}$}
+        \RightLabel{\Log{NFL}}
+        \UnaryInfC{$\lfrexists a$}
+        \RightLabel{\Intro{\eq}}
+        \UnaryInfC{$\eq[a][a]$}
+             \AxiomC{$\lforall[x](\eq/[x][a])$}
+                 \AxiomC{$\Discharge{\Atom{\Obj{P}}{a}}{1}$}
+                 \RightLabel{\Log{NFL}}
+                 \UnaryInfC{$\lfrexists a$}
+             \RightLabel{\Elim{\lforall} \Log{FL}}
+             \BinaryInfC{$\eq/[a][a]$}
+        \DischargeRule{\Elim{\lnot}}{1}
+        \BinaryInfC{$\lnot\Obj{P}a$}
+        \end{prooftree}
+
+        \item !!^{derivation} of $\lforall[x](\Atom{\Obj{F}}{x}
+        \lif\Atom{\Obj{G}}{ax}),
+        \lexists[x][\Atom{\Obj F}{x}] 
+        \vdash \lfrexists a$.
+
+        \begin{prooftree}
+        \AxiomC{$\lexists[x][\Atom{\Obj F}{x}]$}
+            \AxiomC{$\Discharge{\lfrexists b}{1}$}
+                \AxiomC{$\lforall[x](\Atom{\Obj{F}}{x}\lif\Atom{\Obj{G}}{ax})$}
+            \RightLabel{\Elim{\lforall} \Log{FL}}
+            \BinaryInfC{$\Atom{\Obj{F}}{b}\lif\Atom{\Obj{G}}{ab}$}
+                \AxiomC{$\Discharge{\Atom{\Obj{F}}{b}}{1}$}
+            \RightLabel{\Elim{\lif}}
+            \BinaryInfC{$\Atom{\Obj{G}}{ab}$}
+            \RightLabel{\Log{NFL}}
+            \UnaryInfC{$\lfrexists a$}
+        \DischargeRule{\Elim{\lexists}}{1}
+        \BinaryInfC{$\lfrexists a$}
+        \end{prooftree}
+    \end{enumerate}
+    \end{ans}
+
+\end{prob}
 
 \end{document}

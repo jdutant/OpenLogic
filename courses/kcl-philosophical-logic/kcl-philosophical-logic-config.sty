@@ -45,10 +45,11 @@
 % --------------------
 
 % \olgreekformulas (default), otherwise use \ollatinformulas
+\olgreekformulas
 % provide our own (\lookup defined in open-logic-formulas.sty)
-\def\olpqrlatinformulas
-{\gdef\formula{\lookup{A/p,B/q,C/r,D/s,E/t,F/u,G/v,H/a,K/b,L/c,O/d,R/e,S/f,T/g}}}
-\olpqrlatinformulas
+% \def\olpqrlatinformulas
+% {\gdef\formula{\lookup{A/p,B/q,C/r,D/s,E/t,F/u,G/v,H/a,K/b,L/c,O/d,R/e,S/f,T/g}}}
+% \olpqrlatinformulas
 
 % Object language propositional variables
 % \pvar{A}, \pvar{B}, ...
@@ -62,7 +63,7 @@
 {\let\propositionalvariable\relax}
 \pqrpropositionalvariables % default
 
-\ABCpropositionalvariables % MacFarlane
+% \ABCpropositionalvariables % MacFarlane
 
 % NB, they'll be typeset with \Obj \PVarP
 % Default definition, could be added in open-logic-sty
@@ -72,11 +73,11 @@
 \newcommand{\PVarS}{s}
 \newcommand{\PVarT}{t}
 % Redefine (MacFarlane)
-\renewcommand{\PVarP}{A}
-\renewcommand{\PVarQ}{B}
-\renewcommand{\PVarR}{C}
-\renewcommand{\PVarS}{D}
-\renewcommand{\PVarT}{E}
+% \renewcommand{\PVarP}{A}
+% \renewcommand{\PVarQ}{B}
+% \renewcommand{\PVarR}{C}
+% \renewcommand{\PVarS}{D}
+% \renewcommand{\PVarT}{E}
 
 % Object language formulas: sans-serif but not italic
 \DeclareDocumentCommand \Obj { m }{\mathsf{#1}}
@@ -105,8 +106,8 @@
 
 % ### Propositional Constants and Connectives
 % MacFarlane's preferences
-\DeclareDocumentMacro \lif {\supset}
-\DeclareDocumentMacro \liff {\equiv}
+%\DeclareDocumentMacro \lif {\supset}
+%\DeclareDocumentMacro \liff {\equiv}
 
 % Quantifiers 
 % ----------- 

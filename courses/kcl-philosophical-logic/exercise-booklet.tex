@@ -15,7 +15,7 @@
 % style the document
 \input{design.sty}
 
-% tigher lists
+% tighter lists
 \firmlists
 
 \begin{document}
@@ -33,7 +33,7 @@
     \Large \vskip 4ex
     Julien Dutant\\[.5ex]
     King's College London\\[.5ex]
-    2024-25\\[2ex]
+    2025-26\\[2ex]
     \textbf{Version of \today}\\
 \end{raggedleft}
     
@@ -60,9 +60,9 @@
 
 \mainmatter
 
-\tagtrue{showAns}
+\tagtrue{showAns} % TURN ANSWERS OFF / ON
 
-% \olimport[exercise-booklet]{exercises} % we break it down isntead
+% \olimport[exercise-booklet]{exercises} % we break it down instead
 
 \olimport[exercise-booklet/propositional-logic]{propositional-logic}
 
@@ -86,7 +86,28 @@
 
 \OLEndChapterHook
 
-\olimport[exercise-booklet/first-order-logic]{first-order-logic}
+% \olimport[exercise-booklet/first-order-logic]{first-order-logic} % we break it down instead
+
+\chapter{First-order Logic}
+
+\olimport[exercise-booklet/first-order-logic]{syntax}
+
+\olimport[exercise-booklet/first-order-logic]{semantics}
+
+\olimport[exercise-booklet/first-order-logic]{semantics-identity}
+
+\iftag{prfND}{%
+    \olimport[exercise-booklet/first-order-logic]{natural-deduction}
+}{}
+
+\tagfalse{showAns} % TURN ANSWERS OFF / ON
+
+\iftag{prfTab}{%
+    \olimport[exercise-booklet/first-order-logic]{tableaus}
+    \olimport[exercise-booklet/first-order-logic]{tableaus-identity}
+}{}
+
+
 
 \olimport[exercise-booklet/free-logic]{free-logic}
 

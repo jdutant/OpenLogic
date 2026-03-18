@@ -14,7 +14,7 @@
 all: kcl-philosophical-logic.pdf
 
 %.pdf : %.tex FORCE_MAKE
-	latexmk -pdf -dvi- -ps- -interaction=nonstopmode $<
+	latexmk -pdf -dvi- -ps- $<
 
 clean:	
 	latexmk -c *.tex

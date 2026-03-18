@@ -27,7 +27,7 @@ propositional logic rules alone, we may simply write:
 \end{defish}
 
 \begin{ex}
-The following !!{derivation} of $!A\lor!B,\lnot!A\Proves{\Log{K}}!B$:
+The following !!{derivation} of $!A\lor!B,\lnot!A\Proves_{\Log{K}}!B$:
 \begin{prooftree}
 \AxiomC{$!A\lor!B$}
     \AxiomC{$\Discharge{!A}{1}$}
@@ -91,7 +91,7 @@ The first is correct because from !!a{formula} $\lnot\lnot!A$ you can
 derive $!A$ using propositional rules alone. It does not matter
 whether $!A$ contains a modal operator: you need not `unpack' it. 
 The second is incorrect because from !!a{formula} $\Box\lnot\lnot!A$ 
-you cannot derive $\Box!A$ by propositonal rules alone. You need to 
+you cannot derive $\Box!xA$ by propositonal rules alone. You need to 
 `unpack' the !!{operator} $\Box$ first. See the full !!{derivation}s
 below.
 

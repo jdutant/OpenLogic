@@ -1,0 +1,446 @@
+% Part: Philosophical Introduction
+% no need to use \olchapter and \OLEndChapterHook
+
+\documentclass[../../../include/open-logic-chapter]{subfiles}
+
+\begin{document}
+
+\olpart{phi}{Philosophical Introduction}
+
+\chapter{Three Puzzles Concerning Identity, Necessity and Existence}
+
+This chapter introduces some philosophical puzzles concerning 
+identity, necessity and existence. These puzzles have been
+central to contemporary developments in logic, metaphysics, 
+philosophy of mind and philosophy of language. 
+They have spurred major developments in logic in the XXth century,
+notably Quantified Modal Logic, but also Free Logic and Hyperintensional
+Logics. These new logics have in turn improved our understanding 
+of the puzzles. The new logics have also applications beyond the puzzles.
+
+Here we introduce our puzzles without using any logical notation. 
+You may notice that it is sometimes difficult to parse the claims
+involved. That is intentional. Later in this course you'll be able 
+to recast these puzzles using the language of quantified modal logic. 
+Hopefully, you'll then experience how logical tools can shaprent philosophical thought.   
+
+\section{Identity, Necessity and Existence}
+
+Our three puzzles are the Puzzle of Necessary Existence,
+the Puzzle of Necessary Identity, and Frege's Puzzle (which we 
+might call the Puzzle of Unknown Identities).
+
+All the puzzles involve the notion of \emph{identity}. What do we mean
+by that? Being one and the same thing (also called \emph{numerical
+identity}). For instance, Mount McKinley and Denali are one and the
+same thing: the Alaskan mountain called `Mount McKinley' and the
+Alaskan mountain called `Denali' are one and the same. `Identity' in
+that sense is not something shared with others like being a Londoner,
+or two cars being of the same make and model (what is sometimes called
+\emph{qualitative identity}). It's a matter of being one and the same
+thing. Thus two `identical' twins are not identical in the
+philosophical sense: they are \emph{not} one and the same person.
+
+Two of the puzzles invovle the notion of what is \emph{necessarily so} 
+(\emph{metaphysical} necessity). What does that mean? We understand this notion in the 
+following way: something is necessarily so iff it couldn't in any sense 
+have been otherwise. For instance, it couldn't at all have been the 
+case that there were cats and dogs without it being the case 
+that there are cats. Therefore, the following is necessary: if there are
+cats and dogs there are cats.
+
+One puzzle also involve the notion of \emph{existence}. The moon exists; you exist;  so do some cats, some chairs, London, rivers, etc. Perhaps also some 
+more esoteric things like viruses, atoms, and black holes. Unicorns, on 
+the other hand, don't exist. But what is it to exist, more generally? 
+One common idea is that \emph{to exist is to be 
+something}. London is something, so it exists. Nothing is a unicorn, 
+so unicorns don't exist. Another idea is that \emph{what exist is 
+what there is}. There is a city that is London, so London exists. 
+There are no unicorns, so unicorns don't exist. The two ideas aren't
+necesssarily distinct: in fact, in first-order logic, we translate them 
+in the same manner. 
+
+\section{The Puzzle of Necessary Existence}
+
+There is an argument from plausible principles to the conclusion that existence is necessary. 
+
+The idea of something existing necessarily is often associated with
+God. Many philosophers, theist and atheist alike, agree that if there
+is in fact a God, then God is something that could not have failed to
+exist. If the argument we're about to discuss is correct, however,
+necessary existence isn't the prerogative of God: \emph{you} also
+couldn't have failed to exist. That's a puzzling conclusion.
+
+We first spell out a specific instance of the argument:
+
+\begin{enumerate}
+\item Necessarily, King Charles is King Charles.
+\item Necessarily, if some thing is itself, then that thing is
+something.\footnote{Here `thing' here is used in the most general
+sense, aking to 'entity'. In that sense `thing' doesn't contrast with
+animals or people.}
+\item Necessarily, if some thing is something, then that thing exists. 
+\item Necessarily, King Charles exists. (By 1-3 using \emph{Distribution})
+\end{enumerate}
+
+Where \emph{Distribution} (of Necessity) is the following principle:
+
+\begin{quote}
+\emph{Distribution}. If necessarily, if something is so then something is so, then: if necessarily, the former is so, then necessarily, the latter is so.
+\end{quote}
+
+For instance: if necessarily, if King Charles is a human then King
+Charles is mortal, then: if necessarily, King Charles is human, then
+necessarily, King Charles is mortal. Applying \emph{Distribution} to
+the premises above, we can derive the conclusion:
+
+\begin{itemize}
+\item Necessarily, King Charles is himself. (From 1)
+\item If necessarily, King Charles is himself, then necessarily, King
+Charles is something. (From 2, \emph{Distribution})
+\item If necessarily, King Charles is something, then necessarily,
+King Charles exists. (From 3, \emph{Distribution})
+\item Therefore, necessarily, King Charles exists.
+\end{itemize}
+
+The conclusion should strike you as obviously false. If it doesn't,
+you are probably reading ``necessarily'' in its \emph{epistemic}, not
+metaphysical sense: `given what we know, it cannot be otherwise
+than...'. (We know that King Charles is alive, so given what we know
+it cannot be otherwise than King Charles exist.) That is not the sense
+of ``necessarily'' we're interested in here. We're interested in the
+metaphysical sense: `it could not have been otherwise than'. To get
+the intended sense of the argument, it may help you to consider a
+version that makes this explicit:
+
+\begin{enumerate}
+\item It could not have happened that King Charles is not King Charles.
+\item It could not have happened that some thing is itself and 
+that thing is nothing.
+\item It could not have happened that some thing is something and that
+thing doesn't exist. 
+\item Therefore, it couldn't have happened that King Charles doesn't
+exist. 
+\end{enumerate}
+
+The conclusion seems obviously false. King Charles's parents could
+have never met and King Charles never born. If so, it would seem, King
+Charles wouldn't have existed. 
+
+If you think that King Charles could have failed to exist, then you
+reject the argument's conclusion. Therefore, you have to reject one of
+its premises or the \emph{Distribution} principle. Otherwise, you have
+to accept that not only King Charles exists, but it couldn't have
+failed to exist. Which is it?
+
+The argument for King Charles's necessary existence can obviously be
+replicated for any existing thing, including you and me. We can state
+it in a more general form:
+
+\begin{enumerate}
+    \item  Everything is necessarily itself. (\emph{Necessity of
+    Self-Identity})
+    \item Necessarily, if some thing is itself, then that thing is
+    something. (\emph{Necessitated Existential Generalization})
+    \item Necessarily, if some thing is something then that thing
+    exists. (\emph{Necessitated Quantified Definition of Existence})
+    \item Therefore, everything necessarily exists. (\emph{Necessity
+    of Existence})
+\end{enumerate}
+
+In the recent literature, philosophers who endorse the necessity of
+existence have been called \emph{Necessitists} and those who reject\
+it \emph{Contingentist}.
+
+Another reason why the argument is puzzling is that it infers a
+necessity from a fact. In general, from the mere observation that
+something is \emph{in fact} the case we can't infer that it
+\emph{could not have been otherwise}. Hume famously thought this
+couldn't be done: from the observation that one thing followed another
+we can't infer that it had to follow the other. Yet if this argument
+is right, Hume's line can be crossed: from the mere observation that
+something exists, we can infer that it couldn't have failed to exist.
+Therefore, if the argument is right, some truths are both \emph{a
+posteriori} (discovered by  experience) and yet known to be
+\emph{necessary} (such that they couldn't be otherwise). 
+
+\section{The Puzzle of Necessary Identity}
+
+There is an argument from plausible premises that identity is
+necessary. This puzzling as it would seem that some identities are
+contingent. 
+
+Let us consider a specific instance of the argument first. Aurélie
+Dupin wrote under the nom de plume George Sand. Hence George Sand and
+Aurélie Dupin are one and the same person.
+
+\begin{enumerate}
+\item Necessarily, Aurélie Dupin is Aurélie Dupin.
+\item If some thing is some thing, then everything that is true of the
+former is true of the latter.\footnote{Here `thing' here is used in
+the most general sense, aking to 'entity'. In that sense `thing'
+doesn't contrast with animals or people.}
+\item If George Sand is Aurélie Dupin, then necessarily, George Sand is Aurélie Dupin. (1,2 and \emph{De Re Modality Conversion})
+\end{enumerate}
+
+Where \emph{De Re Modality Conversion} is the following principle:
+
+\begin{itemize}
+\item \emph{De Re Modality Conversion} (DRMC). Necessarily some thing is some way if and
+only if it is true of that thing that necessarily, it is in that way. 
+\end{itemize}
+
+The conclusion follows from the premises and the principle as follows:
+
+\begin{itemize}
+\item It is true of Aurélie Dupin that necessarily, she is Aurélie
+Dupin. (by 1, DRMC)
+\item If George Sand is Aurélie Dupin, then: if it is true of Aurélie 
+Dupin that necessarily, she is Aurélie Dupin, then it is true of 
+George Sand that necessarily, she is Aurélie Dupin.
+Dupin. (by 2)
+\item So, if George Sand is Aurélie Dupin, then: it is true of George Sand that necessarily, she is Aurélie Dupin. (by the two previous claims)
+\item If it is true of George Sand that necessarily, she is Aurélie Dupin, then it is necessary that George Sand is Aurélie Dupin. (DRMC)
+\item So, if George Sand is Aurélie Dupin, then it is necessary that George Sand is Aurélie Dupin. (by the two previous claims)
+\end{itemize}
+
+The conclusion should strike you as suprising at least, perhaps even
+false. If it doesn't, you may be reading ``if ..., then necessarily,
+..." in the sense of: ``from the fact or assumption that ... it
+necessarily follows that ...'' (what Medieval logicians call the
+\emph{necessity of consequence}). Understood in that way the
+conclusion is not surprising but trivially true: from the fact that
+George Sand is Aurélie Dupin it obviously follows that George Sand is
+Aurélie Dupin. But the intended sense of the conclusion here is that
+if George Sand is Aurélie Dupin, that that fact necessary (what
+Medieval logicians call the \emph{necessity of the consequent}). That
+is not obvious or trivial: for comparison, from the fact that I won a
+lottery prize it doesn't follow that it was necessary that I would win
+it. To get the intended sense of the argument, it may be useful to
+rephrase it by making explicit the intended sense of `necessarily',
+namely that something could not have been otherwise. That is:
+
+\begin{enumerate}
+\item It could not have been that Aurélie Dupin is not Aurélie Dupin.
+\item If some thing is some thing, then everything that is true of the
+former is true of the latter.\footnote{Here `thing' here is used in
+the most general sense, aking to 'entity'. In that sense `thing'
+doesn't contrast with animals or people.}
+\item If George Sand is Aurélie Dupin, then it could not have been that
+George Sand is not Aurélie Dupin. 
+\end{enumerate}
+
+The conclusion might seem false. Put yourself in the shoes of a reader
+at the time. They might be surprised to learn that George Sand is 
+Aurélie Dupin. They might have thought that George Sand could have 
+been somebody else. 
+
+The argument for the necessary identity of Aurélie Dupin and George 
+Sand can obviously be replicated for any identity. Some classic examples: the Morning Star (Phosphorus) and the Evening Star (Hesperus), which turn
+out to be Venus; Clark Kent and Superman; Mark Twain and Samuel Clemens. 
+In each case you might seem that the identity is contingent. But if 
+the argument is correct, that's false: these things couldn't have 
+failed to be one and the same.
+
+If you think these identities are contingent, you need to reject the
+conclusion, and hence one of the premises or the \emph{De Re Modality
+Conversion Principle} principle. Which is it? Otherwise, you need to
+accept the conclusion: these things that are in fact identical
+couldn't have failed to be identical. 
+
+We can state the argument in a more general form:
+
+\begin{itemize}
+\item Everything is necessarily itself. \emph{Necessity of self-identity.} 
+\item If something is one and the same thing as something, whatever is true of the former is true of the latter. \emph{Leibniz's law, a.k.a. the Indescernibility of Identicals}
+\item Therefore, if something is one and the same thing as something, it is necessary that the former is one and the same thing as the latter. \emph{Necessity of identity}. 
+\end{itemize}
+
+Another reason why the argument is puzzling is that it infers a
+necessity from a fact. In general, from the mere observation that
+something is \emph{in fact} the case we can't infer that it
+\emph{could not have been otherwise}. Hume famously thought this
+couldn't be done: from the observation that one thing followed another
+we can't infer that it had to follow the other. Yet if this argument
+is right, Hume's line can be crossed: from the mere observation that
+some thing is one and the same as some thing, we can infer that the 
+former couldn't have failed to be the latter.
+Therefore, if the argument is right, some truths are both \emph{a
+posteriori} (discovered by  experience) and yet known to be
+\emph{necessary} (such that they couldn't be otherwise). 
+
+\section{Frege's puzzle}
+
+There is an argument from plausible premises that all true identities
+are known. This is puzzling as it seems obvious that some identities
+are unknown. 
+
+Consider the following story (accurate, for all I know, but I haven't
+checked). At the times of Homer, Greeks had a name for the first
+'star' (in fact, planet) to be visible at night, Hesperus. They also
+had a name for the last 'star' to be visible in the morning,
+Phosphorus. Only centuries later, Greek astronomers realized that
+these where one and the same `star' (the planet we call Venus). If so,
+both of the following claim seem true:
+
+\begin{itemize}
+    \item Phosphorus is (the same thing as) Hesperus.
+    \item Homer did not know that Phosphorus is Hesperus.
+\end{itemize}
+
+However, there is an argument from that leads to the opposite
+conclusion.
+
+\begin{enumerate}
+\item Homer knew that Hesperus is Hesperus. 
+\item If some thing is some thing, then everything that is true of the
+former is true of the latter.\footnote{Here `thing' here is used in
+the most general sense, aking to 'entity'. In that sense `thing'
+doesn't contrast with animals or people.}
+\item If Phosphorus is Hesperus, then Homer knew that Phosphorus is Hesperus. (1,2 and \emph{De Re Knoweldge Conversion})
+\end{enumerate}
+
+Where \emph{De Re Knowledge Conversion} is the following principle:
+
+\begin{itemize}
+\item \emph{De Re Knowledge Conversion} (DRKC). One knows that some thing is some way if and
+only if it is true of that thing that one knows it to be that way. 
+\end{itemize}
+
+The conclusion follows from the premises and the principle as follows:
+
+\begin{itemize}
+\item It is true of Hesperus that Homer knows it to be Hesperus. (by 1, DRKC)
+\item If Phosphorus is Hesperus, then: if it is true of Hesperus that Homer knows it to be Hesperus, then it is true of Phosphorus that Homer knows it to be Hesperus. (by 2)
+\item So, if Phosphorus is Hesperus, then: it is true of Phosphorus that Homer knows it to be Hesperus. (by the two previous claims)
+\item If true of Phosphorus that Homer knows it to be Hesperus, then Homer knows that Phosphorus is Hesperus. (DRMC)
+\item So, if Phosphorus is Hesperus, then Homer knows that Phosphorus is Hesperus. (by the two previous claims)
+\end{itemize}
+
+The conclusion seems obviously false. Homer didn't know that Phosphorus
+is Hesperus.
+
+The argument can be obviously generalized to any true identity.
+
+If you reject the conclusion, you must reject one of the premises
+or the De Re Knoweldge Conversion. Which is is? Otherwise you 
+have to accept the knowledge, and say that no true identity is unknown.
+
+Kripke's `A Puzzle About Belief' poses a particularly sharp version Of
+the problem. In his story, Pierre grows up in France and learns about 
+London through photos and descriptions in French. Based on this, 
+he sincerly makes claims such as:
+
+\begin{itemize}
+\item Londres est jolie.
+\end{itemize}
+
+Which translates as `London is pretty'. Later he moves to work in 
+the UK, with little awareness of where he is, learns English with
+the locals, and ends up living in a ugly industrial part of London.
+He sincerely utters things like:
+
+\begin{itemize}
+\item London is not pretty.
+\end{itemize}
+
+He is not aware that ``London'' and ``Londres'' name the same city.
+The opinions he expressed with the word ``Londres'' haven't changed;
+he would still assent to the sentence ``Londres est jolie''. 
+
+The puzzle is: \emph{does Pierre believe that London is pretty?} If we only  considered the part of the story, we would say that Pierre believe 
+that London is pretty. He learned about London through books, in French,
+he calls it ``Londres'', but that's a name for London. When he sincerely
+utters ``Londres is pretty'', we should say that:
+
+\begin{itemize}
+\item Pierre believes that London is pretty. 
+\end{itemize}
+
+On the other hand, if we look at the second part of the story, he's
+learned about London by living in it; he calls it `London', which 
+is its English name indeed. When he sincerely assert that `London 
+is not pretty', we should say at least that:
+
+\begin{itemize}
+\item Pierre believes that London is not pretty. 
+\end{itemize}
+
+If we say both things, we're ascribing Pierre \emph{contradictory beliefs}: he believes one thing, and he believes its negation. That
+is a first puzzle, because having contradictory beliefs is usually
+irrational, but Pierre doesn't seem irrational here---merely poorly
+informed.
+
+But that's not all. Based on the second part of the story alone, because 
+Pierre sincerly rejects `London is pretty', we should not only say 
+that Pierre believes that London is not pretty, but also that he \emph{does not} have the belief that London is pretty:
+
+\begin{itemize}
+\item Pierre does not believe that London is pretty. 
+\end{itemize}
+
+But would mean a contradition not just in Pierre's mind, but in our 
+own theory of Pierre's beliefs! 
+
+There are many things we can all agree on about Pierre's beliefs:
+
+\begin{itemize}
+    \item He believes that there is city called `Londres' that is pretty.
+    \item He believes that there is a city called `London' that is ugly.
+    \item He believes that `London' and `Londres' are names of different cities.
+    \item He does not believe that `London' and `Londres' name the same city.
+    \item He does not believe that there is an ugly city called `Londres'.
+    \item He does not believe that there is a pretty city called `London'. 
+\end{itemize}
+
+But as Kripke insists, these does not settle the question he raises.
+If it makes sense talk of someone believing that London is pretty, 
+it must make sense to ask whether Pierre does believe it or not. 
+Which is it?
+
+We can relate Kripke's Pierre case with our argument. Using the 
+word `Londres' ourselves, an argument like
+the one above can be used to show that if Pierre believes that Londres
+is pretty, he believes that Londres is pretty. 
+
+\begin{enumerate}
+\item Pierre believes that London is pretty. 
+\item If Homer believes that London is pretty, then it is true of London 
+that Homer believes it to be pretty. (DRKC)
+\item So, it is true that of London that Pierre believes it to be pretty. (1, 2)
+\item If some thing is some thing, then everything that is true of the
+former is true of the latter.
+\item Londres is London.
+\item So, it is true of Londres that Pierre believes it to be pretty. (3,4,5)
+\item If it is true of Londres that Pierre believes it to be pretty, then Pierre believes Londres to be pretty. (DRKC)
+\item So, Pierre believes that Londres is pretty.
+\end{enumerate}
+
+The conclusion seems false, as Pierre insists that the city he calls
+Londres isn't pretty. If you reject the conclusion, you must reject
+one of the premises, or the principle of \emph{De Re Knoweldge Conversion}.
+Which is it? Otherwise, if you accept it, you must accept that Pierre
+does believe that London is pretty. (And also, by parallel reasoning,
+that he does believe that London is ugly.)
+
+The argument behind Frege's puzzle is formally like the argument 
+for the necessity of identity. If you think that the argument for 
+the necessity of identity is correct, but the argument for 
+the knowledge of identities is not, you should consider why
+they differ.
+
+The puzzle of unkonw identities was first raised by Frege. He raised
+it in slightly different terms. He compares the sentences `Hesperus is
+Hesperus' and 'Hesperus is Phosphorus'. He points out their difference
+in informativeness: the former isn't informative (anyone would have
+figured it out that it is true), the second is informative (it took
+careful astronomic observations to establish that it was true).
+However, the two sentences seem to have the same meaning (to `say' the
+same thing): `Hesperus' denotes a certain planet, and `Phosphorus'
+denotes the same planet. Yet their different informativeness must be
+due to different meaning (to them `saying' different things). 
+
+%\olimport[story]{story}
+%\olimport[ordinals]{ordinals}
+
+\end{document}

@@ -1,0 +1,117 @@
+% Part: exercise-booklet
+% Chapter: first-order-logic
+% Section: natural-deduction.tex
+
+\documentclass[../../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{exb}{fol}{nd}
+
+\olsection{Natural deduction}
+
+\begin{prob}[Natural Deduction proofs]
+Give natural deduction proofs of the following:
+\begin{enumerate}
+\item $\Proves\lforall x\Atom{\Obj F}{x}\lif\lforall y\Atom{\Obj F}{y}$.
+\item $\Proves \Atom{\Obj F}{a}\lif\lexists x\Atom{\Obj F}{x}$.
+\item $\Proves\lforall x\Atom{\Obj F}{x}\lif\lforall y(\Atom{\Obj F}{y}\lor \Atom{\Obj G}{y})$.
+\item $\Proves\lexists x\Atom{\Obj F}{x}\lif\lexists y\Atom{\Obj F}{y}$.
+\item $\lforall x\Atom{\Obj F}{x},\lforall x(\Atom{\Obj F}{x}\lif \Atom{\Obj G}{x})\Proves\lforall x\Atom{\Obj G}{x}$.
+\item $\lforall x(\Atom{\Obj F}{x}\lif \Atom{\Obj G}{x}),\lforall x(\Atom{\Obj G}{x}\lif \Atom{\Obj H}{x})\Proves\lforall x(\Atom{\Obj F}{x}\lif \Atom{\Obj H}{x})$.
+\item $\Proves\lforall x(!A \lif !B)\lif(\lforall x !A\lif\lforall x !B)$.\footnote{This is a schema rather than a formula. You'll give a ``proof schema'', which is just like a normal tableau but using
+$!A$,$!B$, $\ldots$ instead, that can stand for any variable / formula whatsoever.}
+\item $\lforall x\Atom{\Obj F}{x},\lexists x\Atom{\Obj G}{x}\Proves\lexists x(\Atom{\Obj F}{x}\land \Atom{\Obj G}{x})$.
+\item $\Proves\lforall x\Atom{\Obj G}{a,x}\lif\lforall x\lexists y\Atom{\Obj G}{y,x}$.
+\item $\lexists x\lforall y\Atom{\Obj G}{x,y}\Proves\lforall y\lexists x\Atom{\Obj G}{x,y}$.
+\item $\lforall x\lforall y(\Atom{\Obj G}{x,y}\lif\lnot \Atom{\Obj G}{y,x})\Proves\lforall x\lnot \Atom{\Obj G}{x,x}$.
+\item $\lexists x\Atom{\Obj G}{a,x},\lforall y(\Atom{\Obj G}{a,y}\lif\lforall z\Atom{\Obj G}{z,y})\Proves\lexists x\lforall z\Atom{\Obj G}{z,x}$.
+\end{enumerate}
+\begin{ans}
+\begin{enumerate}
+    \item $\Proves\lforall x\Atom{\Obj F}{x}\lif\lforall y\Atom{\Obj F}{y}$.
+    
+    \begin{prooftree}
+    \AxiomC{$\Discharge{\lforall x\Atom{\Obj F}{x}}{1}$}
+    \RightLabel{\Elim{\lforall}}
+    \UnaryInfC{$\Atom{\Obj F}{a}$}
+    \RightLabel{\Intro{\lforall}}
+    \UnaryInfC{$\lforall y\Atom{\Obj F}{y}$}
+    \DischargeRule{\Intro{\lif} (or \textbf{PL})}{1}
+    \UnaryInfC{$\lforall x\Atom{\Obj F}{x}\lif\lforall y\Atom{\Obj F}{y}$}
+    \end{prooftree}
+
+    \emph{Comment}. The restrictions on \Intro{\lforall} are obeyed.
+    First, $a$ does not appear in appear in undischarged assumptions
+    of the derivation at the time when \Intro{\lforall} is applied.
+    Second, it not does it appear in the formula to which $\lforall$
+    is added, $\Atom{\Obj F}{x}$. 
+
+    \item $\Proves \Atom{\Obj F}{a}\lif\lexists x\Atom{\Obj F}{x}$.
+    
+    \begin{prooftree}
+    \AxiomC{$\Discharge{\Atom{\Obj F}{a}}{1}$}
+    \RightLabel{\Intro{\lexists}}
+    \UnaryInfC{$\lexists x\Atom{\Obj F}{x}$}
+    \DischargeRule{\Intro{\lif} (or \textbf{PL})}{1}
+    \UnaryInfC{$\Atom{\Obj F}{a}\lif\lexists x\Atom{\Obj F}{x}$}
+    \end{prooftree}
+
+    
+
+    \item $\Proves\lforall x\Atom{\Obj F}{x}\lif\lforall y(\Atom{\Obj F}{y}\lor \Atom{\Obj G}{y})$.
+    
+    \begin{prooftree}
+    \AxiomC{$\Discharge{\lforall x\Atom{\Obj F}{x}}{1}$}
+    \RightLabel{\Elim{\lforall}}
+    \UnaryInfC{$\Atom{\Obj F}{a}$}
+    \RightLabel{\Intro{\lor}}
+    \UnaryInfC{$\Atom{\Obj F}{a}\lor \Atom{\Obj G}{a}$}
+    \RightLabel{\Intro{\lforall}}
+    \UnaryInfC{$\lforall y(\Atom{\Obj F}{y}\lor \Atom{\Obj G}{y})$}
+    \DischargeRule{\Intro{\lif} (or \textbf{PL})}{1}
+    \UnaryInfC{$\lforall x\Atom{\Obj F}{x}\lif\lforall y(\Atom{\Obj F}{y}\lor \Atom{\Obj G}{y})$}
+    \end{prooftree}
+
+    \emph{Comment}. The restrictions on \Intro{\lforall} are obeyed.
+    First, $a$ does not appear in appear in undischarged assumptions
+    of the derivation at the time when \Intro{\lforall} is applied.
+    Second, it not does it appear in the formula to which $\lforall$
+    is added, $\Atom{\Obj F}{x}$. 
+
+    \item $\Proves\lexists x\Atom{\Obj F}{x}\lif\lexists y\Atom{\Obj F}{y}$.
+    \item $\lforall x\Atom{\Obj F}{x},\lforall x(\Atom{\Obj F}{x}\lif \Atom{\Obj G}{x})\Proves\lforall x\Atom{\Obj G}{x}$.
+    \item $\lforall x(\Atom{\Obj F}{x}\lif \Atom{\Obj G}{x}),\lforall x(\Atom{\Obj G}{x}\lif \Atom{\Obj H}{x})\Proves\lforall x(\Atom{\Obj F}{x}\lif \Atom{\Obj H}{x})$.
+    \item $\Proves\lforall x(!A \lif !B)\lif(\lforall x !A\lif\lforall x !B)$.\footnote{This is a schema rather than a formula. You'll give a ``proof schema'', which is just like a normal tableau but using
+    $!A$,$!B$, $\ldots$ instead, that can stand for any variable / formula whatsoever.}
+    \item $\lforall x\Atom{\Obj F}{x},\lexists x\Atom{\Obj G}{x}\Proves\lexists x(\Atom{\Obj F}{x}\land \Atom{\Obj G}{x})$.
+    \item $\Proves\lforall x\Atom{\Obj G}{a,x}\lif\lforall x\lexists y\Atom{\Obj G}{y,x}$.
+    \item $\lexists x\lforall y\Atom{\Obj G}{x,y}\Proves\lforall y\lexists x\Atom{\Obj G}{x,y}$.
+    \item $\lforall x\lforall y(\Atom{\Obj G}{x,y}\lif\lnot \Atom{\Obj G}{y,x})\Proves\lforall x\lnot \Atom{\Obj G}{x,x}$.
+    \item $\lexists x\Atom{\Obj G}{a,x},\lforall y(\Atom{\Obj G}{a,y}\lif\lforall z\Atom{\Obj G}{z,y})\Proves\lexists x\lforall z\Atom{\Obj G}{z,x}$.
+\end{enumerate}
+\end{ans}
+\end{prob}
+
+\begin{prob}
+    \citep[1.5]{MacFarlane-2020-PhilosophicalLogicContemporary}
+    Give natural deduction proofs of the following.
+\begin{enumerate}
+    \item $\Proves\lforall x ((\Atom{\Obj F}{x}\land \Atom{\Obj G}{x})
+    \lif\Atom{\Obj F}{x})$
+    \item $\Proves\lnot\lexists x (\Atom{\Obj F}{x}\land \Atom{\Obj G}{x})
+        \lif (\lforall x\Atom{\Obj F}{x} \lif \lnot\lexists x\Atom{\Obj G}{x})$
+    \item $\Proves\lexists x\lforall y \lforall z\Atom{\Obj F}{x,y,z}
+        \lif \lforall y\lforall z \lexists x\Atom{\Obj F}{x,y,z}$
+    \item $\lexists x(\Atom{\Obj P}{x}\land\Atom{\Obj S}x),
+        \lforall x(\Atom{\Obj S}{x}\lif \Atom{\Obj S}{x,b})
+        \Proves \lexists x\Atom{\Obj R}{x,b}$
+    \item $\lforall x(\Atom{\Obj P}{x}\lif\lexists x\Atom{\Obj F}{y,x}),
+    \lforall x\lforall y(\Atom{\Obj F}{y,x}\lif \Atom{\Obj L}{y,x})
+    \Proves \lforall x(\Atom{\Obj P}{x}\lif\lexists y\Atom{\Obj L}{y,x})$
+    \item $\lnot\lforall x\Atom{\Obj F}{x}\Proves \lexists x\lnot\Atom{\Obj F}{x}$ 
+    (without using derived Duality aka QNE rules)
+\end{enumerate}
+\end{prob}
+
+\end{document}

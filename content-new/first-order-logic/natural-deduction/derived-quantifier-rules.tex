@@ -1,0 +1,98 @@
+% Part: first-order-logic
+% Chapter: natural-deduction
+% Section: quantifier-rules
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{ntd}{qrd}
+
+\olsection{Derived Quantifier Rules}
+
+\begin{explain}
+    The Duality rules are derived. They simplify some !!{derivation}s.
+    They capture the fact that the universal and
+    existential quantifiers are \emph{duals} of each other, namely:
+
+    $$\lnot\lforall[x][!A]\liff\lexists[x][\lnot!A]$$
+
+    $$\lnot\lexists[x][!A]\liff\lforall[x][\lnot!A]$$
+\end{explain}
+
+\begin{prop}[Duality Rules]
+    \ollabel{prop:duality}
+    The following rules are derived. 
+
+    \vskip 1em
+
+    \noindent
+    \AxiomC{$\lforall[x][\lnot!A(x)]$}
+    \RightLabel{\Intro{\lforall}}
+    \UnaryInfC{$\lnot\lexists[x][!A(x)]$}
+    \DisplayProof
+    \hfill
+    \AxiomC{$\lnot\lexists[x][!A(x)]$}
+    \RightLabel{\Intro{\lforall}}
+    \UnaryInfC{$\lforall[x][\lnot!A(x)]$}
+    \DisplayProof
+
+    \vskip 1em
+
+    \noindent
+    \AxiomC{$\lexists[x][\lnot!A(x)]$}
+    \RightLabel{\Intro{\lforall}}
+    \UnaryInfC{$\lnot\lforall[x][!A(x)]$}
+    \DisplayProof
+    \hfill
+    \AxiomC{$\lnot\lforall[x][!A(x)]$}
+    \RightLabel{Dual}
+    \UnaryInfC{$\lexists[x][\lnot!A(x)]$}
+    \DisplayProof
+
+\end{prop}
+
+\begin{proof}
+    The first rule abbreviates the following steps,
+    where $c$ is a constant that doesn't appear anywhere else in the
+    !!{derivation}:
+
+    \begin{prooftree}
+    \AxiomC{$\Discharge{\lexists[x][!A(x)]}{3}$}
+        \AxiomC{$\Discharge{!A(c)}{2}$}
+            \AxiomC{$\Discharge{\lforall[x][\lnot!A(x)]}{1}$}
+            \RightLabel{\Elim{\lforall}}
+            \UnaryInfC{$\lnot !A(c)$}
+        \DischargeRule{\Intro{\lnot}}{1}
+        \BinaryInfC{$\lnot\lforall[x][\lnot!A(x)]$}
+    \DischargeRule{\Elim{\lexists}}{2}
+    \BinaryInfC{$\lnot\lforall[x][\lnot!A(x)]$}
+        \AxiomC{$\lforall[x][\lnot!A(x)]$}
+    \DischargeRule{\Intro{\lnot}}{3}
+    \BinaryInfC{$\lnot\lexists[x][!A(x)]$}
+    \end{prooftree}
+
+    The second rule abbreviates the following steps,
+    where $c$ is a constant that doesn't appear anywhere else in the
+    !!{derivation}:
+
+    \begin{prooftree}
+    \AxiomC{$\Discharge{!A(c)}{1}$}
+    \RightLabel{\Intro{\lexists}}
+    \UnaryInfC{$\lexists[x][!A(x)]$}
+            \AxiomC{$\lnot\lexists[x][!A(x)]$}
+    \DischargeRule{\Intro{\lnot}}{1}
+    \BinaryInfC{$\lnot !A(c)$}
+    \RightLabel{\Intro{\lforall}}
+    \UnaryInfC{$\lforall[x][\lnot!A(x)]$}
+    \end{prooftree}
+    
+    The other rules are left as exercise.
+\end{proof}
+
+\begin{prob}
+    !!^{derive} the remaining rules 
+    of \olref[fol][ntd][qrd]{prop:duality}.
+\end{prob}
+
+\end{document}

@@ -86,26 +86,65 @@
     \smallskip\noindent
     \emph{Identity rules}
 
-    \smallskip\noindent
+    \smallskip
+    \begin{center}
     \begin{tabular}{ll}
         \AxiomC{}
         \RightLabel{\Intro{\eq}}
         \UnaryInfC{$\eq[c][c]$}
         \DisplayProof
         &
-        \AxiomC{$\eq[c][d]$}
-            \AxiomC{$!A[c/v]$}
+        \AxiomC{}\DeduceC{$\eq[c][d]$}
+            \AxiomC{}\DeduceC{$!A[c/v]$}
         \RightLabel{\Elim{\eq}}
         \BinaryInfC{$!A[d/v]$}
         \DisplayProof
     \end{tabular}
+    \end{center}
 
     \end{defish}
     \caption{Natural Deduction rules for First Order Logic with Identity.}
     \ollabel{natdedfol}
 \end{figure}
+
+\begin{figure}
+    \begin{defish}
+    \emph{You may also use the derived rules:}
+
+    \smallskip
+    \begin{center}
+    {\setlength\extrarowheight{3em}
+    \begin{tabular}{ll}
+        \AxiomC{}\DeduceC{$\lforall[x][\lnot!A(x)]$}
+        \RightLabel{Dual}
+        \UnaryInfC{$\lnot\lexists[x][!A(x)]$}
+        \DisplayProof
+        &
+        \AxiomC{}\DeduceC{$\lnot\lexists[x][!A(x)]$}
+        \RightLabel{Dual}
+        \UnaryInfC{$\lforall[x][\lnot!A(x)]$}
+        \DisplayProof
+        \\
+        \AxiomC{}\DeduceC{$\lexists[x][\lnot!A(x)]$}
+        \RightLabel{Dual}
+        \UnaryInfC{$\lnot\lforall[x][!A(x)]$}
+        \DisplayProof
+        &
+        \AxiomC{}\DeduceC{$\lnot\lforall[x][!A(x)]$}
+        \RightLabel{Dual}
+        \UnaryInfC{$\lexists[x][\lnot!A(x)]$}
+        \DisplayProof
+    \end{tabular}
+    }
+    \end{center}
+
+    \end{defish}
+    \caption{Derived Natural Deduction rules for First Order Logic with Identity.}
+    \ollabel{natdedfolder}
     
-The rules are summarized in \olref{natdedfol}
+\end{figure}
+    
+The rules are summarized in \olref{natdedfol} and \olref{natdedfolder}.
 
 \subsection{Propositional Rules}
 
@@ -221,5 +260,25 @@ straightforward.
 
 Note that Leibniz's law allow you to replace \emph{one or more} 
 occurrences of $c$ in $!A$ with $d$.
+
+\subsection{Duality Rules}
+
+\olref{natdedfolder} provides derived Duality rules. Even though you
+do not strictly need them, some !!{derivation}s are very long without
+them, so I recommend learning them too. 
+
+In exam you may used derived rules unless explicitly instructed 
+not to use them.
+
+The Duality rules capture the following equivalences:
+
+    $$\lnot\lforall[x][!A]\liff\lexists[x][\lnot!A]$$
+
+    $$\lnot\lexists[x][!A]\liff\lforall[x][\lnot!A]$$
+
+Note that, unlike MacFarlane's "Quantifier-Negation equivalence" rules,
+these rules do not allow you to \emph{substitute} `$\lforall[x]\lnot$' 
+by `$\lnot\lexists[x]$' \emph{anywhere in a formula}. They only apply
+to the \emph{main} quantifier or negation of a formula. 
 
 \end{document}

@@ -13,32 +13,37 @@
 \begin{prob}[Natural Deduction proofs]
 Give natural deduction proofs of the following:
 \begin{enumerate}
-\item $\Proves\lforall x\Atom{\Obj F}{x}\lif\lforall y\Atom{\Obj F}{y}$.
-\item $\Proves \Atom{\Obj F}{a}\lif\lexists x\Atom{\Obj F}{x}$.
-\item $\Proves\lforall x\Atom{\Obj F}{x}\lif\lforall y(\Atom{\Obj F}{y}\lor \Atom{\Obj G}{y})$.
-\item $\Proves\lexists x\Atom{\Obj F}{x}\lif\lexists y\Atom{\Obj F}{y}$.
-\item $\lforall x\Atom{\Obj F}{x},\lforall x(\Atom{\Obj F}{x}\lif \Atom{\Obj G}{x})\Proves\lforall x\Atom{\Obj G}{x}$.
-\item $\lforall x(\Atom{\Obj F}{x}\lif \Atom{\Obj G}{x}),\lforall x(\Atom{\Obj G}{x}\lif \Atom{\Obj H}{x})\Proves\lforall x(\Atom{\Obj F}{x}\lif \Atom{\Obj H}{x})$.
-\item $\Proves\lforall x(!A \lif !B)\lif(\lforall x !A\lif\lforall x !B)$.\footnote{This is a schema rather than a formula. You'll give a ``proof schema'', which is just like a normal tableau but using
-$!A$,$!B$, $\ldots$ instead, that can stand for any variable / formula whatsoever.}
-\item $\lforall x\Atom{\Obj F}{x},\lexists x\Atom{\Obj G}{x}\Proves\lexists x(\Atom{\Obj F}{x}\land \Atom{\Obj G}{x})$.
-\item $\Proves\lforall x\Atom{\Obj G}{a,x}\lif\lforall x\lexists y\Atom{\Obj G}{y,x}$.
-\item $\lexists x\lforall y\Atom{\Obj G}{x,y}\Proves\lforall y\lexists x\Atom{\Obj G}{x,y}$.
-\item $\lforall x\lforall y(\Atom{\Obj G}{x,y}\lif\lnot \Atom{\Obj G}{y,x})\Proves\lforall x\lnot \Atom{\Obj G}{x,x}$.
-\item $\lexists x\Atom{\Obj G}{a,x},\lforall y(\Atom{\Obj G}{a,y}\lif\lforall z\Atom{\Obj G}{z,y})\Proves\lexists x\lforall z\Atom{\Obj G}{z,x}$.
+\item $\Proves\lforall[x][\Atom{\Obj F}{x}]\lif\lforall[y][\Atom{\Obj F}{y}]$.
+\item $\Proves \Atom{\Obj F}{\Obj a}\lif\lexists[x][\Atom{\Obj F}{x}]$.
+\item $\Proves\lforall[x][\Atom{\Obj F}{x}]\lif\lforall[y][(\Atom{\Obj F}{y}\lor \Atom{\Obj G}{y})]$.
+\item $\Proves\lexists[x][\Atom{\Obj F}{x}]\lif\lexists[y][\Atom{\Obj F}{y}]$.
+\item $\lforall[x][\Atom{\Obj F}{x}],\lforall[x][(\Atom{\Obj F}{x}\lif \Atom{\Obj G}{x})]
+    \Proves\lforall[x][\Atom{\Obj G}{x}]$.
+\item $\lforall[x][(\Atom{\Obj F}{x}\lif \Atom{\Obj G}{x})],\lforall[x][(\Atom{\Obj G}{x}\lif \Atom{\Obj H}{x})]
+\Proves\lforall[x][(\Atom{\Obj F}{x}\lif \Atom{\Obj H}{x})]$.
+\item $\Proves\lforall[x][(!A \lif !B)]\lif(\lforall[x][!A]\lif\lforall[x][!B])$.\footnote{This is a schema rather than a formula. You'll give a ``proof schema'', which is just like a normal tableau but using
+$!A$,$!B$, $\ldots$ instead, that can stand for any !!{variable} and formula whatsoever, respectively.}
+\item $\lforall[x][\Atom{\Obj F}{x}],\lexists[x][\Atom{\Obj G}{x}]
+    \Proves\lexists[x][(\Atom{\Obj F}{x}\land \Atom{\Obj G}{x})]$.
+\item $\Proves\lforall[x][\Atom{\Obj G}{{\Obj a},x}]\lif\lforall[x][\lexists[y][\Atom{\Obj G}{y,x}]]$.
+\item $\lexists[x][\lforall[y][\Atom{\Obj G}{x,y}]]\Proves\lforall[y][\lexists[x][\Atom{\Obj G}{x,y}]]$.
+\item $\lforall[x][\lforall[y][(\Atom{\Obj G}{x,y}\lif\lnot \Atom{\Obj G}{y,x})]]
+    \Proves\lforall[x]\lnot \Atom{\Obj G}{x,x}$.
+\item $\lexists[x][\Atom{\Obj G}{\Obj a,x}],\lforall[y][(\Atom{\Obj G}{\Obj a,y}\lif\lforall z\Atom{\Obj G}{z,y})]
+\Proves\lexists[x][\lforall[z][\Atom{\Obj G}{z,x}]]$.
 \end{enumerate}
 \begin{ans}
 \begin{enumerate}
-    \item $\Proves\lforall x\Atom{\Obj F}{x}\lif\lforall y\Atom{\Obj F}{y}$.
+    \item $\Proves\lforall[x][\Atom{\Obj F}{x}]\lif\lforall[y][\Atom{\Obj F}{y}]$.
     
     \begin{prooftree}
-    \AxiomC{$\Discharge{\lforall x\Atom{\Obj F}{x}}{1}$}
+    \AxiomC{$\Discharge{\lforall[x][\Atom{\Obj F}{x}]}{1}$}
     \RightLabel{\Elim{\lforall}}
-    \UnaryInfC{$\Atom{\Obj F}{a}$}
+    \UnaryInfC{$\Atom{\Obj F}{\Obj a}$}
     \RightLabel{\Intro{\lforall}}
-    \UnaryInfC{$\lforall y\Atom{\Obj F}{y}$}
+    \UnaryInfC{$\lforall[y][\Atom{\Obj F}{y}]$}
     \DischargeRule{\Intro{\lif} (or \textbf{PL})}{1}
-    \UnaryInfC{$\lforall x\Atom{\Obj F}{x}\lif\lforall y\Atom{\Obj F}{y}$}
+    \UnaryInfC{$\lforall[x][\Atom{\Obj F}{x}]\lif\lforall[y][\Atom{\Obj F}{y}]$}
     \end{prooftree}
 
     \emph{Comment}. The restrictions on \Intro{\lforall} are obeyed.
@@ -47,48 +52,287 @@ $!A$,$!B$, $\ldots$ instead, that can stand for any variable / formula whatsoeve
     Second, it not does it appear in the formula to which $\lforall$
     is added, $\Atom{\Obj F}{x}$. 
 
-    \item $\Proves \Atom{\Obj F}{a}\lif\lexists x\Atom{\Obj F}{x}$.
+    \item $\Proves \Atom{\Obj F}{\Obj a}\lif\lexists[x][\Atom{\Obj F}{x}]$.
     
     \begin{prooftree}
-    \AxiomC{$\Discharge{\Atom{\Obj F}{a}}{1}$}
+    \AxiomC{$\Discharge{\Atom{\Obj F}{\Obj a}}{1}$}
     \RightLabel{\Intro{\lexists}}
-    \UnaryInfC{$\lexists x\Atom{\Obj F}{x}$}
+    \UnaryInfC{$\lexists[x][\Atom{\Obj F}{x}]$}
     \DischargeRule{\Intro{\lif} (or \textbf{PL})}{1}
-    \UnaryInfC{$\Atom{\Obj F}{a}\lif\lexists x\Atom{\Obj F}{x}$}
+    \UnaryInfC{$\Atom{\Obj F}{\Obj a}\lif\lexists[x][\Atom{\Obj F}{x}]$}
     \end{prooftree}
 
-    
-
-    \item $\Proves\lforall x\Atom{\Obj F}{x}\lif\lforall y(\Atom{\Obj F}{y}\lor \Atom{\Obj G}{y})$.
+    \item $\Proves\lforall[x][\Atom{\Obj F}{x}]\lif\lforall[y][(\Atom{\Obj F}{y}\lor \Atom{\Obj G}{y})]$.
     
     \begin{prooftree}
-    \AxiomC{$\Discharge{\lforall x\Atom{\Obj F}{x}}{1}$}
+    \AxiomC{$\Discharge{\lforall[x][\Atom{\Obj F}{x}]}{1}$}
     \RightLabel{\Elim{\lforall}}
-    \UnaryInfC{$\Atom{\Obj F}{a}$}
+    \UnaryInfC{$\Atom{\Obj F}{\Obj a}$}
     \RightLabel{\Intro{\lor}}
-    \UnaryInfC{$\Atom{\Obj F}{a}\lor \Atom{\Obj G}{a}$}
+    \UnaryInfC{$\Atom{\Obj F}{\Obj a}\lor \Atom{\Obj G}{\Obj a}$}
     \RightLabel{\Intro{\lforall}}
-    \UnaryInfC{$\lforall y(\Atom{\Obj F}{y}\lor \Atom{\Obj G}{y})$}
+    \UnaryInfC{$\lforall[y][(\Atom{\Obj F}{y}\lor \Atom{\Obj G}{y})]$}
     \DischargeRule{\Intro{\lif} (or \textbf{PL})}{1}
-    \UnaryInfC{$\lforall x\Atom{\Obj F}{x}\lif\lforall y(\Atom{\Obj F}{y}\lor \Atom{\Obj G}{y})$}
+    \UnaryInfC{$\lforall[x][\Atom{\Obj F}{x}]\lif\lforall[y][(\Atom{\Obj F}{y}\lor \Atom{\Obj G}{y})]$}
     \end{prooftree}
 
     \emph{Comment}. The restrictions on \Intro{\lforall} are obeyed.
-    First, $a$ does not appear in appear in undischarged assumptions
+    First, $\Obj a$ does not appear in appear in undischarged assumptions
     of the derivation at the time when \Intro{\lforall} is applied.
     Second, it not does it appear in the formula to which $\lforall$
     is added, $\Atom{\Obj F}{x}$. 
 
-    \item $\Proves\lexists x\Atom{\Obj F}{x}\lif\lexists y\Atom{\Obj F}{y}$.
-    \item $\lforall x\Atom{\Obj F}{x},\lforall x(\Atom{\Obj F}{x}\lif \Atom{\Obj G}{x})\Proves\lforall x\Atom{\Obj G}{x}$.
-    \item $\lforall x(\Atom{\Obj F}{x}\lif \Atom{\Obj G}{x}),\lforall x(\Atom{\Obj G}{x}\lif \Atom{\Obj H}{x})\Proves\lforall x(\Atom{\Obj F}{x}\lif \Atom{\Obj H}{x})$.
-    \item $\Proves\lforall x(!A \lif !B)\lif(\lforall x !A\lif\lforall x !B)$.\footnote{This is a schema rather than a formula. You'll give a ``proof schema'', which is just like a normal tableau but using
-    $!A$,$!B$, $\ldots$ instead, that can stand for any variable / formula whatsoever.}
-    \item $\lforall x\Atom{\Obj F}{x},\lexists x\Atom{\Obj G}{x}\Proves\lexists x(\Atom{\Obj F}{x}\land \Atom{\Obj G}{x})$.
-    \item $\Proves\lforall x\Atom{\Obj G}{a,x}\lif\lforall x\lexists y\Atom{\Obj G}{y,x}$.
-    \item $\lexists x\lforall y\Atom{\Obj G}{x,y}\Proves\lforall y\lexists x\Atom{\Obj G}{x,y}$.
-    \item $\lforall x\lforall y(\Atom{\Obj G}{x,y}\lif\lnot \Atom{\Obj G}{y,x})\Proves\lforall x\lnot \Atom{\Obj G}{x,x}$.
-    \item $\lexists x\Atom{\Obj G}{a,x},\lforall y(\Atom{\Obj G}{a,y}\lif\lforall z\Atom{\Obj G}{z,y})\Proves\lexists x\lforall z\Atom{\Obj G}{z,x}$.
+    \item $\Proves\lexists[x][\Atom{\Obj F}{x}]\lif\lexists[y][\Atom{\Obj F}{y}]$.
+    
+    \begin{prooftree}
+    \AxiomC{$\Discharge{\lexists[x][\Atom{\Obj F}{x}]}{2}$}
+        \AxiomC{$\Discharge{\Atom{\Obj F}{\Obj a}}{1}$}
+        \RightLabel{\Intro{\lexists}}
+        \UnaryInfC{$\lexists[y][\Atom{\Obj F}{y}]$}
+    \DischargeRule{\Elim{\lexists}}{2}
+    \BinaryInfC{$\lexists[y][\Atom{\Obj F}{y}]$}
+    \end{prooftree}
+
+    \emph{Comment}. There are no restrictions on \Intro{\lexists}.
+    The restrictions on \Elim{\lexists} are obeyed.
+    First, $\Obj a$ does not appear in appear in undischarged assumptions
+    of the derivation of the right other than $\Atom{\Obj F}{\Obj a}$. 
+    Second, it is not in $Atom{\Obj F}{x}$. Third, it is not in 
+    $\lexists[y][\Atom{\Obj F}{y}]$.    
+
+    \item $\lforall[x][\Atom{\Obj F}{x}],\lforall[x][(\Atom{\Obj F}{x}\lif \Atom{\Obj G}{x})]
+    \Proves\lforall[x][\Atom{\Obj G}{x}]$.
+    
+    \begin{prooftree}
+    \AxiomC{$\lforall[x][\Atom{\Obj F}{x}]$}
+    \RightLabel{\Elim{\lforall}}
+    \UnaryInfC{$\Atom{\Obj F}{\Obj a}$}
+        \AxiomC{$\lforall[x][(\Atom{\Obj F}{x}\lif \Atom{\Obj G}{x})]$}
+        \RightLabel{\Elim{\lforall}}
+        \UnaryInfC{$\Atom{\Obj F}{\Obj a}\lif\Atom{\Obj G}{\Obj a}$}
+    \RightLabel{\Elim{\lif}}
+    \BinaryInfC{$\Atom{\Obj G}{\Obj a}$}
+    \RightLabel{\Intro{\lforall}}
+    \UnaryInfC{$\lforall[x][\Atom{\Obj G}{x}]$}
+    \end{prooftree}
+
+    \emph{Comment}. There are no restrictions on \Elim{\lforall}.
+    The restrictions on \Intro{\lforall} are obeyed. First, $\Obj a$ 
+    doesn't appear in any assumption that is undischarged at the time 
+    of the \Intro{\lforall} step. Second, $\Obj a$ doesn't appear in
+    the conclusion: the step moves from $\Subst{!A}{\Obj a}{x}$ 
+    to $\lforall[x][!A]$ where $!A$ is $\Atom{\Obj G}{x}$, which does 
+    not contain $\Obj a$.
+
+    \item $\lforall[x][(\Atom{\Obj F}{x}\lif \Atom{\Obj G}{x})],\lforall[x][(\Atom{\Obj G}{x}\lif \Atom{\Obj H}{x})]
+    \Proves\lforall[x][(\Atom{\Obj F}{x}\lif \Atom{\Obj H}{x})]$.
+
+    \begin{prooftree}
+    \AxiomC{$\Discharge{\Atom{\Obj F}{\Obj a}}{1}$}
+        \AxiomC{$\lforall[x][(\Atom{\Obj F}{x}\lif \Atom{\Obj G}{x})]$}
+        \RightLabel{\Elim{\lforall}}
+        \UnaryInfC{$\Atom{\Obj F}{\Obj a}\lif \Atom{\Obj G}{\Obj a}$}
+    \RightLabel{\Elim{\lif}}
+    \BinaryInfC{$\Atom{\Obj G}{\Obj a}$}
+        \AxiomC{$\lforall[x][(\Atom{\Obj G}{x}\lif \Atom{\Obj H}{x})]$}
+        \RightLabel{\Elim{\lforall}}
+        \UnaryInfC{$\Atom{\Obj G}{\Obj a}\lif \Atom{\Obj H}{\Obj a}$}
+    \RightLabel{\Elim{\lif}}
+    \BinaryInfC{$\Atom{\Obj H}{\Obj a}$}
+    \DischargeRule{\Intro{\lif}}{1}
+    \UnaryInfC{$\Atom{\Obj F}{\Obj a}\lif \Atom{\Obj H}{\Obj a}$}
+    \RightLabel{\Intro{\lforall}}
+    \UnaryInfC{$\lforall[x][(\Atom{\Obj F}{x}\lif \Atom{\Obj H}{x})]$}
+    \end{prooftree}
+
+    \emph{Comment}. There are no restrictions on \Elim{\lforall}.
+    The restrictions on \Intro{\lforall} are obeyed. First, $\Obj a$ 
+    doesn't appear in any assumption that is undischarged at the time 
+    of the \Intro{\lforall} step. Second, $\Obj a$ doesn't appear in
+    the conclusion: the step moves from $\Subst{!A}{\Obj a}{x}$ 
+    to $\lforall[x][!A]$ where $!A$ is 
+    $\Atom{\Obj F}{x}\lif \Atom{\Obj F}{x}$, which does 
+    not contain $\Obj a$.
+
+    \item $\Proves\lforall[x][(!A \lif !B)]\lif(\lforall[x][!A]\lif\lforall[x][!B])$.\footnote{This is a schema rather than a formula. You'll give a ``proof schema'', which is just like a normal tableau but using
+    $!A$,$!B$, $\ldots$ instead, that can stand for any !!{variable} and formula whatsoever, respectively.}
+
+    Where $c$ is !!a{constant} that does not appear in $!A$ nor $!B$.
+
+    \begin{prooftree}
+    \AxiomC{$\Discharge{\lforall[x][(!A \lif !B)]}{2}$}
+    \RightLabel{\Elim{\lforall}}
+    \UnaryInfC{$\Subst{!A}{c}{x}\lif \Subst{!B}{c}{x}$}
+        \AxiomC{$\Discharge{\lforall[x][!A]}{1}$}
+        \RightLabel{\Elim{\lforall}}
+        \UnaryInfC{$\Subst{!A}{c}{x}$}
+    \RightLabel{\Elim{\lif}}
+    \BinaryInfC{$\Subst{!B}{c}{x}$}
+    \RightLabel{\Intro{\lforall}}
+    \UnaryInfC{$\lforall[x][!B]$}
+    \DischargeRule{\Intro{\lif}}{1}
+    \UnaryInfC{$\lforall[x][!A]\lif\lforall[x][!B]$}
+    \DischargeRule{\Intro{\lif}}{2}
+    \UnaryInfC{$\lforall[x][(!A \lif !B)]\lif(\lforall[x][!A]\lif\lforall[x][!B])$}
+    \end{prooftree}
+
+    \emph{Comment}. The only rule with restrictions here is \Intro{\lforall}.
+    You need to state that $c$ is !!a{constant} not appearing in $!A$ or $!B$
+    to ensure that the restrictions are obeyed. First, since it doesn't appear
+    in either, it doesn't appear in the assumptions $\lforall[x][(!A \lif !B)]$
+    and $\lforall[x][!A]$ that are still undischarged at the time of the when 
+    \Intro{\lforall} is applied. Second, since it doesn't appear in $!B$, 
+    the second constraint is obeyed.
+
+    \item $\lforall[x][\Atom{\Obj F}{x}],\lexists[x][\Atom{\Obj G}{x}]
+        \Proves\lexists[x][(\Atom{\Obj F}{x}\land \Atom{\Obj G}{x})]$.
+
+    \begin{prooftree}
+    \AxiomC{$\lexists[x][\Atom{\Obj G}{x}]$}
+        \AxiomC{$\Discharge{\Atom{\Obj G}{\Obj a}}{1}$}
+            \AxiomC{$\lforall[x][\Atom{\Obj F}{x}]$}
+            \RightLabel{\Elim{\lforall}}
+            \UnaryInfC{$\Atom{\Obj F}{\Obj a}$}
+        \RightLabel{\Intro{\land}}
+        \BinaryInfC{$\Atom{\Obj F}{\Obj a}\land \Atom{\Obj G}{\Obj a}$}
+        \RightLabel{\Intro{\lexists}}
+        \UnaryInfC{$\lexists[x][(\Atom{\Obj F}{x}\land \Atom{\Obj G}{x})]$}
+    \DischargeRule{\Elim{\lexists}}{1}
+    \BinaryInfC{$\lexists[x][(\Atom{\Obj F}{x}\land \Atom{\Obj G}{x})]$}
+    \end{prooftree}
+
+    \emph{Comment}. The only restricted rule here is \Elim{\lexists}.
+    That step's pattern is as follows, 
+    with $\lexists[x][(\Atom{\Obj F}{x}\land \Atom{\Obj G}{x})]$ for $!B$: 
+    
+    \begin{prooftree}
+    \AxiomC{$\lexists[x][\Atom{\Obj G}{x}]$}
+        \AxiomC{$\Discharge{\Subst{\Atom{\Obj G}{x}}{\Obj a}{x}}{1}$}
+        \noLine
+        \UnaryInfC{$\mathcal{D}$}
+        \noLine
+        \UnaryInfC{$!B$}
+    \DischargeRule{\Elim{\lexists}}{1}
+    \BinaryInfC{$!B$}
+    \end{prooftree}
+
+    The restrictions are obeyed. First, the only undischarged assumption
+    of $\mathcal{D}$ other than $\Subst{\Atom{\Obj G}{x}}{\Obj a}{x}$
+    is $\lforall[x][\Atom{\Obj F}{x}]$, which does not contain $\Obj a$.
+    Second, $\Obj a$ doesn't appear in our $\lexists$ premise, 
+    $\lexists[x][\Atom{\Obj G}{x}]$. Third, $\Obj a$ doesn't appear in
+    the conclusion $\psi$.
+    
+    A common error is to forget to \emph{generalize on your arbitrary
+    !!{constant} before applying \Elim{\lexists}}:
+
+    \begin{prooftree}
+    \AxiomC{$\lexists[x][\Atom{\Obj G}{x}]$}
+        \AxiomC{$\Discharge{\Atom{\Obj G}{\Obj a}}{1}$}
+            \AxiomC{$\lforall[x][\Atom{\Obj F}{x}]$}
+            \RightLabel{\Elim{\lforall}}
+            \UnaryInfC{$\Atom{\Obj F}{\Obj a}$}
+        \RightLabel{\Intro{\land}}
+        \BinaryInfC{$\color{red}\Atom{\Obj F}{\Obj a}\land \Atom{\Obj G}{\Obj a}$}
+    \DischargeRule{{\color{red}\Elim{\lexists}\quad WRONG}}{1}
+    \BinaryInfC{$\color{red}\Atom{\Obj F}{\Obj a}\land \Atom{\Obj G}{\Obj a}$}
+    \RightLabel{\Intro{\lexists}}
+    \UnaryInfC{$\lexists[x][(\Atom{\Obj F}{x}\land \Atom{\Obj G}{x})]$}
+    \end{prooftree}
+
+    In this mistaken !!{derivation}, right after the \Elim{\lexists} 
+    step we conclude $\Atom{\Obj F}{\Obj a}\land \Atom{\Obj G}{\Obj a}$
+    (`Ali is French and German', say) from the premises 
+    $\lforall[x][\Atom{\Obj F}{x}]$ (`Everyone is French') and 
+    $\lexists[x][\Atom{\Obj G}{x}]$ (`\emph{Someone} is German') 
+    alone---for that step discharges $\Atom{\Obj G}{\Obj a}$, so these
+    are the only two assumptions left. But of course, that argument is 
+    not valid: from the fact that \emph{someone} is German and everyone
+    is French, it doesn't follow that \emph{Ali} in particular is 
+    German and French. Indeed, this violates the third restriction of 
+    \Elim{\lexists}: the arbitrary !!{constant} $c$ we use (here, $\Obj a$) 
+    should not appear in the conclusion of \Elim{\lexists} step.
+    Before applying \Elim{\lexists} we need to 
+    get rid of our arbitrary !!{constant}, $\Obj a$. The 
+    solution is to apply \Intro{\lexists} \emph{before} 
+    \Elim{\lexists}. 
+
+    \item $\Proves\lforall[x][\Atom{\Obj G}{{\Obj a},x}]\lif\lforall[x][\lexists[y][\Atom{\Obj G}{y,x}]]$.
+
+    \begin{prooftree}
+    \AxiomC{$\Discharge{\lforall[x][\Atom{\Obj G}{\Obj a,x}]}{1}$}
+    \RightLabel{\Elim{\lforall}}
+    \UnaryInfC{$\Atom{\Obj G}{\Obj a,\Obj b}$}
+    \RightLabel{\Intro{\lexists}}
+    \UnaryInfC{$\lexists[y][\Atom{\Obj G}{y,\Obj b}]$}
+    \RightLabel{\Intro{\lforall}}
+    \UnaryInfC{$\lforall[x][\lexists[y][\Atom{\Obj G}{y,x}]]$}
+    \DischargeRule{\Intro{\lif}}{1}
+    \UnaryInfC{$\lforall[x][\Atom{\Obj G}{{\Obj a},x}]\lif\lforall[x][\lexists[y][\Atom{\Obj G}{y,x}]]$}
+    \end{prooftree}
+
+    \emph{Comment.} The only restricted rule here is $\Intro{\lforall}$.
+    Our $\Intro{\lforall}$ step here generalizes 
+    over !!{constant} $\Obj b$. Thus, we need to ensure (1) that 
+    it doesn't appear in any assumption that is undischarged when we apply
+    the rule, and (2) that it doesn't appear in the conclusion of the rule.
+    The only undischarged assumption at that step is $\lforall[x][\Atom{\Obj G}{\Obj a,x}]$,
+    which does not contain $\Obj b$, and the conclusion is 
+    $\lforall[x][\lexists[y][\Atom{\Obj G}{y,x}]]$, which does not 
+    contain it either, so the restrictions are obeyed.
+
+    What mattered here was that at the first step, $\Elim{\lforall}$, 
+    we instantiate $x$ with !!a{constant} \emph{other than $\Obj a$}.
+    Otherwise we would violate the first restriction of $\Intro{\lforall}$.
+
+    \item $\lexists[x][\lforall[y][\Atom{\Obj G}{x,y}]]\Proves\lforall[y][\lexists[x][\Atom{\Obj G}{x,y}]]$.
+   
+
+    \item $\lforall[x][\lforall[y][(\Atom{\Obj G}{x,y}\lif\lnot \Atom{\Obj G}{y,x})]]
+        \Proves\lforall[x]\lnot \Atom{\Obj G}{x,x}$.
+
+    \begin{prooftree}
+    \AxiomC{$\lforall[x][\lforall[y][(\Atom{\Obj G}{x,y}\lif \lnot\Atom{\Obj G}{y,x})]]$}
+    \RightLabel{\Elim{\lforall}}
+    \UnaryInfC{$\lforall[y][(\Atom{\Obj G}{\Obj a,y}
+        \lif \lnot\Atom{\Obj G}{y,\Obj a})]$}
+    \RightLabel{\Elim{\lforall}}
+    \UnaryInfC{$\Atom{\Obj G}{\Obj a,\Obj a}\lif \lnot\Atom{\Obj G}{\Obj a,\Obj a}$}
+    \RightLabel{$\mathsf{PL}$}
+    \UnaryInfC{$\lnot\Atom{\Obj G}{\Obj a,\Obj a}$}
+    \RightLabel{\Intro{\lforall}}
+    \UnaryInfC{$\lforall[x][\lnot\Atom{\Obj G}{x,x}]$}
+  \end{prooftree}
+
+  \emph{Comment.} The only restricted rule is \Intro{\forall}.
+  Its restrictions are obeyed. First, $\Obj a$ doesn't appear in 
+  the undischarged assumption at that step, 
+  $\lforall[x][\lforall[y][(\Atom{\Obj G}{x,y}\lif \lnot\Atom{\Obj G}{y,x})]]$.
+  Second, it doesn't appear in the conclusion of that step, 
+  $\lforall[x][\lnot\Atom{\Obj G}{x,x}]$.
+
+  The $\mathsf{PL}$ step is allowed because we know we can 
+  !!{derive} $\lnot!A$ from $!A\lif\lnot!A$ in propositional logic alone. 
+  The omitted steps are:
+
+  \begin{prooftree}
+    \AxiomC{$\Atom{\Obj G}{\Obj a,\Obj a}
+        \lif \lnot\Atom{\Obj G}{\Obj a,\Obj a}$}
+        \AxiomC{$\Discharge{\Atom{\Obj G}{\Obj a,\Obj a}}{1}$}
+    \RightLabel{\Elim{\lif}}
+    \BinaryInfC{$\lnot\Atom{\Obj G}{\Obj a,\Obj a}$}
+        \AxiomC{$\Discharge{\Atom{\Obj G}{\Obj a,\Obj a}}{1}$}
+    \RightLabel{\Intro{\bot}}
+    \BinaryInfC{$\bot$}
+    \DischargeRule{\Elim{\bot}}{1}
+    \UnaryInfC{$\lnot\Atom{\Obj G}{\Obj a,\Obj a}$}
+  \end{prooftree}
+
+  Where the \Intro{\bot} and \Elim{\bot} steps can be replaced by a 
+  single \Intro{\lnot} step (derived Reductio rule).
+
+    \item $\lexists[x][\Atom{\Obj G}{\Obj a,x}],\lforall[y][(\Atom{\Obj G}{\Obj a,y}\lif\lforall z\Atom{\Obj G}{z,y})]
+    \Proves\lexists[x][\lforall[z][\Atom{\Obj G}{z,x}]]$.
 \end{enumerate}
 \end{ans}
 \end{prob}
@@ -97,21 +341,195 @@ $!A$,$!B$, $\ldots$ instead, that can stand for any variable / formula whatsoeve
     \citep[1.5]{MacFarlane-2020-PhilosophicalLogicContemporary}
     Give natural deduction proofs of the following.
 \begin{enumerate}
-    \item $\Proves\lforall x ((\Atom{\Obj F}{x}\land \Atom{\Obj G}{x})
-    \lif\Atom{\Obj F}{x})$
-    \item $\Proves\lnot\lexists x (\Atom{\Obj F}{x}\land \Atom{\Obj G}{x})
-        \lif (\lforall x\Atom{\Obj F}{x} \lif \lnot\lexists x\Atom{\Obj G}{x})$
-    \item $\Proves\lexists x\lforall y \lforall z\Atom{\Obj F}{x,y,z}
-        \lif \lforall y\lforall z \lexists x\Atom{\Obj F}{x,y,z}$
-    \item $\lexists x(\Atom{\Obj P}{x}\land\Atom{\Obj S}x),
-        \lforall x(\Atom{\Obj S}{x}\lif \Atom{\Obj S}{x,b})
-        \Proves \lexists x\Atom{\Obj R}{x,b}$
-    \item $\lforall x(\Atom{\Obj P}{x}\lif\lexists x\Atom{\Obj F}{y,x}),
-    \lforall x\lforall y(\Atom{\Obj F}{y,x}\lif \Atom{\Obj L}{y,x})
-    \Proves \lforall x(\Atom{\Obj P}{x}\lif\lexists y\Atom{\Obj L}{y,x})$
-    \item $\lnot\lforall x\Atom{\Obj F}{x}\Proves \lexists x\lnot\Atom{\Obj F}{x}$ 
-    (without using derived Duality aka QNE rules)
+    \item $\Proves\lforall[x][((\Atom{\Obj F}{x}\land \Atom{\Obj G}{x})
+    \lif\Atom{\Obj F}{x})]$
+    \item $\Proves\lnot\lexists[x][(\Atom{\Obj F}{x}\land \Atom{\Obj G}{x})]
+        \lif (\lforall[x][\Atom{\Obj F}{x}]\lif \lnot\lexists[x][\Atom{\Obj G}{x}])$
+    \item $\Proves\lexists[x][\lforall[y][\lforall[z][\Atom{\Obj F}{x,y,z}]]]
+        \lif \lforall[y][\lforall[z][\lexists[x][\Atom{\Obj F}{x,y,z}]]]$
+    \item $\lexists[x][(\Atom{\Obj P}{x}\land\Atom{\Obj S}x)],
+        \lforall[x][(\Atom{\Obj S}{x}\lif \Atom{\Obj R}{x,\Obj b})]
+        \Proves \lexists[x][\Atom{\Obj R}{x,\Obj b}]$
+    \item $\lforall[x][(\Atom{\Obj P}{x}\lif\lexists[y][\Atom{\Obj F}{y,x}])],
+    \lforall[x][\lforall[y][(\Atom{\Obj F}{y,x}\lif \Atom{\Obj L}{y,x})]]
+    \Proves \lforall[x][(\Atom{\Obj P}{x}\lif\lexists[y][\Atom{\Obj L}{y,x}])]$
+    \item $\lnot\lforall[x][\Atom{\Obj F}{x}]\Proves \lexists[x][\lnot\Atom{\Obj F}{x}]$ 
+    (without using derived Duality rules)
 \end{enumerate}
+\begin{ans}
+\begin{enumerate}
+    \item $\Proves\lforall[x][((\Atom{\Obj F}{x}\land \Atom{\Obj G}{x})
+    \lif\Atom{\Obj F}{x})]$
+
+    \begin{prooftree}
+        \AxiomC{$\Discharge{(\Atom{\Obj F}{\Obj a}\land \Atom{\Obj G}{\Obj a})}{1}$}
+        \RightLabel{\Elim{\land}}
+        \UnaryInfC{$\Atom{\Obj F}{\Obj a}$}
+        \DischargeRule{\Intro{\lif}}{1}
+        \UnaryInfC{$(\Atom{\Obj F}{\Obj a}\land \Atom{\Obj G}{\Obj a})\lif\Atom{\Obj F}{\Obj a}$}
+        \RightLabel{\Intro{\lforall}}
+        \UnaryInfC{$\lforall[x][((\Atom{\Obj F}{x}\land \Atom{\Obj G}{x})\lif\Atom{\Obj F}{x})]$}
+    \end{prooftree}
+
+    \item $\Proves\lnot\lexists[x][(\Atom{\Obj F}{x}\land \Atom{\Obj G}{x})]
+        \lif (\lforall[x][\Atom{\Obj F}{x}]\lif \lnot\lexists[x][\Atom{\Obj G}{x}])$
+
+        Using the derived Duality and $\mathsf{PL}$ rules:
+
+        \begin{prooftree}
+        \AxiomC{$\Discharge{\lnot\lexists[x][(\Atom{\Obj F}{x}\land \Atom{\Obj G}{x})]}{2}$}
+        \RightLabel{Dual}
+        \UnaryInfC{$\lforall[x][\lnot(\Atom{\Obj F}{x}\land \Atom{\Obj G}{x})]$}
+        \RightLabel{\Elim{\lforall}}
+        \UnaryInfC{$\lnot(\Atom{\Obj F}{\Obj a}\land \Atom{\Obj G}{\Obj a})$}
+            \AxiomC{$\Discharge{\lforall[x][\Atom{\Obj F}{x}]}{1}$}
+            \RightLabel{\Elim{\lforall}}
+            \UnaryInfC{$\Atom{\Obj F}{\Obj a}$}
+        \RightLabel{$\mathsf{PL}$}
+        \BinaryInfC{$\lnot\Atom{\Obj G}{\Obj a}$}
+        \RightLabel{\Intro{\lforall}}
+        \UnaryInfC{$\lforall[x][\lnot\Atom{\Obj G}{x}]$}
+        \RightLabel{Dual}
+        \UnaryInfC{$\lnot\lexists[x][\Atom{\Obj G}{x}]$}
+        \DischargeRule{\Intro{\lif}}{1}
+        \UnaryInfC{$\lforall[x][\Atom{\Obj F}{x}]\lif\lnot\lexists[x][\Atom{\Obj G}{x}]$}
+        \DischargeRule{\Intro{\lif}}{2}
+        \UnaryInfC{$\lnot\lexists[x][(\Atom{\Obj F}{x}\land \Atom{\Obj G}{x})]
+            \lif (\lforall[x][\Atom{\Obj F}{x}]\lif \lnot\lexists[x][\Atom{\Obj G}{x}])$}
+        \end{prooftree}
+
+        Alternatively, using only non-derived rules:
+    
+        \begin{prooftree}
+        \AxiomC{$\Discharge{\lexists[x][\Atom{\Obj G}{x}]}{2}$}
+            \AxiomC{$\Discharge{\Atom{\Obj G}{\Obj a}}{1}$}
+                \AxiomC{$\Discharge{\lforall[x][\Atom{\Obj F}{x}]}{3}$}
+                \RightLabel{\Elim{\lforall}}
+                \UnaryInfC{$\Atom{\Obj F}{\Obj a}$}
+            \RightLabel{\Intro{\land}}
+            \BinaryInfC{$\Atom{\Obj F}{\Obj a}\land \Atom{\Obj G}{\Obj a}$}
+            \RightLabel{\Intro{\lexists}}
+            \UnaryInfC{$\lexists[x][(\Atom{\Obj F}{x}\land \Atom{\Obj G}{x})]$}
+        \DischargeRule{\Elim{\lexists}}{1}
+        \BinaryInfC{$\lexists[x][(\Atom{\Obj F}{x}\land \Atom{\Obj G}{x})]$}
+            \AxiomC{$\Discharge{\lnot\lexists[x][(\Atom{\Obj F}{x}\land \Atom{\Obj G}{x})]}{4}$}
+        \DischargeRule{\Intro{\lnot}}{2}
+        \BinaryInfC{$\lnot\lexists[x][\Atom{\Obj G}{x}]$}
+        \DischargeRule{\Intro{\lif}}{3}
+        \UnaryInfC{$\lforall[x][\Atom{\Obj F}{x}]\lif\lnot\lexists[x][\Atom{\Obj G}{x}]$}
+        \DischargeRule{\Intro{\lif}}{4}
+        \UnaryInfC{$\lnot\lexists[x][(\Atom{\Obj F}{x}\land \Atom{\Obj G}{x})]
+            \lif (\lforall[x][\Atom{\Obj F}{x}]\lif \lnot\lexists[x][\Atom{\Obj G}{x}])$}
+        \end{prooftree}
+
+        
+    \item $\Proves\lexists[x][\lforall[y][\lforall[z][\Atom{\Obj F}{x,y,z}]]]
+        \lif \lforall[y][\lforall[z][\lexists[x][\Atom{\Obj F}{x,y,z}]]]$
+
+    \begin{prooftree}
+        \AxiomC{$\Discharge{\lexists[x][\lforall[y][\lforall[z][\Atom{\Obj F}{x,y,z}]]]}{2}$}
+            \AxiomC{$\Discharge{\lforall[y][\lforall[z][\Atom{\Obj F}{\Obj a,y,z}]]}{1}$}
+            \RightLabel{\Elim{\lforall}}
+            \UnaryInfC{$\lforall[z][\Atom{\Obj F}{\Obj a,\Obj b,z}]$}
+            \RightLabel{\Elim{\lforall}}
+            \UnaryInfC{$\Atom{\Obj F}{\Obj a,\Obj b,\Obj c}$}
+            \RightLabel{\Intro{\lexists}}
+            \UnaryInfC{$\lexists[x][\Atom{\Obj F}{x,\Obj b,\Obj c}]$}
+            \RightLabel{\Intro{\lforall}}
+            \UnaryInfC{$\lforall[z][\lexists[x][\Atom{\Obj F}{x,\Obj b,z}]]$}
+            \RightLabel{\Intro{\lforall}}
+            \UnaryInfC{$\lforall[y][\lforall[z][\lexists[x][\Atom{\Obj F}{x,y,z}]]]$}
+        \DischargeRule{\Elim{\lexists}}{1}
+        \BinaryInfC{$\lforall[y][\lforall[z][\lexists[x][\Atom{\Obj F}{x,y,z}]]]$}
+        \DischargeRule{\Intro{\lif}}{2}
+        \UnaryInfC{$\lexists[x][\lforall[y][\lforall[z][\Atom{\Obj F}{x,y,z}]]]
+            \lif \lforall[y][\lforall[z][\lexists[x][\Atom{\Obj F}{x,y,z}]]]$}
+    \end{prooftree}
+
+    \emph{Comment.} The main difficulty is to make sure you get rid of all 
+    !!{constant}s before applying \Elim{\lexists}.
+
+
+    \item $\lexists[x][(\Atom{\Obj P}{x}\land\Atom{\Obj S}x)],
+        \lforall[x][(\Atom{\Obj S}{x}\lif \Atom{\Obj R}{x,\Obj b})]
+        \Proves \lexists[x][\Atom{\Obj R}{x,\Obj b}]$
+
+    \begin{prooftree}
+        \AxiomC{$\lexists[x][(\Atom{\Obj P}{x}\land\Atom{\Obj S}{x})]$}
+            \AxiomC{$\Discharge{\Atom{\Obj P}{\Obj a}\land\Atom{\Obj S}{\Obj a}}{1}$}
+            \RightLabel{\Elim{\land}}
+            \UnaryInfC{$\Atom{\Obj S}{\Obj a}$}
+                \AxiomC{$\lforall[x][(\Atom{\Obj S}{x}\lif \Atom{\Obj R}{x,\Obj b})]$}
+                \RightLabel{\Elim{\lforall}}
+                \UnaryInfC{$\Atom{\Obj S}{\Obj a}\lif \Atom{\Obj R}{\Obj a,\Obj b}$}
+            \RightLabel{\Elim{\lif}}
+            \BinaryInfC{$\Atom{\Obj R}{\Obj a,\Obj b}$}
+            \RightLabel{\Intro{\lexists}}
+            \UnaryInfC{$\lexists[x][\Atom{\Obj R}{x,\Obj b}]$}
+        \DischargeRule{\Elim{\lexists}}{1}
+        \BinaryInfC{$\lexists[x][\Atom{\Obj R}{x,\Obj b}]$}
+    \end{prooftree}
+
+    \emph{Comment.} The main difficulty is to make sure you use a 
+    !!{constant} other than $\Obj b$ and get rid of it before applying 
+    \Elim{\lexists}.
+    
+    \item $\lforall[x][(\Atom{\Obj P}{x}\lif\lexists[y][\Atom{\Obj F}{y,x}])],
+    \lforall[x][\lforall[y][(\Atom{\Obj F}{y,x}\lif \Atom{\Obj L}{y,x})]]
+    \Proves \lforall[x][(\Atom{\Obj P}{x}\lif\lexists[y][\Atom{\Obj L}{y,x}])]$
+
+        \begin{prooftree}
+        \AxiomC{$\lforall[x][(\Atom{\Obj P}{x}\lif\lexists[y][\Atom{\Obj F}{y,x}])]$}
+        \RightLabel{\Elim{\lforall}}
+        \UnaryInfC{$\Atom{\Obj P}{\Obj a}\lif\lexists[y][\Atom{\Obj F}{y,\Obj a}]$}
+            \AxiomC{$\Discharge{\Atom{\Obj P}{\Obj a}}{2}$}
+        \RightLabel{\Elim{\lif}}
+        \BinaryInfC{$\lexists[y][\Atom{\Obj F}{y,\Obj a}]$}
+                \AxiomC{$\Discharge{\Atom{\Obj F}{\Obj b,\Obj a}}{1}$}
+                    \AxiomC{$\lforall[x][\lforall[y][(\Atom{\Obj F}{y,x}\lif \Atom{\Obj L}{y,x})]]$}
+                    \RightLabel{\Elim{\lforall}}
+                    \UnaryInfC{$\lforall[y][(\Atom{\Obj F}{y,\Obj a}\lif \Atom{\Obj L}{y,\Obj a})]$}
+                    \RightLabel{\Elim{\lforall}}
+                    \UnaryInfC{$\Atom{\Obj F}{\Obj b,\Obj a}\lif \Atom{\Obj L}{\Obj b,\Obj a}$}
+                    \RightLabel{\Elim{\lif}}
+                \BinaryInfC{$\Atom{\Obj L}{\Obj b,\Obj a}$}
+                \RightLabel{\Intro{\lexists}}
+                \UnaryInfC{$\lexists[y][\Atom{\Obj L}{y,\Obj a}]$}
+        \DischargeRule{\Elim{\lexists}}{1}
+        \BinaryInfC{$\lexists[y][\Atom{\Obj L}{y,\Obj a}]$}
+        \DischargeRule{\Intro{\lif}}{2}
+        \UnaryInfC{$\Atom{\Obj P}{\Obj a}\lif\lexists[y][\Atom{\Obj L}{y,\Obj a}]$}
+        \RightLabel{\Intro{\lforall}}
+        \UnaryInfC{$\lforall[x][(\Atom{\Obj P}{x}\lif\lexists[y][\Atom{\Obj L}{y,x}])]$}
+    \end{prooftree}
+
+
+    \item $\lnot\lforall[x][\Atom{\Obj F}{x}]\Proves \lexists[x][\lnot\Atom{\Obj F}{x}]$ 
+    (without using derived Duality rules)
+
+        \begin{prooftree}
+        \AxiomC{$\lnot\lforall[x][\Atom{\Obj F}{x}]$}
+            \AxiomC{$\Discharge{\lnot\lexists[x][\lnot\Atom{\Obj F}{x}]}{2}$}
+                \AxiomC{$\Discharge{\lnot\Atom{\Obj F}{\Obj a}}{1}$}
+                \RightLabel{\Intro{\lexists}}
+                \UnaryInfC{$\lexists[x][\lnot\Atom{\Obj F}{x}]$}
+            \DischargeRule{\Elim{\lnot} or $\mathsf{PL}$}{1}
+            \BinaryInfC{$\Atom{\Obj F}{\Obj a}$}
+            \RightLabel{\Intro{\lforall}}
+            \UnaryInfC{$\lforall[x][\Atom{\Obj F}{x}]$}
+        \DischargeRule{\Elim{\lnot} or $\mathsf{PL}$}{2}
+        \BinaryInfC{$\lexists[x][\lnot\Atom{\Obj F}{x}]$}
+    \end{prooftree}
+
+    \emph{Comment.} The only restricted rule is \Intro{\lforall}.
+    Its restrictions are obeyed because (1) when we apply it, 
+    $\lnot \Atom{\Obj F}{\Obj a}$ has been discharged, so $\Obj a$
+    doesn't appear in any undischarged assumption of the \Intro{\lforall}
+    step, and (2) $\Obj a$ doesn't appear in its conclusion
+     $\lforall[x][\Atom{\Obj F}{\Obj a}]$ either.
+
+\end{enumerate}
+\end{ans}
 \end{prob}
 
 \end{document}

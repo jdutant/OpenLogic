@@ -1,0 +1,94 @@
+% Part: quantified-modal-logic
+% Chapter: syntax-and-semantics
+% Section: languages
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{qml}{syn}{lan}
+
+\olsection{Language}
+
+\begin{explain}
+The language of quantified modal logic combines those of
+first-order logic (terms, predicates, quantification)
+and modal logic (modal operators).
+\end{explain}
+
+Expressions of quantified modal logic are built up from a basic vocabulary
+containing \emph{!!{variable}s}, \emph{!!{constant}s},
+\emph{!!{predicate}s} and sometimes \emph{!!{function}s}.  From them,
+together with logical connectives, quantifiers, modal operators, 
+and punctuation symbols such as parentheses and commas, \emph{terms} and
+\emph{!!{formula}s} are formed. 
+
+\begin{enumerate}
+\item Logical symbols
+\begin{enumerate}
+\item Logical connectives:
+  \startycommalist
+  \iftag{prvFalse}{\ycomma $\lfalse$ (the propositional constant for !!{falsity})}{}%
+  \iftag{prvTrue}{\ycomma $\ltrue$ (the propositional constant for !!{truth})}{}%
+  \iftag{prvNot}{\ycomma $\lnot$ (negation)}{}%
+  \iftag{prvAnd}{\ycomma $\land$ (conjunction)}{}%
+  \iftag{prvOr}{\ycomma $\lor$ (disjunction)}{}%
+  \iftag{prvIf}{\ycomma $\lif$ (!!{conditional})}{}%
+  \iftag{prvIff}{\ycomma $\liff$ (!!{biconditional})}{}%
+  \iftag{prvAll}{\ycomma $\lforall$ (universal quantifier)}{}%
+  \iftag{prvEx}{\ycomma $\lexists$ (existential quantifier)}{}%
+  \iftag{prvBox}{\ycomma $\Box$ (necessity operator)}{}%
+  \iftag{prvDiamond}{\ycomma $\Diamond$ (possibility operator)}{}.
+\item The two-place !!{identity}~$\eq$.
+\item A !!{denumerable}s set of !!{variable}s: $\Obj v_0$, $\Obj v_1$, $\Obj
+  v_2$, \dots
+\end{enumerate}
+\item Non-logical symbols, making up the \emph{standard
+  language} of quantified modal logic
+\begin{enumerate}
+\item A !!{denumerable}s set of $n$-place !!{predicate}s for each $n>0$: $\Obj
+  A^n_0$, $\Obj A^n_1$, $\Obj A^n_2$, \dots
+\item A !!{denumerable}s set of !!{constant}s: $\Obj c_0$, $\Obj c_1$, $\Obj
+  c_2$, \dots.
+\item A !!{denumerable}s set of $n$-place !!{function}s for each $n>0$:
+  $\Obj f^n_0$, $\Obj f^n_1$, $\Obj f^n_2$, \dots
+\end{enumerate}
+\item Punctuation marks: (, ), and the comma.
+\end{enumerate}
+
+Most of our definitions and results will be formulated for the full
+standard language.  However, depending on the
+application, we may also restrict the language to only a few
+!!{predicate}s, !!{constant}s, and !!{function}s.
+
+\iftag{defNot,defOr,defAnd,defIf,defIff,defTrue,defFalse,defEx,defAll}{%
+In addition to the primitive connectives and
+\iftag{notprvEx,notprvAll}{quantifier}{quantifiers} introduced
+above, we also use the following \emph{defined} symbols:
+\startycommalist
+  \iftag{defFalse}{\ycomma !!{falsity}~$\lfalse$}{}%
+  \iftag{defTrue}{\ycomma !!{truth}~$\ltrue$}}{}%
+  \iftag{defNot}{\ycomma $\lnot$ (negation)}{}%
+  \iftag{defAnd}{\ycomma $\land$ (conjunction)}{}%
+  \iftag{defOr}{\ycomma $\lor$ (disjunction)}{}%
+  \iftag{defIf}{\ycomma $\lif$ (!!{conditional})}{}%
+  \iftag{defIff}{\ycomma $\liff$ (!!{biconditional})}{}%
+  \iftag{defAll}{\ycomma $\lforall$ (universal quantifier)}{}%
+  \iftag{defEx}{\ycomma $\lexists$ (existential quantifier)}{}%
+  \iftag{defBox}{\ycomma $\Box$ (necessity operator)}{}%
+  \iftag{defDiamond}{\ycomma $\Diamond$ (possibility operator)}{}.
+
+\begin{tagblock}{defNot,defOr,defAnd,defIf,defIff,defTrue,defFalse,defEx,defAll,defBox,defDiamond}
+\begin{explain}
+A defined symbol is not officially part of the language, but is
+introduced as an informal abbreviation: it allows us to abbreviate
+formulas which would, if we only used primitive symbols, get quite
+long.  This is obviously an advantage.  The bigger advantage, however,
+is that proofs become shorter.  If a symbol is primitive, it has to be
+treated separately in proofs. The more primitive symbols, therefore,
+the longer our proofs.
+\end{explain}
+\end{tagblock}
+
+
+\end{document}

@@ -1,0 +1,26 @@
+% Part: quantified-modal-logic
+% Chapter: syntax-and-semantics
+% Section: properties-classical
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{qml}{syn}{prc}
+
+\olsection{Properties of classical quantified modal logic}
+
+Classical quantified modal logic, $\Log{CQML}$ has 
+the following properties
+
+Necessity of existence is a logical truth
+$$\Entails[\Log{CQML}] \lforall[x][\Box\lexists[y][\eq[x][y]]]$$
+Equivalently, using $\lfrexists$ for existence:
+$$\Entails[\Log{CQML}] \lforall[x][\Box\lfrexists x]$$
+
+% Converse Barcan Formula (CBF). 
+% If necessarily, everything $!A$-es, then 
+% everything necessarily $!A$-es.
+% $$\Box\forall  $$
+
+\end{document}

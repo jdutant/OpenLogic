@@ -1,0 +1,35 @@
+% Part: first-order-logic
+% Chapter: syntax-and-semantics
+% Section: semantic-notions
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{qml}{syn}{sem}
+
+\olsection{Semantic Notions}
+
+\begin{explain}
+The notions of logical truth, validity, satisfiability, are
+defined as in modal logic. This holds for free quantified 
+modal logic as well as classical quantified modal logic.
+
+A logical truth $!A$ is a sentence that is true at every world of every model.
+
+An argument with set of sentences $\Gamma$ as premises and sentence
+$!A$ as conclusion is valid (written $\Gamma \Entails !A$) iff 
+there is no model and world at which all the sentences in $\Gamma$ 
+are true but $!A$ is false. 
+
+\Article{sentence} !!{sentence} is satisfiable iff there is a model and a world 
+at which it is true.
+
+\Article{formula} !!{formula} is satisfiable iff it satisfied at some
+world relative to some assignment in some model. 
+
+And so on.
+
+\end{explain}
+
+\end{document}

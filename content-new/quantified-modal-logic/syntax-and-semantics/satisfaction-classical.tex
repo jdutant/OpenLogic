@@ -1,0 +1,195 @@
+% Part: quantified-modal-logic
+% Chapter: syntax-and-semantics
+% Section: satisfaction-classical
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{qml}{syn}{sac}
+
+\olsection{Satisfaction in Fixed-Domain Models}
+
+\begin{explain}
+In first-order logic, the basic semantic relation between !!{formula}s
+and !!{structure}s is not \emph{truth} (which only applies to 
+!!{sentence}s, that is, !!{formula}s without free !!{variable}s) 
+but instead \emph{satisfaction relative to an assignment}. 
+In propositional modal logic, the basic semantic relation between 
+!!{formula}s and !!{structure}s (models) is 
+\emph{truth at a world}.
+In quantified modal logic, the basic relation between !!{formula}s
+and models takes into account both world and assignment: it is
+\emph{satisfaction at a world relative to an assignment}.
+\end{explain}
+
+\begin{explain}
+!!^{variable} assignments and assignment variants are defined as in 
+first-order logic. The !!{value} of terms is defined as in first-order
+logic except that !!{function}s may vary depending on world. Note
+that:
+\begin{enumerate}
+\item !!^{constant}s and (relative to a given assignment) !!{variable}s
+    have world-invariant !!{value}s. They `directly' or `rigidly'
+    refer to an object of the domain. Compare how `Socrates' denote the
+    same person whether we're talking of what actually happens or 
+    what could have happened.
+\item Complex terms, which involve !!{function}s, have a world-sensitive
+    !!{value}s. Compare how `the birthplace of Alice' or 
+    `the number of planets' denote different places or numbers depending
+    on how the world is.
+\end{enumerate}
+\end{explain}
+
+\begin{defn}[Variable Assignment]
+A \emph{variable assignment}~$s$ for a fixed-domain model~$\mModel{M}$ 
+is a function which maps each !!{variable} to !!a{element} of~$\mDomain M$,
+i.e., $s\colon \Var \to \mDomain M$.
+\end{defn}
+
+\begin{defn}[!!^{value} of Terms]
+If $t$ is a term of the language~$\Lang L$, $\mModel M$ is a
+fixed-domain model for~$\Lang L$, $w$ a world in $mWorlds M$, and $s$
+is !!a{variable} assignment for~$\mModel M$, the
+\emph{!!{value}}~$\mValue{t}{M}{w}[s]$ of $t$ at world $w$ in the is
+defined as follows:
+\begin{enumerate}
+\item \indcase{t}{c}{$\mValue{\indfrm}{M}{w}[s] = \mAssign{\indcomplex}{M}$.}
+\item \indcase{t}{x}{$\mValue{\indfrm}{M}{w}[s] = s(\indcomplex)$.}
+\item \indcase{t}{\Atom{f}{t_1, \ldots, t_n}}{
+\[
+\mValue{\indfrm}{M}{w}[s] = \mAssign{f}{M}[w](\mValue{t_1}{M}{w}[s], \ldots,
+\mValue{t_n}{M}{w}[s]).
+\]}
+\end{enumerate}
+\end{defn}
+
+\begin{defn}[$x$-Variant]
+If $s$ is !!a{variable} assignment for a fixed-domain model~$\mModel{M}$, 
+then any !!{variable} assignment~$s'$ for~$\mModel M$ which differs from~$s$ at most
+in what it assigns to~$x$ is called an \emph{$x$-variant} of~$s$.  If
+$s'$ is an $x$-variant of~$s$ we write $\varAssign{s'}{s}{x}$.
+\end{defn}
+
+\begin{defn}
+  If $s$ is !!a{variable} assignment for a fixed-domain model~$\mModel{M}$, 
+  and $m \in \mDomain{M}$, then the assignment~$\Subst{s}{m}{x}$ is the
+  variable assignment defined by
+  \[\Subst{s}{m}{x}(y) = \begin{cases}
+    m & \text{if } y \ident x\\
+    s(y) & \text{otherwise}.
+  \end{cases}\]
+\end{defn}
+
+In other words, $\Subst{s}{m}{x}$ is the particular $x$-variant of~$s$
+which assigns the domain !!{element}~$m$ to~$x$, and assigns the same
+things to !!{variable}s other than~$x$ that $s$ does.
+
+\begin{defn}[Satisfaction in fixed-domain models]
+\ollabel{defn:satisfaction}
+Satisfaction of !!a{formula}~$!A$ a fixed-domain model~$\mModel{M}$
+at a world $w$ in $\mWorlds{M}$ relative to !!a{variable} assignment~$s$, in symbols:
+$\qmSat{M}{!A}[w][s]$, is defined recursively as follows. (We write
+$\qmSat/{M}{!A}[w][s]$ to mean ``not $\qmSat/{M}{!A}[w][s]$.'')
+\begin{enumerate}
+\tagitem{prvFalse}{%
+  \indcase{!A}{\lfalse}{$\qmSat/{M}{\indfrm}[w][s]$.}}{}
+
+\tagitem{prvTrue}{%
+  \indcase{!A}{\ltrue}{$\qmSat{M}{\indfrm}[w][s]$.}}{}
+
+\item \indcase{!A}{\Atom{R}{t_1, \dots, t_n}}{$\qmSat{M}{\indfrm}[w][s]$
+  iff $\langle \mValue{t_1}{M}{w}[s], \dots, \mValue{t_n}{M}{w}[s] \rangle \in
+  \mAssign{R}{M}[w]$.}
+
+\item \indcase{!A}{\eq[t_1][t_2]}{$\qmSat{M}{\indfrm}[w][s]$ iff
+  $\mValue{t_1}{M}{w}[s] = \mValue{t_2}{M}{w}[s]$.}
+
+\tagitem{prvNot}{%
+  \indcase{!A}{\lnot !B}{$\qmSat{M}{\indfrm}[w][s]$ iff
+    $\qmSat/{M}{!B}[w][s]$.}}{}
+
+\tagitem{prvAnd}{%
+  \indcase{!A}{(!B \land !C)}{$\qmSat{M}{\indfrm}[w][s]$ iff 
+  $\qmSat{M}{!B}[w][s]$ and $\qmSat{M}{!C}[w][s]$.}}{}
+
+\tagitem{prvOr}{%
+  \indcase{!A}{(!B \lor !C)}{$\qmSat{M}{\indfrm}[w][s]$ iff
+    $\qmSat{M}{!B}[w][s]$ or $\qmSat{M}{!C}[w][s]$ (or both).}}{}
+
+\tagitem{prvIf}{%
+  \indcase{!A}{(!B \lif !C)}{$\qmSat{M}{\indfrm}[w][s]$ iff 
+    $\qmSat/{M}{!B}[w][s]$ or $\qmSat{M}{!C}[w][s]$ (or both).}}{}
+
+\tagitem{prvIff}{%
+  \indcase{!A}{(!B \liff !C)}{$\qmSat{M}{\indfrm}[w][s]$ iff either
+    both $\qmSat{M}{!B}[w][s]$ and $\qmSat{M}{!C}[w][s]$, or neither
+    $\qmSat{M}{!B}[w][s]$ nor $\qmSat{M}{!C}[w][s]$.}}{}
+
+\tagitem{prvAll}{%
+  \indcase{!A}{\lforall[x][!B]}{$\qmSat{M}{\indfrm}[w][s]$ iff for
+    every !!{element}~$m \in \mDomain M$,
+    $\qmSat{M}{!B}[w][\Subst{s}{m}{x}]$.}}{}
+
+\tagitem{prvEx}{%
+  \indcase{!A}{\lexists[x][!B]}{$\qmSat{M}{\indfrm}[w][s]$ iff for at
+  least one !!{element}~$m \in \mDomain M$,
+  $\qmSat{M}{!B}[w][\Subst{s}{m}{x}]$.}}{}
+
+\tagitem{prvBox}{%
+  \indcase{!A}{\Box !B}{$\qmSat{M}{\indfrm}[w][s]$ iff
+    $\qmSat{M}{!B}[w'][s]$ for all $w' \in \mWorlds{M}$ with
+    $\mAccess{M}ww'$.}}{}
+
+\tagitem{prvDiamond}{%
+    \indcase{!A}{\Diamond !B}{$\qmSat{M}{\indfrm}[w][s]$ iff
+      $\qmSat{M}{!B}[w'][s]$ for at least one $w' \in \mWorlds{M}$
+      with $\mAccess{M}ww'$.}}{}
+
+\end{enumerate}
+\end{defn}
+
+\begin{prop}
+\Article{sentence} !!{sentence} is satisfied at a world relative to an 
+assignement if and only if it is satisfied at that world relative to 
+to any other assignment. That is, if $!A$ is !!a{sentence} then:
+$$\qmSat{M}{!A}[w][s]\text{ iff }\qmSat{M}{!A}[w][s']\text{ for any }s,s'$$
+\end{prop}
+
+\begin{defn}[truth-at-w]
+\Article{sentence} !!{sentence} $!A$ is \emph{true at a world} $w$
+in model $\mModel M$ iff it is satisfied at $w$ relative to some assignment, 
+or equivalently, iff it is satisfied at $w$ to every assignment.
+We then simply write $\qmSat{M}{!A}{w}$. 
+\end{defn}
+
+\begin{ex}
+The !!{sentence} $\lforall[x][\Box\lexists[y][\eq[x][y]]]$ 
+(``Everything necessarily exists'') is true at every world in every model. 
+Any fixed-domain model $\mModel{M}$, world $w$, assignment $s$ satisfies
+:
+$$\qmSat{M}{\lforall[x][\Box\lexists[y][\eq[x][y]]]}[w][s]$$
+To see this, let $\mModel{M}$ be any fixed-domain model, $w$ any world
+in $\mWorlds{M}$, and $s$ any assignment in $\mModel{M}$. Note that the 
+assignment $\Subst{s}{s(x)}{y}$ assigns the same object to !!{variable}s
+$x$ and $y$. For $\Subst{s}{s(x)}{y}$ is the assignment just like $s$ except
+that it assigns to $y$ the object $s(x)$ that $s$ assigns to $x$. Since
+$\Subst{s}{s(x)}{y}$ is just like $s$ otherwise, it still assigns 
+to $x$ whatever $s$ assigns to $x$, namely $s(x)$. In short, we have:
+$$\Subst{s}{s(x)}{y}(y)=s(x)=\Subst{s}{s(x)}{y}(x)$$
+Therefore, by the semantics (\olref{defn:satisfaction}):
+$$\qmSat{M}{\eq[x][y]}[w][\Subst{s}{s(x)}{y}]$$
+$$\qmSat{M}{\lexists[y][\eq[x][y]]}[w][s]$$
+By the same reasoning, the same holds for any world $v$, and in particular
+any world $v$ accessible from $w$:
+$$\qmSat{M}{\lexists[y][\eq[x][y]]}[v][s]\text{ for any }v\text{ with }\mAccess{M}wv$$
+Hence, by the semantics again (\olref{defn:satisfaction}):
+$$\qmSat{M}{\Box \lexists[y][\eq[x][y]]}[w][s]$$
+But by the same reasoning, the same holds for any assignment $s'$, in 
+particular any $x$-variant of $s$:
+$$\qmSat{M}{\Box \lexists[y][\eq[x][y]]}[w][\Subst{s}{m}{x}]\text{ for any }m\in\mDomain{M}$$
+Hence, by the semantics again (\olref{defn:satisfaction}):
+$$\qmSat{M}{\lforall[x][\Box \lexists[y][\eq[x][y]]]}[w][s]\text{ for any }m\in\mDomain{M}$$
+\end{ex}
+
+\end{document}

@@ -23,7 +23,98 @@
 % Free logic: outer domain
 \DeclareDocumentCommand \OuterDomain { m }{ O_{\Struct{#1}} }
 
-% Supervaluationsim / Definitely
+% Quantified Modal Logic chapter
+% ==============================
+
+% semantics
+
+% - `\mDomain{M}[w]` - domain of a model/structure (at a world), e.g., `\mDomain{M}` gives
+% $\left|\Struct{M}\right|(w)$.
+
+\DeclareDocumentCommand \mDomain { m o }{
+      \IfNoValueTF {#2}
+        % optional argument not present
+        { \left| \mModel{#1} \right| }
+        % optional argument present
+        { \left| \mModel{#1} \right|(#2) }
+}
+
+% - `\mWorlds{M}` - set of worlds of a model/structure, e.g., `\mWorlds{M}` gives
+% $W_{\mModel{#1}}$.
+
+\DeclareDocumentCommand \mWorlds { m }{W_{\mModel{#1}}}
+
+% - `\mAccess{M}` - accessibility relation of a model/structure 
+% e.g., `\mAccess{M}` gives $R_{\mModel{#1}}$.
+
+\DeclareDocumentCommand \mAccess { m }{R_{\mModel{#1}}}
+
+% - `\mAssign{R}{M}[w]` - Assignment (value of) of a constant/predicate symbol
+% in a structure; e.g., `\mAssign{R}{M}[w]` produces $R^\mathfrak{M}_w$.
+
+\DeclareDocumentCommand \mAssign { m m o }{
+  \IfNoValueTF {#3}
+    % optional argument not present
+    { \mathord{#1^{\mModel{#2}}} }
+    % optional argument present
+    { \mathord{#1^{\mModel{#2}}_{#3}} }
+}
+
+% - `\mValue{t}{M}{w}[s]` - Value of a term in a structure/model at a world. Takes three mandatory
+% arguments (term, model and world) and one optional argument (variable
+% assignment). By default, `\mValue{t}{M}{w}[s]` produces 
+% $\mathrm{Val}^\mathfrak{M}_s(w)(t)$.
+
+\DeclareDocumentCommand \mValue { m m m o} {
+    \IfNoValueTF {#4}
+        % optional argument not present
+        { \mathrm{Val}^{\mModel{#2}}(#1,#3) }
+        % optional argument present
+        { \mathrm{Val}^{\mModel{#2}}_{#4}(#1,#3) }
+}
+
+
+% `\qmSat[/]{M}{!A}[w][s]`, the relation of being satisfied in a
+% model (at a world, relative to an assignment), is provided as the command
+% `\qmSat` with two mandatory arguments (the model and the formula)
+% and two optional arguments (the world and the satisfaction relation).  
+% If only one optional argument is provided, it is assumed to be the world.
+% Use `\qmSat/` to create the negated relation.  
+% By default, `\qmSat{M}{!A}[w][s]` is typeset as 
+% $\mathfrak{M}, w, s \models \varphi$.
+
+\DeclareDocumentCommand \qmSat { t{/} m m o o } {%
+  \IfBooleanTF{#1}{%
+    % negated
+    \IfNoValueTF{#5}{%
+      % no assignment
+        \IfNoValueTF{#4}%
+          % no world
+          { \mModel{#2} \nVdash #3 }
+          % world
+          { \mModel{#2}, #4 \nVdash #3}
+      }{%
+      % assignment and world
+        {\mModel{#2}, #4, #5 \nVdash #3}
+      }%
+  }{%
+    % not negated
+    \IfNoValueTF{#5}{%
+      % no assignment
+        \IfNoValueTF{#4}%
+          % no world
+          { \mModel{#2} \Vdash #3 }
+          % world
+          { \mModel{#2}, #4 \Vdash #3}
+      }{%
+      % assignment and world
+        {\mModel{#2}, #4, #5 \Vdash #3}
+      }%
+  }
+}
+
+
+% Supervaluationism / Definitely
 % ==============================
 
 % - Determinacy operators 
@@ -193,12 +284,75 @@
   \IfBooleanTF{#1}{%
     % negated
     \IfNoValueTF {#4} 
-        { \nvDash_{\mModel{#2}} #3 }
-        { \nvDash_{\mModel{#2}}^{#4} #3}}{%
+        { \not\models{\mModel{#2}} #3 }
+        { \not\models{\mModel{#2}}^{#4} #3}}{%
     % not negated
     \IfNoValueTF {#4} 
-        { \vDash_{\mModel{#2}} #3 }
-        { \vDash_{\mModel{#2}}^{#4} #3}}}
+        { \models_{\mModel{#2}} #3 }
+        { \models_{\mModel{#2}}^{#4} #3}}}
+
+
+% Quantified modal logic
+% ----------------------
+
+% - `\mDomain{M}[w]` - domain of a model/structure (at a world), 
+% redefined to match worlds and acessibility relations
+
+\DeclareDocumentCommand \mDomain { m o }{
+      \IfNoValueTF {#2}
+        % optional argument not present
+        { D_{\mModel{#1}} }
+        % optional argument present
+        { D_{\mModel{#1}}(#2) }
+}
+
+% - `\mAssign{R}{M}[w]` - Assignment (value of) of a constant/predicate symbol
+% in a structure; e.g., `\mAssign{R}{M}[w]` produces $R^\mathfrak{M}_w$.
+
+\DeclareDocumentCommand \mAssign { m m o }{
+  \IfNoValueTF {#3}
+    % optional argument not present
+    { I_{\mModel{#2}}(#1) }
+    % optional argument present
+    { I_{\mModel{#2}}(#1,#3) }
+}
+
+
+% `\qmSat[/]{M}{!A}[w][s]`, the relation of being satisfied in a
+% model (at a world, relative to an assignment), 
+% Redesigned to $\vdash$ as opposed to $vDash$.
+% Redesigned to match MacFarlane's $\models_{\mModel{M}}^{w,s}$.
+
+\DeclareDocumentCommand \qmSat { t{/} m m o o } {%
+  \IfBooleanTF{#1}{%
+    % negated
+    \IfNoValueTF{#5}{%
+      % no assignment
+        \IfNoValueTF{#4}%
+          % no world
+          { \not\models_{\mModel{#2}} #3 }
+          % world
+          { \not\models_{\mModel{#2}}^{#4} #3}
+      }{%
+      % assignment and world
+        { \not\models_{\mModel{#2}}^{#4,#5} #3}
+      }%
+  }{%
+    % not negated
+    \IfNoValueTF{#5}{%
+      % no assignment
+        \IfNoValueTF{#4}%
+          % no world
+          { \models_{\mModel{#2}} #3 }
+          % world
+          { \models_{\mModel{#2}}^{#4} #3}
+      }{%
+      % assignment and world
+        {\models_{\mModel{#2}}^{#4,#5} #3}
+      }%
+  }
+}
+
 
 
 % Special Sets and Mathematical Symbols

@@ -1,12 +1,12 @@
 % Part: quantified-modal-logic
-% Chapter: syntax-and-semantics
+% Chapter: semantics
 % Section: satisfaction-classical
 
 \documentclass[../../../include/open-logic-section]{subfiles}
 
 \begin{document}
 
-\olfileid{qml}{syn}{sac}
+\olfileid{qml}{sem}{sac}
 
 \olsection{Satisfaction in Fixed-Domain Models}
 
@@ -90,7 +90,7 @@ things to !!{variable}s other than~$x$ that $s$ does.
 Satisfaction of !!a{formula}~$!A$ a fixed-domain model~$\mModel{M}$
 at a world $w$ in $\mWorlds{M}$ relative to !!a{variable} assignment~$s$, in symbols:
 $\qmSat{M}{!A}[w][s]$, is defined recursively as follows. (We write
-$\qmSat/{M}{!A}[w][s]$ to mean ``not $\qmSat/{M}{!A}[w][s]$.'')
+$\qmSat/{M}{!A}[w][s]$ to mean ``not $\qmSat{M}{!A}[w][s]$.'')
 \begin{enumerate}
 \tagitem{prvFalse}{%
   \indcase{!A}{\lfalse}{$\qmSat/{M}{\indfrm}[w][s]$.}}{}
@@ -101,6 +101,9 @@ $\qmSat/{M}{!A}[w][s]$ to mean ``not $\qmSat/{M}{!A}[w][s]$.'')
 \item \indcase{!A}{\Atom{R}{t_1, \dots, t_n}}{$\qmSat{M}{\indfrm}[w][s]$
   iff $\langle \mValue{t_1}{M}{w}[s], \dots, \mValue{t_n}{M}{w}[s] \rangle \in
   \mAssign{R}{M}[w]$.}
+
+\item \indcase{!A}{\Atom{\lfrexists}{t}}{$\qmSat{M}{\indfrm}[w][s]$ iff 
+  $\mValue{t}{M}{w}[s]\in \mDomain{M}$ (which is always the case).}
 
 \item \indcase{!A}{\eq[t_1][t_2]}{$\qmSat{M}{\indfrm}[w][s]$ iff
   $\mValue{t_1}{M}{w}[s] = \mValue{t_2}{M}{w}[s]$.}
@@ -151,7 +154,7 @@ $\qmSat/{M}{!A}[w][s]$ to mean ``not $\qmSat/{M}{!A}[w][s]$.'')
 
 \begin{prop}
 \Article{sentence} !!{sentence} is satisfied at a world relative to an 
-assignement if and only if it is satisfied at that world relative to 
+assignment if and only if it is satisfied at that world relative to 
 to any other assignment. That is, if $!A$ is !!a{sentence} then:
 $$\qmSat{M}{!A}[w][s]\text{ iff }\qmSat{M}{!A}[w][s']\text{ for any }s,s'$$
 \end{prop}
@@ -160,7 +163,7 @@ $$\qmSat{M}{!A}[w][s]\text{ iff }\qmSat{M}{!A}[w][s']\text{ for any }s,s'$$
 \Article{sentence} !!{sentence} $!A$ is \emph{true at a world} $w$
 in model $\mModel M$ iff it is satisfied at $w$ relative to some assignment, 
 or equivalently, iff it is satisfied at $w$ to every assignment.
-We then simply write $\qmSat{M}{!A}{w}$. 
+We then simply write $\qmSat{M}{!A}[w]$. 
 \end{defn}
 
 \begin{ex}

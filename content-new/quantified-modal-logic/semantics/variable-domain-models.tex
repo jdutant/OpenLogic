@@ -1,0 +1,116 @@
+% Part: quantified-modal-logic
+% Chapter: semantics
+% Section: variable-domain-models
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{qml}{sem}{vdm}
+
+\olsection{Variable-Domain Models}
+
+\begin{explain}
+Variable domain semantics combines the semantics of modal logic 
+with the semantics of free logic. In this semantics, what objects
+there are is allowed to vary from one world to another. Thus we have
+\emph{one domain of objects per world}. A world's domain consists 
+of the objects that exist at that world. The domains of two worlds
+can overlap: typically, objects exist at multiple worlds. 
+(Hawaii would still exist if the climate was slightly 
+cooler.) 
+
+To give world-variant and possibly overlapping domains, 
+we give the model an \emph{super-domain} that gathers all 
+objects that may exist at some world---and possibly includes 
+some objects that exist at no world at all. Each world's domain is a 
+subset of the model's outer domain.
+
+Free logic has variants, including positive free logic
+ and negative free logic. The variable-domain models
+ below can be used for both positive and 
+ negative free quantified modal logic. Model-wise, the only 
+ difference is that models for the negative variant
+ obey further constraints---constraints that ensure 
+ that at a given world, !!{predicate}s only apply to objects
+ existing at that world, and likewise for !!{function}s. 
+ The only other difference between the two is in the 
+ satisfaction clause for identity. 
+\end{explain}
+
+\begin{defn}[Variable-domain models]
+    A \emph{variable-domain model} $\mModel M$ for the language $\Lang{L}$ 
+    of quantified modal logic consists of the following elements:
+    \begin{enumerate}
+    \item \emph{Worlds:} a non-empty set~$\mWorlds{M}$
+    \item \emph{Accessibility relation:} a binary relation~$\mAccess{M}$ on~$\mWorlds{M}$
+    \item \emph{Super-Domain:} a non-empty set, $\mathcal{S}$
+    \item \emph{Domains Function}: a function $\mDomain{M}$ that assigns
+    to each world $w$ in $\mWorlds{M}$ a subset $\mDomain{M}(w)$ of $\mathcal{S}$, the \emph{domain of world $w$}
+\item \emph{Interpretation of !!{constant}s:} for each !!{constant}~$c$ of
+  $\Lang{L}$, !!a{element} of the super-domain, $\mAssign{c}{M} \in \mathcal{S}$
+\item \emph{Interpretation of !!{predicate}s:} for each $n$-place
+  !!{predicate}~$R$ of $\Lang{L}$ (other than $\eq$), a function 
+  from worlds to $n$-place
+  relations on the super-domain: $\mAssign{R}{M} \colon W \to \mathcal{S}^n$
+\item \emph{Interpretation of !!{function}s:} for each $n$-place
+  !!{function}~$f$ of $\Lang{L}$, an $n$-place function from worlds 
+  to $n$-place functions on the super-domain: $\mAssign{f}{M} \colon W \to 
+  (\mathcal{S}^n \to \mathcal{S})$
+
+\end{enumerate}
+
+We write $\mAssign{R}{M}[w]$ for the value of $\mAssign{R}{M}$ at $w$ (a $n$-place relation) and $\mAssign{f}{M}[w]$ for the value of the 
+$\mAssign{f}{M}[w]$ at $w$ (a $n$-place function). 
+\end{defn}
+
+\begin{defn}[Negative variable-domain models]
+  A variable-domain model is \emph{negative} if it additionally 
+  obeys the following constraints:
+  \begin{enumerate}
+    \item \emph{Interpretation of !!{predicate}s:} the interpretation
+    of a $n$-place !!{predicate}~$R$ associates each world $w$ with a
+    relation over \emph{the domain of $w$}: $\mAssign{R}{M}[w]\in
+    \mDomain{M}(w)$. 
+  \item \emph{Interpretation of !!{function}s:} the interpretation 
+    an $n$-place !!{function}~$f$ associates each world $w$ with a 
+    function \emph{that maps any sequence of objects
+    containing some object not in $w$ to an object outside the domain 
+    of $w$}. That is, $\mAssign{f}{M}(w)(m_1,\ldots,m_n)\in \mDomain{M}(w)$
+    only if $m_1,\ldots,m_n\in \mDomain{M}(w)$.
+  \end{enumerate}
+\end{defn}
+
+\begin{explain}
+  The first constraint ensures that, at a given world, !!a{predicate}
+  only applies to objects existing at that world. The second ensures
+  that, at a given world, the value of a function is an object of 
+  that world only for arguments that are objects existing 
+  at that world. 
+\end{explain}
+
+\begin{rem} % digress?
+  For the negative variant, another approach could have 
+  been used. Standard models for (non-modal) free logic use 
+partial functions: interpretations of !!{constant}s 
+that assign an object to some but not necessarily all !!{constant}s, 
+interpretation of !!{function}s that give a value for 
+some but not necessarily all constants. We could have 
+adopted used a similar approach here. There are a 
+few ways of implementing it. One is to let defined
+!!{constant}s denote the same object at all worlds, even 
+those where that object doesn't exist, but restrict
+the identity clause to ensure that $\Obj a=\Obj a$ holds 
+only at worlds the object (if any) denoted by $\Obj a$ 
+exists. Another is to let constant denotes a single 
+object, but only relative to worlds where that object
+exist. We leave it to the reader to work out the details.
+\end{rem}
+
+\begin{rem}[Model types]
+  As in modal logic, a model $\mModel{M}$ is called a $\Ax{D}$-model, 
+  $\Ax{T}$-model, etc., if its accessibility relation is serial,
+  reflexive, etc., as in \olref[qml][sem][fdm]{tab:five-types}. 
+\end{rem}
+
+\end{document}

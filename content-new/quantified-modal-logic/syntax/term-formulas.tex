@@ -1,12 +1,12 @@
 % Part: quantified-modal-logic
-% Chapter: syntax-and-semantics
-% Section: language
+% Chapter: syntax
+% Section: term-formulas
 
 \documentclass[../../../include/open-logic-section]{subfiles}
 
 \begin{document}
 
-\olfileid{qml}{syn}{lan}
+\olfileid{qml}{syn}{fml}
 
 \olsection{Terms and \printtoken{P}{formula}}
 
@@ -42,6 +42,9 @@ is defined inductively as follows:
   $t_n$ are terms of~$\Lang L$, then $\Atom{R}{t_1,\ldots, t_n}$ is an
   atomic !!{formula}.
 
+\item If $t$ is a term of~$\Lang L$, then $\Atom{\lfrexists}{t}$
+  is an atomic !!{formula}.
+
 \item If $t_1$ and $t_2$ are terms of~$\Lang L$, then $\Atom{\eq}{t_1, t_2}$
   is an atomic !!{formula}.
 
@@ -74,11 +77,5 @@ is defined inductively as follows:
 \tagitem{limitClause}{Nothing else is !!a{formula}.}{}
 \end{enumerate}
 \end{defn}
-
-Free and bound !!{variable}s, !!{sentence}s, variable substitution are defined as in
-first-order logic.
-
-\Article{sentence} \emph{!!{sentence}} is !!a{formula} without free
-!!{variable}s.
 
 \end{document}

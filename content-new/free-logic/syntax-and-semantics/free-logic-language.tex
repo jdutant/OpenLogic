@@ -17,15 +17,16 @@ In systems of free logic that are bivalent and with !!{identity}, the
 existence predicate can be defined by:
 
 \begin{defn}[Existence predicate]
-$\Atom{\lfrexists}{t}$ abbreviates $\lexists x (\eq[t][x])$
+$\Atom{\lfrexists}{t}$ abbreviates $\lexists v (\eq[t][v])$, 
+where $v$ is a variable not free in $t$.
 \end{defn}
 
 In neutral (non-bivalent) systems, or in languages without !!{identity}, 
 $\lfrexists$ must be introduced as a primitive instead.
 
-The following is a rigorous definition of the language of free logic. It mostly
-repeats the language of first-order logic, with additions for a 
-primitive $\lfrexists$ predicate.
+The following is a rigorous definition of the language of free logic.
+It is language of first-order logic, with additions
+for a primitive $\lfrexists$ predicate.
 
 We will thus make use of the following symbols in the language of 
 free logic: 

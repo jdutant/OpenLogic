@@ -1,36 +1,37 @@
 % Part: quantified-modal-logic
-% Chapter: syntax-and-semantics
+% Chapter: semantics
 % Section: fixed-domain-models
 
 \documentclass[../../../include/open-logic-section]{subfiles}
 
 \begin{document}
 
-\olfileid{qml}{syn}{fdm}
+\olfileid{qml}{sem}{fdm}
 
 \olsection{Fixed-Domain Models}
 
 \begin{explain}
 Fixed domain semantics is the simplest way of combining the semantics
-of modal logic with the semantics of first-order logic. We have a 
-single, fixed domain of objects (as in first-order logic) and a 
-set of worlds (as in modal logic). The only novelty is in the 
-semantics of \emph{!!{predicate}s} and \emph{!!{function}s}, which becomes world-relative. 
-In first-order logic the interpretation of a monadic !!{predicate} 
-meaning `is red' would be a set of objects (namely, the red ones). 
-In modal logic, however, we're considering
-multiple worlds, which may differ as to which objects are red in them. 
-Hence we need to associate such a !!{predicate} to a single set of 
-objects, but to a set of objects \emph{for each world}. To do so,
-our interpretations of !!{predicate}s are \emph{functions from worlds to} 
-sets of (or relations between) objects
+of modal logic with the semantics of first-order logic. We have a
+single, fixed domain of objects (as in first-order logic) and a set of
+worlds (as in modal logic). The only novelty is in the semantics of
+\emph{!!{predicate}s} and \emph{!!{function}s}, which becomes
+world-relative. 
 
-Similarly, a 
-!!{function} meaning `the birthplace of' should be associated with a 
-one function \emph{for each world}, since which place is the birthplace of a given 
-individual may differ from world to world. To do so, our 
-interpretations of !!{function}s are \emph{functions from worlds to} 
-to functions from objects to objects.
+In first-order logic the interpretation of a monadic !!{predicate}
+meaning `is red' would be a set of objects (namely, the red ones). In
+modal logic, however, we're considering multiple worlds, which may
+differ as to which objects are red in them. Hence we need to associate
+such a !!{predicate} to a single set of objects, but to a set of
+objects \emph{for each world}. To do so, our interpretations of
+!!{predicate}s are \emph{functions from worlds to} sets of (or
+relations between) objects.
+
+Similarly, a !!{function} meaning `the birthplace of' should be
+associated with a one function \emph{for each world}, since which
+place is the birthplace of a given individual may differ from world to
+world. To do so, our interpretations of !!{function}s are
+\emph{functions from worlds to} to functions from objects to objects.
 \end{explain}
 
 \begin{defn}[Fixed-domain models]
@@ -41,15 +42,15 @@ to functions from objects to objects.
     \item \emph{Accessibility relation:} a binary relation~$\mAccess{M}$ on~$\mWorlds{M}$
     \item \emph{Domain:} a non-empty set, $\mDomain{M}$
 \item \emph{Interpretation of !!{constant}s:} for each !!{constant}~$c$ of
-  $\Lang{L}$, !!a{element} $\Assign{c}{M} \in \Domain M$
+  $\Lang{L}$, !!a{element} $\mAssign{c}{M} \in \mDomain{M}$
 \item \emph{Interpretation of !!{predicate}s:} for each $n$-place
   !!{predicate}~$R$ of $\Lang{L}$ (other than $\eq$), a function 
   from worlds to $n$-place
-  relations on the domain: $\Assign{R}{M} \colon W \to \Domain{M}^n$
+  relations on the domain: $\mAssign{R}{M} \colon W \to \mDomain{M}^n$
 \item \emph{Interpretation of !!{function}s:} for each $n$-place
   !!{function}~$f$ of $\Lang{L}$, an $n$-place function from worlds 
-  to $n$-place functions on the domain: $\Assign{f}{M} \colon W \to 
-  (\Domain{M}^n \to \Domain{M})$
+  to $n$-place functions on the domain: $\mAssign{f}{M} \colon W \to 
+  (\mDomain{M}^n \to \mDomain{M})$
 
 \end{enumerate}
 

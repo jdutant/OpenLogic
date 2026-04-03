@@ -11,55 +11,212 @@
 \olsection{Necessity of Existence}
 
 Combining standard first-order logic with identity and modal logic 
-allows us to prove that (a) necessarily, something exists, 
-and (b) everything exists necessarily---that is, everything is such
-that it could not have not existed. The second result is highly 
-contentious, of course.
+allows us to prove that everything exists necessarily. 
 
-For the first:
+\begin{defn}[Necessity of Existence] The necessity of existence is
+    the claim that everything exists necessarily. For a particular
+    !!{constant} $\Obj{a}$, it is the claim that necessarily, $\Obj{a}$ is something,
+    i.e., that $\Obj{a}$ exists:
+    $$\Box\lexists[x][\eq[\Obj{a}][x]]$$
+    Or equivalently, using the existence predicate $\lfrexists$:
+    $$\Box\lfrexists \Obj{a}$$
+    We can also express it as a universal claim:
+    $$\lforall[x][\lexists[y][\eq[x][y]]]$$
+    $$\lforall[x][\lfrexists x]$$
+\end{defn}
+
+These claims are highly controversial, of course. However, they follow
+from core principles of first-order logic and modal logic. 
+
+The proof of necessity of existence relies on two claims:
+\begin{enumerate}
+    \item It is necessary that $\Obj{a}$ is $\Obj{a}$. 
+    \item It is necessary that if $\Obj{a}$ is $\Obj{a}$, then $\Obj{a}$ exists. 
+\end{enumerate}
+Together with the \emph{Distribution} principle of modal logic:
+\begin{itemize}
+\item \emph{Distriubtion} (Necessity is Closed under Necessary Consequence).
+If it is necessary that if $\Obj \PVarP$ then $\Obj \PVarQ$, then if 
+it is necessary that $\Obj \PVarP$, it is necessary that $\Obj \PVarQ$.\\
+$\Box(\Obj \PVarP\lif \Obj \PVarQ)\lif (\Box\Obj \PVarP\lif\Box\Obj \PVarQ)$.
+\footnote{This principle is called `distribution' because it `distributes'
+the $\Box$ operator over the conditional~$\lif$.}
+\end{itemize}
+The two claims together with the principle entail that necessarily,
+$\Obj{a}$ exists. 
+
+The two claims can be derived from Reflexivity, Classical Existential
+Implication and the Necessitation rule: 
+\begin{itemize}
+    \item Reflexivity. For any name $\Obj{a}$, `$\Obj{a}$ is $\Obj{a}$' is a logical truth.
+    \item Classical Existential Implication. If something is true of $\Obj{a}$, then $\Obj{a}$ exists.
+    \item Necessitation rule. If $!A$ is a logical truth, $\Box!A$ is
+    a logical truth.
+\end{itemize}
+The first claim is derived from Reflexivity and the Necessitation
+rule. The second claim is derived from Classical Existential
+Implication and the Necessitation rule. 
+
+In natural deduction, Reflexivity corresponds to \Intro{\eq}
+in first-order logic and positive free logic, 
+Classical Existential Implication is an application of the 
+\Intro{\lexists} rule of first-order logic, and Distribution and
+ the Necessitation rule are both captured by $\Box \Ax{K}$.
+
+The proof can be put in natural deduction as follows:
 
 \begin{prooftree}
     \AxiomC{}
     \RightLabel{\Intro{\eq}}
-    \UnaryInfC{$\eq[a][a]$}
+    \UnaryInfC{$\eq[\Obj{a}][\Obj{a}]$}
     \RightLabel{\Intro{\lexists}}
-    \UnaryInfC{$\lexists[x][\eq[x][x]]$}
+    \UnaryInfC{$\lexists[x][\eq[\Obj{a}][x]]$}
     \RightLabel{$\Box$\Ax{K}}
-    \UnaryInfC{$\Box\lexists[x][\eq[x][x]]$}
+    \UnaryInfC{$\Box\lexists[x][\eq[\Obj{a}][x]]$}
 \end{prooftree}
 
-For the second:
-
+For generalized Necessity of Existence, we add a \Intro{\lforall}
+step. 
 \begin{prooftree}
     \AxiomC{}
     \RightLabel{\Intro{\eq}}
-    \UnaryInfC{$\eq[a][a]$}
+    \UnaryInfC{$\eq[\Obj{a}][\Obj{a}]$}
     \RightLabel{\Intro{\lexists}}
-    \UnaryInfC{$\lexists[x][\eq[x][x]]$}
+    \UnaryInfC{$\lexists[y][\eq[\Obj{a}][y]]$}
     \RightLabel{$\Box$\Ax{K}}
-    \UnaryInfC{$\Box\lexists[x][\eq[x][x]]$}
+    \UnaryInfC{$\Box\lexists[y][\eq[\Obj{a}][y]]$}
+    \RightLabel{\Intro{\lforall}}
+    \UnaryInfC{$\lforall[x][\Box\lexists[y][\eq[x][y]]]$}
+\end{prooftree}
+Note that the restrictions on \Intro{\lforall} are satisfied since 
+$\Obj{a}$ doesn't appear in assumptions that are undischarged at the time
+of that step nor in the conclusion of the step.
+
+The conclusion, that everything necessarily exist, is highly 
+controversial. Since, however, it follows from Reflexivity, 
+Necessitation and Distribution, and Classical Existential 
+Implication, anyone who rejects it must reject one of these 
+principles. 
+
+Free logics reject Classical Existential Implications. In those 
+logics, the $\Intro{\lexists}$ rule is rejected. We instead have 
+the weaker free quantification rule:
+\begin{prooftree}
+    \AxiomC{$\lfrexists\Obj{a}$}
+        \AxiomC{$!A[a/x]$}
+    \RightLabel{\Intro{\lexists}$_{\Log{FL}}$}
+    \BinaryInfC{$!A$}
 \end{prooftree}
 
-We can show the same point using possible world semantics.
+This blocks the original proof of Necessary of Existence. To use the 
+weaker \Intro{\lexists}$_{\Log{FL}}$ rule, we would to assume that 
+$\Obj{a}$ exists, but the only conclusions we then get are trivial. 
+Here's one failed attempt at proving the Necessity of Existence in 
+free quantified modal logic:
+\begin{prooftree}
+    \AxiomC{$\lfrexists\Obj{a}$}
+        \AxiomC{}
+        \RightLabel{\Intro{\eq}}
+        \UnaryInfC{$\eq[\Obj{a}][\Obj{a}]$}
+    \RightLabel{\Intro{\lexists}$_{\Log{FL}}$}
+    \BinaryInfC{$\lexists[x][\eq[\Obj{a}][x]]$}
+    \RightLabel{{\color{red}$\Box$\Ax{K}}\quad \textbf{Incorrect}}
+    \UnaryInfC{$\Box\lexists[x][\eq[\Obj{a}][x]]$}
+\end{prooftree}
+The $\Box\Ax{K}$ step is incorrect here. We're trying to get $\Box!A$
+from !!a{derivation} of $!A$, but that's only possible if the
+!!a{derivation} has no undischarged assumptions, or if we have the
+necessitated version of each of its premises. Here the derivation has
+$\lfrexists\Obj{a}$ as undischarged assumption, so the $\Box\Ax{K}$ step
+is incorrect.
 
-In \emph{fixed domain} semantics for Quantified Modal Logic, a model
-has a set of world and a unique domain of object. It's easy to see
-that the necessity of existence holds on such models. See Sider for 
-a detailed presentation.
+Both ways of `fixing' the !!{derivation} above for free logic lead 
+to correct !!{derivation}s whose conclusion is not the Necessity
+of Existence but a trivial claim. 
 
-To avoid the consequence, one must give up at least one of
-Necessitation, the Reflexivity of Identity, or the rules of
-Existential Instantiation. The dominant approach is a to change the 
-quantifier rule and adopt a \emph{free logic}.
+First, we may try and discharge the $\lfrexists\Obj{a}$ before
+ $\Box\Ax{K}$:
+\begin{prooftree}
+    \AxiomC{$\Discharge{\lfrexists\Obj{a}}{1}$}
+        \AxiomC{}
+        \RightLabel{\Intro{\eq}}
+        \UnaryInfC{$\eq[\Obj{a}][\Obj{a}]$}
+    \RightLabel{\Intro{\lexists}$_{\Log{FL}}$}
+    \BinaryInfC{$\lexists[x][\eq[\Obj{a}][x]]$}
+    \DischargeRule{\Intro{\lif}}{1}
+    \UnaryInfC{$\lfrexists\Obj{a} \lif \lexists[x][\eq[\Obj{a}][x]]$}
+    \RightLabel{$\Box$\Ax{K}}
+    \UnaryInfC{$\Box(\lfrexists\Obj{a} \lif \lexists[x][\eq[\Obj{a}][x]])$}
+\end{prooftree}
+This !!{derivation} is correct in \emph{positive} free quantified modal logic. 
+In the negative variant, 
+\Intro{\eq} is rejected, for we can only infer $\eq[\Obj{a}][\Obj{a}]$ if we 
+have the assumption that $\Obj{a}$ exists. As it happens, there's no 
+problem with making that assumption here, since we're making it 
+for the \Intro{\lexists}$_{\Log{FL}}$ step anyway. So,
+we can also get !!a{derivation} for negative free quantified modal logic:
+\begin{prooftree}
+    \AxiomC{$\Discharge{\lfrexists\Obj{a}}{1}$}
+        \AxiomC{$\Discharge{\lfrexists\Obj{a}}{1}$}
+        \RightLabel{\Intro{\eq}$_{\Log{NFL}}$}
+        \UnaryInfC{$\eq[\Obj{a}][\Obj{a}]$}
+    \RightLabel{\Intro{\lexists}$_{\Log{FL}}$}
+    \BinaryInfC{$\lexists[x][\eq[\Obj{a}][x]]$}
+    \DischargeRule{\Intro{\lif}}{1}
+    \UnaryInfC{$\lfrexists\Obj{a} \lif \lexists[x][\eq[\Obj{a}][x]]$}
+    \RightLabel{$\Box$\Ax{K}}
+    \UnaryInfC{$\Box(\lfrexists\Obj{a} \lif \lexists[x][\eq[\Obj{a}][x]])$}
+\end{prooftree}
+Either way, the conclusion is trivial. It simply says that
+necessarily, $\Obj{a}$ exists if $\Obj{a}$ exists. In some versions of the
+language of free logic, $\lfrexists\Obj{a}$ merely \emph{abbreviates}
+$\lexists[x][\eq[\Obj{a}][x]]$; in those versions the conclusion is just
+$\Box(\lexists[x][\eq[\Obj{a}][x]] \lif \lexists[x][\eq[\Obj{a}][x]])$.
 
-In terms of models, we must adopt *variable*
+Alternatively, we may supplement the mistaken $\Box\Ax{K}$ step 
+with the assumption that $\Box \lfrexists\Obj{a}$:
+\begin{prooftree}
+    \AxiomC{$\Discharge{\Box\lfrexists\Obj{a}}{2}$}
+        \AxiomC{$\Discharge{\lfrexists\Obj{a}}{1}$}
+            \AxiomC{}
+            \RightLabel{\Intro{\eq}}
+            \UnaryInfC{$\eq[\Obj{a}][\Obj{a}]$}
+        \RightLabel{\Intro{\lexists}$_{\Log{FL}}$}
+        \BinaryInfC{$\lexists[x][\eq[\Obj{a}][x]]$}
+    \DischargeRule{$\Box$\Ax{K}}{1}
+    \BinaryInfC{$\Box\lexists[x][\eq[\Obj{a}][x]]$}
+    \DischargeRule{\Intro{\lif}}{2}
+    \UnaryInfC{$\Box\lfrexists\Obj{a}\lif \Box\lexists[x][\eq[\Obj{a}][x]]$}
+\end{prooftree}
+This !!{derivation} is correct in \emph{positive} free quantified
+modal logic. As before, there is a variant suitable for the negative
+variant instead:
+\begin{prooftree}
+    \AxiomC{$\Discharge{\Box\lfrexists\Obj{a}}{2}$}
+        \AxiomC{$\Discharge{\lfrexists\Obj{a}}{1}$}
+            \AxiomC{$\Discharge{\lfrexists\Obj{a}}{1}$}
+            \RightLabel{\Intro{\eq}$_{\Log{NFL}}$}
+            \UnaryInfC{$\eq[\Obj{a}][\Obj{a}]$}
+        \RightLabel{\Intro{\lexists}$_{\Log{FL}}$}
+        \BinaryInfC{$\lexists[x][\eq[\Obj{a}][x]]$}
+    \DischargeRule{$\Box$\Ax{K}}{1}
+    \BinaryInfC{$\Box\lexists[x][\eq[\Obj{a}][x]]$}
+    \DischargeRule{\Intro{\lif}}{2}
+    \UnaryInfC{$\Box\lfrexists\Obj{a}\lif \Box\lexists[x][\eq[\Obj{a}][x]]$}
+\end{prooftree}
+Either way, the conclusion is also trivial. For it states that:
+if $\Obj{a}$ necessarily exists, then $\Obj{a}$ is 
+necessarily something. 
+
+In terms of models, the Necessity of Existence holds in 
+fixed-domain models. To avoid it, we need a \emph{variable}
 domains: the domain of individuals may change from world to world. 
-This means that a constant like $\Obj a$ may denote an object that is not
+This means that a constant like $\Obj{a}$ may denote an object that is not
 in the domain of some worlds. We must then evaluate formulas like 
-$\Obj{Fa}$ or $\Obj(a=b)$ at worlds \emph{where $a$ doesn't denote
+$\Obj{Fa}$ or $\eq[\Obj{a}][\Obj{b}]$ at worlds \emph{where $\Obj{a}$ doesn't denote
 anything in the domain}. Classical semantics for predicate logic 
 doesn't have a way to do that. Free logics have been designed to 
-accomodate denotation-less constants. Hence a Quantified Modal Logic
+accommodate denotation-less constants. Hence a Quantified Modal Logic
 that avoids the necessity of existence must combine modal logic with 
 \emph{free} first order logic logic.
 

@@ -9,174 +9,8 @@
 \olfileid{for}{two}{qmod}
 
 \newpage
-\olsection{Quantified Modal Logic and Free Logic}
+\olsection{Free Logic}
 
-\emph{Notation}. \Log{SQML} (`Simple Quantified Modal Logic', Sider) 
-natural deduction proofs can use any rules of first order logic plus 
-modal logic $\Log{K}$. \Log{SQML} !!{structure}s have a \emph{fixed} domain of 
-objects.
-
-\begin{prob}
-    Answer the following.
-    \begin{enumerate}
-    \item 
-    Formalize the following in the language of Quantified Modal Logic 
-    using Russell's theory of definite descriptions. Show that the 
-    sentence is ambiguous by giving \emph{two} formalizations. 
-    \begin{quote}
-        The red crab is necessarily red.
-    \end{quote}
-    
-    \item
-    One of these formalizations is a logical truth: give a natural 
-    deduction proof of it in \Log{SQML}. 
-    \end{enumerate}
-
-    \begin{ans}
-    \begin{enumerate}
-    \item Dictionary:
-    
-    \begin{tabular}{ll}
-        $C$ & \dots is a crab \\
-        $Q$ & \dots is red \\
-    \end{tabular}
-    
-    \emph{Note: using $Q$ rather than $R$ for `red' to avoid 
-    confusion with the accessibility relations of countermodels
-    below.}
-
-    Formalisations:
-    \begin{enumerate}
-    \item The definite description takes wide scope.
-    $$\lexists[x](\Atom{C}{x}\land \Atom{Q}{x}\land
-    \lforall[y]((\Atom{C}{y}\land \Atom{Q}{y})\lif\eq[y][x])\land \Box\Atom{Q}{x})$$
-    \item The necessity operator takes wide scope.
-    $$\Box\lexists[x](\Atom{C}{x}\land \Atom{Q}{x}\land
-    \lforall[y](\Atom{C}{y}\land \Atom{Q}{y}\lif\eq[y][x])\land \Atom{Q}{x})$$
-    \end{enumerate}
-
-    \item Neither is a logical truth in \Log{SQML}. For both we can 
-    use as counterexample a !!{structure} in which there is no crab at the actual world, 
-    and the actual world is accessible.
-    
-    !!^{structure} $\Struct{M}$ with worlds $W=\{@\}$, 
-    accessibility relation $R=\{\tuple{@,@}\}$, domain $D=\{1\}$.
-    Interpretation $I(C,@)=\emptyset$, $I(Q,@)$ arbitrary (e.g.
-    $\emptyset$).
-
-    Let $s$ be some assignment. We have $\Sat/{M,@}{Cx}[s(m/x)]$ 
-    for any $m$ in $D$. Hence a fortiori $\Atom{C}{x}\land \Atom{Q}{x}\land
-    \lforall[y]((\Atom{C}{y}\land \Atom{Q}{y})\lif\eq[y][x])\land \Box\Atom{Q}{x}$
-    is false at $@$ relative to $s(m/x)$ for any object $m$ in the 
-    domain (namely, for $1$). From this it follows that the first !!{formula}
-    is false at $@$ relative to $s$.
-    
-    For the same reason, $\Atom{C}{x}\land \Atom{Q}{x}\land
-    \lforall[y]((\Atom{C}{y}\land
-    \Atom{Q}{y})\lif\eq[y][x])\land\Atom{Q}{x}$ is false at $@$
-    relative to to $s(m/x)$ for any object $m$ in the domain (namely,
-    for $1$). Hence $\lexists[x](\Atom{C}{x}\land \Atom{Q}{x}\land
-    \lforall[y]((\Atom{C}{y}\land
-    \Atom{Q}{y})\lif\eq[y][x])\land\Atom{Q}{x})$ is false at $@$
-    relative to $s$. Since $R@@$ ($@$ is accessible from $@$), it
-    follows that the second !!{formula} is false at $@$ relative to $s$.
-
-    \end{enumerate}
-    
-    \clearpage
-    \end{ans}
-
-\end{prob}
-
-\begin{prob}
-    Give a proof of the following in \Log{SQML}:
-    $$\Proves[\Log{SQML}]\Box\lexists[x][\eq[x][a]]$$
-    
-    Should we reject this consequence of \Log{SQML}? If so, how can
-    we avoid it? If not, why not? Briefly justify your answer (<500 words). 
-
-    \begin{ans} Proof of $\Proves[\Log{SQML}]\Box\lexists[x][\eq[x][a]]$:
-        \begin{prooftree}
-            \AxiomC{}
-            \RightLabel{\Intro{\eq}}
-            \UnaryInfC{$\eq[a][a]$}
-            \RightLabel{\Intro{\lexists}}
-            \UnaryInfC{$\lexists[x][\eq[x][a]]$}
-            \RightLabel{$\Box$K}
-            \UnaryInfC{$\Box\lexists[x][\eq[x][a]]$}        
-        \end{prooftree}
-
-        On the face of it, the conclusion should not be a logical 
-        truth. Arguably, some things---me, for instance---could have 
-        failed to exist. Using $a$ as a name for me, the 
-        !!{formula} says that necessarily, I exists. Hence it is false.
-        Even if, in fact, I necessarily exist (if, for instance, 
-        fatalism is true and things could not have been other than 
-        they are), that does not seem 
-        to be a matter of logic alone. 
-
-        We should already reject the claim that $\lexists[x][\eq[x][a]]$
-        is a logical truth. Considering the possibility in 
-        which I do not exist, it seems false that in that possibility,
-        I am something. Therefore $\lexists[x][\eq[x][a]]$ 
-        expresses a falsehood in that possibility. 
-
-        If so, we should therefore reject one of the rules 
-        \Intro{\eq}, \Intro{\lexists}. Even considering
-        how things would have been, I think it remains 
-        true that I am myself ($\eq[a][a]$). Instead, 
-        we sould replace \Intro{\lexists} with a free 
-        logic quantifier rule: from !!a{formula} $\Subst{!A}{a}{x}$
-        we can only infer $\lexists[x][!A]$ if $a$ 
-        exists:
-        \begin{prooftree}
-        \AxiomC{$\Subst{!A}{a}{x}$}
-            \AxiomC{$\lexists[x][\eq[x][a]]$}
-        \RightLabel{\Intro{\lexists}-\Log{FL}}
-        \BinaryInfC{$!A$}
-        \end{prooftree} 
-        With this weaker quantifier rule the undesirable
-        conclusion is not a logical truth.
-
-        \emph{Comments on the proof. The line $\eq[a][a]$ isn't an undischarged 
-        assumption: $\Intro{\eq}$ derives it from no assumption.}
-        
-        \emph{The \Intro{\lexists} step is an instance of 
-        the rule, since $\eq[a][a]$ is $\Subst{\eq[x][a]}{a}{x}$. 
-        There are no restrictions on \Intro{\lexists} otherwise.}
-        
-        \emph{The $\Box$K step is an instance of the rule since the
-        $\lexists[x][\eq[x][a]]$ has been derived from no
-        assumption. Equivalently, it's an instance of the Nec derived
-        rule. See the derivation of that rule for a more detailed
-        explanation of why we can apply $\Box$K to a derivation
-        without undischarged assumption.}
-
-        \emph{Comment on the reflexion question. That is an example
-        answer; you could have defended the opposite viewpoint
-        instead. To defend the idea that $\Box\lexists[x][\eq[x][a]]$
-        it's not a good idea to use controversial metaphysical theses
-        (e.g. fatalism), as they suggest at best that the !!{formula} is
-        true, but don't tell us why we should think it's a
-        \emph{logical} truth. Your defense should focus on the
-        plausibility of \Elim{\lexists} inferences: for instance,
-        showing how there are truths about things even in
-        possibilities where they apparently don't exist, and show how
-        intuitive the \Elim{\lexists} inference is (`Suppose Socrates
-        wasn't born. Then, something wouldn't be born, namely
-        Socrates.'). You could then claim that the best way to make
-        sense of those situations $a$ is still something, hence
-        exists, though it is not something concrete and physical and
-        `chunky' (Williamson's phrase). Or you could argue by
-        elimination: claim that alternatives are Meinongian (there are
-        things that don't exist) or free logic (accept that claims of
-        the form `Socrates isn't born but he isn't something that isn't
-        born') and that both are bad.}
-
-    \clearpage
-    \end{ans}
-
-\end{prob}
 
 \begin{prob}
     Say whether the arguments below are valid in \emph{negative} free logic.
@@ -266,6 +100,179 @@ objects.
 
     \clearpage
     \end{ans}
+\end{prob}
+
+\olsection{Quantified Modal Logic}
+
+\emph{Notation}. In the following \Log{CQML} (Classical 
+Quantified Modal Logic) is quantified modal logic with 
+\emph{fixed-domain models}, or equivalently, first-order
+logic quantification (as in KCL Philosophical Logic textbook).
+You can replace it with Sider's \Log{SQML} (`Simple Quantified Modal Logic')
+if you have read the latter instead. The natural deduction for
+ \Log{CQML} and \Log{SQML} include all rules of first order logic plus 
+modal logic $\Log{K}$.
+
+\begin{prob}
+    Answer the following.
+    \begin{enumerate}
+    \item 
+    Formalize the following in the language of Quantified Modal Logic.
+    Show that the sentence is ambiguous by giving \emph{two}
+    formalizations. 
+    \begin{quote}
+        All red crabs are necessarily red.
+    \end{quote}
+    
+    \item
+    One of these formalizations is a logical truth: give a natural 
+    deduction proof of it in \Log{CQML}. 
+    \end{enumerate}
+
+    % \begin{ans}
+    % \begin{enumerate}
+    % \item Dictionary:
+    
+    % \begin{tabular}{ll}
+    %     $C$ & \dots is a crab \\
+    %     $Q$ & \dots is red \\
+    % \end{tabular}
+    
+    % \emph{Note: using $Q$ rather than $R$ for `red' to avoid 
+    % confusion with the accessibility relations of countermodels
+    % below.}
+
+    % Formalisations:
+    % \begin{enumerate}
+    % \item The definite description takes wide scope.
+    % $$\lexists[x](\Atom{C}{x}\land \Atom{Q}{x}\land
+    % \lforall[y]((\Atom{C}{y}\land \Atom{Q}{y})\lif\eq[y][x])\land \Box\Atom{Q}{x})$$
+    % \item The necessity operator takes wide scope.
+    % $$\Box\lexists[x](\Atom{C}{x}\land \Atom{Q}{x}\land
+    % \lforall[y](\Atom{C}{y}\land \Atom{Q}{y}\lif\eq[y][x])\land \Atom{Q}{x})$$
+    % \end{enumerate}
+
+    % \item Neither is a logical truth in \Log{CQML}. For both we can 
+    % use as counterexample a !!{structure} in which there is no crab at the actual world, 
+    % and the actual world is accessible.
+    
+    % !!^{structure} $\Struct{M}$ with worlds $W=\{@\}$, 
+    % accessibility relation $R=\{\tuple{@,@}\}$, domain $D=\{1\}$.
+    % Interpretation $I(C,@)=\emptyset$, $I(Q,@)$ arbitrary (e.g.
+    % $\emptyset$).
+
+    % Let $s$ be some assignment. We have $\Sat/{M,@}{Cx}[s(m/x)]$ 
+    % for any $m$ in $D$. Hence a fortiori $\Atom{C}{x}\land \Atom{Q}{x}\land
+    % \lforall[y]((\Atom{C}{y}\land \Atom{Q}{y})\lif\eq[y][x])\land \Box\Atom{Q}{x}$
+    % is false at $@$ relative to $s(m/x)$ for any object $m$ in the 
+    % domain (namely, for $1$). From this it follows that the first !!{formula}
+    % is false at $@$ relative to $s$.
+    
+    % For the same reason, $\Atom{C}{x}\land \Atom{Q}{x}\land
+    % \lforall[y]((\Atom{C}{y}\land
+    % \Atom{Q}{y})\lif\eq[y][x])\land\Atom{Q}{x}$ is false at $@$
+    % relative to to $s(m/x)$ for any object $m$ in the domain (namely,
+    % for $1$). Hence $\lexists[x](\Atom{C}{x}\land \Atom{Q}{x}\land
+    % \lforall[y]((\Atom{C}{y}\land
+    % \Atom{Q}{y})\lif\eq[y][x])\land\Atom{Q}{x})$ is false at $@$
+    % relative to $s$. Since $R@@$ ($@$ is accessible from $@$), it
+    % follows that the second !!{formula} is false at $@$ relative to $s$.
+
+    % \end{enumerate}
+    
+    % \clearpage
+    % \end{ans}
+
+\end{prob}
+
+\begin{prob}
+    Give a proof of the following in \Log{CQML}:
+    $$\Proves[\Log{CQML}]\Box\lexists[x][\eq[x][a]]$$
+    
+    Should we reject this consequence of \Log{CQML}? If so, how can
+    we avoid it? If not, why not? Briefly justify your answer (<500 words). 
+
+    % \begin{ans} Proof of $\Proves[\Log{SQML}]\Box\lexists[x][\eq[x][a]]$:
+    %     \begin{prooftree}
+    %         \AxiomC{}
+    %         \RightLabel{\Intro{\eq}}
+    %         \UnaryInfC{$\eq[a][a]$}
+    %         \RightLabel{\Intro{\lexists}}
+    %         \UnaryInfC{$\lexists[x][\eq[x][a]]$}
+    %         \RightLabel{$\Box$K}
+    %         \UnaryInfC{$\Box\lexists[x][\eq[x][a]]$}        
+    %     \end{prooftree}
+
+    %     On the face of it, the conclusion should not be a logical 
+    %     truth. Arguably, some things---me, for instance---could have 
+    %     failed to exist. Using $a$ as a name for me, the 
+    %     !!{formula} says that necessarily, I exists. Hence it is false.
+    %     Even if, in fact, I necessarily exist (if, for instance, 
+    %     fatalism is true and things could not have been other than 
+    %     they are), that does not seem 
+    %     to be a matter of logic alone. 
+
+    %     We should already reject the claim that $\lexists[x][\eq[x][a]]$
+    %     is a logical truth. Considering the possibility in 
+    %     which I do not exist, it seems false that in that possibility,
+    %     I am something. Therefore $\lexists[x][\eq[x][a]]$ 
+    %     expresses a falsehood in that possibility. 
+
+    %     If so, we should therefore reject one of the rules 
+    %     \Intro{\eq}, \Intro{\lexists}. Even considering
+    %     how things would have been, I think it remains 
+    %     true that I am myself ($\eq[a][a]$). Instead, 
+    %     we sould replace \Intro{\lexists} with a free 
+    %     logic quantifier rule: from !!a{formula} $\Subst{!A}{a}{x}$
+    %     we can only infer $\lexists[x][!A]$ if $a$ 
+    %     exists:
+    %     \begin{prooftree}
+    %     \AxiomC{$\Subst{!A}{a}{x}$}
+    %         \AxiomC{$\lexists[x][\eq[x][a]]$}
+    %     \RightLabel{\Intro{\lexists}-\Log{FL}}
+    %     \BinaryInfC{$!A$}
+    %     \end{prooftree} 
+    %     With this weaker quantifier rule the undesirable
+    %     conclusion is not a logical truth.
+
+    %     \emph{Comments on the proof. The line $\eq[a][a]$ isn't an undischarged 
+    %     assumption: $\Intro{\eq}$ derives it from no assumption.}
+        
+    %     \emph{The \Intro{\lexists} step is an instance of 
+    %     the rule, since $\eq[a][a]$ is $\Subst{\eq[x][a]}{a}{x}$. 
+    %     There are no restrictions on \Intro{\lexists} otherwise.}
+        
+    %     \emph{The $\Box$K step is an instance of the rule since the
+    %     $\lexists[x][\eq[x][a]]$ has been derived from no
+    %     assumption. Equivalently, it's an instance of the Nec derived
+    %     rule. See the derivation of that rule for a more detailed
+    %     explanation of why we can apply $\Box$K to a derivation
+    %     without undischarged assumption.}
+
+    %     \emph{Comment on the reflexion question. That is an example
+    %     answer; you could have defended the opposite viewpoint
+    %     instead. To defend the idea that $\Box\lexists[x][\eq[x][a]]$
+    %     it's not a good idea to use controversial metaphysical theses
+    %     (e.g. fatalism), as they suggest at best that the !!{formula} is
+    %     true, but don't tell us why we should think it's a
+    %     \emph{logical} truth. Your defense should focus on the
+    %     plausibility of \Elim{\lexists} inferences: for instance,
+    %     showing how there are truths about things even in
+    %     possibilities where they apparently don't exist, and show how
+    %     intuitive the \Elim{\lexists} inference is (`Suppose Socrates
+    %     wasn't born. Then, something wouldn't be born, namely
+    %     Socrates.'). You could then claim that the best way to make
+    %     sense of those situations $a$ is still something, hence
+    %     exists, though it is not something concrete and physical and
+    %     `chunky' (Williamson's phrase). Or you could argue by
+    %     elimination: claim that alternatives are Meinongian (there are
+    %     things that don't exist) or free logic (accept that claims of
+    %     the form `Socrates isn't born but he isn't something that isn't
+    %     born') and that both are bad.}
+
+    % \clearpage
+    % \end{ans}
+
 \end{prob}
 
 \end{document}

@@ -15,9 +15,9 @@ allows us to prove the necessity of identity.
 
 \begin{defn}[Necessity of identity]
 The necessity of identity is the claim that true identities are 
-necessary. For particular constants $a,b$, it is the claim that 
-if $a$ and $b$ are one and the same thing, it is necessarily so:
-$$\eq[a][b]\lif\Box\eq[a][b]$$ 
+necessary. For particular constants $\Obj{a},\Obj{b}$, it is the claim that 
+if $\Obj{a}$ and $\Obj{b}$ are one and the same thing, it is necessarily so:
+$$\eq[\Obj{a}][\Obj{b}]\lif\Box\eq[\Obj{a}][\Obj{b}]$$ 
 
 We can also express it as a universal claim. If a thing and a thing
 are one and the same, it is necessary that  are necessarily one and
@@ -25,12 +25,12 @@ the same:
 $$\lforall[x][\lforall[y][(\eq[x][y]\lif\Box\eq[x][y])]]$$
 \end{defn}
 
-(Avoid saying: `if \emph{two things} are identical \dots'. Calling $a$
- and $b$ \emph{two} things entails that they are distinct.)
+(Avoid saying: `if \emph{two things} are identical \dots'. Calling $\Obj{a}$
+ and $\Obj{b}$ \emph{two} things entails that they are distinct.)
 
 According to the necessity of identity, it is never the case that 
-some thing $a$ is in fact some thing $b$ but also 
-could have not been $b$. To illustrate it denies claims such as:
+some thing $\Obj{a}$ is in fact some thing $\Obj{b}$ but also 
+could have not been $\Obj{b}$. To illustrate it denies claims such as:
 \begin{itemize}
 \item Hesperus is Phosphorus but could have failed to be Phosphorus.
 \item Clark Kent is Superman but could have failed to be Superman.
@@ -40,36 +40,32 @@ failed to be Oscar.
 
 Informally, the proof rests on two claims:
 \begin{enumerate}
-    \item It is necessary that $a$ is $a$. (Where $a$ can be any name.)
-    \item If $a$ is $b$ and it is necessary that $a$ is $a$, then it 
-    is necesasry that $a$ is $b$.
+    \item It is necessary that $\Obj{a}$ is $\Obj{a}$. (Where $\Obj{a}$ can be any name.)
+    \item If $\Obj{a}$ is $\Obj{b}$ and it is necessary that $\Obj{a}$ is $\Obj{a}$, then it 
+    is necessary that $\Obj{a}$ is $\Obj{b}$.
 \end{enumerate}
 The first claim can be further derived from Reflexivity and the
 Necessitation rule and the second is an instance of Leibniz's Law.
 \begin{itemize}
-    \item Reflexivity. For any name $a$, `$a$ is $a$' is a logical truth.
+    \item Reflexivity. For any name $\Obj{a}$, `$\Obj{a}$ is $\Obj{a}$' is a logical truth.
     \item Necessitation rule. If $!A$ is a logical truth, $\Box!A$ is
     a logical truth.
-    \item Lebiniz's law. If $a$ is $b$ and $!A[a/c]$ is so, then 
-    $!A[b/c]$ is so.
+    \item Lebiniz's law. If $\Obj{a}$ is $\Obj{b}$ and $!A[\Obj{a}/\Obj{c}]$ is so, then 
+    $!A[\Obj{b}/\Obj{c}]$ is so.
 \end{itemize}
 
-Formally:
+We can express the prove in natural deduction:
 \begin{prooftree}
     \AxiomC{}
     \RightLabel{\Intro{\eq}}
-    \UnaryInfC{$\eq[a][a]$}
+    \UnaryInfC{$\eq[\Obj{a}][\Obj{a}]$}
     \RightLabel{$\Box$\Ax{K}}
-    \UnaryInfC{$\Box\eq[a][a]$}
-\AxiomC{$\Discharge{\eq[a][b]}{1}$}
+    \UnaryInfC{$\Box\eq[\Obj{a}][\Obj{a}]$}
+\AxiomC{$\Discharge{\eq[\Obj{a}][\Obj{b}]}{1}$}
 \RightLabel{\Elim{\eq}}
-\BinaryInfC{$\Box\eq[a][b]$}
+\BinaryInfC{$\Box\eq[\Obj{a}][\Obj{b}]$}
 \DischargeRule{\Elim{\lif}}{1}
-\UnaryInfC{$\eq[a][b]\lif\Box\eq[a][b]$}
-\RightLabel{\Intro{\lforall}}
-\UnaryInfC{$\lforall[y][(\eq[a][y]\lif\Box\eq[a][y])]$}
-\RightLabel{\Intro{\lforall}}
-\UnaryInfC{$\lforall[x][(\lforall[y][\eq[a][y]\lif\Box\eq[a][y]])]$}
+\UnaryInfC{$\eq[\Obj{a}][\Obj{b}]\lif\Box\eq[\Obj{a}][\Obj{b}]$}
 \end{prooftree}
 As the formal !!{derivation} makes clear the proof only rests on 
 the Reflexivity of Identity, Lebiniz's Law (applied to de re 
@@ -80,29 +76,88 @@ universal version of the Necessity of Identity:
 \begin{prooftree}
     \AxiomC{}
     \RightLabel{\Intro{\eq}}
-    \UnaryInfC{$\eq[a][a]$}
+    \UnaryInfC{$\eq[\Obj{a}][\Obj{a}]$}
     \RightLabel{$\Box$\Ax{K}}
-    \UnaryInfC{$\Box\eq[a][a]$}
-\AxiomC{$\Discharge{\eq[a][b]}{1}$}
+    \UnaryInfC{$\Box\eq[\Obj{a}][\Obj{a}]$}
+\AxiomC{$\Discharge{\eq[\Obj{a}][\Obj{b}]}{1}$}
 \RightLabel{\Elim{\eq}}
-\BinaryInfC{$\Box\eq[a][b]$}
+\BinaryInfC{$\Box\eq[\Obj{a}][\Obj{b}]$}
 \DischargeRule{\Elim{\lif}}{1}
-\UnaryInfC{$\eq[a][b]\lif\Box\eq[a][b]$}
+\UnaryInfC{$\eq[\Obj{a}][\Obj{b}]\lif\Box\eq[\Obj{a}][\Obj{b}]$}
 \RightLabel{\Intro{\lforall}}
-\UnaryInfC{$\lforall[y][(\eq[a][y]\lif\Box\eq[a][y])]$}
+\UnaryInfC{$\lforall[y][(\eq[\Obj{a}][y]\lif\Box\eq[\Obj{a}][y])]$}
 \RightLabel{\Intro{\lforall}}
-\UnaryInfC{$\lforall[x][(\lforall[y][\eq[a][y]\lif\Box\eq[a][y]])]$}
+\UnaryInfC{$\lforall[x][\lforall[y][(\eq[x][y]\lif\Box\eq[x][y])]]$}
+\end{prooftree}
+The \Intro{\lforall} steps satisfy restrictions on that rule: 
+the !!{constant} we're quantifying on does not appear in assumptions
+that are undischarged at that step, and all occurrences of 
+the~!!{constant} have been quantified, that is, the !!{constant}
+doesn't appear in the conclusion of the step either. 
+
+The \Intro{\Box} step is accepted in all our systems of modal logic.
+The \Elim{\eq} step is accepted in first-order logic with identity
+(classical logic) as well as in free logic. The \Intro{\eq} step 
+is accepted in classical logic and in \emph{positive} free logic, 
+but not in \emph{negative} free logic.
+
+In Negative Free Logic, we only accept a weaker version of Reflexivity:
+
+\begin{itemize}
+\item Conditional Reflexivity. For any name $\Obj{a}$, `if $\Obj{a}$ exists, then $\Obj{a}$ is $\Obj{a}$' is a logical truth.
+\end{itemize}
+
+Together with Necessitation, this gives us the conditional version of 
+our two main claims:
+
+\begin{enumerate}
+    \item It is necessary that if $\Obj{a}$ exists then $\Obj{a}$ is $\Obj{a}$. (Where $\Obj{a}$ can be any name.)
+    \item If $\Obj{a}$ is $\Obj{b}$ and it is necessary that if $\Obj{a}$ exists then $\Obj{a}$ is $\Obj{a}$, then it 
+    is necesasry that if $\Obj{a}$ exists then $\Obj{a}$ is $\Obj{b}$.
+\end{enumerate}
+
+And conditional versions of the Necessity of Identity:
+\begin{defn}[Conditional Necessity of identity]
+Conditional necessity of identity is the claim that true identities
+are necessary conditional on the existence of the objects involved.
+For particular constants $\Obj{a},\Obj{b}$, it is the claim that if $\Obj{a}$ and $\Obj{b}$
+are one and the same thing, it is necessarily so:
+$$\eq[\Obj{a}][\Obj{b}]\lif\Box(\lexists[x][\eq[\Obj{a}][x]]\lif \eq[\Obj{a}][\Obj{b}])$$
+equivalently, using the existence predicate $\lfrexists$: 
+$$\eq[\Obj{a}][\Obj{b}]\lif\Box(\lfrexists\Obj{a}\lif \eq[\Obj{a}][\Obj{b}])$$
+
+The corresponding universal claim is:
+$$\lforall[x][\lforall[y][(\eq[x][y]\lif\Box(\lexists[z][\eq[x][z]]\lif \eq[x][y]))]]$$
+$$\lforall[x][\lforall[y][(\eq[x][y]\lif\Box(\lfrexists x\lif \eq[x][y]))]]$$
+\end{defn}
+
+In natural deduction for negative free quantified logic:
+\begin{prooftree}
+    \AxiomC{$\Discharge{\lfrexists\Obj{a}}{1}$}
+    \RightLabel{\Intro{\eq}$_{\Log{NFL}}$}
+    \UnaryInfC{$\eq[\Obj{a}][\Obj{a}]$}
+    \DischargeRule{\Intro{\lif}}{1}
+    \UnaryInfC{$\lfrexists\Obj{a}\lif \eq[\Obj{a}][\Obj{a}]$}
+    \RightLabel{$\Box$\Ax{K}}
+    \UnaryInfC{$\Box(\lfrexists\Obj{a}\lif \eq[\Obj{a}][\Obj{a}])$}
+\AxiomC{$\Discharge{\eq[\Obj{a}][\Obj{b}]}{2}$}
+\RightLabel{\Elim{\eq}}
+\BinaryInfC{$\Box(\lfrexists\Obj{a}\lif \eq[\Obj{a}][\Obj{b}])$}
+\DischargeRule{\Elim{\lif}}{1}
+\UnaryInfC{$\eq[\Obj{a}][\Obj{b}]\lif\Box(\lfrexists\Obj{a}\lif \eq[\Obj{a}][\Obj{b}])$}
 \end{prooftree}
 
-Since the necessity of identity follows from just three principles
-(Reflexivity, the Necessitation rule and Leibniz's law), anyone who
-finds fault with the necessity of identity must reject at least one of
-these three principles. 
+Which can then be generalized using \Intro{\lforall}.
 
-Note that \emph{de re} modal claims are central to the proof: $a$ is
-necessarily $a$ (necessitation of reflexivity) and if $a$ is $b$, then
-from $a$ being necessarily $a$ we can infer than $b$ is necessarily
-$a$ too (Leibniz's law applied to \emph{de re} modal claims). Those
+Since the (connditional) necessity of identity follows from just three
+principles---(Conditional) Reflexivity, the Necessitation rule and
+Leibniz's law---anyone who finds fault with the necessity of identity
+must reject at least one of these three principles. 
+
+Note that \emph{de re} modal claims are central to the proof: $\Obj{a}$ is
+necessarily $\Obj{a}$ (necessitation of reflexivity) and if $\Obj{a}$ is $\Obj{b}$, then
+from $\Obj{a}$ being necessarily $\Obj{a}$ we can infer than $\Obj{b}$ is necessarily
+$\Obj{a}$ too (Leibniz's law applied to \emph{de re} modal claims). Those
 suspicious of \emph{de re} modal claims (like Quine) are suspicious of
 the proof too.
 
@@ -110,7 +165,8 @@ Suppose, on the other hand, that we accept the proof's conclusion.
 This has two important consequences: the necessary a posteriori 
 and the distinction between necessity and logicality. 
 
-Necessary a posteriori. In Hume and Kant we find the idea that 
+\paragraph{Necessary a posteriori}
+ In Hume and Kant we find the idea that 
 experience cannot teach us that something is necessarily so. Experience
 only teaches us what is, it doesn't show that something couldn't have 
 been otherwise. Hence no necessary truth is discovered empirically
@@ -125,7 +181,7 @@ learn that  it is necessary that Hesperus is Phosphorus. That is a
 true necessity that is discovered a posteriori (on the basis of 
 experience): a necessary a posteriori. 
 
-Necessity vs Logicality. You may find modal notions (what could have 
+\paragraph{Necessity vs Logicality} You may find modal notions (what could have 
 been or not been the case, possible world, \dots) obscure, but logical
 ones (validity) clear. If so, you could be tempted by the idea that 
 necessity is just logicality. We can put that idea in a principle:
@@ -146,18 +202,19 @@ sentence.)
 
 If the proof of the necessity of identity is correct, then Necessity 
 as Logicality is false because its right to left direction fails. 
-That is, from some $a$, $b$ such that $a$ is in fact $b$ (`Hesperus'
+That is, from some $\Obj{a}$, $\Obj{b}$ such that $\Obj{a}$ is in fact $\Obj{b}$ (`Hesperus'
 and `Phosphorus', say), we have: 
 
 \begin{itemize}
-\item It's necessary that $a$ is $b$.
-\item But, `$a=b$' isn't a logical truth.
+\item It's necessary that $\Obj{a}$ is $\Obj{b}$.
+\item But, `$\eq[\Obj{a}][\Obj{b}]$' isn't a logical truth.
 \end{itemize}
 
 We still have the converse: if $\ulcorner!A\urcorner$ is a logical 
 truth, then it is necessary that $!A$.
 
-\emph{Rough historical background.} Logical Positivists (like Carnap) and 
+\subsection{Simplified history} 
+Logical Positivists (like Carnap) and 
 philosophers close to them (like Wittgenstein, Carnap) hoped to 
 understand necessity in terms of logical truth. For a bit of background:
 traditional metaphysics (Aristotle, Descartes

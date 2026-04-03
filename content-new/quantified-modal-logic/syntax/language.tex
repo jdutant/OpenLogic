@@ -1,5 +1,5 @@
 % Part: quantified-modal-logic
-% Chapter: syntax-and-semantics
+% Chapter: syntax
 % Section: language
 
 \documentclass[../../../include/open-logic-section]{subfiles}
@@ -39,6 +39,7 @@ and punctuation symbols such as parentheses and commas, \emph{terms} and
   \iftag{prvEx}{\ycomma $\lexists$ (existential quantifier)}{}%
   \iftag{prvBox}{\ycomma $\Box$ (necessity operator)}{}%
   \iftag{prvDiamond}{\ycomma $\Diamond$ (possibility operator)}{}.
+\item The one-place existence predicate~$\lfrexists$.
 \item The two-place !!{identity}~$\eq$.
 \item A !!{denumerable}s set of !!{variable}s: $\Obj v_0$, $\Obj v_1$, $\Obj
   v_2$, \dots
@@ -78,16 +79,18 @@ above, we also use the following \emph{defined} symbols:
   \iftag{defBox}{\ycomma $\Box$ (necessity operator)}{}%
   \iftag{defDiamond}{\ycomma $\Diamond$ (possibility operator)}{}.
 
-\begin{tagblock}{defNot,defOr,defAnd,defIf,defIff,defTrue,defFalse,defEx,defAll,defBox,defDiamond}
 \begin{explain}
-A defined symbol is not officially part of the language, but is
-introduced as an informal abbreviation: it allows us to abbreviate
-formulas which would, if we only used primitive symbols, get quite
-long.  This is obviously an advantage.  The bigger advantage, however,
-is that proofs become shorter.  If a symbol is primitive, it has to be
-treated separately in proofs. The more primitive symbols, therefore,
-the longer our proofs.
+The existence predicate $\lfrexists$ can also be treated as 
+defined:
+
+\begin{defn}[Existence predicate]
+$\Atom{\lfrexists}{t}$ abbreviates $\lexists v (\eq[t][v])$, 
+where $v$ is a variable not free in $t$.
+\end{defn}
+
+In all the systems provided in this section, $\Atom{\lfrexists}{t}$
+and $\lexists v (\eq[t][v])$ are equivalent. They entail each other 
+and each can be proved from the other.
 \end{explain}
-\end{tagblock}
 
 \end{document}

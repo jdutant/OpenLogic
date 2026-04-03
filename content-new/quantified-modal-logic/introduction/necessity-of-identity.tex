@@ -101,7 +101,8 @@ The \Elim{\eq} step is accepted in first-order logic with identity
 is accepted in classical logic and in \emph{positive} free logic, 
 but not in \emph{negative} free logic.
 
-In Negative Free Logic, we only accept a weaker version of Reflexivity:
+In Negative Free Logic, we only accept a weaker version of Reflexivity,
+corresponding to the \Intro{\eq}$_{\Log{FL}}$ rule:
 
 \begin{itemize}
 \item Conditional Reflexivity. For any name $\Obj{a}$, `if $\Obj{a}$ exists, then $\Obj{a}$ is $\Obj{a}$' is a logical truth.
@@ -113,7 +114,7 @@ our two main claims:
 \begin{enumerate}
     \item It is necessary that if $\Obj{a}$ exists then $\Obj{a}$ is $\Obj{a}$. (Where $\Obj{a}$ can be any name.)
     \item If $\Obj{a}$ is $\Obj{b}$ and it is necessary that if $\Obj{a}$ exists then $\Obj{a}$ is $\Obj{a}$, then it 
-    is necesasry that if $\Obj{a}$ exists then $\Obj{a}$ is $\Obj{b}$.
+    is necessary that if $\Obj{a}$ exists then $\Obj{a}$ is $\Obj{b}$.
 \end{enumerate}
 
 And conditional versions of the Necessity of Identity:
@@ -134,7 +135,7 @@ $$\lforall[x][\lforall[y][(\eq[x][y]\lif\Box(\lfrexists x\lif \eq[x][y]))]]$$
 In natural deduction for negative free quantified logic:
 \begin{prooftree}
     \AxiomC{$\Discharge{\lfrexists\Obj{a}}{1}$}
-    \RightLabel{\Intro{\eq}$_{\Log{NFL}}$}
+    \RightLabel{\Intro{\eq}$_{\Log{FL}}$}
     \UnaryInfC{$\eq[\Obj{a}][\Obj{a}]$}
     \DischargeRule{\Intro{\lif}}{1}
     \UnaryInfC{$\lfrexists\Obj{a}\lif \eq[\Obj{a}][\Obj{a}]$}

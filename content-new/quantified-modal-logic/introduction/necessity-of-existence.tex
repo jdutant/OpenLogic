@@ -150,15 +150,16 @@ First, we may try and discharge the $\lfrexists\Obj{a}$ before
 \end{prooftree}
 This !!{derivation} is correct in \emph{positive} free quantified modal logic. 
 In the negative variant, 
-\Intro{\eq} is rejected, for we can only infer $\eq[\Obj{a}][\Obj{a}]$ if we 
-have the assumption that $\Obj{a}$ exists. As it happens, there's no 
-problem with making that assumption here, since we're making it 
+\Intro{\eq} is rejected; we have instead the \Intro{\eq}$_{FL}$ rule
+that only allows us to infer $\eq[\Obj{a}][\Obj{a}]$ from the premise 
+that $\Obj{a}$ exists. As it happens, there's no
+problem with assuming that premise here, since we're assuming it 
 for the \Intro{\lexists}$_{\Log{FL}}$ step anyway. So,
 we can also get !!a{derivation} for negative free quantified modal logic:
 \begin{prooftree}
     \AxiomC{$\Discharge{\lfrexists\Obj{a}}{1}$}
         \AxiomC{$\Discharge{\lfrexists\Obj{a}}{1}$}
-        \RightLabel{\Intro{\eq}$_{\Log{NFL}}$}
+        \RightLabel{\Intro{\eq}$_{\Log{FL}}$}
         \UnaryInfC{$\eq[\Obj{a}][\Obj{a}]$}
     \RightLabel{\Intro{\lexists}$_{\Log{FL}}$}
     \BinaryInfC{$\lexists[x][\eq[\Obj{a}][x]]$}
@@ -195,7 +196,7 @@ variant instead:
     \AxiomC{$\Discharge{\Box\lfrexists\Obj{a}}{2}$}
         \AxiomC{$\Discharge{\lfrexists\Obj{a}}{1}$}
             \AxiomC{$\Discharge{\lfrexists\Obj{a}}{1}$}
-            \RightLabel{\Intro{\eq}$_{\Log{NFL}}$}
+            \RightLabel{\Intro{\eq}$_{\Log{FL}}$}
             \UnaryInfC{$\eq[\Obj{a}][\Obj{a}]$}
         \RightLabel{\Intro{\lexists}$_{\Log{FL}}$}
         \BinaryInfC{$\lexists[x][\eq[\Obj{a}][x]]$}

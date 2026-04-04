@@ -1,0 +1,68 @@
+% Part: quantified-modal-logic
+% Chapter: semantics
+% Section: free-rules
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{qml}{nd}{fre}
+
+\olsection{Free Quantified Modal Logic}
+
+We use two systems for free quantified modal logic:
+either positive \Log{PFQML} or negative \Log{NFQML}. 
+
+You are allowed to use the following rules, detailed
+in the relevant sections of this textbook:
+
+\begin{enumerate}
+  \item Propositional Logic. All rules of propositional logic.
+  \item Free Quantification. All rules of quantifiers in free
+  logics (they are the same inpositive and negative).
+  \item The positive or negative free logic rules
+  for identity and atomic predication, respectively. 
+  \begin{enumerate} 
+    \item Positive (\Log{PFQML}): \Intro{\eq} and \Elim{\eq} as in
+    first order logic. No constraint on atomic predication.
+    \item Negative (\Log{PFQML}): the weaker \Intro{\eq}$_{\Log{FL}}$ rule, and
+    \Elim{\eq}. Constraint on atomic predication: \Log{NFL} 
+    rules that allow us to infer $\lfrexists t$ from 
+    $\Atom{R}{\ldots,t,\ldots}$ and $\eq[t][t']$.
+  \end{enumerate}
+  \item Existence. The definition of the existence predicate
+  $\lfrexists$ (below). These are derived rules in free logic systems.
+  \item Modality. All rules of modal logics. Depending on how the
+    accessibility 
+    relation of our models are constrained:
+    \begin{enumerate}
+      \item By default, \Log{PFQML} and \Log{PFQML} use modal rules
+      from the basic modal system \Log{K}.
+      \item Stronger systems are \Log{FQML+X}, for instance
+      \Log{NFQML+T} is negative free quantified modal logic with modal rules
+      from system \Log{T}. Its models are variable-domain models where
+      the accessibility relation is reflexive.
+    \end{enumerate}
+\end{enumerate}
+
+\begin{defish}
+    \emph{Definition of $\lfrexists$}
+
+    \begin{center}        
+    \smallskip
+    \begin{tabular}{cc}
+    \AxiomC{$\lexists[v][\eq[c][v]]$}
+    \RightLabel{Def~$\lfrexists$}
+    \UnaryInfC{$\lfrexists c$}
+    \DisplayProof
+    &
+    \AxiomC{$\lfrexists c$}
+    \RightLabel{Def~$\lfrexists$}
+    \UnaryInfC{$\lexists[v][\eq[c][v]]$}
+    \DisplayProof
+    \end{tabular}
+    \end{center}
+
+\end{defish}
+
+\end{document}

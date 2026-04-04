@@ -1,0 +1,42 @@
+% \subsection{Negative Free Logic looses the Uniform Substitution Rule}
+
+% Because of the rule \Log{NFL}, Negative Free Logic violates the 
+% \emph{uniforn substitution rule} that other logics uphold. 
+
+% \begin{defn}[Uniform Substitution Rule]
+%     If $!A$ is a logical truth, and $!A[!B/\Obj{P}]$ is the 
+%     result of uniformly substituting $!B$ for 
+%     the atomic !!{formula} $\Obj{P}$ in $!A$, then 
+%     $!A[!B/\Obj{P}]$.
+% \end{defn}
+
+% \begin{ex}
+% The Uniform Substitution Rule holds in propositional logic. For instance
+% $\Obj{P}\lor\lnot\Obj{P}$ is a logical truth (where $\Obj{P}$ is 
+% atomic), but so is any !!{formula} of the form $!A\lor\lnot!B$.
+% \end{ex}
+
+% The same holds in modal logic, first order logic, positive free logic, 
+% and many others.
+
+% Negative Free Logic violates the substitution rule. Where $\Obj{P}a$
+% is \emph{atomic}, we have the logical truth of Negative Free Logic:
+% $$\vdash_{\Log{NFL}}Obj{P}a\lif \lfrexists a$$
+% However, if we substitute the non-atomic $\lnot\Obj{P}a$ for $\Obj{P}a$,
+% the result is \emph{not} a logical truth of Negative Free Logic:
+% $$\nvdash_{\Log{NFL}}\lnot Obj{P}a\lif \lfrexists a$$
+
+% Is violating uniform substitution a problem? Two contrasting views on the issue:
+% \begin{itemize}
+%     \item The Uniform Substitution Rule is essential to logic. Logical truths are 
+%     true in virtue of their form. The rule captures that idea, because it 
+%     says that if $!A$ is a logical truth, then any !!{formula} with \emph{the 
+%     same form} should be a logical truth too. Because the principles
+%     of Negative Free Logic treat atomic vs non-atomic !!{formula}s differently, 
+%     they are not formal hence not logical.
+%     \item The difference between atomic and complex !!{formula}s \emph{is}
+%     a matter of form. Negative Free Logic upholds the general idea that 
+%     if $!A$ is a logical truth, then any !!{formula} of the same `form'
+%     is a logical truth; it just denies that replacing atomic sub-!!{formula}s
+%     by complex ones preserves the form. 
+% \end{itemize}

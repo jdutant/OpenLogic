@@ -1,0 +1,304 @@
+% Part: cheat-sheets
+% Chapter: quantified-modal-logics
+% Section: free-qml
+\documentclass[../../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{chs}{qml}{fre}
+
+\olsection{Free Quantified Modal Logics}
+
+The systems of Free Quantified Modal Logic, $\Log{FQML}$,
+combines free quantification, i.e. positive or negative 
+free logic with modal logic. We distinguish 
+positive free quantified modal logic, $\Log{PFQML}$,
+and negative free quantified modal logic, $\Log{NFQML}$.
+
+Their semantics uses \emph{variable-domain models}.
+The differences between negative vs positive semantics
+are that:
+\begin{itemize}
+\item negative semantics constrains the interpretation 
+ of predicates to ensure that at a given world, a predicate 
+ only applies to objects existing at that world,
+ \item the clause for $\eq$ in negative semantics is restricted
+ to ensure that at a given true, identity claims are true 
+ only of objects that exist at that world. That is, $\eq[\Obj{a}][t]$
+ is true at $w$ only if $\Obj{a}$ denotes an object in the domain of $w$. 
+\end{itemize}
+
+Their natural deduction system has rules of
+\emph{positive free logic} or \emph{negative free logic}
+plus the modal rules.
+
+\subsection{Variable-domain models}
+
+In variable-domain models, we have a single \emph{super-domain}
+$\mathcal{S}$, but \emph{each world $w$ has its own domain}
+$\mDomain{M}(w)$ of objects taken from the super-domain. The world's
+domain represents the objects existing at that world.
+
+
+\begin{defn}[Variable-domain models]
+    A \emph{variable-domain model} $\mModel M$ for the language $\Lang{L}$ 
+    of quantified modal logic consists of the following elements:
+    \begin{enumerate}
+    \item \emph{Worlds:} a non-empty set~$\mWorlds{M}$
+    \item \emph{Accessibility relation:} a binary relation~$\mAccess{M}$ on~$\mWorlds{M}$
+    \item \emph{Super-Domain:} a non-empty set, $\mathcal{S}$
+    \item \emph{Domains Function}: a function $\mDomain{M}$ that assigns
+    to each world $w$ in $\mWorlds{M}$ a subset $\mDomain{M}(w)$ of $\mathcal{S}$, the \emph{domain of world $w$}
+\item \emph{Interpretation of !!{constant}s:} for each !!{constant}~$c$ of
+  $\Lang{L}$, !!a{element} of the super-domain, $\mAssign{c}{M} \in \mathcal{S}$
+\item \emph{Interpretation of !!{predicate}s:} for each $n$-place
+  !!{predicate}~$R$ of $\Lang{L}$ (other than $\eq$), a function 
+  from worlds to $n$-place
+  relations on the super-domain: $\mAssign{R}{M} \colon W \to \mathcal{S}^n$
+\item \emph{Interpretation of !!{function}s:} for each $n$-place
+  !!{function}~$f$ of $\Lang{L}$, an $n$-place function from worlds 
+  to $n$-place functions on the super-domain: $\mAssign{f}{M} \colon W \to 
+  (\mathcal{S}^n \to \mathcal{S})$
+
+\end{enumerate}
+
+We write $\mAssign{R}{M}[w]$ for the value of $\mAssign{R}{M}$ at $w$ (a $n$-place relation) and $\mAssign{f}{M}[w]$ for the value of the 
+$\mAssign{f}{M}[w]$ at $w$ (a $n$-place function). 
+\end{defn}
+
+\begin{defn}[Negative variable-domain models]
+  A variable-domain model is \emph{negative} if it additionally 
+  obeys the following constraints:
+  \begin{enumerate}
+    \item \emph{Interpretation of !!{predicate}s:} the interpretation
+    of a $n$-place !!{predicate}~$R$ associates each world $w$ with a
+    relation over \emph{the domain of $w$}: $\mAssign{R}{M}[w]\in
+    \mDomain{M}(w)$. 
+  \item \emph{Interpretation of !!{function}s:} the interpretation 
+    an $n$-place !!{function}~$f$ associates each world $w$ with a 
+    function \emph{that maps any sequence of objects
+    containing some object not in $w$ to an object outside the domain 
+    of $w$}. That is, $\mAssign{f}{M}(w)(m_1,\ldots,m_n)\in \mDomain{M}(w)$
+    only if $m_1,\ldots,m_n\in \mDomain{M}(w)$.
+  \end{enumerate}
+\end{defn}
+
+\begin{rem}[Model types]
+  As in modal logic, a model $\mModel{M}$ is called a $\Ax{D}$-model, 
+  $\Ax{T}$-model, etc., if its accessibility relation is serial,
+  reflexive, etc., as in \olref[chs][qml][cla]{tab:five-types}. 
+\end{rem}
+
+\subsection{satisfaction}
+
+!!^{variable} assignments are defined as in classical quantified modal 
+logic except that we use objects from the super-domain:
+
+\begin{defn}[Variable Assignment]
+A \emph{variable assignment}~$s$ for a variable-domain model~$\mModel{M}$ 
+is a function which maps each !!{variable} to !!a{element} of
+the super-domain~$\mathcal{S}$,
+i.e., $s\colon \Var \to \mathcal{S}$.
+\end{defn}
+
+The definitions of terms !!{value}s and of 
+assignment variants are as in classical quantified modal logic.
+
+
+Satisfaction is defined as for fixed-domain models, with two differences:
+\begin{enumerate}
+\item For quantifiers: make their range world-relative,
+\item For identity, in the negative semantics: restrict its application
+to each world's domain.
+\end{enumerate}
+Let us look at these differences before stating the full 
+definitions of satisfactions. 
+
+\paragraph{Quantifiers} With variable-domain models we restrict the range of 
+quantifiers at each world to that world's domain. That includes
+the existence predicate:
+\begin{itemize}
+\item $\qmSat{M}{\Atom{\lfrexists}{t}}[w][s]$ iff 
+  $\mValue{t}{M}{w}[s]\in \mDomain{M}(w)$.
+
+\tagitem{prvAll}{%
+  $\qmSat{M}{\lforall[x][!B]}[w][s]$ iff for
+    every !!{element}~$m \in \mDomain{M}[w]$,
+    $\qmSat{M}{!B}[w][\Subst{s}{m}{x}]$.}{}
+
+\tagitem{prvEx}{%
+  $\qmSat{M}{\lexists[x][!B]}[w][s]$ iff for at
+  least one !!{element}~$m \in \mDomain{M}[w]$,
+  $\qmSat{M}{!B}[w][\Subst{s}{m}{x}]$.}{}
+\end{itemize}
+Note that for a quantified sentence to hold at a world 
+$w$ relative to an assignment $s$, we only variants
+of $s$ involving objects \emph{of that world's domain}, 
+$\mDomain{M}[w]$---not objects of the model's super-domain
+ $\mathcal{S}$.
+
+\paragraph{Identity in Negative Free semantics}. For the \emph{positive}
+variant of quantified modal logic, the clause for identity
+is the same. For the \emph{negative} variant, we restrict it 
+as follows:
+
+\begin{itemize}
+
+\item classical, positive free: $\qmSat{M}{\eq[t_1][t_2]}[w][s]$ iff
+  $\mValue{t_1}{M}{w}[s] = \mValue{t_2}{M}{w}[s]$.
+
+\item negative free: $\qmSat{M}{\eq[t_1][t_2]}[w][s]$ iff
+  $\mValue{t_1}{M}{w}[s]\in \mDomain{M}[w]$ and 
+  $\mValue{t_1}{M}{w}[s] = \mValue{t_2}{M}{w}[s]$.
+
+\end{itemize}
+
+Satisfaction has a different identity clause for the 
+positive and for the negative variants of free quantified 
+modal logic. When we need to disambiguate we write
+ $\models_{\Log{PFQML}}$ for the positive semantics and
+ $\models_{\Log{NFQML}}$. 
+
+\begin{defn}[Satisfaction in variable-domain models]
+\ollabel{defn:satisfaction}
+Satisfaction of !!a{formula}~$!A$ a fixed-domain model~$\mModel{M}$
+at a world $w$ in $\mWorlds{M}$ relative to !!a{variable} assignment~$s$, in symbols:
+$\qmSat{M}{!A}[w][s]$, is defined recursively as follows. We write
+$\qmSat/{M}{!A}[w][s]$ to mean ``not $\qmSat{M}{!A}[w][s]$.'' 
+When we need to specify the positive or negative variant of 
+the definition, we use  When we need to disambiguate we write
+ $\models_{\Log{PFQML}}$ for the positive semantics and
+ $\models_{\Log{NFQML}}$. 
+\begin{enumerate}
+\tagitem{prvFalse}{%
+  \indcase{!A}{\lfalse}{$\qmSat/{M}{\indfrm}[w][s]$.}}{}
+
+\tagitem{prvTrue}{%
+  \indcase{!A}{\ltrue}{$\qmSat{M}{\indfrm}[w][s]$.}}{}
+
+\item \indcase{!A}{\Atom{R}{t_1, \dots, t_n}}{$\qmSat{M}{\indfrm}[w][s]$
+  iff $\langle \mValue{t_1}{M}{w}[s], \dots, \mValue{t_n}{M}{w}[s] \rangle \in
+  \mAssign{R}{M}[w]$.}
+
+\item \indcase{!A}{\Atom{\lfrexists}{t}}{$\qmSat{M}{\indfrm}[w][s]$ iff 
+  $\mValue{t}{M}{w}[s]\in \mDomain{M}(w)$.}
+
+\item \indcase{!A}{\eq[t_1][t_2]}{$\qmSat{M}{\indfrm}[w][s]$ iff
+  \begin{itemize}
+    \item positive variant: $\mValue{t_1}{M}{w}[s] = \mValue{t_2}{M}{w}[s]$,
+    \item negative variant:  $\mValue{t_1}{M}{w}[s]\in \mDomain{M}[w]$ and 
+  $\mValue{t_1}{M}{w}[s] = \mValue{t_2}{M}{w}[s]$.
+  \end{itemize}
+ }
+
+\tagitem{prvNot}{%
+  \indcase{!A}{\lnot !B}{$\qmSat{M}{\indfrm}[w][s]$ iff
+    $\qmSat/{M}{!B}[w][s]$.}}{}
+
+\tagitem{prvAnd}{%
+  \indcase{!A}{(!B \land !C)}{$\qmSat{M}{\indfrm}[w][s]$ iff 
+  $\qmSat{M}{!B}[w][s]$ and $\qmSat{M}{!C}[w][s]$.}}{}
+
+\tagitem{prvOr}{%
+  \indcase{!A}{(!B \lor !C)}{$\qmSat{M}{\indfrm}[w][s]$ iff
+    $\qmSat{M}{!B}[w][s]$ or $\qmSat{M}{!C}[w][s]$ (or both).}}{}
+
+\tagitem{prvIf}{%
+  \indcase{!A}{(!B \lif !C)}{$\qmSat{M}{\indfrm}[w][s]$ iff 
+    $\qmSat/{M}{!B}[w][s]$ or $\qmSat{M}{!C}[w][s]$ (or both).}}{}
+
+\tagitem{prvIff}{%
+  \indcase{!A}{(!B \liff !C)}{$\qmSat{M}{\indfrm}[w][s]$ iff either
+    both $\qmSat{M}{!B}[w][s]$ and $\qmSat{M}{!C}[w][s]$, or neither
+    $\qmSat{M}{!B}[w][s]$ nor $\qmSat{M}{!C}[w][s]$.}}{}
+
+\tagitem{prvAll}{%
+  \indcase{!A}{\lforall[x][!B]}{$\qmSat{M}{\indfrm}[w][s]$ iff for
+    every !!{element}~$m \in \mDomain{M}(w)$,
+    $\qmSat{M}{!B}[w][\Subst{s}{m}{x}]$.}}{}
+
+\tagitem{prvEx}{%
+  \indcase{!A}{\lexists[x][!B]}{$\qmSat{M}{\indfrm}[w][s]$ iff for at
+  least one !!{element}~$m \in \mDomain{M}(w)$,
+  $\qmSat{M}{!B}[w][\Subst{s}{m}{x}]$.}}{}
+
+\tagitem{prvBox}{%
+  \indcase{!A}{\Box !B}{$\qmSat{M}{\indfrm}[w][s]$ iff
+    $\qmSat{M}{!B}[w'][s]$ for all $w' \in \mWorlds{M}$ with
+    $\mAccess{M}ww'$.}}{}
+
+\tagitem{prvDiamond}{%
+    \indcase{!A}{\Diamond !B}{$\qmSat{M}{\indfrm}[w][s]$ iff
+      $\qmSat{M}{!B}[w'][s]$ for at least one $w' \in \mWorlds{M}$
+      with $\mAccess{M}ww'$.}}{}
+
+\end{enumerate}
+\end{defn}
+
+Sentences and truth at a world are defined as in classical quantified
+modal logic.
+
+\subsection{Natural Deduction for \Log{FQML}}
+
+We use two systems for free quantified modal logic:
+either positive \Log{PFQML} or negative \Log{NFQML}. 
+
+You are allowed to use the following rules, detailed
+in the relevant sections of these cheatsheets:
+
+\begin{enumerate}
+  \item Propositional Logic. All rules of propositional logic.
+  \item Free Quantification. All rules of quantifiers in free
+  logics (they are the same inpositive and negative).
+  \item The positive or negative free logic rules
+  for identity and atomic predication, respectively. 
+  \begin{enumerate} 
+    \item Positive (\Log{PFQML}): \Intro{\eq} and \Elim{\eq} as in
+    first order logic. No constraint on atomic predication.
+    \item Negative (\Log{PFQML}): the weaker \Intro{\eq}$_{\Log{FL}}$ rule, and
+    \Elim{\eq}. Constraint on atomic predication: \Log{NFL} 
+    rules that allow us to infer $\lfrexists t$ from 
+    $\Atom{R}{\ldots,t,\ldots}$ and $\eq[t][t']$.
+  \end{enumerate}
+  \item Existence. The definition of the existence predicate
+  $\lfrexists$ (below). These are derived rules in free logic systems.
+  \item Modality. All rules of modal logics. Depending on how the
+    accessibility 
+    relation of our models are constrained:
+    \begin{enumerate}
+      \item By default, \Log{PFQML} and \Log{PFQML} use modal rules
+      from the basic modal system \Log{K}.
+      \item Stronger systems are \Log{FQML+X}, for instance
+      \Log{NFQML+T} is negative free quantified modal logic with modal rules
+      from system \Log{T}. Its models are variable-domain models where
+      the accessibility relation is reflexive.
+      \item Sider's "Variable-Domain Quantified Modal Logic" \Log{SQML}
+      is \Log{PFQML+S5}, positive free quantified modal logic with 
+      modal rules for system \Log{S5}. Its models are variable-domain models where
+      the accessibility relation is an equivalence relation (reflexive, 
+      symmetric and transitive), and it uses the positive 
+      variant of satisfaction clauses.
+    \end{enumerate}
+\end{enumerate}
+
+\begin{defish}
+    \emph{Definition of $\lfrexists$}
+
+    \begin{center}        
+    \smallskip
+    \begin{tabular}{cc}
+    \AxiomC{$\lexists[v][\eq[c][v]]$}
+    \RightLabel{Def~$\lfrexists$}
+    \UnaryInfC{$\lfrexists c$}
+    \DisplayProof
+    &
+    \AxiomC{$\lfrexists c$}
+    \RightLabel{Def~$\lfrexists$}
+    \UnaryInfC{$\lexists[v][\eq[c][v]]$}
+    \DisplayProof
+    \end{tabular}
+    \end{center}
+
+\end{defish}
+
+\end{document}

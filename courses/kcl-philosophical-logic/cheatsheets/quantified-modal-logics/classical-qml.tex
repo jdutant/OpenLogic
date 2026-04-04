@@ -1,0 +1,266 @@
+% Part: cheat-sheets
+% Chapter: quantified-modal-logics
+% Section: classical-qml 
+
+\documentclass[../../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{chs}{qml}{cla}
+
+\olsection{Classical Quantified Modal Logic}
+
+The system of Classical Quantified Modal Logic, $\Log{CQML}$,
+combines classical quantification, i.e. first-order logic with 
+identity, with modal logic. 
+
+Its semantics uses \emph{fixed-domain models} (also 
+called \emph{constant-domain models}).
+
+Its natural deduction system has the rules of \emph{first-order 
+logic with identity} plus the modal rules.
+
+\subsection{Fixed-domain models}
+
+\begin{defn}[Fixed-domain models]
+    A \emph{fixed-domain model} $\mModel M$ for the language $\Lang{L}$ 
+    of quantified modal logic consists of the following elements:
+    \begin{enumerate}
+    \item \emph{Worlds:} a non-empty set~$\mWorlds{M}$
+    \item \emph{Accessibility relation:} a binary relation~$\mAccess{M}$ on~$\mWorlds{M}$
+    \item \emph{Domain:} a non-empty set, $\mDomain{M}$
+\item \emph{Interpretation of !!{constant}s:} for each !!{constant}~$c$ of
+  $\Lang{L}$, !!a{element} $\mAssign{c}{M} \in \mDomain{M}$
+\item \emph{Interpretation of !!{predicate}s:} for each $n$-place
+  !!{predicate}~$R$ of $\Lang{L}$ (other than $\eq$), a function 
+  from worlds to $n$-place
+  relations on the domain: $\mAssign{R}{M} \colon W \to \mDomain{M}^n$
+\item \emph{Interpretation of !!{function}s:} for each $n$-place
+  !!{function}~$f$ of $\Lang{L}$, an $n$-place function from worlds 
+  to $n$-place functions on the domain: $\mAssign{f}{M} \colon W \to 
+  (\mDomain{M}^n \to \mDomain{M})$
+
+\end{enumerate}
+
+We write $\mAssign{R}{M}[w]$ for the value of $\mAssign{R}{M}$ at $w$ (a $n$-place relation) and $\mAssign{f}{M}[w]$ for the value of the 
+$\mAssign{f}{M}[w]$ at $w$ (a $n$-place function). 
+\end{defn}
+
+\begin{rem}[Model types]
+  As in modal logic, a model $\mModel{M}$ is called a $\Ax{D}$-model, 
+  $\Ax{T}$-model, etc., if its accessibility relation is serial,
+  reflexive, etc., as in \olref{tab:five-types}. 
+\end{rem}
+
+\begin{table}[t]
+    \begin{tabular}{| c | l | l |}
+      \hline
+      Model type & Property of $R$ & Characteristic schema \\
+      \hline \hline
+      \Ax{K} & no constraint & \\
+      \hline
+      \Ax{D} & \emph{serial}: $\forall u \exists v Ruv$ 
+      & $\Box p \lif \Diamond p$ \\
+      \hline
+      \Ax{T} & \emph{reflexive}: $\forall w Rww$
+      & $\Box p \lif p$ \\
+      \hline
+      \Ax{B} & \emph{symmetric}: $\forall u\forall v(Ruv \lif Rvu)$
+      & $p \lif \Box\Diamond p$ \\
+      \hline
+      \Ax{4} & \emph{transitive}:
+      $\forall u \forall v \forall w ((Ruv \land Rvw) \lif Ruw)$
+      & $\Box p \lif \Box \Box p$ \\
+      \hline
+      \Ax{5} & \emph{euclidean}:
+      $\forall w \forall u \forall v ((Rwu \land Rwv) \lif Ruv)$ 
+      & $\Diamond p \lif \Box\Diamond p$ \\
+      \hline
+    \end{tabular}
+    \caption{Five model types.}
+    \ollabel{tab:five-types}
+  \end{table} 
+
+\subsection{Satisfaction in Fixed-Domain Models}
+
+In quantified modal logics, satisfaction is relative
+to an assignment (as in first-order logic or free logic)
+\emph{and} to a world.
+
+Sentences (formulas without free variables) are satisfied 
+at a world irrespective of choice of assignment, so We
+call them \emph{true} or \emph{false}, as in first-order logic.
+ But their truth or falsity is still relative to world. 
+
+\begin{explain}
+!!^{variable} assignments and assignment variants are defined as in 
+first-order logic. The !!{value} of terms is defined as in first-order
+logic except that !!{function}s may vary depending on world. Note
+that:
+\begin{enumerate}
+\item !!^{constant}s and (relative to a given assignment) !!{variable}s
+    have world-invariant !!{value}s. They `directly' or `rigidly'
+    refer to an object of the domain. Compare how `Socrates' denote the
+    same person whether we're talking of what actually happens or 
+    what could have happened.
+\item Complex terms, which involve !!{function}s, have a world-sensitive
+    !!{value}s. Compare how `the birthplace of Alice' or 
+    `the number of planets' denote different places or numbers depending
+    on how the world is.
+\end{enumerate}
+\end{explain}
+
+\begin{defn}[Variable Assignment]
+A \emph{variable assignment}~$s$ for a fixed-domain model~$\mModel{M}$ 
+is a function which maps each !!{variable} to !!a{element} of~$\mDomain M$,
+i.e., $s\colon \Var \to \mDomain M$.
+\end{defn}
+
+\begin{defn}[!!^{value} of Terms]
+If $t$ is a term of the language~$\Lang L$, $\mModel M$ is a
+fixed-domain model for~$\Lang L$, $w$ a world in $mWorlds M$, and $s$
+is !!a{variable} assignment for~$\mModel M$, the
+\emph{!!{value}}~$\mValue{t}{M}{w}[s]$ of $t$ at world $w$ in the is
+defined as follows:
+\begin{enumerate}
+\item \indcase{t}{c}{$\mValue{\indfrm}{M}{w}[s] = \mAssign{\indcomplex}{M}$.}
+\item \indcase{t}{x}{$\mValue{\indfrm}{M}{w}[s] = s(\indcomplex)$.}
+\item \indcase{t}{\Atom{f}{t_1, \ldots, t_n}}{
+\[
+\mValue{\indfrm}{M}{w}[s] = \mAssign{f}{M}[w](\mValue{t_1}{M}{w}[s], \ldots,
+\mValue{t_n}{M}{w}[s]).
+\]}
+\end{enumerate}
+\end{defn}
+
+$x$-variant assignments are defined as in first-order logic.
+For instance, where $m$ is an object of the domain 
+$\mDomain{M}$, and $s$ a !!{variable} assignment,
+$\Subst{s}{m}{x}$ is the !!{variable} assignment that assigns 
+$m$ to variable $x$ and is otherwise just like $s$.
+
+\begin{defn}[Satisfaction in fixed-domain models]
+Satisfaction of !!a{formula}~$!A$ a fixed-domain model~$\mModel{M}$
+at a world $w$ in $\mWorlds{M}$ relative to !!a{variable} assignment~$s$, in symbols:
+$\qmSat{M}{!A}[w][s]$, is defined recursively as follows. (We write
+$\qmSat/{M}{!A}[w][s]$ to mean ``not $\qmSat{M}{!A}[w][s]$.'')
+\begin{enumerate}
+\tagitem{prvFalse}{%
+  \indcase{!A}{\lfalse}{$\qmSat/{M}{\indfrm}[w][s]$.}}{}
+
+\tagitem{prvTrue}{%
+  \indcase{!A}{\ltrue}{$\qmSat{M}{\indfrm}[w][s]$.}}{}
+
+\item \indcase{!A}{\Atom{R}{t_1, \dots, t_n}}{$\qmSat{M}{\indfrm}[w][s]$
+  iff $\langle \mValue{t_1}{M}{w}[s], \dots, \mValue{t_n}{M}{w}[s] \rangle \in
+  \mAssign{R}{M}[w]$.}
+
+\item \indcase{!A}{\Atom{\lfrexists}{t}}{$\qmSat{M}{\indfrm}[w][s]$ iff 
+  $\mValue{t}{M}{w}[s]\in \mDomain{M}$ (which is always the case).}
+
+\item \indcase{!A}{\eq[t_1][t_2]}{$\qmSat{M}{\indfrm}[w][s]$ iff
+  $\mValue{t_1}{M}{w}[s] = \mValue{t_2}{M}{w}[s]$.}
+
+\tagitem{prvNot}{%
+  \indcase{!A}{\lnot !B}{$\qmSat{M}{\indfrm}[w][s]$ iff
+    $\qmSat/{M}{!B}[w][s]$.}}{}
+
+\tagitem{prvAnd}{%
+  \indcase{!A}{(!B \land !C)}{$\qmSat{M}{\indfrm}[w][s]$ iff 
+  $\qmSat{M}{!B}[w][s]$ and $\qmSat{M}{!C}[w][s]$.}}{}
+
+\tagitem{prvOr}{%
+  \indcase{!A}{(!B \lor !C)}{$\qmSat{M}{\indfrm}[w][s]$ iff
+    $\qmSat{M}{!B}[w][s]$ or $\qmSat{M}{!C}[w][s]$ (or both).}}{}
+
+\tagitem{prvIf}{%
+  \indcase{!A}{(!B \lif !C)}{$\qmSat{M}{\indfrm}[w][s]$ iff 
+    $\qmSat/{M}{!B}[w][s]$ or $\qmSat{M}{!C}[w][s]$ (or both).}}{}
+
+\tagitem{prvIff}{%
+  \indcase{!A}{(!B \liff !C)}{$\qmSat{M}{\indfrm}[w][s]$ iff either
+    both $\qmSat{M}{!B}[w][s]$ and $\qmSat{M}{!C}[w][s]$, or neither
+    $\qmSat{M}{!B}[w][s]$ nor $\qmSat{M}{!C}[w][s]$.}}{}
+
+\tagitem{prvAll}{%
+  \indcase{!A}{\lforall[x][!B]}{$\qmSat{M}{\indfrm}[w][s]$ iff for
+    every !!{element}~$m \in \mDomain M$,
+    $\qmSat{M}{!B}[w][\Subst{s}{m}{x}]$.}}{}
+
+\tagitem{prvEx}{%
+  \indcase{!A}{\lexists[x][!B]}{$\qmSat{M}{\indfrm}[w][s]$ iff for at
+  least one !!{element}~$m \in \mDomain M$,
+  $\qmSat{M}{!B}[w][\Subst{s}{m}{x}]$.}}{}
+
+\tagitem{prvBox}{%
+  \indcase{!A}{\Box !B}{$\qmSat{M}{\indfrm}[w][s]$ iff
+    $\qmSat{M}{!B}[w'][s]$ for all $w' \in \mWorlds{M}$ with
+    $\mAccess{M}ww'$.}}{}
+
+\tagitem{prvDiamond}{%
+    \indcase{!A}{\Diamond !B}{$\qmSat{M}{\indfrm}[w][s]$ iff
+      $\qmSat{M}{!B}[w'][s]$ for at least one $w' \in \mWorlds{M}$
+      with $\mAccess{M}ww'$.}}{}
+
+\end{enumerate}
+\end{defn}
+
+\begin{defn}[truth-at-w]
+\Article{sentence} !!{sentence} $!A$ is \emph{true at a world} $w$
+in model $\mModel M$ iff it is satisfied at $w$ relative to some assignment, 
+or equivalently, iff it is satisfied at $w$ to every assignment.
+We then simply write $\qmSat{M}{!A}[w]$. 
+\end{defn}
+
+\subsection{Natural Deduction for \Log{CQML}}
+
+In Natural Deduction !!{derivation}s for classical 
+quantified modal logic (\Log{CQML}), you may use
+the following rules, detailed in the relevant 
+sections of these cheatsheets:
+
+\begin{enumerate}
+  \item Propositional Logic. All rules of propositional logic.
+  \item Classical Quantification and Identity. All rules of
+  first-order logic.
+  \item Existence. The definition of the existence predicate
+  $\lfrexists$ (see below).
+  \item Modality. All rules of modal logics. Depending on how the
+    accessibility 
+    relation of our models are constrained:
+    \begin{enumerate}
+      \item By default, \Log{CQML} uses modal rules from the basic
+      modal system \Log{K}.
+      \item Stronger systems are \Log{CQML+X}, for instance
+      \Log{CQML+T} is classical quantified modal logic with modal rules
+      from system \Log{T}. Its models are fixed-domain models where
+      the accessibility relation is reflexive.
+      \item Sider's "Simple Quantified Modal Logic" \Log{SQML}
+      is \Log{CQML+S5}, classical quantified modal logic with 
+      modal rules for system \Log{S5}. Its models are fixed-domain models where
+      the accessibility relation is an equivalence relation (reflexive, 
+      symmetric and transitive).
+    \end{enumerate}
+\end{enumerate}
+
+\begin{defish}
+    \emph{Definition of $\lfrexists$}
+
+    \begin{center}        
+    \smallskip
+    \begin{tabular}{cc}
+    \AxiomC{$\lexists[v][\eq[c][v]]$}
+    \RightLabel{Def~$\lfrexists$}
+    \UnaryInfC{$\lfrexists c$}
+    \DisplayProof
+    &
+    \AxiomC{$\lfrexists c$}
+    \RightLabel{Def~$\lfrexists$}
+    \UnaryInfC{$\lexists[v][\eq[c][v]]$}
+    \DisplayProof
+    \end{tabular}
+    \end{center}
+
+\end{defish}
+
+\end{document}

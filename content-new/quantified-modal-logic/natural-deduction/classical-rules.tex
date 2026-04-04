@@ -1,0 +1,56 @@
+% Part: quantified-modal-logic
+% Chapter: semantics
+% Section: classical-rules
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{qml}{nd}{cla}
+
+\olsection{Classical Quantified Modal Logic}
+
+In Natural Deduction !!{derivation}s for classical 
+quantified modal logic (\Log{CQML}), you are allowed to use the following rules, detailed
+in the relevant sections of this textbook:
+
+\begin{enumerate}
+  \item Propositional Logic. All rules of propositional logic.
+  \item Classical Quantification and Identity. All rules of
+  first-order logic.
+  \item Existence. The definition of the existence predicate
+  $\lfrexists$ (see below).
+  \item Modality. All rules of modal logics. Depending on how the
+    accessibility 
+    relation of our models are constrained:
+    \begin{enumerate}
+      \item By default, \Log{CQML} uses modal rules from the basic
+      modal system \Log{K}.
+      \item Stronger systems are \Log{CQML+X}, for instance
+      \Log{CQML+T} is classical quantified modal logic with modal rules
+      from system \Log{T}. Its models are fixed-domain models where
+      the accessibility relation is reflexive.
+    \end{enumerate}
+\end{enumerate}
+
+\begin{defish}
+    \emph{Definition of $\lfrexists$}
+
+    \begin{center}        
+    \smallskip
+    \begin{tabular}{cc}
+    \AxiomC{$\lexists[v][\eq[c][v]]$}
+    \RightLabel{Def~$\lfrexists$}
+    \UnaryInfC{$\lfrexists c$}
+    \DisplayProof
+    &
+    \AxiomC{$\lfrexists c$}
+    \RightLabel{Def~$\lfrexists$}
+    \UnaryInfC{$\lexists[v][\eq[c][v]]$}
+    \DisplayProof
+    \end{tabular}
+    \end{center}
+
+\end{defish}
+
+\end{document}

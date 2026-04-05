@@ -1,0 +1,84 @@
+% Part: cheat-sheets
+% Chapter: quantified-modal-logics
+% Section: comparisons
+\documentclass[../../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{chs}{qml}{com}
+
+\olsection{Comparison Betweeen Classical vs Free Quantified Modal Logics}
+
+\begin{center}
+Comparing validity across classical quantified modal logic (\Log{CQML})
+and free quantified modal logics: negative (\Log{NFQML}) and 
+positive (\Log{PFQML}).
+\smallskip
+\begin{tabular}[t]{p{.20\textwidth}p{.30\textwidth}ccc}
+    \hline
+    !!^{sentence} & English trans. & \multicolumn{3}{c}{Valid in:} \\
+        &       & \Log{CQML} & \Log{NFQML} & \Log{PFQML} \\
+    \hline 
+    \multicolumn{2}{l}{Necessity of Existence} \\
+    $\Box\lforall[x][\lfrexists x]$ 
+        & Necessarily, everything exists 
+        & $\surd$ & $\surd$ & $\surd$ \\
+    $\lforall[x][\Box\lfrexists x]$ 
+        & Everything exists necessarily
+        & $\surd$ & $\times$ & $\times$ \\
+    $\lfrexists \Obj{a}$ 
+        & $\Obj{a}$ exists necessarily
+        & $\surd$ & $\times$ & $\times$ \\
+    \multicolumn{2}{l}{Conditional Necessity of Identity} \\
+    $\eq[\Obj{a}][\Obj{b}]\lif\Box(\lfrexists\Obj{a}\lif \eq[\Obj{a}][\Obj{b}])$
+        & If $\Obj{a}$ is identical to $\Obj{b}$ then necessarily if $\Obj{a}$ exists it is identical to $\Obj{a}$
+        & $\surd$ & $\surd$ & $\surd$ \\
+    $\lforall[x][\lforall[y][(\eq[x][y]\lif\Box\eq[x][y])]]$
+        & If something is identical to a thing then necessarily it is identical to that thing
+        & $\surd$ & $\times$ & $\surd$ \\
+    \multicolumn{2}{l}{Unconditional Necessity of Identity} \\
+        $\eq[\Obj{a}][\Obj{b}]\lif\Box\eq[\Obj{a}][\Obj{b}]$
+        & If $\Obj{a}$ is identical to $\Obj{b}$ then necessarily $\Obj{a}$ is identical to $\Obj{b}$
+        & $\surd$ & $\times$ & $\surd$ \\
+    $\lforall[x][\lforall[y][(\eq[x][y]\lif\Box\eq[x][y])]]$
+        & If something is identical to a thing then necessarily it is identical to that thing
+        & $\surd$ & $\times$ & $\surd$ \\
+    \multicolumn{2}{l}{Identity} \\
+    $\Box\lforall[x][\eq[x][x]]$
+        & Necessarily, everything is itself
+        & $\surd$ & $\surd$ & $\surd$ \\
+    $\Box\eq[\Obj{a}][\Obj{a}]$
+        & $\Obj{a}$ is $\Obj{a}$
+        & $\surd$ & $\times$ & $\surd$ \\
+    \multicolumn{2}{l}{Atomic predication} \\
+    $\Box(\Atom{\Obj{P}}{\Obj{a}}\lif\lfrexists\Obj{a})$ 
+        & Necessarily, if $\Obj{a}$ is $\Obj{P}$, then $\Obj{a}$ exists 
+        & $\surd$ & $\surd$ & $\times$ \\
+    \multicolumn{2}{l}{Negated atomic predication} \\
+    $\Box(\lnot \Atom{\Obj{P}}{\Obj{a}}\lif\lfrexists\Obj{a})$ 
+        & Necessarily, if it's not the case that $\Obj{a}$ is $\Obj{P}$, then $\Obj{a}$ exists 
+        & $\surd$ & $\times$ & $\times$ \\
+    \hline
+\end{tabular}
+\smallskip
+\end{center}
+
+\emph{Note on the existence predicate $\lfrexists$}. In free logics
+it is equivalent to $\lexists[v][\eq[\ldots][v]]$. In first-order
+logic with identity we haven't introduced it, but it would be
+equivalent to that to. Thus were first-order logic is concerned,
+simply treat $\lfrexists c$ as an abbreviation of
+ $\lexists[v][\leq[c][v]]$.
+Thus:
+\begin{itemize}
+    \item $\lfrexists \Obj{a}$ is 
+    equivalent to $\lexists[x][\eq[\Obj{a}][x]]$
+    \item $\lforall[x][\lfrexists x]$ is 
+    equivalent $\lforall[x][\lexists[y][\eq[x][y]]]$
+    \item $\lfrexists\Obj{a}\lif\Subst{!A}{\Obj{a}}{x}$ is 
+    equivalent $\lexists[y][\eq[\Obj{a}][y]]\lif\Subst{!A}{\Obj{a}}{x}$
+\end{itemize}
+
+\end{document}
+
+\end{document}

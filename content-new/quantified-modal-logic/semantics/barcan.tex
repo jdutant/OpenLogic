@@ -1,0 +1,102 @@
+% Part: quantified-modal-logic
+% Chapter: semantics
+% Section: barcan
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{qml}{sem}{bar}
+
+\olsection{Barcan Formulas}
+
+CBF. $\Box\lforall[x][!A(x)]\lif\lforall[x][\Box!A(x)]$
+
+CBF$\Diamond$?. $\Diamond \lexists[x][!A(x)]\if\lexists[x][\Diamond!A(x)]$
+
+BF. $\lforall[x][\Box!A(x)]\lif\Box\lforall[x][!A(x)]$
+
+!!^{derivation} of~$\Proves[\Log{CQML}] \Box\lforall[v][!A] \lif\lforall[v][\Box!A]$ 
+(converse Barcan formula).
+
+\begin{prooftree}
+\AxiomC{$\Discharge{\Box\lforall[v][!A]}{2}$}
+    \AxiomC{$\Discharge{\lforall[v][!A]}{1}$}
+    \RightLabel{\Elim{\lforall}}
+    \UnaryInfC{$\Subst{!A}{c}{v}$}
+\DischargeRule{$\Box$\Ax{K}}{1}
+\BinaryInfC{$\Box\Subst{!A}{c}{v}$}
+\RightLabel{\Intro{\lforall}}
+\UnaryInfC{$\lforall[v][\Box!A]$}
+\DischargeRule{\Intro{lif}}{2}
+\UnaryInfC{$\Box\lforall[v][!A] \lif\lforall[v][\Box!A]$}
+\end{prooftree}
+
+In free logic the closest we get is !!a{derivation}
+of~$\Proves[\Log{FQML}]\Box\lforall[v][!A]\lif \lforall[v][\Box(\lfrexists v\lif !A)]$ 
+
+\begin{prooftree}
+    \AxiomC{$\Discharge{\Box\lforall[v][!A]}{4}$}
+        \AxiomC{$\Discharge{\lforall[v][!A]}{2}$}
+            \AxiomC{$\Discharge{\lfrexists c}{1}$}
+        \RightLabel{\Elim{\lforall}$_{\Log{FL}}$}
+        \BinaryInfC{$\Subst{!A}{c}{v}$}
+        \DischargeRule{\Intro{\lif}}{1}
+        \UnaryInfC{$\lfrexists c\lif \Subst{!A}{c}{v}$}
+    \DischargeRule{$\Box$\Ax{K}}{2}
+    \BinaryInfC{$\Box(\lfrexists c\lif\Subst{!A}{c}{v})$}
+\AxiomC{$\Discharge{\lfrexists c}{3}$}
+\DischargeRule{\Intro{\lforall}$_{\Log{FL}}$}{3}
+\BinaryInfC{$\lforall[v][\Box(\lfrexists v\lif !A)]$}
+\DischargeRule{\Intro{\lif}}{4}
+\UnaryInfC{$\Box\lforall[v][!A]\lif \lforall[v][\Box(\lfrexists v\lif !A)]$}
+\end{prooftree}
+
+!!^{derivation} of~$\Proves[\Log{CQML+B}]\lforall[v][\Box!A] \lif\Box\lforall[v][!A]$ (Barcan formula)
+in $\Log{B}$ systems
+
+\begin{prooftree}
+\AxiomC{$\Discharge{\lforall[v][\Box!A]}{3}$}
+\RightLabel{$\Box$\Ax{B}}
+\UnaryInfC{$\Box\Diamond\lforall[v][\Box!A]$}
+    \AxiomC{$\Discharge{\Diamond\lforall[v][\Box!A]}{2}$}
+        \AxiomC{$\Discharge{\lforall[v][\Box!A]}{1}$}
+        \RightLabel{\Elim{\lforall}} 
+        \UnaryInfC{$\Box\Subst{!A}{c}{v}$}
+    \DischargeRule{$\Diamond$\Ax{K}}{1}
+    \BinaryInfC{$\Diamond\Box\Subst{!A}{c}{v}$}
+    \RightLabel{$\Diamond$\Ax{B}}
+    \UnaryInfC{$\Subst{!A}{c}{v}$}
+    \RightLabel{\Intro{\lforall}}
+    \UnaryInfC{$\lforall[v][!A]$}
+\DischargeRule{$\Box$\Ax{K}}{2}
+\BinaryInfC{$\Box\lforall[v][!A]$}
+\DischargeRule{\Intro{\lif}}{3}
+\UnaryInfC{$\lforall[v][\Box!A] \lif\Box\lforall[v][!A]$}
+\end{prooftree}
+
+In free logic the closest we get is !!a{derivation}
+of~???
+
+\begin{prooftree}
+\AxiomC{$\lforall[v][\Box!A]$}
+\RightLabel{$\Box$\Ax{B}}
+\UnaryInfC{$\Box\Diamond\lforall[v][\Box!A]$}
+    \AxiomC{$\Discharge{\Diamond\lforall[v][\Box!A]}{3}$}
+        \AxiomC{$\Discharge{\lforall[v][\Box!A]}{2}$}
+            \AxiomC{$\Discharge{\lfrexists c}{1}$}
+        \RightLabel{\Elim{\lforall}} 
+        \BinaryInfC{$\Box\Subst{!A}{c}{v}$}
+        \DischargeRule{\Intro{\lif}}{1}
+        \UnaryInfC{$\lfrexists c\lif \Box\Subst{!A}{c}{v}$}
+    \DischargeRule{$\Diamond$\Ax{K}}{2}
+    \BinaryInfC{$\Diamond(\lfrexists c\lif \Box\Subst{!A}{c}{v})$}
+    \RightLabel{$\Diamond$\Ax{B}???}
+    \UnaryInfC{$\Subst{!A}{c}{v}$}
+    \RightLabel{\Intro{\lforall}}
+    \UnaryInfC{$\lforall[v][!A]$}
+\DischargeRule{$\Box$\Ax{K}}{3}
+\BinaryInfC{$\Box\lforall[v][!A]$}
+\end{prooftree}
+
+\end{document}

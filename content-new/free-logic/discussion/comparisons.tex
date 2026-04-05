@@ -1,0 +1,73 @@
+% Part: free-logic
+% Chapter: natural-deduction
+% Section: common-rules
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{frl}{dis}{com}
+
+\olsection{Comparisons Between First-Order Logic and Free Logics}
+
+\begin{center}
+Comparing validity across first-order logic with identity (\Log{FOL}) 
+and free logics: negative free logic (\Log{NFL}) and positive free 
+logic (\Log{PFL}).
+\smallskip
+\begin{tabular}[t]{lp{.33\textwidth}ccc}
+    \hline
+    !!^{sentence} & English trans. & \multicolumn{3}{c}{Valid in:} \\
+        &       & \Log{FOL} & \Log{NFL} & \Log{PFL} \\
+    \hline 
+    \multicolumn{2}{l}{Classical vs free quantification} \\
+    $\lforall[x][!A]\lif\Subst{!A}{\Obj{a}}{x}$ 
+        & If everything is $!A$, $\Obj{a}$ is $!A$ 
+        & $\surd$ & $\times$ & $\times$ \\
+    $\lforall[x][!A]\lif(\lfrexists\Obj{a}\lif\Subst{!A}{\Obj{a}}{x})$ 
+        & If everything is $!A$, then if $\Obj{a}$ exists $\Obj{a}$ is $!A$
+        & $\surd$ & $\surd$ & $\surd$ \\
+    \multicolumn{2}{l}{Classical vs free existence assumptions} \\    
+    $\lforall[x][\lfrexists x]$ 
+        & Everything exists 
+        & $\surd$ & $\surd$ & $\surd$ \\
+    $\lfrexists \Obj{a}$ 
+        & $\Obj{a}$ exists 
+        & $\surd$ & $\times$ & $\times$ \\
+    \multicolumn{2}{l}{Identity: \Log{PFL} like \Log{FOL}, \Log{NFL} not} \\
+    $\lforall[x][\eq[x][x]]$
+        & Everything is itself
+        & $\surd$ & $\surd$ & $\surd$ \\
+    $\eq[\Obj{a}][\Obj{a}]$
+        & $\Obj{a}$ is $\Obj{a}$
+        & $\surd$ & $\times$ & $\surd$ \\
+    \multicolumn{2}{l}{Atomic predication: \Log{NFL} like \Log{FOL}, \Log{PFL} not} \\
+    $\Atom{\Obj{P}}{\Obj{a}}\lif\lfrexists\Obj{a}$ 
+        & If $\Obj{a}$ is $\Obj{P}$, then $\Obj{a}$ exists 
+        & $\surd$ & $\surd$ & $\times$ \\
+    \multicolumn{2}{l}{Negated atomic predication: classical vs free} \\
+    $\lnot \Atom{\Obj{P}}{\Obj{a}}\lif\lfrexists\Obj{a}$ 
+        & If it's not the case that $\Obj{a}$ is $\Obj{P}$, then $\Obj{a}$ exists 
+        & $\surd$ & $\times$ & $\times$ \\
+    \hline
+\end{tabular}
+\smallskip
+\end{center}
+
+\emph{Note on the existence predicate $\lfrexists$}. In free logics
+it is equivalent to $\lexists[v][\eq[\ldots][v]]$. In first-order
+logic with identity we haven't introduced it, but it would be
+equivalent to that to. Thus were first-order logic is concerned,
+simply treat $\lfrexists c$ as an abbreviation of
+ $\lexists[v][\leq[c][v]]$.
+Thus:
+\begin{itemize}
+    \item $\lfrexists \Obj{a}$ is 
+    equivalent to $\lexists[x][\eq[\Obj{a}][x]]$
+    \item $\lforall[x][\lfrexists x]$ is 
+    equivalent $\lforall[x][\lexists[y][\eq[x][y]]]$
+    \item $\lfrexists\Obj{a}\lif\Subst{!A}{\Obj{a}}{x}$ is 
+    equivalent $\lexists[y][\eq[\Obj{a}][y]]\lif\Subst{!A}{\Obj{a}}{x}$
+\end{itemize}
+
+\end{document}

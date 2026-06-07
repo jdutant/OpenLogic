@@ -60,7 +60,9 @@
 
 \mainmatter
 
-\tagtrue{showAns} % TURN ANSWERS OFF / ON
+% TURN ANSWERS OFF / ON
+%\tagtrue{showAns}
+\tagfalse{showAns}
 
 % \olimport[exercise-booklet]{exercises} % we break it down instead
 
@@ -100,16 +102,16 @@
     \olimport[exercise-booklet/first-order-logic]{natural-deduction}
 }{}
 
-\tagfalse{showAns} % TURN ANSWERS OFF / ON
-
 \iftag{prfTab}{%
     \olimport[exercise-booklet/first-order-logic]{tableaus}
     \olimport[exercise-booklet/first-order-logic]{tableaus-identity}
 }{}
 
-
+%\tagfalse{showAns} % TURN ANSWERS OFF / ON
 
 \olimport[exercise-booklet/free-logic]{free-logic}
+
+%\olimport[exercise-booklet/quantified-modal-logic]{quantified-modal-logic}
 
 
 \backmatter

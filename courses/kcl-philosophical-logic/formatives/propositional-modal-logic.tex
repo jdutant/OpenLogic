@@ -24,7 +24,7 @@
     \begin{enumerate}
     \item $\Diamond \Obj{\pvar{P}}$
     \item $\Box(\Obj{\pvar{R}}\lif\Diamond \Obj{\pvar{Q}})$
-    \item $\Box(\Diamond \Obj{\Obj{\pvar{R}}}\lor\Diamond \Obj{\pvar{P}})$
+    \item $\Box(\Diamond \Obj{\pvar{R}}\lor\Diamond \Obj{\pvar{P}})$
     \item $\Box\Box\Diamond \Obj{\pvar{Q}}$
     \end{enumerate}
 
@@ -38,7 +38,7 @@ where $\Obj{\pvar{Q}}$ is true), therefore $\Obj{\pvar{R}}\lif\Diamond
 \Obj{\pvar{Q}}$ is true at $u$ and $v$. Since these are the only two
 worlds $@$ has access to, $\Box(\Obj{\pvar{R}}\lif\Diamond
 \Obj{\pvar{Q}})$ is true at $@$, hence true.
-\item $\Box(\Diamond \Obj{\pvar{\Obj{\pvar{R}}}}\lor\Diamond \Obj{\pvar{P}})$. True. 
+\item $\Box(\Diamond \Obj{\pvar{R}}\lor\Diamond \Obj{\pvar{P}})$. True. 
 Justification: $\Diamond\Obj{\pvar{P}}$ is true at $u$ (since $u$ has access
 to world $@$ where $\Obj{\pvar{P}}$ is true) and 
 $\Diamond\Obj{\pvar{R}}$ is true at $v$ (since $v$ has access to 
@@ -104,9 +104,9 @@ $v$, $\Box\Box\Diamond\Obj{\pvar{Q}}$ is false at $@$.
         $\ldots\Proves\ldots$'' rather than ``proof of
         $\ldots\Entails\ldots$'' since a proof primarily establishes
         that the argument is \emph{provable} ($\Proves$) rather than
-        \emph{valid} ($\Entails$). However, because our proof system is
-        sound for our semantics, if the argument is provable in it
-        then it is valid.
+        \emph{valid} ($\Entails$). However, because our proof systems are
+        sounds for their respective semantics, if an argument is provable 
+        in a modal system it is valid in that modal system.
 
         \item Counterexample to establish $\Diamond\lnot\Obj{\pvar{A}}, 
         \Box(\Obj{\pvar{A}}\lor\Obj{\pvar{B}})
@@ -135,7 +135,7 @@ $v$, $\Box\Box\Diamond\Obj{\pvar{Q}}$ is false at $@$.
         $\Obj{\pvar{A}},\Obj{\pvar{B}}$ true at every world accessible
         from $@$ (to make $\Box(\Obj{\pvar{A}}\lor\Obj{\pvar{B}})$
         true), but $\Obj{\pvar{A}}$ false in one of these worlds (to
-        make $\Diamond\lnot\Obj{\pvar{A}}$ true) and $\Obj{\pvar{A}}$
+        make $\Diamond\lnot\Obj{\pvar{A}}$ true) and $\Obj{\pvar{B}}$
         false at another one of these worlds (to make
         $\Box\Obj{\pvar{B}}$ false).}
 
@@ -148,7 +148,7 @@ $v$, $\Box\Box\Diamond\Obj{\pvar{Q}}$ is false at $@$.
         \RightLabel{\Log{PL}}
         \UnaryInfC{$(\Obj{\pvar{A}}\land\Obj{\pvar{B}})\lif\Obj{\pvar{A}}$}
         \RightLabel{$\Diamond$T}
-        \UnaryInfC{$\Diamond(\Obj{\pvar{A}}\land\Obj{\pvar{B}})\lif\Obj{\pvar{A}}$}
+        \UnaryInfC{$\Diamond((\Obj{\pvar{A}}\land\Obj{\pvar{B}})\lif\Obj{\pvar{A}})$}
         \end{prooftree}
 
         \emph{Comment. Note that the proof has no premise, since we 
